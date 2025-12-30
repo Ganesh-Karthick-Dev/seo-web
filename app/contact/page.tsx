@@ -12,12 +12,15 @@ import {
     ArrowRight,
     Sparkles,
     Clock,
-    CheckCircle
+    CheckCircle,
+    AlertCircle
 } from "lucide-react";
 
 export default function Contact() {
     const [activeTab, setActiveTab] = useState<"form" | "calendar">("calendar");
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -26,18 +29,119 @@ export default function Contact() {
         message: "",
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const [errors, setErrors] = useState({
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        message: "",
+    });
+
+    const validateForm = () => {
+        let isValid = true;
+        const newErrors = {
+            name: "",
+            email: "",
+            company: "",
+            phone: "",
+            message: "",
+        };
+
+        // Name validation
+        if (!formData.name.trim()) {
+            newErrors.name = "Full Name is required";
+            isValid = false;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email.trim()) {
+            newErrors.email = "Email Address is required";
+            isValid = false;
+        } else if (!emailRegex.test(formData.email)) {
+            newErrors.email = "Please enter a valid email address";
+            isValid = false;
+        }
+
+        // Phone validation (10 digits)
+        const phoneRegex = /^\d{10}$/;
+        if (!formData.phone.trim()) {
+            newErrors.phone = "Phone Number is required";
+            isValid = false;
+        } else if (!phoneRegex.test(formData.phone.replace(/\D/g, ''))) {
+            newErrors.phone = "Phone number must be exactly 10 digits";
+            isValid = false;
+        }
+
+        // Company validation
+        if (!formData.company.trim()) {
+            newErrors.company = "Company Name is required";
+            isValid = false;
+        }
+
+        // Message validation
+        if (!formData.message.trim()) {
+            newErrors.message = "Message is required";
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
-        setFormSubmitted(true);
-        setTimeout(() => setFormSubmitted(false), 3000);
+
+        if (!validateForm()) {
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                setFormSubmitted(true);
+                setFormData({
+                    name: "",
+                    email: "",
+                    company: "",
+                    phone: "",
+                    message: "",
+                });
+                setTimeout(() => setFormSubmitted(false), 5000);
+            } else {
+                alert('Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('Something went wrong. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            [name]: value,
         });
+
+        // Clear error when user starts typing
+        if (errors[name as keyof typeof errors]) {
+            setErrors({
+                ...errors,
+                [name]: "",
+            });
+        }
     };
 
     const contactInfo = [
@@ -242,10 +346,14 @@ export default function Contact() {
                                                             name="name"
                                                             value={formData.name}
                                                             onChange={handleChange}
-                                                            required
-                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all"
+                                                            className={`w-full px-4 py-3 rounded-xl bg-white/5 border ${errors.name ? 'border-red-500' : 'border-white/10'} text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all`}
                                                             placeholder="John Doe"
                                                         />
+                                                        {errors.name && (
+                                                            <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                                                                <AlertCircle className="w-3 h-3" /> {errors.name}
+                                                            </p>
+                                                        )}
                                                     </div>
 
                                                     <div>
@@ -258,17 +366,21 @@ export default function Contact() {
                                                             name="email"
                                                             value={formData.email}
                                                             onChange={handleChange}
-                                                            required
-                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all"
+                                                            className={`w-full px-4 py-3 rounded-xl bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all`}
                                                             placeholder="john@company.com"
                                                         />
+                                                        {errors.email && (
+                                                            <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                                                                <AlertCircle className="w-3 h-3" /> {errors.email}
+                                                            </p>
+                                                        )}
                                                     </div>
                                                 </div>
 
                                                 <div className="grid sm:grid-cols-2 gap-5">
                                                     <div>
                                                         <label htmlFor="company" className="block text-sm font-medium text-neutral-300 mb-2">
-                                                            Company Name
+                                                            Company Name *
                                                         </label>
                                                         <input
                                                             type="text"
@@ -276,14 +388,19 @@ export default function Contact() {
                                                             name="company"
                                                             value={formData.company}
                                                             onChange={handleChange}
-                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all"
+                                                            className={`w-full px-4 py-3 rounded-xl bg-white/5 border ${errors.company ? 'border-red-500' : 'border-white/10'} text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all`}
                                                             placeholder="Your Company"
                                                         />
+                                                        {errors.company && (
+                                                            <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                                                                <AlertCircle className="w-3 h-3" /> {errors.company}
+                                                            </p>
+                                                        )}
                                                     </div>
 
                                                     <div>
                                                         <label htmlFor="phone" className="block text-sm font-medium text-neutral-300 mb-2">
-                                                            Phone Number
+                                                            Phone Number *
                                                         </label>
                                                         <input
                                                             type="tel"
@@ -291,9 +408,14 @@ export default function Contact() {
                                                             name="phone"
                                                             value={formData.phone}
                                                             onChange={handleChange}
-                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all"
-                                                            placeholder="+1 (555) 000-0000"
+                                                            className={`w-full px-4 py-3 rounded-xl bg-white/5 border ${errors.phone ? 'border-red-500' : 'border-white/10'} text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all`}
+                                                            placeholder="10-digit number"
                                                         />
+                                                        {errors.phone && (
+                                                            <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                                                                <AlertCircle className="w-3 h-3" /> {errors.phone}
+                                                            </p>
+                                                        )}
                                                     </div>
                                                 </div>
 
@@ -306,16 +428,21 @@ export default function Contact() {
                                                         name="message"
                                                         value={formData.message}
                                                         onChange={handleChange}
-                                                        required
                                                         rows={5}
-                                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all resize-none"
+                                                        className={`w-full px-4 py-3 rounded-xl bg-white/5 border ${errors.message ? 'border-red-500' : 'border-white/10'} text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all resize-none`}
                                                         placeholder="Tell us about your project and goals..."
                                                     />
+                                                    {errors.message && (
+                                                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                                                            <AlertCircle className="w-3 h-3" /> {errors.message}
+                                                        </p>
+                                                    )}
                                                 </div>
 
                                                 <button
                                                     type="submit"
-                                                    className="group relative w-full flex items-center justify-center gap-2 py-4 rounded-xl text-white font-semibold overflow-hidden transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-orange-500/25"
+                                                    disabled={isSubmitting}
+                                                    className="group relative w-full flex items-center justify-center gap-2 py-4 rounded-xl text-white font-semibold overflow-hidden transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-orange-500/25 disabled:opacity-70 disabled:cursor-not-allowed"
                                                 >
                                                     {/* Gradient background */}
                                                     <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500" />
@@ -327,6 +454,11 @@ export default function Contact() {
                                                         <span className="relative z-10 flex items-center gap-2">
                                                             <CheckCircle className="w-5 h-5" />
                                                             Message Sent!
+                                                        </span>
+                                                    ) : isSubmitting ? (
+                                                        <span className="relative z-10 flex items-center gap-2">
+                                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                                            Sending...
                                                         </span>
                                                     ) : (
                                                         <span className="relative z-10 flex items-center gap-2">

@@ -1,49 +1,76 @@
 "use client";
-import { Spotlight } from "@/components/ui/spotlight";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
+import { ArrowRight, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="relative w-full bg-black/[0.96] antialiased">
-      {/* Hero Section with Spotlight */}
-      <div className="relative flex min-h-screen w-full flex-col items-center overflow-hidden bg-grid-white/[0.02]">
-        <Spotlight
-          className="-top-40 left-0 md:left-60 md:-top-20"
-          fill="white"
-        />
-        <div className="relative z-10 flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-4">
-          <div className="flex flex-col items-center gap-8 text-center">
-            <h1 className="bg-opacity-50 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-4xl font-bold text-transparent md:text-7xl">
-              Spotlight Effect <br /> is the new trend.
+      {/* Hero Section */}
+      <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-grid-white/[0.02]">
+
+        {/* Orange/Amber Gradient Orbs (Replacing Spotlight for consistency) */}
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-orange-500/20 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 flex w-full max-w-7xl flex-col items-center justify-center px-4 pt-20">
+          <div className="flex flex-col items-center gap-8 text-center max-w-5xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+              </span>
+              <span className="text-sm font-medium text-orange-400">Engineering Excellence</span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-4xl font-bold text-transparent md:text-7xl leading-tight tracking-tight">
+              Your Vision Deserves Better Delivery — <br className="hidden md:block" />
+              <span className="text-white">Build, Modernize & Scale</span> <br />
+              with Engineering-driven Software Development.
             </h1>
-            <p className="max-w-lg text-base font-normal text-neutral-300 md:text-lg">
-              Spotlight effect is a great way to draw attention to a specific part
-              of the page. Here, we are drawing the attention towards the text
-              section of the page. I don&apos;t know why but I&apos;m running out of copy.
+
+            {/* Subheadline */}
+            <p className="max-w-2xl text-lg font-normal text-neutral-400 md:text-xl leading-relaxed">
+              You’re building mission-critical digital platforms — and you need scalable software development and reliable engineering execution.
             </p>
-            <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-              <a
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-8 text-black transition-colors hover:bg-neutral-200 md:w-auto"
-                href=""
-                target="_blank"
-                rel="noopener noreferrer"
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col gap-4 text-base font-medium sm:flex-row mt-4">
+              <Link
+                href="/contact"
+                className="group relative flex h-12 w-full items-center justify-center gap-2 rounded-full overflow-hidden bg-orange-600 px-8 text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25 md:w-auto"
               >
-                Explore
-              </a>
-              <a
-                className="flex h-12 w-full items-center justify-center rounded-full border border-white/[.145] px-8 text-white transition-colors hover:bg-white/[.1] md:w-auto"
-                href=""
-                target="_blank"
-                rel="noopener noreferrer"
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500" />
+                <span className="relative z-10 flex items-center gap-2">
+                  Let&apos;s Talk
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
+
+              <Link
+                href="/services"
+                className="flex h-12 w-full items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 text-white backdrop-blur-sm transition-colors hover:bg-white/10 md:w-auto"
               >
-                Contact Us
-              </a>
+                View Services
+              </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-neutral-500">
+              {["Enterprise Grade Security", "Scalable Architecture", "24/7 Support"].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-orange-500" />
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Features Section with Sticky Scroll */}
+      {/* Features Section */}
       <div className="relative w-full py-20">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-12 text-center text-4xl font-bold text-white md:text-5xl">
