@@ -14,7 +14,6 @@ import {
     Clock,
     CheckCircle
 } from "lucide-react";
-import { Spotlight } from "@/components/ui/spotlight";
 
 export default function Contact() {
     const [activeTab, setActiveTab] = useState<"form" | "calendar">("calendar");
@@ -69,14 +68,13 @@ export default function Contact() {
     ];
 
     return (
-        <div className="relative min-h-screen w-full bg-black/[0.96] antialiased">
+        <div className="relative min-h-screen w-full bg-black/[0.96] antialiased overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0 bg-grid-white/[0.02]" />
-            <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
 
-            {/* Gradient orbs */}
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+            {/* Orange/Amber Gradient orbs */}
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-orange-500/20 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
@@ -87,12 +85,12 @@ export default function Contact() {
                         transition={{ duration: 0.6 }}
                         className="text-center mb-16"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-                            <Sparkles className="w-4 h-4 text-blue-400" />
-                            <span className="text-sm font-medium text-blue-400">Get in Touch</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 mb-6">
+                            <Sparkles className="w-4 h-4 text-orange-400" />
+                            <span className="text-sm font-medium text-orange-400">Get in Touch</span>
                         </div>
 
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-transparent mb-6">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent mb-6">
                             Let&apos;s Talk
                         </h1>
 
@@ -111,7 +109,7 @@ export default function Contact() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="space-y-6"
                         >
-                            <div className="p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-xl">
+                            <div className="p-6 rounded-2xl bg-neutral-900/50 border border-white/10 backdrop-blur-xl">
                                 <h3 className="text-xl font-semibold text-white mb-6">Contact Information</h3>
 
                                 <div className="space-y-4">
@@ -121,7 +119,7 @@ export default function Contact() {
                                             href={item.link}
                                             className="group flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors"
                                         >
-                                            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform">
                                                 <item.icon className="w-5 h-5 text-white" />
                                             </div>
                                             <div>
@@ -134,7 +132,7 @@ export default function Contact() {
                             </div>
 
                             {/* Why Choose Us Card */}
-                            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10">
+                            <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-500/10 to-amber-500/10 border border-white/10">
                                 <h3 className="text-lg font-semibold text-white mb-4">Why Choose Us?</h3>
                                 <ul className="space-y-3">
                                     {[
@@ -145,7 +143,7 @@ export default function Contact() {
                                         "24/7 support available",
                                     ].map((item, idx) => (
                                         <li key={idx} className="flex items-center gap-3 text-neutral-300">
-                                            <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                                            <CheckCircle className="w-5 h-5 text-orange-400 flex-shrink-0" />
                                             <span>{item}</span>
                                         </li>
                                     ))}
@@ -160,14 +158,14 @@ export default function Contact() {
                             transition={{ duration: 0.6, delay: 0.3 }}
                             className="lg:col-span-2"
                         >
-                            <div className="rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-xl overflow-hidden">
+                            <div className="rounded-2xl bg-neutral-900/50 border border-white/10 backdrop-blur-xl overflow-hidden">
                                 {/* Tab Switcher */}
                                 <div className="flex border-b border-white/10">
                                     <button
                                         onClick={() => setActiveTab("calendar")}
                                         className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 text-sm font-medium transition-all ${activeTab === "calendar"
-                                                ? "text-blue-400 bg-blue-500/10 border-b-2 border-blue-400"
-                                                : "text-neutral-400 hover:text-white hover:bg-white/5"
+                                            ? "text-orange-400 bg-orange-500/10 border-b-2 border-orange-400"
+                                            : "text-neutral-400 hover:text-white hover:bg-white/5"
                                             }`}
                                     >
                                         <Calendar className="w-4 h-4" />
@@ -176,8 +174,8 @@ export default function Contact() {
                                     <button
                                         onClick={() => setActiveTab("form")}
                                         className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 text-sm font-medium transition-all ${activeTab === "form"
-                                                ? "text-blue-400 bg-blue-500/10 border-b-2 border-blue-400"
-                                                : "text-neutral-400 hover:text-white hover:bg-white/5"
+                                            ? "text-orange-400 bg-orange-500/10 border-b-2 border-orange-400"
+                                            : "text-neutral-400 hover:text-white hover:bg-white/5"
                                             }`}
                                     >
                                         <MessageSquare className="w-4 h-4" />
@@ -202,7 +200,7 @@ export default function Contact() {
                                             {/* Calendly Widget */}
                                             <div className="rounded-xl overflow-hidden bg-white">
                                                 <InlineWidget
-                                                    url="https://calendly.com/your-calendly-link"
+                                                    url="https://calendly.com/ganeshkarthik18697/30min"
                                                     styles={{
                                                         height: "600px",
                                                         width: "100%",
@@ -211,7 +209,7 @@ export default function Contact() {
                                                         backgroundColor: "ffffff",
                                                         hideEventTypeDetails: false,
                                                         hideLandingPageDetails: false,
-                                                        primaryColor: "6366f1",
+                                                        primaryColor: "f97316", // Orange-500 hex
                                                         textColor: "374151",
                                                     }}
                                                 />
@@ -245,7 +243,7 @@ export default function Contact() {
                                                             value={formData.name}
                                                             onChange={handleChange}
                                                             required
-                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all"
+                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all"
                                                             placeholder="John Doe"
                                                         />
                                                     </div>
@@ -261,7 +259,7 @@ export default function Contact() {
                                                             value={formData.email}
                                                             onChange={handleChange}
                                                             required
-                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all"
+                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all"
                                                             placeholder="john@company.com"
                                                         />
                                                     </div>
@@ -278,7 +276,7 @@ export default function Contact() {
                                                             name="company"
                                                             value={formData.company}
                                                             onChange={handleChange}
-                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all"
+                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all"
                                                             placeholder="Your Company"
                                                         />
                                                     </div>
@@ -293,7 +291,7 @@ export default function Contact() {
                                                             name="phone"
                                                             value={formData.phone}
                                                             onChange={handleChange}
-                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all"
+                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all"
                                                             placeholder="+1 (555) 000-0000"
                                                         />
                                                     </div>
@@ -310,17 +308,17 @@ export default function Contact() {
                                                         onChange={handleChange}
                                                         required
                                                         rows={5}
-                                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all resize-none"
+                                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/50 focus:bg-white/10 transition-all resize-none"
                                                         placeholder="Tell us about your project and goals..."
                                                     />
                                                 </div>
 
                                                 <button
                                                     type="submit"
-                                                    className="group relative w-full flex items-center justify-center gap-2 py-4 rounded-xl text-white font-semibold overflow-hidden transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/25"
+                                                    className="group relative w-full flex items-center justify-center gap-2 py-4 rounded-xl text-white font-semibold overflow-hidden transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-orange-500/25"
                                                 >
                                                     {/* Gradient background */}
-                                                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500" />
+                                                    <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500" />
 
                                                     {/* Animated shine */}
                                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
