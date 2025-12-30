@@ -109,8 +109,6 @@ export function ServicesStackSection() {
                         start: "top top+=150",
                         end: "bottom top",
                         scrub: true,
-                        // Pinning is handled by CSS sticky, but we can add scale effects here if needed
-                        // For now, pure sticky CSS is often smoother for this specific effect
                     });
                 });
             }
@@ -139,12 +137,12 @@ export function ServicesStackSection() {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="sticky top-32 group" // Sticky positioning does the magic
-                            style={{ top: `${150 + index * 20}px` }} // Offset each card slightly
+                            className="sticky top-32 group"
+                            style={{ top: `${150 + index * 20}px` }}
                         >
                             <div className={cn(
                                 "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/90 backdrop-blur-xl transition-all duration-500 hover:border-orange-500/30 hover:shadow-[0_0_50px_-12px_rgba(249,115,22,0.3)]",
-                                "h-[400px] flex flex-col md:flex-row" // Fixed height for consistent stacking
+                                "h-[400px] flex flex-col md:flex-row"
                             )}>
 
                                 {/* Gradient Background */}
@@ -175,17 +173,31 @@ export function ServicesStackSection() {
                                     </Link>
                                 </div>
 
-                                {/* Visual Side (Abstract Pattern) */}
-                                <div className="relative w-full md:w-1/3 bg-black/20 border-l border-white/5 overflow-hidden hidden md:block">
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                                        {/* Simple abstract pattern based on index */}
+                                {/* Visual Side (Hero Icon) */}
+                                <div className="relative w-full md:w-1/3 bg-white/5 border-l border-white/5 overflow-hidden hidden md:flex items-center justify-center group-hover:bg-white/10 transition-colors duration-500">
+
+                                    {/* Background Decor */}
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-50" />
+                                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
+
+                                    {/* Animated Rings */}
+                                    <div className="absolute w-64 h-64 rounded-full border border-white/5 animate-[spin_10s_linear_infinite]" />
+                                    <div className="absolute w-48 h-48 rounded-full border border-white/10 animate-[spin_15s_linear_infinite_reverse]" />
+
+                                    {/* Large Hero Icon */}
+                                    <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
                                         <div className={cn(
-                                            "w-64 h-64 rounded-full blur-3xl bg-gradient-to-tr",
+                                            "absolute inset-0 blur-2xl opacity-30 bg-gradient-to-tr",
                                             service.gradient
                                         )} />
+                                        <service.icon
+                                            strokeWidth={1}
+                                            className={cn(
+                                                "w-32 h-32 drop-shadow-2xl",
+                                                "text-white/90"
+                                            )}
+                                        />
                                     </div>
-                                    {/* Grid Pattern Overlay */}
-                                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
                                 </div>
 
                             </div>
