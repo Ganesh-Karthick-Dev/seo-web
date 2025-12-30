@@ -142,7 +142,8 @@ export function ServicesStackSection() {
                         >
                             <div className={cn(
                                 "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/90 backdrop-blur-xl transition-all duration-500 hover:border-orange-500/30 hover:shadow-[0_0_50px_-12px_rgba(249,115,22,0.3)]",
-                                "h-[400px] flex flex-col md:flex-row"
+                                "h-[400px] flex flex-col",
+                                index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
                             )}>
 
                                 {/* Gradient Background */}
@@ -174,7 +175,10 @@ export function ServicesStackSection() {
                                 </div>
 
                                 {/* Visual Side (Hero Icon) */}
-                                <div className="relative w-full md:w-1/3 bg-white/5 border-l border-white/5 overflow-hidden hidden md:flex items-center justify-center group-hover:bg-white/10 transition-colors duration-500">
+                                <div className={cn(
+                                    "relative w-full md:w-1/3 bg-white/5 overflow-hidden hidden md:flex items-center justify-center group-hover:bg-white/10 transition-colors duration-500",
+                                    index % 2 === 1 ? "border-r border-white/5" : "border-l border-white/5"
+                                )}>
 
                                     {/* Background Decor */}
                                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-50" />
