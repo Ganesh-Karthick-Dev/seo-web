@@ -1,5 +1,6 @@
 "use client";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
+import { ChallengesSection } from "@/components/sections/ChallengesSection";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -49,28 +50,13 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-neutral-500">
-              {["Enterprise Grade Security", "Scalable Architecture", "24/7 Support"].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-orange-500" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
+
           </div>
         </div>
       </div>
 
-      {/* Features Section */}
-      <div className="relative w-full py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <h2 className="mb-12 text-center text-4xl font-bold text-white md:text-5xl">
-            Why Choose Us
-          </h2>
-          <FeaturesSection />
-        </div>
-      </div>
+      {/* Challenges Section */}
+      <ChallengesSection />
     </div>
   );
 }
