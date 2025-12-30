@@ -1,6 +1,7 @@
 "use client";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { ChallengesSection } from "@/components/sections/ChallengesSection";
+import { ServicesStackSection } from "@/components/sections/ServicesStackSection";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
@@ -62,6 +63,9 @@ export default function Home() {
 
       {/* Challenges Section */}
       <ChallengesSection />
+
+      {/* Services Stack Section */}
+      <ServicesStackSection />
     </div>
   );
 }
