@@ -156,9 +156,12 @@ export function ChallengesSection() {
                 <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[350px]">
 
                     {/* Card 1: Projects (Large Left) - Span 7 */}
-                    <div className="group relative md:col-span-7 rounded-3xl bg-[#0a0a0a] border border-white/5 overflow-hidden hover:border-orange-500/30 transition-colors duration-500">
+                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 overflow-hidden hover:border-orange-500/30 transition-colors duration-500">
+                        {/* Glossy Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
+
                         <GridVisual />
-                        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent z-10" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent z-10" />
 
                         <div className="relative z-20 h-full flex flex-col justify-center items-end p-12 text-right w-full">
                             <div className="max-w-md">
@@ -177,9 +180,12 @@ export function ChallengesSection() {
                     </div>
 
                     {/* Card 2: Integration (Medium Right) - Span 5 */}
-                    <div className="group relative md:col-span-5 rounded-3xl bg-[#0a0a0a] border border-white/5 overflow-hidden hover:border-orange-500/30 transition-colors duration-500">
+                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 overflow-hidden hover:border-orange-500/30 transition-colors duration-500">
+                        {/* Glossy Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
+
                         <WaveVisual />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
 
                         <div className="relative z-20 h-full flex flex-col justify-end p-10">
                             <span className="text-xs font-bold text-neutral-500 tracking-widest uppercase mb-2 block">
@@ -195,9 +201,12 @@ export function ChallengesSection() {
                     </div>
 
                     {/* Card 3: Scalability (Medium Left) - Span 5 */}
-                    <div className="group relative md:col-span-5 rounded-3xl bg-[#0a0a0a] border border-white/5 overflow-hidden hover:border-orange-500/30 transition-colors duration-500">
+                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 overflow-hidden hover:border-orange-500/30 transition-colors duration-500">
+                        {/* Glossy Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
+
                         <ChartVisual />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
 
                         <div className="relative z-20 h-full flex flex-col justify-end p-10">
                             <span className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-2 block">
@@ -213,11 +222,14 @@ export function ChallengesSection() {
                     </div>
 
                     {/* Card 4: Standards (Large Right) - Span 7 */}
-                    <div className="group relative md:col-span-7 rounded-3xl bg-[#0a0a0a] border border-white/5 overflow-hidden hover:border-orange-500/30 transition-colors duration-500">
+                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 overflow-hidden hover:border-orange-500/30 transition-colors duration-500">
+                        {/* Glossy Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
+
                         <div className="absolute right-0 top-0 w-1/2 h-full">
                             <NetworkVisual />
                         </div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-10" />
 
                         <div className="relative z-20 h-full flex flex-col justify-center p-12">
                             <div className="max-w-md">
