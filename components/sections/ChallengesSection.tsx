@@ -117,22 +117,41 @@ export function ChallengesSection() {
                 }
             );
 
-            // Grid Items Stagger
+            // Grid Items Animation (Directions: Top, Right, Bottom, Left)
             const items = gridRef.current?.children;
-            if (items) {
-                gsap.fromTo(items,
-                    { y: 50, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.1,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: gridRef.current,
-                            start: "top 80%",
-                        }
+            if (items && items.length >= 4) {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: gridRef.current,
+                        start: "top 75%",
+                        end: "bottom top", // Fades out when the bottom of the grid leaves the top of the viewport
+                        toggleActions: "play reverse play reverse"
                     }
+                });
+
+                // Card 1: From Top
+                tl.fromTo(items[0],
+                    { y: -100, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+                    0
+                );
+                // Card 2: From Right
+                tl.fromTo(items[1],
+                    { x: 100, opacity: 0 },
+                    { x: 0, opacity: 1, duration: 1, ease: "power3.out" },
+                    0.1
+                );
+                // Card 3: From Bottom
+                tl.fromTo(items[2],
+                    { y: 100, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+                    0.2
+                );
+                // Card 4: From Left
+                tl.fromTo(items[3],
+                    { x: -100, opacity: 0 },
+                    { x: 0, opacity: 1, duration: 1, ease: "power3.out" },
+                    0.3
                 );
             }
         }, containerRef);
