@@ -2,6 +2,7 @@
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { ChallengesSection } from "@/components/sections/ChallengesSection";
 import { ServicesStackSection } from "@/components/sections/ServicesStackSection";
+import { HowWeWorkSection } from "@/components/sections/HowWeWorkSection";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
@@ -33,7 +34,7 @@ export default function Home() {
 
               {/* Subheadline */}
               <p className="max-w-4xl text-lg font-normal text-neutral-400 md:text-xl leading-relaxed">
-                You’re building mission-critical digital platforms — and you need scalable software development and reliable engineering execution.
+                You're building mission-critical digital platforms — and you need scalable software development and reliable engineering execution.
               </p>
 
               {/* CTA Buttons */}
@@ -66,6 +67,9 @@ export default function Home() {
 
       {/* Services Stack Section */}
       <ServicesStackSection />
+
+      {/* How We Work Section */}
+      <HowWeWorkSection />
     </div>
   );
 }
