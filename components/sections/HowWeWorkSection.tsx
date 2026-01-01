@@ -38,12 +38,142 @@ const steps = [
 
 export function HowWeWorkSection() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const sectionBgRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
     const stepsRef = useRef<HTMLDivElement>(null);
     const ctaRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            // Background color transition - white when in section
+            gsap.to(sectionBgRef.current, {
+                backgroundColor: "#ffffff",
+                duration: 0.8,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 60%",
+                    end: "bottom 40%",
+                    toggleActions: "play reverse play reverse",
+                },
+            });
+
+            // Text color transitions for title
+            const titleH2 = titleRef.current?.querySelector("h2");
+            const titleSpan = titleRef.current?.querySelector("span");
+
+            if (titleH2) {
+                gsap.to(titleH2, {
+                    color: "#171717",
+                    duration: 0.8,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 60%",
+                        end: "bottom 40%",
+                        toggleActions: "play reverse play reverse",
+                    },
+                });
+            }
+
+            if (titleSpan) {
+                gsap.to(titleSpan, {
+                    color: "#737373",
+                    duration: 0.8,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 60%",
+                        end: "bottom 40%",
+                        toggleActions: "play reverse play reverse",
+                    },
+                });
+            }
+
+            // Card background and border transitions
+            const cards = stepsRef.current?.querySelectorAll(".step-card");
+            if (cards) {
+                cards.forEach((card) => {
+                    gsap.to(card, {
+                        backgroundColor: "rgba(245, 245, 245, 0.8)",
+                        borderColor: "rgba(229, 229, 229, 1)",
+                        duration: 0.8,
+                        ease: "power2.inOut",
+                        scrollTrigger: {
+                            trigger: containerRef.current,
+                            start: "top 60%",
+                            end: "bottom 40%",
+                            toggleActions: "play reverse play reverse",
+                        },
+                    });
+
+                    // Card title color
+                    const cardTitle = card.querySelector(".card-title");
+                    if (cardTitle) {
+                        gsap.to(cardTitle, {
+                            color: "#171717",
+                            duration: 0.8,
+                            ease: "power2.inOut",
+                            scrollTrigger: {
+                                trigger: containerRef.current,
+                                start: "top 60%",
+                                end: "bottom 40%",
+                                toggleActions: "play reverse play reverse",
+                            },
+                        });
+                    }
+
+                    // Card description color
+                    const cardDesc = card.querySelector(".card-desc");
+                    if (cardDesc) {
+                        gsap.to(cardDesc, {
+                            color: "#525252",
+                            duration: 0.8,
+                            ease: "power2.inOut",
+                            scrollTrigger: {
+                                trigger: containerRef.current,
+                                start: "top 60%",
+                                end: "bottom 40%",
+                                toggleActions: "play reverse play reverse",
+                            },
+                        });
+                    }
+
+                    // Icon box
+                    const iconBox = card.querySelector(".icon-box");
+                    if (iconBox) {
+                        gsap.to(iconBox, {
+                            backgroundColor: "rgba(249, 115, 22, 0.1)",
+                            borderColor: "rgba(249, 115, 22, 0.3)",
+                            duration: 0.8,
+                            ease: "power2.inOut",
+                            scrollTrigger: {
+                                trigger: containerRef.current,
+                                start: "top 60%",
+                                end: "bottom 40%",
+                                toggleActions: "play reverse play reverse",
+                            },
+                        });
+                    }
+
+                    // Icon color
+                    const icon = card.querySelector(".icon-svg");
+                    if (icon) {
+                        gsap.to(icon, {
+                            color: "#ea580c",
+                            duration: 0.8,
+                            ease: "power2.inOut",
+                            scrollTrigger: {
+                                trigger: containerRef.current,
+                                start: "top 60%",
+                                end: "bottom 40%",
+                                toggleActions: "play reverse play reverse",
+                            },
+                        });
+                    }
+                });
+            }
+
             // Title Animation
             gsap.fromTo(
                 titleRef.current,
@@ -101,7 +231,14 @@ export function HowWeWorkSection() {
     }, []);
 
     return (
-        <section ref={containerRef} className="relative w-full py-32 bg-black overflow-hidden">
+        <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
+            {/* Animated Background */}
+            <div
+                ref={sectionBgRef}
+                className="absolute inset-0 bg-black transition-colors"
+                style={{ willChange: "background-color" }}
+            />
+
             {/* Subtle Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
@@ -123,10 +260,10 @@ export function HowWeWorkSection() {
                             className="group relative"
                         >
                             <div className={cn(
-                                "relative h-full p-8 md:p-10 rounded-3xl",
+                                "step-card relative h-full p-8 md:p-10 rounded-3xl",
                                 "border border-white/10 bg-zinc-900/50 backdrop-blur-sm",
                                 "transition-all duration-500",
-                                "hover:border-orange-500/30 hover:bg-zinc-900/80",
+                                "hover:border-orange-500/30",
                                 "hover:shadow-[0_0_50px_-12px_rgba(249,115,22,0.25)]"
                             )}>
                                 {/* Gradient Overlay on Hover */}
@@ -144,18 +281,18 @@ export function HowWeWorkSection() {
                                         </span>
 
                                         {/* Icon */}
-                                        <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-orange-500/30 group-hover:bg-orange-500/10 transition-all duration-500">
-                                            <step.icon className="w-7 h-7 text-white group-hover:text-orange-400 transition-colors duration-500" />
+                                        <div className="icon-box w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-orange-500/30 group-hover:bg-orange-500/10 transition-all duration-500">
+                                            <step.icon className="icon-svg w-7 h-7 text-white group-hover:text-orange-400 transition-colors duration-500" />
                                         </div>
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
+                                    <h3 className="card-title text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
                                         {step.title}
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="text-lg text-neutral-400 leading-relaxed">
+                                    <p className="card-desc text-lg text-neutral-400 leading-relaxed">
                                         {step.description}
                                     </p>
                                 </div>
