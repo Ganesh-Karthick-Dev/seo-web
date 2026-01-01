@@ -1,4 +1,8 @@
 "use client";
+
+import { useEffect, useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { ChallengesSection } from "@/components/sections/ChallengesSection";
 import { ServicesStackSection } from "@/components/sections/ServicesStackSection";
@@ -10,9 +14,31 @@ import { WavyBackground } from "@/components/ui/wavy-background";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Home() {
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Wait for all content to render, then refresh ScrollTrigger
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    // Also refresh on window load (for images, fonts, etc.)
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
+
   return (
-    <div className="relative w-full bg-black/[0.96] antialiased">
+    <div ref={mainRef} className="relative w-full bg-black/[0.96] antialiased">
       {/* Hero Section with Wavy Background */}
       <div className="relative w-full overflow-hidden">
         <WavyBackground
@@ -85,5 +111,3 @@ export default function Home() {
     </div>
   );
 }
-
-

@@ -183,6 +183,7 @@ export function HowWeWorkSection() {
                     opacity: 1,
                     duration: 1,
                     ease: "power3.out",
+                    immediateRender: false,
                     scrollTrigger: {
                         trigger: titleRef.current,
                         start: "top 85%",
@@ -202,6 +203,7 @@ export function HowWeWorkSection() {
                         duration: 0.8,
                         stagger: 0.15,
                         ease: "power3.out",
+                        immediateRender: false,
                         scrollTrigger: {
                             trigger: stepsRef.current,
                             start: "top 80%",
@@ -219,6 +221,7 @@ export function HowWeWorkSection() {
                     opacity: 1,
                     duration: 0.8,
                     ease: "power3.out",
+                    immediateRender: false,
                     scrollTrigger: {
                         trigger: ctaRef.current,
                         start: "top 90%",

@@ -68,6 +68,7 @@ export function Footer() {
                     opacity: 1,
                     duration: 1.5,
                     ease: "power3.out",
+                    immediateRender: false,
                     scrollTrigger: {
                         trigger: containerRef.current,
                         start: "top 80%",
@@ -85,6 +86,7 @@ export function Footer() {
                     opacity: 1,
                     duration: 1,
                     ease: "power3.out",
+                    immediateRender: false,
                     scrollTrigger: {
                         trigger: containerRef.current,
                         start: "top 85%",

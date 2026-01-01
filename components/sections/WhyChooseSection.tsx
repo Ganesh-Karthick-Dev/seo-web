@@ -122,6 +122,7 @@ export function WhyChooseSection() {
                         duration: 0.9,
                         stagger: 0.12,
                         ease: "power3.out",
+                        immediateRender: false,
                         scrollTrigger: {
                             trigger: cardsRef.current,
                             start: "top 80%",

@@ -62,6 +62,7 @@ export function BlogSection() {
                     opacity: 1,
                     duration: 1,
                     ease: "power3.out",
+                    immediateRender: false,
                     scrollTrigger: {
                         trigger: titleRef.current,
                         start: "top 85%",
@@ -81,6 +82,7 @@ export function BlogSection() {
                         duration: 0.8,
                         stagger: 0.15,
                         ease: "power3.out",
+                        immediateRender: false,
                         scrollTrigger: {
                             trigger: cardsRef.current,
                             start: "top 80%",

@@ -93,6 +93,7 @@ export function ServicesStackSection() {
                     opacity: 1,
                     duration: 1,
                     ease: "power3.out",
+                    immediateRender: false,
                     scrollTrigger: {
                         trigger: titleRef.current,
                         start: "top 85%",
