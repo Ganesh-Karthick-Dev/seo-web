@@ -12,8 +12,13 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "SEOPro - Digital Marketing Excellence",
-  description: "Transform your digital presence with data-driven SEO strategies, content marketing, and comprehensive digital solutions.",
+  title: "Zylex | Built to Out Perform",
+  description: "Engineering-driven software development for scalable, reliable digital products. Build, modernize, and scale with confidence.",
+  icons: {
+    icon: "/favicon_io/favicon.ico",
+    shortcut: "/favicon_io/favicon.ico",
+    apple: "/favicon_io/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
