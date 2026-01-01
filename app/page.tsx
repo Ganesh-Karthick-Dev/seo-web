@@ -4,6 +4,7 @@ import { ChallengesSection } from "@/components/sections/ChallengesSection";
 import { ServicesStackSection } from "@/components/sections/ServicesStackSection";
 import { HowWeWorkSection } from "@/components/sections/HowWeWorkSection";
 import { BlogSection } from "@/components/sections/BlogSection";
+import { WhyChooseSection } from "@/components/sections/WhyChooseSection";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
@@ -74,6 +75,9 @@ export default function Home() {
 
       {/* Blog Section */}
       <BlogSection />
+
+      {/* Why Choose Zylex Section */}
+      <WhyChooseSection />
     </div>
   );
 }
