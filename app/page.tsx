@@ -5,6 +5,7 @@ import { ServicesStackSection } from "@/components/sections/ServicesStackSection
 import { HowWeWorkSection } from "@/components/sections/HowWeWorkSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { WhyChooseSection } from "@/components/sections/WhyChooseSection";
+import { CTASection } from "@/components/sections/CTASection";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
@@ -78,6 +79,9 @@ export default function Home() {
 
       {/* Why Choose Zylex Section */}
       <WhyChooseSection />
+
+      {/* CTA Section */}
+      <CTASection />
     </div>
   );
 }
