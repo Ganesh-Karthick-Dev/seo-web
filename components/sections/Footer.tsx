@@ -52,9 +52,30 @@ const socials = [
 export function Footer() {
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const bgTextRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            // Background ZYLEX text animation - rises from bottom (replays every time)
+            gsap.fromTo(
+                bgTextRef.current,
+                {
+                    y: 200,
+                    opacity: 0,
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 80%",
+                        toggleActions: "play none none reset",
+                    },
+                }
+            );
+
             // Fade in content
             gsap.fromTo(
                 contentRef.current,
@@ -80,6 +101,7 @@ export function Footer() {
             {/* Large Background Text - ZYLEX */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
                 <span
+                    ref={bgTextRef}
                     className="text-[20vw] md:text-[25vw] font-bold text-neutral-200/80 tracking-tight select-none"
                     style={{
                         maskImage: "linear-gradient(to bottom, black 40%, transparent 100%)",
