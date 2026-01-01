@@ -94,16 +94,19 @@ export function WhyChooseSection() {
             );
 
             // Image scale and parallax
-            leftTl.fromTo(
-                imageRef.current?.querySelector("img"),
-                { scale: 1.3 },
-                {
-                    scale: 1,
-                    duration: 1.5,
-                    ease: "power3.out",
-                },
-                "-=1.2"
-            );
+            const imgElement = imageRef.current?.querySelector("img");
+            if (imgElement) {
+                leftTl.fromTo(
+                    imgElement,
+                    { scale: 1.3 },
+                    {
+                        scale: 1,
+                        duration: 1.5,
+                        ease: "power3.out",
+                    },
+                    "-=1.2"
+                );
+            }
 
             // Cards animation - staggered slide from right with rotation
             const cards = cardsRef.current?.children;
