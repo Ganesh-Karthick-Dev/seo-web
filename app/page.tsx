@@ -3,6 +3,7 @@ import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { ChallengesSection } from "@/components/sections/ChallengesSection";
 import { ServicesStackSection } from "@/components/sections/ServicesStackSection";
 import { HowWeWorkSection } from "@/components/sections/HowWeWorkSection";
+import { BlogSection } from "@/components/sections/BlogSection";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
@@ -70,6 +71,9 @@ export default function Home() {
 
       {/* How We Work Section */}
       <HowWeWorkSection />
+
+      {/* Blog Section */}
+      <BlogSection />
     </div>
   );
 }
