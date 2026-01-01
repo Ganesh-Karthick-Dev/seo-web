@@ -12,8 +12,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Zylex | Built to Out Perform",
-  description: "Engineering-driven software development for scalable, reliable digital products. Build, modernize, and scale with confidence.",
+  title: "Zylex — Software Development & Modernization",
+  description: "Zylex helps businesses build, modernize, and scale mission-critical digital platforms through custom software development, application modernization, cloud & DevOps, AI and automation, and digital transformation services.",
   icons: {
     icon: "/favicon_io/favicon.ico",
     shortcut: "/favicon_io/favicon.ico",
