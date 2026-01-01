@@ -12,6 +12,7 @@ export function CTASection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const headlineRef = useRef<HTMLHeadingElement>(null);
     const descRef = useRef<HTMLParagraphElement>(null);
+    const buttonWrapperRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLAnchorElement>(null);
 
     useEffect(() => {
@@ -55,7 +56,7 @@ export function CTASection() {
 
             // Button animation with bounce
             tl.fromTo(
-                buttonRef.current,
+                buttonWrapperRef.current,
                 { y: 20, opacity: 0, scale: 0.9 },
                 {
                     y: 0,
@@ -72,8 +73,81 @@ export function CTASection() {
         return () => ctx.revert();
     }, []);
 
+    // Button follows cursor freely with extra smoothness
+    useEffect(() => {
+        const container = containerRef.current;
+        const buttonWrapper = buttonWrapperRef.current;
+
+        if (!container || !buttonWrapper) return;
+
+        // Get original button position
+        let originalX = 0;
+        let originalY = 0;
+        let isInitialized = false;
+
+        // For extra smoothness - lerped position
+        let currentX = 0;
+        let currentY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        let animationId: number;
+
+        const lerp = (start: number, end: number, factor: number) => {
+            return start + (end - start) * factor;
+        };
+
+        const handleMouseMove = (e: MouseEvent) => {
+            const rect = container.getBoundingClientRect();
+            const wrapperRect = buttonWrapper.getBoundingClientRect();
+
+            // Initialize original position on first move
+            if (!isInitialized) {
+                originalX = wrapperRect.left - rect.left + wrapperRect.width / 2;
+                originalY = wrapperRect.top - rect.top + wrapperRect.height / 2;
+                isInitialized = true;
+            }
+
+            // Get cursor position relative to container
+            const cursorX = e.clientX - rect.left;
+            const cursorY = e.clientY - rect.top;
+
+            // Set target position
+            targetX = cursorX - originalX;
+            targetY = cursorY - originalY;
+        };
+
+        // Smooth animation loop with lerp
+        const animate = () => {
+            // Lerp towards target with smooth factor (lower = smoother)
+            currentX = lerp(currentX, targetX, 0.06);
+            currentY = lerp(currentY, targetY, 0.06);
+
+            gsap.set(buttonWrapper, {
+                x: currentX,
+                y: currentY,
+            });
+
+            animationId = requestAnimationFrame(animate);
+        };
+
+        const handleMouseLeave = () => {
+            targetX = 0;
+            targetY = 0;
+        };
+
+        container.addEventListener("mousemove", handleMouseMove);
+        container.addEventListener("mouseleave", handleMouseLeave);
+        animationId = requestAnimationFrame(animate);
+
+        return () => {
+            container.removeEventListener("mousemove", handleMouseMove);
+            container.removeEventListener("mouseleave", handleMouseLeave);
+            cancelAnimationFrame(animationId);
+        };
+    }, []);
+
     return (
-        <section ref={containerRef} className="relative w-full py-24 md:py-32 overflow-hidden">
+        <section ref={containerRef} className="relative w-full py-16 md:py-20 overflow-hidden">
             {/* Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500" />
 
@@ -105,20 +179,26 @@ export function CTASection() {
                         We align engineering decisions to your goals, growth plans, and long-term value.
                     </p>
 
-                    {/* CTA Button */}
-                    <Link
-                        ref={buttonRef}
-                        href="/contact"
-                        className="group relative flex h-14 items-center justify-center gap-3 rounded-full overflow-hidden bg-white px-10 text-orange-600 font-semibold transition-all hover:scale-105 hover:shadow-2xl hover:shadow-black/20"
+                    {/* CTA Button Wrapper - Follows cursor freely */}
+                    <div
+                        ref={buttonWrapperRef}
+                        className="relative pointer-events-auto"
+                        style={{ willChange: "transform" }}
                     >
-                        <span className="relative z-10 flex items-center gap-2 text-lg">
-                            Talk to our team
-                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </span>
+                        <Link
+                            ref={buttonRef}
+                            href="/contact"
+                            className="group relative flex h-14 items-center justify-center gap-3 rounded-full overflow-hidden bg-white px-10 text-orange-600 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-black/20"
+                        >
+                            <span className="relative z-10 flex items-center gap-2 text-lg">
+                                Talk to our team
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </span>
 
-                        {/* Hover background effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-white via-orange-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </Link>
+                            {/* Hover background effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-white via-orange-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </Link>
+                    </div>
                 </div>
             </div>
         </section>
