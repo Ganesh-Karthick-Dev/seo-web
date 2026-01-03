@@ -4,6 +4,7 @@ import { AboutHeroSection } from "@/components/sections/AboutHeroSection";
 import { AboutVisionSection } from "@/components/sections/AboutVisionSection";
 import { AboutMissionSection } from "@/components/sections/AboutMissionSection";
 import { AboutValuesSection } from "@/components/sections/AboutValuesSection";
+import { AboutCTASection } from "@/components/sections/AboutCTASection";
 
 export default function About() {
     return (
@@ -19,6 +20,9 @@ export default function About() {
 
             {/* Values Section with Cascading Parallax */}
             <AboutValuesSection />
+
+            {/* CTA Section */}
+            <AboutCTASection />
         </div>
     );
 }

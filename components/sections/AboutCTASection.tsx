@@ -8,13 +8,13 @@ import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function CTASection() {
+export function AboutCTASection() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const sectionRef = useRef<HTMLElement>(null);
     const headlineRef = useRef<HTMLHeadingElement>(null);
     const descRef = useRef<HTMLParagraphElement>(null);
     const buttonWrapperRef = useRef<HTMLDivElement>(null);
-    const buttonRef = useRef<HTMLAnchorElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
+    const bgRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -29,7 +29,26 @@ export function CTASection() {
                     ease: "power3.inOut",
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: "top 60%",
+                        start: "top 60%", // Triggers later when more visible
+                    },
+                }
+            );
+
+            // Background parallax - Stronger and more professional
+            gsap.fromTo(bgRef.current,
+                {
+                    yPercent: -25,
+                    scale: 1.2,
+                },
+                {
+                    yPercent: 25,
+                    scale: 1, // Subtle zoom out effect adds depth
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 0, // Instant response for tighter feel
                     },
                 }
             );
@@ -37,7 +56,7 @@ export function CTASection() {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top 55%",
+                    start: "top 55%", // Content animates after reveal
                 },
             });
 
@@ -71,7 +90,7 @@ export function CTASection() {
                 "-=0.5"
             );
 
-            // Button animation with bounce
+            // Button animation
             tl.fromTo(
                 buttonWrapperRef.current,
                 { y: 20, opacity: 0, scale: 0.9 },
@@ -85,7 +104,7 @@ export function CTASection() {
                 "-=0.3"
             );
 
-        }, containerRef);
+        }, sectionRef);
 
         return () => ctx.revert();
     }, []);
@@ -164,22 +183,25 @@ export function CTASection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative w-full py-16 md:py-20 overflow-hidden">
-            {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500" />
+        <section ref={sectionRef} className="relative w-full py-24 md:py-32 overflow-hidden">
+            {/* Background Image with Parallax */}
+            <div
+                ref={bgRef}
+                className="absolute -top-[20%] -bottom-[20%] left-0 right-0"
+                style={{ willChange: "transform" }}
+            >
+                <img
+                    src="/aboutus/19852073_6186486.webp"
+                    alt=""
+                    className="w-full h-full object-cover"
+                />
+            </div>
 
-            {/* Animated Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-orange-700/30 via-transparent to-amber-400/20" />
+            {/* Dark Overlay with Orange Tint */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-950/50 to-black/70" />
 
-            {/* Texture Overlay */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30" />
-
-            {/* Floating Shapes */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-amber-400/30 blur-3xl animate-pulse" />
-            <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-orange-600/30 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
+            {/* Subtle Orange Glow */}
+            <div className="absolute inset-0 bg-gradient-to-t from-orange-600/20 via-transparent to-amber-500/10" />
 
             <div ref={containerRef} className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
@@ -187,13 +209,13 @@ export function CTASection() {
                     {/* Headline */}
                     <div className="overflow-hidden mb-6">
                         <h2 ref={headlineRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">
-                            Accelerate delivery — without compromising quality, stability, or reliability.
+                            Ready to Build What Outperforms the Ordinary?
                         </h2>
                     </div>
 
                     {/* Description */}
                     <p ref={descRef} className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed mb-10">
-                        We align engineering decisions to your goals, growth plans, and long-term value.
+                        Partner with us to shape your next digital milestone — through disciplined delivery, scalable architecture, and solutions engineered for real-world impact.
                     </p>
 
                     {/* CTA Button Wrapper - Follows cursor freely */}
@@ -203,12 +225,11 @@ export function CTASection() {
                         style={{ willChange: "transform" }}
                     >
                         <Link
-                            ref={buttonRef}
                             href="/contact"
                             className="group relative flex h-14 items-center justify-center gap-3 rounded-full overflow-hidden bg-white px-10 text-orange-600 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-black/20"
                         >
                             <span className="relative z-10 flex items-center gap-2 text-lg">
-                                Talk to our team
+                                Let&apos;s Talk
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </span>
 
