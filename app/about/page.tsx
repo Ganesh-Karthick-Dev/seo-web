@@ -2,6 +2,7 @@
 
 import { AboutHeroSection } from "@/components/sections/AboutHeroSection";
 import { AboutVisionSection } from "@/components/sections/AboutVisionSection";
+import { AboutMissionSection } from "@/components/sections/AboutMissionSection";
 
 export default function About() {
     return (
@@ -12,7 +13,10 @@ export default function About() {
             {/* Vision Section with Parallax */}
             <AboutVisionSection />
 
-            {/* Mission & Values Section */}
+            {/* Mission Section with Horizontal Scroll */}
+            <AboutMissionSection />
+
+            {/* Values Section */}
             <section className="relative w-full py-24 md:py-32">
                 {/* Background Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black" />
