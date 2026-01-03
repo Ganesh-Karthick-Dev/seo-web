@@ -15,6 +15,7 @@ export function CTASection() {
     const descRef = useRef<HTMLParagraphElement>(null);
     const buttonWrapperRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLAnchorElement>(null);
+    const bgRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -30,6 +31,25 @@ export function CTASection() {
                     scrollTrigger: {
                         trigger: sectionRef.current,
                         start: "top 60%",
+                    },
+                }
+            );
+
+            // Background parallax - Stronger and more professional
+            gsap.fromTo(bgRef.current,
+                {
+                    yPercent: -25,
+                    scale: 1.2,
+                },
+                {
+                    yPercent: 25,
+                    scale: 1, // Subtle zoom out effect adds depth
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 0, // Instant response for tighter feel
                     },
                 }
             );
@@ -85,7 +105,7 @@ export function CTASection() {
                 "-=0.3"
             );
 
-        }, containerRef);
+        }, sectionRef);
 
         return () => ctx.revert();
     }, []);
@@ -164,22 +184,25 @@ export function CTASection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative w-full py-16 md:py-20 overflow-hidden">
-            {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500" />
+        <section ref={sectionRef} className="relative w-full py-24 md:py-32 overflow-hidden">
+            {/* Background Image with Parallax */}
+            <div
+                ref={bgRef}
+                className="absolute -top-[20%] -bottom-[20%] left-0 right-0"
+                style={{ willChange: "transform" }}
+            >
+                <img
+                    src="/aboutus/19852073_6186486.webp"
+                    alt=""
+                    className="w-full h-full object-cover"
+                />
+            </div>
 
-            {/* Animated Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-orange-700/30 via-transparent to-amber-400/20" />
+            {/* Dark Overlay with Orange Tint */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-950/50 to-black/70" />
 
-            {/* Texture Overlay */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30" />
-
-            {/* Floating Shapes */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-amber-400/30 blur-3xl animate-pulse" />
-            <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-orange-600/30 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
+            {/* Subtle Orange Glow */}
+            <div className="absolute inset-0 bg-gradient-to-t from-orange-600/20 via-transparent to-amber-500/10" />
 
             <div ref={containerRef} className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
