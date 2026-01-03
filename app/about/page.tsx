@@ -1,12 +1,16 @@
 "use client";
 
 import { AboutHeroSection } from "@/components/sections/AboutHeroSection";
+import { AboutVisionSection } from "@/components/sections/AboutVisionSection";
 
 export default function About() {
     return (
         <div className="relative w-full bg-black antialiased">
             {/* Hero Section with Animated Text */}
             <AboutHeroSection />
+
+            {/* Vision Section with Parallax */}
+            <AboutVisionSection />
 
             {/* Mission & Values Section */}
             <section className="relative w-full py-24 md:py-32">
