@@ -1,17 +1,21 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MenuIcon } from 'lucide-react';
+import { MenuIcon, Briefcase, Building2, Users } from 'lucide-react';
+import { motion } from 'motion/react';
 import { Sheet, SheetContent, SheetFooter } from '@/components/ui/sheet';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export function FloatingHeader() {
     const [open, setOpen] = React.useState(false);
     const [visible, setVisible] = useState(true);
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const lastScrollY = useRef(0);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -43,14 +47,17 @@ export function FloatingHeader() {
         {
             label: 'Services',
             href: '/services',
+            icon: Briefcase,
         },
         {
             label: 'Industries',
             href: '/industries',
+            icon: Building2,
         },
         {
             label: 'About',
             href: '/about',
+            icon: Users,
         },
     ];
 
@@ -58,7 +65,7 @@ export function FloatingHeader() {
         <header
             className={cn(
                 'fixed top-5 left-1/2 -translate-x-1/2 z-50',
-                'w-[calc(100%-2rem)] max-w-3xl rounded-lg border shadow',
+                'w-[calc(100%-2rem)] max-w-3xl rounded-full border shadow',
                 'bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur-lg',
                 'transition-all duration-300 ease-in-out',
                 visible
@@ -67,7 +74,7 @@ export function FloatingHeader() {
             )}
         >
             <nav className="mx-auto flex items-center justify-between p-1.5">
-                <Link href="/" className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 duration-100">
+                <Link href="/" className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 duration-100">
                     <div className="relative w-28 h-8 overflow-hidden">
                         <Image
                             src="/logo/crop_logo.webp"
@@ -78,16 +85,62 @@ export function FloatingHeader() {
                         />
                     </div>
                 </Link>
-                <div className="hidden items-center gap-1 lg:flex">
-                    {links.map((link) => (
-                        <Link
-                            key={link.label}
-                            className={buttonVariants({ variant: 'ghost', size: 'sm' })}
-                            href={link.href}
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
+
+                {/* Animated Center Navigation */}
+                <div className="hidden items-center gap-1 lg:flex bg-muted/50 rounded-full p-1">
+                    {links.map((link, idx) => {
+                        const Icon = link.icon;
+                        const isActive = pathname === link.href;
+                        const isHovered = hoveredIndex === idx;
+                        const showLabel = isActive || isHovered;
+
+                        return (
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                onMouseEnter={() => setHoveredIndex(idx)}
+                                onMouseLeave={() => setHoveredIndex(null)}
+                                className={cn(
+                                    "flex items-center gap-0 px-3 py-2 rounded-full transition-colors duration-200 relative h-9",
+                                    isActive
+                                        ? "bg-primary/10 dark:bg-primary/15 text-primary dark:text-primary"
+                                        : "bg-transparent text-muted-foreground dark:text-muted-foreground hover:bg-muted dark:hover:bg-muted",
+                                    "focus:outline-none focus-visible:ring-0",
+                                )}
+                            >
+                                <Icon
+                                    size={18}
+                                    strokeWidth={2}
+                                    aria-hidden
+                                    className="transition-colors duration-200 flex-shrink-0"
+                                />
+
+                                <motion.div
+                                    initial={false}
+                                    animate={{
+                                        width: showLabel ? "auto" : "0px",
+                                        opacity: showLabel ? 1 : 0,
+                                        marginLeft: showLabel ? "8px" : "0px",
+                                    }}
+                                    transition={{
+                                        width: { type: "spring", stiffness: 350, damping: 32 },
+                                        opacity: { duration: 0.15 },
+                                        marginLeft: { duration: 0.15 },
+                                    }}
+                                    className="overflow-hidden flex items-center"
+                                >
+                                    <span
+                                        className={cn(
+                                            "font-medium text-sm whitespace-nowrap select-none",
+                                            isActive ? "text-primary dark:text-primary" : "text-foreground",
+                                        )}
+                                    >
+                                        {link.label}
+                                    </span>
+                                </motion.div>
+                            </Link>
+                        );
+                    })}
                 </div>
                 <div className="flex items-center gap-2">
                     <Link href="/contact">
