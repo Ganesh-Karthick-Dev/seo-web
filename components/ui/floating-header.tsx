@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import { Grid2x2PlusIcon, MenuIcon } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MenuIcon } from 'lucide-react';
 import { Sheet, SheetContent, SheetFooter } from '@/components/ui/sheet';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -10,6 +10,34 @@ import Image from 'next/image';
 
 export function FloatingHeader() {
     const [open, setOpen] = React.useState(false);
+    const [visible, setVisible] = useState(true);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            const heroHeight = window.innerHeight * 0.8; // 80% of viewport height
+
+            // Always visible in hero section
+            if (currentScrollY < heroHeight) {
+                setVisible(true);
+            } else {
+                // After hero: hide on scroll down, show on scroll up
+                if (currentScrollY > lastScrollY.current) {
+                    // Scrolling down
+                    setVisible(false);
+                } else {
+                    // Scrolling up
+                    setVisible(true);
+                }
+            }
+
+            lastScrollY.current = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const links = [
         {
@@ -29,9 +57,13 @@ export function FloatingHeader() {
     return (
         <header
             className={cn(
-                'sticky top-5 z-50',
-                'mx-auto w-full max-w-3xl rounded-lg border shadow',
+                'fixed top-5 left-1/2 -translate-x-1/2 z-50',
+                'w-[calc(100%-2rem)] max-w-3xl rounded-lg border shadow',
                 'bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur-lg',
+                'transition-all duration-300 ease-in-out',
+                visible
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 -translate-y-full pointer-events-none',
             )}
         >
             <nav className="mx-auto flex items-center justify-between p-1.5">
