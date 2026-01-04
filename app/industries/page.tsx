@@ -2,6 +2,7 @@
 
 import ParticleEffectHero from "@/components/ui/particle-effect-for-hero";
 import ScrollMorphHero from "@/components/ui/scroll-morph-hero";
+import { IndustriesShowcaseSection } from "@/components/sections/IndustriesShowcaseSection";
 
 export default function Industries() {
     return (
@@ -11,6 +12,10 @@ export default function Industries() {
 
             {/* Industries Showcase Section - Pinned on scroll */}
             <ScrollMorphHero />
+
+            {/* Industries Details Section */}
+            <IndustriesShowcaseSection />
         </div>
     );
 }
+
