@@ -93,34 +93,42 @@ export function NeonOrbs() {
             </div>
 
             {/* Center text */}
-            <div className="relative z-10 text-center text-indigo-900 dark:text-white transition-colors duration-500">
+            <div className="relative z-10 text-center text-indigo-900 dark:text-white transition-colors duration-500 px-4 max-w-5xl">
                 <h1
-                    className={`text-4xl md:text-7xl font-extralight tracking-[0.2em] mb-4 transition-all duration-1000 ease-out ${mounted
-                            ? "opacity-100 translate-y-0 blur-0"
-                            : "opacity-0 translate-y-8 blur-sm"
+                    className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 transition-all duration-1000 ease-out ${mounted
+                        ? "opacity-100 translate-y-0 blur-0"
+                        : "opacity-0 translate-y-8 blur-sm"
                         }`}
                     style={{ transitionDelay: "500ms" }}
                 >
-                    {"BEYOND LIMITS".split("").map((char, i) => (
-                        <span
-                            key={i}
-                            className={`inline-block transition-all duration-500 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                                }`}
-                            style={{ transitionDelay: `${800 + i * 50}ms` }}
-                        >
-                            {char === " " ? "\u00A0" : char}
-                        </span>
-                    ))}
+                    Your Vision Deserves Better Execution
                 </h1>
                 <p
-                    className={`text-lg md:text-xl font-light tracking-widest text-indigo-600/60 dark:text-white/60 transition-all duration-1000 ease-out ${mounted
-                            ? "opacity-100 translate-y-0 blur-0"
-                            : "opacity-0 translate-y-4 blur-sm"
+                    className={`text-lg md:text-xl font-light max-w-3xl mx-auto text-indigo-600/70 dark:text-white/60 transition-all duration-1000 ease-out mb-8 ${mounted
+                        ? "opacity-100 translate-y-0 blur-0"
+                        : "opacity-0 translate-y-4 blur-sm"
                         }`}
-                    style={{ transitionDelay: "1500ms" }}
+                    style={{ transitionDelay: "800ms" }}
                 >
-                    THE FUTURE IS NOW
+                    Building mission-critical SaaS products requires scalable solutions and engineering excellence.
                 </p>
+                <div
+                    className={`transition-all duration-1000 ease-out ${mounted
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                        }`}
+                    style={{ transitionDelay: "1100ms" }}
+                >
+                    <a
+                        href="/contact"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 dark:bg-white dark:hover:bg-white/90 text-white dark:text-indigo-900 rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25"
+                    >
+                        Let&apos;s Talk
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
             </div>
 
             <style jsx global>{`
