@@ -3,6 +3,7 @@
 import ParticleEffectHero from "@/components/ui/particle-effect-for-hero";
 import ScrollMorphHero from "@/components/ui/scroll-morph-hero";
 import { IndustriesShowcaseSection } from "@/components/sections/IndustriesShowcaseSection";
+import { BlogSection } from "@/components/sections/BlogSection";
 
 export default function Industries() {
     return (
@@ -15,7 +16,11 @@ export default function Industries() {
 
             {/* Industries Details Section */}
             <IndustriesShowcaseSection />
+
+            {/* Blog Section */}
+            <BlogSection />
         </div>
     );
 }
+
 
