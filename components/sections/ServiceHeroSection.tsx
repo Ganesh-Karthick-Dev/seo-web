@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { GradientWave } from "@/components/ui/gradient-wave";
-import { cn } from "@/lib/utils";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 interface ServiceHeroProps {
     // Core content
@@ -123,45 +123,18 @@ export function ServiceHeroSection({
                         </motion.div>
                     )}
 
-                    {/* CTA Buttons */}
+                    {/* CTA Button */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.5 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                        className="flex items-center justify-center"
                     >
-                        {/* Primary CTA */}
-                        <Link
-                            href={ctaHref}
-                            className={cn(
-                                "group relative inline-flex items-center gap-2 px-8 py-4 rounded-full",
-                                "bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500",
-                                "text-white font-semibold text-lg",
-                                "shadow-lg shadow-orange-500/25",
-                                "hover:shadow-xl hover:shadow-orange-500/40",
-                                "transform hover:scale-105 transition-all duration-300"
-                            )}
-                        >
-                            {/* Shine effect */}
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 overflow-hidden" />
-                            <span className="relative">{ctaText}</span>
-                            <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                        <Link href={ctaHref}>
+                            <ShinyButton>
+                                {ctaText}
+                            </ShinyButton>
                         </Link>
-
-                        {/* Secondary CTA - only show if provided */}
-                        {secondaryCtaText && (
-                            <Link
-                                href={secondaryCtaHref || "#"}
-                                className={cn(
-                                    "inline-flex items-center gap-2 px-8 py-4 rounded-full",
-                                    "bg-white/10 backdrop-blur-sm border border-white/20",
-                                    "text-white font-semibold text-lg",
-                                    "hover:bg-white/20 transition-all duration-300"
-                                )}
-                            >
-                                {secondaryCtaText}
-                            </Link>
-                        )}
                     </motion.div>
                 </div>
             </div>
