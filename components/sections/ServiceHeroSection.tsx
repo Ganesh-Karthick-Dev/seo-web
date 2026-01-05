@@ -35,29 +35,28 @@ export function ServiceHeroSection({
     ctaHref = "/contact",
     secondaryCtaText,
     secondaryCtaHref,
-    gradientColors = ["#ea580c", "#f97316", "#fb923c", "#fdba74", "#fed7aa"],
+    gradientColors = ["#38bdf8", "#ffffff", "#38bdf8", "#ffffff", "#38bdf8", "#ffffff"],
     highlights = [],
     icon: Icon,
 }: ServiceHeroProps) {
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-sky-400">
             {/* Animated Gradient Background */}
             <GradientWave
                 colors={gradientColors}
                 isPlaying={true}
                 darkenTop={false}
-                noiseSpeed={0.000008}
-                noiseFrequency={[0.00012, 0.00024]}
+                noiseSpeed={0.00001}
+                noiseFrequency={[0.0001, 0.0009]}
                 deform={{
-                    incline: 0.3,
-                    noiseAmp: 200,
-                    noiseFlow: 4,
-                    noiseSpeed: 8,
+                    incline: 0.5,
+                    noiseAmp: 250,
+                    noiseFlow: 5,
                 }}
             />
 
             {/* Dark overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-[1]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 z-[1]" />
 
             {/* Content */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
@@ -69,7 +68,7 @@ export function ServiceHeroSection({
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
                     >
-                        {Icon && <Icon className="w-4 h-4 text-orange-400" />}
+                        {Icon && <Icon className="w-4 h-4 text-sky-400" />}
                         <span className="text-sm font-medium text-white/90">{subtitle}</span>
                     </motion.div>
 
@@ -83,7 +82,7 @@ export function ServiceHeroSection({
                         {title.split(' ').map((word, index, arr) => (
                             <span key={index}>
                                 {index === arr.length - 1 ? (
-                                    <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                                    <span className="bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
                                         {word}
                                     </span>
                                 ) : (
@@ -116,7 +115,7 @@ export function ServiceHeroSection({
                                     key={index}
                                     className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10"
                                 >
-                                    <CheckCircle2 className="w-4 h-4 text-orange-400" />
+                                    <CheckCircle2 className="w-4 h-4 text-sky-400" />
                                     <span className="text-sm text-white/90">{highlight}</span>
                                 </div>
                             ))}

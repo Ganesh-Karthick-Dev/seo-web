@@ -13,13 +13,6 @@ export default function CustomSoftwareDevelopmentPage() {
                 ctaText="Let's Talk"
                 ctaHref="/contact"
                 icon={Code2}
-                gradientColors={[
-                    "#ea580c",
-                    "#f97316",
-                    "#fb923c",
-                    "#fdba74",
-                    "#7c2d12",
-                ]}
             />
 
             {/* More sections will be added here */}
