@@ -263,21 +263,6 @@ export function FloatingHeader() {
                                         })}
                                     </div>
                                 </div>
-
-                                {/* Footer */}
-                                <div className="p-3 border-t border-neutral-100 dark:border-neutral-800">
-                                    <Link
-                                        href="/services"
-                                        className={cn(
-                                            "flex items-center justify-center gap-2 w-full py-2.5 rounded-xl",
-                                            "bg-primary/5 hover:bg-primary/10 dark:bg-primary/10 dark:hover:bg-primary/20",
-                                            "text-primary font-medium text-sm transition-all duration-300"
-                                        )}
-                                    >
-                                        View All Services
-                                        <ChevronDown className="h-4 w-4 rotate-[-90deg]" />
-                                    </Link>
-                                </div>
                             </div>
                         </div>
                     </div>
