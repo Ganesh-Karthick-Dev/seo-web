@@ -1,73 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight, Layers, Rocket, RefreshCw, Cog } from 'lucide-react';
+import { Layers, Rocket, RefreshCw, Cog } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface ServiceCardProps {
-    icon: React.ReactNode;
-    title: string;
-    description: string;
-    index: number;
-}
-
-const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description, index }) => {
-    const cardRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (cardRef.current) {
-            gsap.fromTo(
-                cardRef.current,
-                {
-                    opacity: 0,
-                    y: 50,
-                    scale: 0.95,
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 0.8,
-                    delay: index * 0.15,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: cardRef.current,
-                        start: 'top 85%',
-                        end: 'top 60%',
-                        toggleActions: 'play none none reverse',
-                    },
-                }
-            );
-        }
-    }, [index]);
-
-    return (
-        <div ref={cardRef} className="group">
-            <Card className="h-full border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 hover:shadow-xl hover:shadow-sky-500/10 hover:-translate-y-2 overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <CardContent className="p-6 md:p-8 relative z-10">
-                    <div className="mb-6 inline-flex p-3 rounded-xl bg-sky-500/10 text-sky-400 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500 group-hover:scale-110">
-                        {icon}
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold mb-4 text-white group-hover:text-sky-400 transition-colors duration-300">
-                        {title}
-                    </h3>
-                    <p className="text-white/70 leading-relaxed mb-4">
-                        {description}
-                    </p>
-                    <div className="flex items-center text-sky-400 font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
-                        <span className="text-sm">Learn more</span>
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                    </div>
-                </CardContent>
-            </Card>
-        </div>
-    );
-};
 
 interface ServiceFeaturesSectionProps {
     title?: string;
@@ -84,22 +22,22 @@ export function ServiceFeaturesSection({
     titleHighlight = "Where Custom Software Development Creates the Most Value",
     features = [
         {
-            icon: <Layers className="w-6 h-6" />,
+            icon: <Layers className="w-full h-full" />,
             title: "Outgrown Your Current Software",
             description: "When standard platforms no longer support your operations, our business software development solutions unlock simplicity, performance, and control.",
         },
         {
-            icon: <Rocket className="w-6 h-6" />,
+            icon: <Rocket className="w-full h-full" />,
             title: "Need Market Validation — Fast",
             description: "Our MVP development expertise helps you release working software early so you can gather real customer feedback and refine your product direction with confidence.",
         },
         {
-            icon: <RefreshCw className="w-6 h-6" />,
+            icon: <RefreshCw className="w-full h-full" />,
             title: "Legacy Systems Limit Progress",
             description: "Modernizing outdated software can be disruptive — unless it's done with a disciplined enterprise software development approach that protects continuity.",
         },
         {
-            icon: <Cog className="w-6 h-6" />,
+            icon: <Cog className="w-full h-full" />,
             title: "Automation That Actually Works",
             description: "Stop forcing generic tools to fit critical workflows. Our custom solutions automate real processes with better data insights and fewer exceptions.",
         },
@@ -107,23 +45,61 @@ export function ServiceFeaturesSection({
 }: ServiceFeaturesSectionProps) {
     const sectionRef = useRef<HTMLElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
+    const gridRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            if (headingRef.current) {
-                gsap.fromTo(
-                    headingRef.current,
-                    { opacity: 0, x: -50 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        duration: 1,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: sectionRef.current,
-                            start: 'top 85%',
-                        },
-                    }
+            // Title animation - slide from left
+            gsap.fromTo(
+                headingRef.current,
+                { opacity: 0, x: -80 },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: 'top 85%',
+                    },
+                }
+            );
+
+            // Cards animation - staggered from different directions
+            const cards = gridRef.current?.children;
+            if (cards && cards.length >= 4) {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: gridRef.current,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse',
+                    },
+                });
+
+                // Card 1: From top-left
+                tl.fromTo(cards[0],
+                    { y: -60, x: -30, opacity: 0 },
+                    { y: 0, x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+                    0
+                );
+                // Card 2: From top-right
+                tl.fromTo(cards[1],
+                    { y: -60, x: 30, opacity: 0 },
+                    { y: 0, x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+                    0.12
+                );
+                // Card 3: From bottom-left
+                tl.fromTo(cards[2],
+                    { y: 60, x: -30, opacity: 0 },
+                    { y: 0, x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+                    0.24
+                );
+                // Card 4: From bottom-right
+                tl.fromTo(cards[3],
+                    { y: 60, x: 30, opacity: 0 },
+                    { y: 0, x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+                    0.36
                 );
             }
         }, sectionRef);
@@ -134,16 +110,15 @@ export function ServiceFeaturesSection({
     return (
         <section
             ref={sectionRef}
-            className="relative py-16 md:py-24 lg:py-32 px-4 md:px-6 lg:px-8 bg-black overflow-hidden"
+            className="relative py-24 md:py-32 lg:py-40 px-4 md:px-6 lg:px-8 bg-black overflow-hidden"
         >
             {/* Background effects */}
-            <div className="absolute inset-0 bg-gradient-to-b from-sky-500/5 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(56,189,248,0.1),transparent_50%)] pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-sky-500/5 via-transparent to-sky-500/5 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(56,189,248,0.1),transparent_50%)] pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto relative z-10">
+            <div className="max-w-[90rem] mx-auto relative z-10">
                 {/* Left Aligned Title */}
-                <div className="mb-16 md:mb-20 max-w-4xl">
+                <div className="mb-16 md:mb-24 max-w-5xl">
                     <h2
                         ref={headingRef}
                         className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-[1.1]"
@@ -154,19 +129,99 @@ export function ServiceFeaturesSection({
                     </h2>
                 </div>
 
-                {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
-                    {features.map((feature, index) => (
-                        <ServiceCard
-                            key={index}
-                            icon={feature.icon}
-                            title={feature.title}
-                            description={feature.description}
-                            index={index}
-                        />
-                    ))}
-                </div>
+                {/* Premium Bento Grid */}
+                <div
+                    ref={gridRef}
+                    className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6 auto-rows-[280px] md:auto-rows-[320px]"
+                >
+                    {/* Card 1: Large Left - Span 7 */}
+                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-sky-500/30 transition-all duration-500">
+                        {/* Big Icon Background - Right Side */}
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 text-sky-500/10 group-hover:text-sky-500/15 transition-colors duration-500">
+                            {features[0].icon}
+                        </div>
 
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/60 to-transparent z-10" />
+
+                        {/* Content */}
+                        <div className="relative z-20 h-full flex flex-col justify-center p-8 md:p-12">
+                            <div className="max-w-md">
+                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight group-hover:text-sky-100 transition-colors duration-300">
+                                    {features[0].title}
+                                </h3>
+                                <p className="text-neutral-400 text-base leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
+                                    {features[0].description}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Card 2: Medium Right - Span 5 */}
+                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-cyan-500/30 transition-all duration-500">
+                        {/* Big Icon Background - Right Side */}
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-40 md:w-52 h-40 md:h-52 text-cyan-500/10 group-hover:text-cyan-500/15 transition-colors duration-500">
+                            {features[1].icon}
+                        </div>
+
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/60 to-transparent z-10" />
+
+                        {/* Content */}
+                        <div className="relative z-20 h-full flex flex-col justify-center p-8 md:p-10">
+                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 leading-tight group-hover:text-cyan-100 transition-colors duration-300">
+                                {features[1].title}
+                            </h3>
+                            <p className="text-neutral-400 text-sm leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
+                                {features[1].description}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Card 3: Medium Left - Span 5 */}
+                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all duration-500">
+                        {/* Big Icon Background - Right Side */}
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-40 md:w-52 h-40 md:h-52 text-blue-500/10 group-hover:text-blue-500/15 transition-colors duration-500">
+                            {features[2].icon}
+                        </div>
+
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/60 to-transparent z-10" />
+
+                        {/* Content */}
+                        <div className="relative z-20 h-full flex flex-col justify-center p-8 md:p-10">
+                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 leading-tight group-hover:text-blue-100 transition-colors duration-300">
+                                {features[2].title}
+                            </h3>
+                            <p className="text-neutral-400 text-sm leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
+                                {features[2].description}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Card 4: Large Right - Span 7 */}
+                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-sky-500/30 transition-all duration-500">
+                        {/* Big Icon Background - Right Side */}
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 text-sky-500/10 group-hover:text-sky-500/15 transition-colors duration-500">
+                            {features[3].icon}
+                        </div>
+
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/60 to-transparent z-10" />
+
+                        {/* Content */}
+                        <div className="relative z-20 h-full flex flex-col justify-center p-8 md:p-12">
+                            <div className="max-w-md">
+                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight group-hover:text-sky-100 transition-colors duration-300">
+                                    {features[3].title}
+                                </h3>
+                                <p className="text-neutral-400 text-base leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
+                                    {features[3].description}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );
