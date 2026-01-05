@@ -4,6 +4,7 @@ import { Code2 } from "lucide-react";
 import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 import { ServiceFeaturesSection } from "@/components/sections/ServiceFeaturesSection";
 import { ServiceProcessSection } from "@/components/sections/ServiceProcessSection";
+import { ServiceCTASection } from "@/components/sections/ServiceCTASection";
 
 export default function CustomSoftwareDevelopmentPage() {
     return (
@@ -20,6 +21,12 @@ export default function CustomSoftwareDevelopmentPage() {
             <ServiceFeaturesSection />
 
             <ServiceProcessSection />
+
+            <ServiceCTASection
+                title="Let's explore the right approach for your software initiative."
+                primaryButtonText="Schedule a Discovery Call"
+                primaryButtonHref="/contact"
+            />
         </main>
     );
 }
