@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import { motion } from "motion/react";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
@@ -41,15 +41,30 @@ export function ServiceHeroSection({
     icon: Icon,
 }: ServiceHeroProps) {
     const titleRef = useRef<HTMLHeadingElement>(null);
-    const words = title.split(' ');
+
+    // Split title into words and letters
+    const titleStructure = useMemo(() => {
+        const words = title.split(' ');
+        return words.map((word, wordIndex) => ({
+            word,
+            isLast: wordIndex === words.length - 1,
+            letters: word.split(''),
+        }));
+    }, [title]);
 
     useEffect(() => {
         if (!titleRef.current) return;
 
-        const wordElements = titleRef.current.querySelectorAll('.title-word');
+        const letterElements = titleRef.current.querySelectorAll('.title-letter');
+        const lettersArray = Array.from(letterElements);
 
-        // Set initial state - words start from "in front" of the screen
-        gsap.set(wordElements, {
+        // Create a shuffled array of indices for random order animation
+        const shuffledIndices = lettersArray
+            .map((_, i) => i)
+            .sort(() => Math.random() - 0.5);
+
+        // Set initial state - letters start from "in front" of the screen
+        gsap.set(letterElements, {
             opacity: 0,
             scale: 3,
             z: 500,
@@ -57,16 +72,17 @@ export function ServiceHeroSection({
             transformPerspective: 1000,
         });
 
-        // Animate each word with stagger
-        gsap.to(wordElements, {
-            opacity: 1,
-            scale: 1,
-            z: 0,
-            rotateX: 0,
-            duration: 1.1,
-            ease: "power3.out",
-            stagger: 0.15,
-            delay: 0.3,
+        // Animate each letter in random order
+        shuffledIndices.forEach((originalIndex, animationOrder) => {
+            gsap.to(lettersArray[originalIndex], {
+                opacity: 1,
+                scale: 1,
+                z: 0,
+                rotateX: 0,
+                duration: 1.1,
+                ease: "power3.out",
+                delay: 0.3 + (animationOrder * 0.04), // Stagger based on animation order
+            });
         });
     }, [title]);
 
@@ -103,26 +119,29 @@ export function ServiceHeroSection({
                         <span className="text-sm font-medium text-white/90">{subtitle}</span>
                     </motion.div>
 
-                    {/* Main title with GSAP animation */}
+                    {/* Main title with GSAP animation - each letter independent */}
                     <h1
                         ref={titleRef}
                         className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6"
                         style={{ transformStyle: 'preserve-3d' }}
                     >
-                        {words.map((word, index, arr) => (
-                            <span
-                                key={index}
-                                className="title-word inline-block"
-                                style={{ transformStyle: 'preserve-3d' }}
-                            >
-                                {index === arr.length - 1 ? (
-                                    <span className="bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                                        {word}
+                        {titleStructure.map((wordData, wordIndex) => (
+                            <span key={wordIndex} className="inline-block whitespace-nowrap">
+                                {wordData.letters.map((letter, letterIndex) => (
+                                    <span
+                                        key={`${wordIndex}-${letterIndex}`}
+                                        className={`title-letter inline-block ${wordData.isLast
+                                                ? 'bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent'
+                                                : ''
+                                            }`}
+                                        style={{ transformStyle: 'preserve-3d' }}
+                                    >
+                                        {letter}
                                     </span>
-                                ) : (
-                                    word
+                                ))}
+                                {wordIndex < titleStructure.length - 1 && (
+                                    <span className="inline-block">&nbsp;</span>
                                 )}
-                                {index < arr.length - 1 && '\u00A0'}
                             </span>
                         ))}
                     </h1>
@@ -131,7 +150,7 @@ export function ServiceHeroSection({
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.8 }}
+                        transition={{ duration: 0.6, delay: 1.2 }}
                         className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto mb-8 leading-relaxed"
                     >
                         {description}
@@ -142,7 +161,7 @@ export function ServiceHeroSection({
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.9 }}
+                            transition={{ duration: 0.6, delay: 1.3 }}
                             className="flex flex-wrap justify-center gap-4 mb-10"
                         >
                             {highlights.map((highlight, index) => (
@@ -161,7 +180,7 @@ export function ServiceHeroSection({
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 1.0 }}
+                        transition={{ duration: 0.6, delay: 1.4 }}
                         className="flex items-center justify-center"
                     >
                         <Link href={ctaHref}>
@@ -177,7 +196,7 @@ export function ServiceHeroSection({
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 0.6 }}
+                transition={{ delay: 1.8, duration: 0.6 }}
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
             >
                 <motion.div
