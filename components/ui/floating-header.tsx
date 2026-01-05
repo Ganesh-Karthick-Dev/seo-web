@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MenuIcon, Briefcase, Building2, Users } from 'lucide-react';
+import { MenuIcon, Building2, Users, Code2, Smartphone, ShoppingCart, Sparkles, Box, Bot, MessageSquare, Cloud, ChevronDown, Briefcase } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Sheet, SheetContent, SheetFooter } from '@/components/ui/sheet';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -10,28 +10,86 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
+// Services data
+const servicesData = [
+    {
+        id: 1,
+        icon: Code2,
+        title: "Custom Software Development",
+        description: "Tailored software solutions for your unique business needs",
+        href: "/services/custom-software-development",
+    },
+    {
+        id: 2,
+        icon: Smartphone,
+        title: "Web & Mobile App Development",
+        description: "Powerful web and mobile applications that drive engagement",
+        href: "/services/web-mobile-development",
+    },
+    {
+        id: 3,
+        icon: ShoppingCart,
+        title: "Ecommerce",
+        description: "End-to-end ecommerce solutions to grow your online business",
+        href: "/services/ecommerce",
+    },
+    {
+        id: 4,
+        icon: Sparkles,
+        title: "Digital Transformation",
+        description: "Modernize your business with cutting-edge digital strategies",
+        href: "/services/digital-transformation",
+    },
+    {
+        id: 5,
+        icon: Box,
+        title: "3D Website Development",
+        description: "Immersive 3D experiences that captivate and convert visitors",
+        href: "/services/3d-website-development",
+    },
+    {
+        id: 6,
+        icon: Bot,
+        title: "AI & Automation",
+        description: "Intelligent automation solutions powered by AI technology",
+        href: "/services/ai-automation",
+    },
+    {
+        id: 7,
+        icon: MessageSquare,
+        title: "IT Consulting",
+        description: "Strategic IT guidance to optimize your technology investments",
+        href: "/services/it-consulting",
+    },
+    {
+        id: 8,
+        icon: Cloud,
+        title: "Cloud & DevOps Engineering",
+        description: "Scalable cloud infrastructure and streamlined DevOps practices",
+        href: "/services/cloud-devops",
+    },
+];
+
 export function FloatingHeader() {
     const [open, setOpen] = React.useState(false);
     const [visible, setVisible] = useState(true);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [servicesOpen, setServicesOpen] = useState(false);
     const lastScrollY = useRef(0);
+    const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-            const heroHeight = window.innerHeight * 0.8; // 80% of viewport height
+            const heroHeight = window.innerHeight * 0.8;
 
-            // Always visible in hero section
             if (currentScrollY < heroHeight) {
                 setVisible(true);
             } else {
-                // After hero: hide on scroll down, show on scroll up
                 if (currentScrollY > lastScrollY.current) {
-                    // Scrolling down
                     setVisible(false);
                 } else {
-                    // Scrolling up
                     setVisible(true);
                 }
             }
@@ -43,12 +101,20 @@ export function FloatingHeader() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const links = [
-        {
-            label: 'Services',
-            href: '/services',
-            icon: Briefcase,
-        },
+    const handleServicesMouseEnter = () => {
+        if (servicesTimeoutRef.current) {
+            clearTimeout(servicesTimeoutRef.current);
+        }
+        setServicesOpen(true);
+    };
+
+    const handleServicesMouseLeave = () => {
+        servicesTimeoutRef.current = setTimeout(() => {
+            setServicesOpen(false);
+        }, 150);
+    };
+
+    const regularLinks = [
         {
             label: 'Industries',
             href: '/industries',
@@ -88,7 +154,136 @@ export function FloatingHeader() {
 
                 {/* Animated Center Navigation */}
                 <div className="hidden items-center gap-1 lg:flex bg-muted/50 rounded-full p-1">
-                    {links.map((link, idx) => {
+                    {/* Services Dropdown */}
+                    <div
+                        className="relative"
+                        onMouseEnter={handleServicesMouseEnter}
+                        onMouseLeave={handleServicesMouseLeave}
+                    >
+                        <button
+                            className={cn(
+                                "flex items-center gap-1 px-3 py-2 rounded-full transition-colors duration-200 h-9",
+                                servicesOpen || pathname.startsWith('/services')
+                                    ? "bg-primary/10 text-primary"
+                                    : "text-muted-foreground hover:bg-muted",
+                            )}
+                        >
+                            <Briefcase size={18} strokeWidth={2} className="flex-shrink-0" />
+                            <motion.div
+                                initial={false}
+                                animate={{
+                                    width: servicesOpen || pathname.startsWith('/services') ? "auto" : "0px",
+                                    opacity: servicesOpen || pathname.startsWith('/services') ? 1 : 0,
+                                    marginLeft: servicesOpen || pathname.startsWith('/services') ? "8px" : "0px",
+                                }}
+                                transition={{
+                                    width: { type: "spring", stiffness: 350, damping: 32 },
+                                    opacity: { duration: 0.15 },
+                                    marginLeft: { duration: 0.15 },
+                                }}
+                                className="overflow-hidden flex items-center"
+                            >
+                                <span className="font-medium text-sm whitespace-nowrap select-none">
+                                    Services
+                                </span>
+                            </motion.div>
+                            <ChevronDown
+                                size={14}
+                                className={cn(
+                                    "transition-transform duration-300 ml-0.5",
+                                    servicesOpen && "rotate-180"
+                                )}
+                            />
+                        </button>
+
+                        {/* Dropdown Panel */}
+                        <div
+                            className={cn(
+                                "absolute top-full left-1/2 -translate-x-1/2 pt-3",
+                                "transition-all duration-300 ease-out",
+                                servicesOpen
+                                    ? "opacity-100 translate-y-0 pointer-events-auto"
+                                    : "opacity-0 -translate-y-2 pointer-events-none"
+                            )}
+                        >
+                            <div
+                                className={cn(
+                                    "w-[420px] rounded-2xl shadow-2xl overflow-hidden",
+                                    "bg-white dark:bg-neutral-900",
+                                    "shadow-xl shadow-black/10 dark:shadow-black/50",
+                                    "border border-neutral-200 dark:border-neutral-800",
+                                )}
+                            >
+                                {/* Header */}
+                                <div className="flex items-center gap-4 p-4 border-b border-neutral-100 dark:border-neutral-800">
+                                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20">
+                                        <Briefcase className="h-5 w-5 text-primary" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h3 className="text-base font-semibold text-neutral-900 dark:text-white">Our Services</h3>
+                                        <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                                            Comprehensive digital solutions
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Services List */}
+                                <div className="px-2 py-3 max-h-[400px] overflow-y-auto">
+                                    <div className="space-y-1">
+                                        {servicesData.map((service, index) => {
+                                            const Icon = service.icon;
+                                            return (
+                                                <Link
+                                                    key={service.id}
+                                                    href={service.href}
+                                                    className={cn(
+                                                        "flex items-start gap-3 rounded-xl p-3",
+                                                        "transition-all duration-300 ease-out",
+                                                        "hover:bg-neutral-100 dark:hover:bg-neutral-800/50",
+                                                        "group",
+                                                        servicesOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
+                                                    )}
+                                                    style={{
+                                                        transitionDelay: servicesOpen ? `${index * 40}ms` : "0ms",
+                                                    }}
+                                                >
+                                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-700 group-hover:bg-primary/10 dark:group-hover:bg-primary/20 transition-colors duration-300">
+                                                        <Icon className="h-4 w-4 text-neutral-600 dark:text-neutral-300 group-hover:text-primary transition-colors duration-300" />
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-primary transition-colors duration-300">
+                                                            {service.title}
+                                                        </h4>
+                                                        <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">
+                                                            {service.description}
+                                                        </p>
+                                                    </div>
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                {/* Footer */}
+                                <div className="p-3 border-t border-neutral-100 dark:border-neutral-800">
+                                    <Link
+                                        href="/services"
+                                        className={cn(
+                                            "flex items-center justify-center gap-2 w-full py-2.5 rounded-xl",
+                                            "bg-primary/5 hover:bg-primary/10 dark:bg-primary/10 dark:hover:bg-primary/20",
+                                            "text-primary font-medium text-sm transition-all duration-300"
+                                        )}
+                                    >
+                                        View All Services
+                                        <ChevronDown className="h-4 w-4 rotate-[-90deg]" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Other Links */}
+                    {regularLinks.map((link, idx) => {
                         const Icon = link.icon;
                         const isActive = pathname === link.href;
                         const isHovered = hoveredIndex === idx;
@@ -103,9 +298,8 @@ export function FloatingHeader() {
                                 className={cn(
                                     "flex items-center gap-0 px-3 py-2 rounded-full transition-colors duration-200 relative h-9",
                                     isActive
-                                        ? "bg-primary/10 dark:bg-primary/15 text-primary dark:text-primary"
-                                        : "bg-transparent text-muted-foreground dark:text-muted-foreground hover:bg-muted dark:hover:bg-muted",
-                                    "focus:outline-none focus-visible:ring-0",
+                                        ? "bg-primary/10 text-primary"
+                                        : "text-muted-foreground hover:bg-muted",
                                 )}
                             >
                                 <Icon
@@ -132,7 +326,7 @@ export function FloatingHeader() {
                                     <span
                                         className={cn(
                                             "font-medium text-sm whitespace-nowrap select-none",
-                                            isActive ? "text-primary dark:text-primary" : "text-foreground",
+                                            isActive ? "text-primary" : "text-foreground",
                                         )}
                                     >
                                         {link.label}
@@ -142,6 +336,7 @@ export function FloatingHeader() {
                         );
                     })}
                 </div>
+
                 <div className="flex items-center gap-2">
                     <Link href="/contact">
                         <Button size="sm">Let&apos;s Talk</Button>
@@ -161,7 +356,17 @@ export function FloatingHeader() {
                             side="left"
                         >
                             <div className="grid gap-y-2 overflow-y-auto px-4 pt-12 pb-5">
-                                {links.map((link) => (
+                                <Link
+                                    className={buttonVariants({
+                                        variant: 'ghost',
+                                        className: 'justify-start',
+                                    })}
+                                    href="/services"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    Services
+                                </Link>
+                                {regularLinks.map((link) => (
                                     <Link
                                         key={link.label}
                                         className={buttonVariants({
@@ -187,3 +392,4 @@ export function FloatingHeader() {
         </header>
     );
 }
+
