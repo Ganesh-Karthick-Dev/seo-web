@@ -63,25 +63,22 @@ export function ServiceHeroSection({
             .map((_, i) => i)
             .sort(() => Math.random() - 0.5);
 
-        // Set initial state - letters start from "in front" of the screen
+        // Set initial state - simpler transforms for better performance
         gsap.set(letterElements, {
             opacity: 0,
-            scale: 3,
-            z: 500,
-            rotateX: -20,
-            transformPerspective: 1000,
+            scale: 5,
+            force3D: true,
         });
 
-        // Animate each letter in random order
+        // Animate each letter in random order with GPU acceleration
         shuffledIndices.forEach((originalIndex, animationOrder) => {
             gsap.to(lettersArray[originalIndex], {
                 opacity: 1,
                 scale: 1,
-                z: 0,
-                rotateX: 0,
-                duration: 1.1,
-                ease: "power3.out",
-                delay: 0.3 + (animationOrder * 0.04), // Stagger based on animation order
+                duration: 0.7,
+                ease: "power2.out",
+                delay: 0.15 + (animationOrder * 0.03),
+                force3D: true,
             });
         });
     }, [title]);
@@ -131,8 +128,8 @@ export function ServiceHeroSection({
                                     <span
                                         key={`${wordIndex}-${letterIndex}`}
                                         className={`title-letter inline-block ${wordData.isLast
-                                                ? 'bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent'
-                                                : ''
+                                            ? 'bg-gradient-to-r from-sky-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent'
+                                            : ''
                                             }`}
                                         style={{ transformStyle: 'preserve-3d' }}
                                     >
