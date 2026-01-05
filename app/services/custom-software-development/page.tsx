@@ -2,6 +2,7 @@
 
 import { Code2 } from "lucide-react";
 import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
+import { ServiceFeaturesSection } from "@/components/sections/ServiceFeaturesSection";
 
 export default function CustomSoftwareDevelopmentPage() {
     return (
@@ -15,7 +16,7 @@ export default function CustomSoftwareDevelopmentPage() {
                 icon={Code2}
             />
 
-            {/* More sections will be added here */}
+            <ServiceFeaturesSection />
         </main>
     );
 }
