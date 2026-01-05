@@ -31,9 +31,7 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} font-sans antialiased`}
       >
-        <div className="relative w-full px-4 pt-4">
-          <FloatingHeader />
-        </div>
+        <FloatingHeader />
         {children}
         <Footer />
       </body>
