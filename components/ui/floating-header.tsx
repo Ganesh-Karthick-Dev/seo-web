@@ -340,17 +340,39 @@ export function FloatingHeader() {
                             showClose={false}
                             side="left"
                         >
-                            <div className="grid gap-y-2 overflow-y-auto px-4 pt-12 pb-5">
-                                <Link
-                                    className={buttonVariants({
-                                        variant: 'ghost',
-                                        className: 'justify-start',
-                                    })}
-                                    href="/services"
-                                    onClick={() => setOpen(false)}
-                                >
-                                    Services
-                                </Link>
+                            <div className="grid gap-y-1 overflow-y-auto px-4 pt-12 pb-5">
+                                {/* Services Section with sub-items */}
+                                <div className="space-y-1">
+                                    <Link
+                                        className={buttonVariants({
+                                            variant: 'ghost',
+                                            className: 'justify-start font-semibold',
+                                        })}
+                                        href="/services"
+                                        onClick={() => setOpen(false)}
+                                    >
+                                        Services
+                                    </Link>
+                                    <div className="pl-4 space-y-0.5">
+                                        {servicesData.map((service) => (
+                                            <Link
+                                                key={service.id}
+                                                className={buttonVariants({
+                                                    variant: 'ghost',
+                                                    size: 'sm',
+                                                    className: 'justify-start text-muted-foreground hover:text-foreground w-full',
+                                                })}
+                                                href={service.href}
+                                                onClick={() => setOpen(false)}
+                                            >
+                                                <service.icon className="size-4 mr-2" />
+                                                {service.title}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Other nav links */}
                                 {regularLinks.map((link) => (
                                     <Link
                                         key={link.label}
@@ -361,6 +383,7 @@ export function FloatingHeader() {
                                         href={link.href}
                                         onClick={() => setOpen(false)}
                                     >
+                                        <link.icon className="size-4 mr-2" />
                                         {link.label}
                                     </Link>
                                 ))}
