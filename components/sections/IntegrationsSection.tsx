@@ -1,17 +1,9 @@
 "use client";
 
 import React, { forwardRef, useRef } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
-import {
-    Cloud,
-    Database,
-    Server,
-    Code2,
-    Smartphone,
-    Globe,
-    Cpu
-} from "lucide-react";
 
 const Circle = forwardRef<
     HTMLDivElement,
@@ -21,7 +13,7 @@ const Circle = forwardRef<
         <div
             ref={ref}
             className={cn(
-                "z-10 flex size-12 md:size-16 items-center justify-center rounded-full border-2 border-neutral-200 bg-white p-3 shadow-lg",
+                "z-10 flex size-12 md:size-14 items-center justify-center rounded-full border border-neutral-200 bg-white p-2.5 shadow-lg",
                 className,
             )}
         >
@@ -32,139 +24,274 @@ const Circle = forwardRef<
 
 Circle.displayName = "Circle";
 
+// Tech icons as SVG components
+const Icons = {
+    react: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#61DAFB">
+            <path d="M12 10.11c1.03 0 1.87.84 1.87 1.89 0 1-.84 1.85-1.87 1.85S10.13 13 10.13 12c0-1.05.84-1.89 1.87-1.89M7.37 20c.63.38 2.01-.2 3.6-1.7-.52-.59-1.03-1.23-1.51-1.9a22.7 22.7 0 0 1-2.4-.36c-.51 2.14-.32 3.61.31 3.96m.71-5.74-.29-.51c-.11.29-.22.58-.29.86.27.06.57.11.88.16l-.3-.51m6.54-.76.81-1.5-.81-1.5c-.3-.53-.62-1-.91-1.47C13.17 9 12.6 9 12 9s-1.17 0-1.71.03c-.29.47-.61.94-.91 1.47L8.57 12l.81 1.5c.3.53.62 1 .91 1.47.54.03 1.11.03 1.71.03s1.17 0 1.71-.03c.29-.47.61-.94.91-1.47M12 6.78c-.19.22-.39.45-.59.72h1.18c-.2-.27-.4-.5-.59-.72m0 10.44c.19-.22.39-.45.59-.72h-1.18c.2.27.4.5.59.72M16.62 4c-.62-.38-2 .2-3.59 1.7.52.59 1.03 1.23 1.51 1.9.82.08 1.63.2 2.4.36.51-2.14.32-3.61-.32-3.96m-.7 5.74.29.51c.11-.29.22-.58.29-.86-.27-.06-.57-.11-.88-.16l.3.51m1.45-7.05c1.47.84 1.63 3.05 1.01 5.63 2.54.75 4.37 1.99 4.37 3.68s-1.83 2.93-4.37 3.68c.62 2.58.46 4.79-1.01 5.63-1.46.84-3.45-.12-5.37-1.95-1.92 1.83-3.91 2.79-5.38 1.95-1.46-.84-1.62-3.05-1-5.63-2.54-.75-4.37-1.99-4.37-3.68s1.83-2.93 4.37-3.68c-.62-2.58-.46-4.79 1-5.63 1.47-.84 3.46.12 5.38 1.95 1.92-1.83 3.91-2.79 5.37-1.95M17.08 12c.34.75.64 1.5.89 2.26 2.1-.63 3.28-1.53 3.28-2.26s-1.18-1.63-3.28-2.26c-.25.76-.55 1.51-.89 2.26M6.92 12c-.34-.75-.64-1.5-.89-2.26-2.1.63-3.28 1.53-3.28 2.26s1.18 1.63 3.28 2.26c.25-.76.55-1.51.89-2.26m9 2.26-.3.51c.31-.05.61-.1.88-.16-.07-.28-.18-.57-.29-.86l-.29.51m-9.82 1.49c.78-.16 1.58-.28 2.4-.36.48-.67.99-1.31 1.51-1.9-1.59-1.5-2.97-2.08-3.59-1.7-.64.35-.83 1.82-.32 3.96m9.72-10.24c-.78.16-1.58.28-2.4.36-.48.67-.99 1.31-1.51 1.9 1.59 1.5 2.97 2.08 3.59 1.7.64-.35.83-1.82.32-3.96" />
+        </svg>
+    ),
+    nodejs: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#339933">
+            <path d="M11.998 24c-.321 0-.641-.084-.922-.247L8.14 22.016c-.438-.245-.224-.332-.08-.383.585-.204.703-.25 1.328-.604.065-.036.151-.022.218.017l2.256 1.339c.082.045.198.045.275 0l8.795-5.076c.082-.047.134-.141.134-.238V6.921c0-.099-.053-.193-.137-.242l-8.791-5.072c-.081-.047-.189-.047-.271 0L3.075 6.68c-.085.049-.139.144-.139.243v10.15c0 .097.054.189.139.235l2.409 1.392c1.307.654 2.108-.116 2.108-.891V7.787c0-.142.114-.253.256-.253h1.115c.139 0 .255.111.255.253v10.021c0 1.745-.95 2.745-2.604 2.745-.509 0-.909 0-2.026-.551L2.28 18.675c-.57-.329-.922-.943-.922-1.604V6.921c0-.66.352-1.274.922-1.603L11.076.242c.558-.318 1.303-.318 1.847 0l8.794 5.076c.57.329.924.943.924 1.603v10.15c0 .66-.354 1.273-.924 1.604l-8.794 5.076c-.281.163-.6.249-.922.249zm2.723-6.978c-3.867 0-4.677-1.776-4.677-3.266 0-.142.114-.253.255-.253h1.137c.126 0 .232.091.251.215.171 1.155.682 1.738 3.008 1.738 1.853 0 2.64-.419 2.64-1.401 0-.566-.224-.986-3.101-1.268-2.405-.238-3.894-.769-3.894-2.692 0-1.773 1.495-2.829 4.003-2.829 2.816 0 4.208.977 4.385 3.077.006.075-.021.147-.072.202-.051.056-.122.084-.195.084h-1.142c-.118 0-.223-.081-.248-.195-.276-1.224-.945-1.616-2.729-1.616-2.009 0-2.243.7-2.243 1.225 0 .635.276.821 3.007 1.18 2.705.355 3.985.858 3.985 2.766-.002 1.917-1.598 3.015-4.384 3.015z" />
+        </svg>
+    ),
+    postgresql: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#4169E1">
+            <path d="M23.5594 14.7228a.5269.5269 0 0 0-.0563-.1191c-.139-.2632-.4768-.3418-1.0074-.2321-1.6533.3408-2.0508-.4324-2.1519-.7428.9383-1.3691 1.7356-2.9521 2.3054-4.6076.1528-.4434.2885-.8849.4101-1.3287.7569.0674 1.5057-.4768 1.7229-1.243.2166-.7647-.1718-1.5707-.8679-1.7993-.2543-.0834-.5257-.0825-.7732.0013v-.0014c.0017-.0517.0068-.1036.0068-.1557 0-1.8377-.7553-3.5316-2.1274-4.7704C19.8044.6556 17.9628 0 16.0294 0c-1.9287 0-3.7684.6533-5.1822 1.8397-.2136-.0252-.4264-.0378-.6401-.0378-1.7633 0-3.4218.6901-4.6694 1.9433C4.292 4.9985 3.6 6.6608 3.6 8.4271c0 .0523.0033.1042.0052.1564-.3014-.0511-.6103-.0264-.8934.0767-.6961.2543-.7935 1.0915-.577 1.8566.2114.7478.9608 1.2643 1.7064 1.1775.1186.3737.2512.7453.3959 1.1128l-.0005.0004c-1.1432 2.0324-1.0227 4.8442.4636 6.3698.3943.405.8509.6942 1.3551.8729-.1862.6285-.3343 1.2735-.4416 1.9303-.1001.6133.0203 1.2308.3377 1.7359.3175.5051.8095.8546 1.3849.9829 1.1859.2642 2.3921.4016 3.6SEI 1.4016h.3652c.8325 0 1.6654-.0557 2.4919-.1644.7607-.1.1371-.2211.5046-.3454.8596-.1244.3586-.2654.7111-.4218 1.0574-.4037.8938-.9178 1.7336-1.5286 2.4997-.0556.0699-.1062.1318-.1522.1871.0015.0014.003.0028.0046.0041.1523-.0041.3082-.0145.4704-.0331a8.1SEI 8.1567 0 0 0 1.6055-.3622c.5234-.1688 1.0379-.3754 1.5381-.6194.116-.0567.2317-.1156.3462-.1766.0115-.0061.0231-.0121.0346-.0183.3949-.2152.7824-.4582 1.1586-.7284.6295-.4523 1.2229-.9607 1.773-1.52a10.7383 10.73SEI 0 0 0 1.4346-1.7944c.3653-.5462.694-1.1194.9823-1.7169a6.6235 6.6235 0 0 0 .4399-1.1795c.0792-.3039.1369-.6159.1696-.9329.0262-.2524.0345-.5089.0242-.7652a1.0695 1.0695 0 0 0-.0312-.2637zM12.3583 1.7725c.1313.0098.2619.0268.3916.0508 1.4092.262 2.6095 1.3059 3.3186 2.8782.0736.1632.1412.3312.2026.5034-.3768.0174-.7524.0699-1.1218.1588-.4189-.7462-.9696-1.2912-1.6014-1.5853-.666-.3101-1.3693-.3241-2.0356-.0407-.0275.0117-.0539.0251-.0803.0385-.0631-.0817-.1313-.1601-.2042-.2343-.5965-.6049-1.3894-.9418-2.2326-1.0012.1124-.0682.2275-.133.3445-.1942.8887-.4655 1.9122-.7124 2.961-.7124.3586 0 .7177.0288 1.0576.0884zM5.0706 3.4416c.9584 0 1.8546.4142 2.5241 1.1658.0753.0845.1461.1731.2127.2644-.0079.0067-.0161.0131-.0239.02-.1009.0894-.1943.187-.2792.2924-.2574.3198-.4591.6845-.5999 1.0823a5.0562 5.0562 0 0 0-.3042 1.3481 7.109 7.109 0 0 0-.0272.6231c0 .0351.0009.0701.0015.1051.0012.0818.0041.1631.0094.2431-.0028.0285-.0052.0571-.0075.0857-.2698-.0389-.5435-.0597-.8215-.0626-.0026-.0002-.005-.0002-.0076-.0002-.3066 0-.6008.0465-.8776.1389a1.7315 1.7315 0 0 0-.4036.1888c-.7895-.9542-.8393-2.1867-.1258-3.102.0055-.0071.0106-.0144.0161-.0215.3997-.5147.9468-.8913 1.5802-1.0874.5068-.1569 1.0385-.2061 1.5624-.146.1048-.0178.2103-.032.3161-.0423a4.4016 4.4016 0 0 1 .5551-.0354z" />
+        </svg>
+    ),
+    graphql: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#E10098">
+            <path d="M12.002 0a2.138 2.138 0 1 0 0 4.277 2.138 2.138 0 1 0 0-4.277zm8.54 4.931a2.138 2.138 0 1 0 0 4.277 2.138 2.138 0 1 0 0-4.277zm0 9.862a2.138 2.138 0 1 0 0 4.277 2.138 2.138 0 1 0 0-4.277zm-8.54 4.931a2.138 2.138 0 1 0 0 4.276 2.138 2.138 0 1 0 0-4.276zm-8.542-4.93a2.138 2.138 0 1 0 0 4.276 2.138 2.138 0 1 0 0-4.277zm0-9.863a2.138 2.138 0 1 0 0 4.277 2.138 2.138 0 1 0 0-4.277zm8.542-3.378L2.953 6.777v10.448l9.049 5.224 9.047-5.224V6.777zm0 1.601l7.66 13.27H4.34zm-1.387.371L3.97 15.037V7.363zm2.774 0l6.646 3.838v7.674zM5.355 17.44h13.293l-6.646 3.838z" />
+        </svg>
+    ),
+    aws: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#FF9900">
+            <path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 0 1-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 0 1-.287-.375 6.18 6.18 0 0 1-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.287 2.287 0 0 1-.28.104.488.488 0 0 1-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 0 1 .224-.167c.279-.144.614-.264 1.005-.36a4.84 4.84 0 0 1 1.246-.151c.95 0 1.644.216 2.091.647.439.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 0 0-.735-.136 6.02 6.02 0 0 0-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 0 1-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 0 1 .32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 0 1 .311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 0 1-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 0 1-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 0 1-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 0 0 .415-.758.777.777 0 0 0-.215-.559c-.144-.151-.415-.287-.806-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 0 1-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .359.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 0 1 .24.2.43.43 0 0 1 .071.263v.375c0 .168-.064.256-.184.256a.83.83 0 0 1-.303-.096 3.652 3.652 0 0 0-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.272-.336.511-.583.703-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167zM21.698 16.207c-2.626 1.94-6.442 2.969-9.722 2.969-4.598 0-8.74-1.7-11.87-4.526-.247-.223-.024-.527.27-.351 3.384 1.963 7.559 3.153 11.877 3.153 2.914 0 6.114-.607 9.06-1.852.439-.2.814.287.385.607zM22.792 14.961c-.336-.43-2.22-.207-3.074-.103-.255.032-.295-.192-.063-.36 1.5-1.053 3.967-.75 4.254-.399.287.36-.08 2.826-1.485 4.007-.215.184-.423.088-.327-.151.32-.79 1.03-2.57.695-2.994z" />
+        </svg>
+    ),
+    docker: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#2496ED">
+            <path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.186m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z" />
+        </svg>
+    ),
+    kafka: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#231F20">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.044 4.312c.695 0 1.258.563 1.258 1.259 0 .695-.563 1.258-1.258 1.258-.696 0-1.26-.563-1.26-1.258 0-.696.564-1.26 1.26-1.26zm3.137 2.652c.617 0 1.118.5 1.118 1.118 0 .617-.5 1.118-1.118 1.118-.618 0-1.119-.5-1.119-1.118 0-.617.501-1.118 1.119-1.118zm-6.18.125c.617 0 1.118.5 1.118 1.118 0 .617-.5 1.118-1.118 1.118-.618 0-1.118-.501-1.118-1.118 0-.618.5-1.118 1.118-1.118zm1.09 2.103c.617 0 1.118.5 1.118 1.118 0 .617-.5 1.118-1.118 1.118-.617 0-1.118-.5-1.118-1.118 0-.617.5-1.118 1.118-1.118zm4.001 0c.617 0 1.118.5 1.118 1.118 0 .617-.501 1.118-1.118 1.118-.617 0-1.118-.5-1.118-1.118 0-.617.5-1.118 1.118-1.118zm-2.045 2.154c.695 0 1.258.563 1.258 1.259 0 .695-.563 1.258-1.258 1.258-.696 0-1.26-.563-1.26-1.258 0-.696.564-1.26 1.26-1.26zm3.978 2.068c.617 0 1.118.5 1.118 1.118 0 .617-.5 1.118-1.118 1.118-.618 0-1.119-.5-1.119-1.118 0-.617.501-1.118 1.119-1.118zm-7.957 0c.617 0 1.118.5 1.118 1.118 0 .617-.5 1.118-1.118 1.118-.618 0-1.118-.501-1.118-1.118 0-.618.5-1.118 1.118-1.118zm2.001 2.074c.617 0 1.118.5 1.118 1.118 0 .617-.501 1.118-1.118 1.118-.618 0-1.118-.5-1.118-1.118 0-.617.5-1.118 1.118-1.118zm3.998 0c.617 0 1.118.5 1.118 1.118 0 .617-.5 1.118-1.118 1.118-.617 0-1.118-.501-1.118-1.118 0-.617.5-1.118 1.118-1.118zm-2.046 2.17c.695 0 1.258.563 1.258 1.259 0 .695-.563 1.258-1.258 1.258-.696 0-1.26-.563-1.26-1.258 0-.696.564-1.26 1.26-1.26z" />
+        </svg>
+    ),
+    auth0: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#EB5424">
+            <path d="M21.98 7.448L19.62 0H4.347L2.02 7.448c-1.352 4.312.03 9.206 3.815 12.015L12.007 24l6.157-4.552c3.755-2.81 5.182-7.688 3.815-12.015l-6.16 4.58 2.343 7.45-6.157-4.597-6.158 4.58 2.358-7.433-6.188-4.55 7.63-.045L12.008 0l2.356 7.404 7.615.044z" />
+        </svg>
+    ),
+    prometheus: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#E6522C">
+            <path d="M12 0C5.373 0 0 5.372 0 12c0 6.627 5.373 12 12 12s12-5.373 12-12c0-6.628-5.373-12-12-12zm0 22.46c-1.885 0-3.414-1.574-3.414-3.516h6.828c0 1.942-1.529 3.516-3.414 3.516zm5.64-4.615H6.36v-1.932h11.28v1.932zm-.04-2.906H6.385c-.028-.036-.056-.072-.082-.109-1.143-1.553-1.91-2.8-2.155-4.606-.026-.19.002-.393.009-.494.018-.264.027-.398.027-.398l.127-.001c2.063 0 3.164-1.287 3.164-2.898 0-1.612-1.129-2.898-3.164-2.898-.006 0-.01.002-.015.002l.049-.006c.09-.013.181-.024.271-.024h11.182c.09 0 .181.011.27.024l.05.006c-.005 0-.01-.002-.016-.002-2.035 0-3.164 1.286-3.164 2.898 0 1.611 1.129 2.898 3.164 2.898l.127.001s.01.134.027.398c.007.101.035.304.009.494-.245 1.806-1.012 3.053-2.155 4.606-.026.037-.054.073-.081.109-.002 0-.002 0-.003 0z" />
+        </svg>
+    ),
+    kubernetes: () => (
+        <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-7 md:h-7" fill="#326CE5">
+            <path d="M10.204 14.35l.007.01-.999 2.413a5.171 5.171 0 0 1-2.075-2.597l2.578-.437.004.005a.44.44 0 0 1 .484.606zm-.833-2.129a.44.44 0 0 0 .173-.756l.002-.011L7.585 9.7a5.143 5.143 0 0 0-.73 3.255l2.514-.725.002-.009zm1.145-1.98a.44.44 0 0 0 .699-.337l.01-.005.15-2.62a5.144 5.144 0 0 0-3.01 1.442l2.147 1.523.004-.002zm.76 2.75l.723.349.722-.347.18-.78-.5-.623h-.804l-.5.623.179.778zm1.5-2.063a.44.44 0 0 0 .7.336l.008.003 2.134-1.513a5.188 5.188 0 0 0-2.992-1.442l.148 2.615.002.001zm10.876 5.97l-5.773 7.181a1.6 1.6 0 0 1-1.248.594H9.261a1.6 1.6 0 0 1-1.247-.594l-5.776-7.181a1.583 1.583 0 0 1-.307-1.34L3.823 5.982a1.579 1.579 0 0 1 .768-1.09l6.748-3.832a1.58 1.58 0 0 1 1.563 0l6.75 3.833c.395.222.67.593.768 1.086l1.89 7.999c.092.468-.02.948-.307 1.327zm-8.86-6.167a.44.44 0 0 0-.166.759l-.001.006 1.955 1.754a5.21 5.21 0 0 0-.314-3.264l-2.487.762.013-.017zm.387 3.106a.438.438 0 0 0-.483.609l-.003.011.99 2.413a5.19 5.19 0 0 0 2.077-2.597l-2.58-.436zm.247 4.343l-.135-2.68a.44.44 0 0 0-.704-.337l-.01.002-2.134 1.483a5.176 5.176 0 0 0 2.983 1.532z" />
+        </svg>
+    ),
+};
+
 export function IntegrationsSection() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const div1Ref = useRef<HTMLDivElement>(null);
-    const div2Ref = useRef<HTMLDivElement>(null);
-    const div3Ref = useRef<HTMLDivElement>(null);
-    const div4Ref = useRef<HTMLDivElement>(null);
-    const div5Ref = useRef<HTMLDivElement>(null);
-    const div6Ref = useRef<HTMLDivElement>(null);
-    const div7Ref = useRef<HTMLDivElement>(null);
+
+    // Left side refs (5 nodes)
+    const leftRef1 = useRef<HTMLDivElement>(null);
+    const leftRef2 = useRef<HTMLDivElement>(null);
+    const leftRef3 = useRef<HTMLDivElement>(null);
+    const leftRef4 = useRef<HTMLDivElement>(null);
+    const leftRef5 = useRef<HTMLDivElement>(null);
+
+    // Center ref
+    const centerRef = useRef<HTMLDivElement>(null);
+
+    // Right side refs (5 nodes)
+    const rightRef1 = useRef<HTMLDivElement>(null);
+    const rightRef2 = useRef<HTMLDivElement>(null);
+    const rightRef3 = useRef<HTMLDivElement>(null);
+    const rightRef4 = useRef<HTMLDivElement>(null);
+    const rightRef5 = useRef<HTMLDivElement>(null);
 
     return (
         <section className="w-full py-20 lg:py-32 bg-black">
             <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="mb-16 max-w-4xl">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                    <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}>
                         Our Advanced Technology Stack
                         <br />
                         <span className="text-neutral-500">for Custom Software Development</span>
                     </h2>
                 </div>
 
-                {/* Animated Beam Demo */}
+                {/* Animated Beam Diagram - No card background */}
                 <div
-                    className="relative flex h-[400px] md:h-[500px] w-full items-center justify-center overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 md:p-10"
+                    className="relative flex h-[500px] md:h-[600px] w-full items-center justify-center overflow-hidden p-6 md:p-10"
                     ref={containerRef}
                 >
-                    <div className="flex size-full flex-col max-w-lg max-h-[250px] items-stretch justify-between gap-8 md:gap-10">
-                        <div className="flex flex-row items-center justify-between">
-                            <Circle ref={div1Ref}>
-                                <Cloud className="w-6 h-6 md:w-8 md:h-8 text-sky-500" />
-                            </Circle>
-                            <Circle ref={div5Ref}>
-                                <Database className="w-6 h-6 md:w-8 md:h-8 text-purple-500" />
-                            </Circle>
+                    <div className="flex size-full max-w-5xl items-center justify-between gap-4 md:gap-8">
+                        {/* Left Column - 5 tech icons with labels on left */}
+                        <div className="flex flex-col gap-6 md:gap-8">
+                            <div className="flex items-center gap-3">
+                                <span className="text-white text-xs md:text-sm font-medium text-right w-20 md:w-24 hidden sm:block">Frontend</span>
+                                <Circle ref={leftRef1}>
+                                    <Icons.react />
+                                </Circle>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className="text-white text-xs md:text-sm font-medium text-right w-20 md:w-24 hidden sm:block">Backend</span>
+                                <Circle ref={leftRef2}>
+                                    <Icons.nodejs />
+                                </Circle>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className="text-white text-xs md:text-sm font-medium text-right w-20 md:w-24 hidden sm:block">Databases</span>
+                                <Circle ref={leftRef3}>
+                                    <Icons.postgresql />
+                                </Circle>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className="text-white text-xs md:text-sm font-medium text-right w-20 md:w-24 hidden sm:block">APIs</span>
+                                <Circle ref={leftRef4}>
+                                    <Icons.graphql />
+                                </Circle>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className="text-white text-xs md:text-sm font-medium text-right w-20 md:w-24 hidden sm:block">Cloud</span>
+                                <Circle ref={leftRef5}>
+                                    <Icons.aws />
+                                </Circle>
+                            </div>
                         </div>
-                        <div className="flex flex-row items-center justify-between">
-                            <Circle ref={div2Ref}>
-                                <Server className="w-6 h-6 md:w-8 md:h-8 text-green-500" />
-                            </Circle>
-                            <Circle ref={div4Ref} className="size-16 md:size-20">
-                                <Cpu className="w-8 h-8 md:w-10 md:h-10 text-cyan-500" />
-                            </Circle>
-                            <Circle ref={div6Ref}>
-                                <Smartphone className="w-6 h-6 md:w-8 md:h-8 text-orange-500" />
-                            </Circle>
+
+                        {/* Center - Favicon Logo */}
+                        <div
+                            ref={centerRef}
+                            className="z-10 flex size-20 md:size-24 items-center justify-center rounded-full border-2 border-neutral-200 bg-white p-4 shadow-[0_0_30px_rgba(14,165,233,0.3)]"
+                        >
+                            <Image
+                                src="/favicon_io/favicon-32x32.png"
+                                alt="Logo"
+                                width={48}
+                                height={48}
+                                className="w-10 h-10 md:w-12 md:h-12"
+                            />
                         </div>
-                        <div className="flex flex-row items-center justify-between">
-                            <Circle ref={div3Ref}>
-                                <Code2 className="w-6 h-6 md:w-8 md:h-8 text-pink-500" />
-                            </Circle>
-                            <Circle ref={div7Ref}>
-                                <Globe className="w-6 h-6 md:w-8 md:h-8 text-blue-500" />
-                            </Circle>
+
+                        {/* Right Column - 5 tech icons with labels on right */}
+                        <div className="flex flex-col gap-6 md:gap-8">
+                            <div className="flex items-center gap-3">
+                                <Circle ref={rightRef1}>
+                                    <Icons.docker />
+                                </Circle>
+                                <span className="text-white text-xs md:text-sm font-medium w-20 md:w-24 hidden sm:block">DevOps</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Circle ref={rightRef2}>
+                                    <Icons.kafka />
+                                </Circle>
+                                <span className="text-white text-xs md:text-sm font-medium w-20 md:w-24 hidden sm:block">Messaging</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Circle ref={rightRef3}>
+                                    <Icons.auth0 />
+                                </Circle>
+                                <span className="text-white text-xs md:text-sm font-medium w-20 md:w-24 hidden sm:block">Security</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Circle ref={rightRef4}>
+                                    <Icons.prometheus />
+                                </Circle>
+                                <span className="text-white text-xs md:text-sm font-medium w-20 md:w-24 hidden sm:block">Observability</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Circle ref={rightRef5}>
+                                    <Icons.kubernetes />
+                                </Circle>
+                                <span className="text-white text-xs md:text-sm font-medium w-20 md:w-24 hidden sm:block">Architecture</span>
+                            </div>
                         </div>
                     </div>
 
                     {/* Beams from left side to center */}
                     <AnimatedBeam
                         containerRef={containerRef}
-                        fromRef={div1Ref}
-                        toRef={div4Ref}
-                        curvature={-75}
-                        endYOffset={-10}
-                        gradientStartColor="#0ea5e9"
-                        gradientStopColor="#06b6d4"
+                        fromRef={leftRef1}
+                        toRef={centerRef}
+                        curvature={-50}
+                        gradientStartColor="#61DAFB"
+                        gradientStopColor="#61DAFB"
                     />
                     <AnimatedBeam
                         containerRef={containerRef}
-                        fromRef={div2Ref}
-                        toRef={div4Ref}
-                        gradientStartColor="#22c55e"
-                        gradientStopColor="#10b981"
+                        fromRef={leftRef2}
+                        toRef={centerRef}
+                        curvature={-25}
+                        gradientStartColor="#339933"
+                        gradientStopColor="#339933"
                     />
                     <AnimatedBeam
                         containerRef={containerRef}
-                        fromRef={div3Ref}
-                        toRef={div4Ref}
-                        curvature={75}
-                        endYOffset={10}
-                        gradientStartColor="#ec4899"
-                        gradientStopColor="#f43f5e"
+                        fromRef={leftRef3}
+                        toRef={centerRef}
+                        gradientStartColor="#4169E1"
+                        gradientStopColor="#4169E1"
+                    />
+                    <AnimatedBeam
+                        containerRef={containerRef}
+                        fromRef={leftRef4}
+                        toRef={centerRef}
+                        curvature={25}
+                        gradientStartColor="#E10098"
+                        gradientStopColor="#E10098"
+                    />
+                    <AnimatedBeam
+                        containerRef={containerRef}
+                        fromRef={leftRef5}
+                        toRef={centerRef}
+                        curvature={50}
+                        gradientStartColor="#FF9900"
+                        gradientStopColor="#FF9900"
                     />
 
                     {/* Beams from center to right side (reverse) */}
                     <AnimatedBeam
                         containerRef={containerRef}
-                        fromRef={div5Ref}
-                        toRef={div4Ref}
-                        curvature={-75}
-                        endYOffset={-10}
+                        fromRef={rightRef1}
+                        toRef={centerRef}
+                        curvature={-50}
                         reverse
-                        gradientStartColor="#a855f7"
-                        gradientStopColor="#8b5cf6"
+                        gradientStartColor="#2496ED"
+                        gradientStopColor="#2496ED"
                     />
                     <AnimatedBeam
                         containerRef={containerRef}
-                        fromRef={div6Ref}
-                        toRef={div4Ref}
+                        fromRef={rightRef2}
+                        toRef={centerRef}
+                        curvature={-25}
                         reverse
-                        gradientStartColor="#f97316"
-                        gradientStopColor="#fb923c"
+                        gradientStartColor="#ffffff"
+                        gradientStopColor="#ffffff"
                     />
                     <AnimatedBeam
                         containerRef={containerRef}
-                        fromRef={div7Ref}
-                        toRef={div4Ref}
-                        curvature={75}
-                        endYOffset={10}
+                        fromRef={rightRef3}
+                        toRef={centerRef}
                         reverse
-                        gradientStartColor="#3b82f6"
-                        gradientStopColor="#60a5fa"
+                        gradientStartColor="#EB5424"
+                        gradientStopColor="#EB5424"
+                    />
+                    <AnimatedBeam
+                        containerRef={containerRef}
+                        fromRef={rightRef4}
+                        toRef={centerRef}
+                        curvature={25}
+                        reverse
+                        gradientStartColor="#E6522C"
+                        gradientStopColor="#E6522C"
+                    />
+                    <AnimatedBeam
+                        containerRef={containerRef}
+                        fromRef={rightRef5}
+                        toRef={centerRef}
+                        curvature={50}
+                        reverse
+                        gradientStartColor="#326CE5"
+                        gradientStopColor="#326CE5"
                     />
                 </div>
 
-                {/* Integration Labels */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                    <div className="text-center p-4">
-                        <p className="text-white font-medium">Cloud Services</p>
-                        <p className="text-neutral-500 text-sm">AWS, Azure, GCP</p>
-                    </div>
-                    <div className="text-center p-4">
-                        <p className="text-white font-medium">Databases</p>
-                        <p className="text-neutral-500 text-sm">SQL, NoSQL, Graph</p>
-                    </div>
-                    <div className="text-center p-4">
-                        <p className="text-white font-medium">APIs & Services</p>
-                        <p className="text-neutral-500 text-sm">REST, GraphQL, gRPC</p>
-                    </div>
-                    <div className="text-center p-4">
-                        <p className="text-white font-medium">Platforms</p>
-                        <p className="text-neutral-500 text-sm">Web, Mobile, IoT</p>
-                    </div>
+                {/* Description text below beam */}
+                <div className="mt-12 max-w-3xl mx-auto text-center">
+                    <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
+                        Technology decisions are driven by your requirements — not our preferences. We select the right stack based on scalability needs, team capabilities, integration requirements, and long-term maintenance strategy.
+                    </p>
                 </div>
             </div>
         </section>
