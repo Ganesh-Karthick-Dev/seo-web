@@ -228,13 +228,11 @@ export function WhyChooseUsSection() {
                             <span className="text-neutral-500">
                                 Ready to get started?
                             </span>
-                            <a
-                                href="/contact"
-                                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-sky-500 to-cyan-500 text-white font-medium hover:shadow-[0_0_30px_rgba(14,165,233,0.4)] transition-all duration-300"
-                            >
-                                Start a Project
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </a>
+                            <Link href="/contact">
+                                <ShinyButton>
+                                    Start a Project
+                                </ShinyButton>
+                            </Link>
                         </motion.div>
                     </div>
                 </div>

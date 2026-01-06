@@ -8,6 +8,7 @@ import { ServiceCTASection } from "@/components/sections/ServiceCTASection";
 import { ServiceScrollSection } from "@/components/sections/ServiceScrollSection";
 import { IntegrationsSection } from "@/components/sections/IntegrationsSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
+import { BlogSection } from "@/components/sections/BlogSection";
 
 export default function CustomSoftwareDevelopmentPage() {
     return (
@@ -36,6 +37,8 @@ export default function CustomSoftwareDevelopmentPage() {
             <IntegrationsSection />
 
             <WhyChooseUsSection />
+
+            <BlogSection />
         </main>
     );
 }
