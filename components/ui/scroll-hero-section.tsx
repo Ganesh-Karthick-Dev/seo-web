@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { GradientCard } from '@/components/ui/gradient-card';
+import { CTA } from '@/components/ui/call-to-action';
 import { Search, PenTool, Code2, CheckCircle, Rocket } from 'lucide-react';
 
 export interface ScrollHeroSectionProps {
@@ -126,6 +127,14 @@ export function ScrollHeroSection({
                             />
                         ))}
                     </div>
+
+                    {/* CTA Section */}
+                    <CTA
+                        title="See How We Work"
+                        description="Get a walkthrough of our structured, milestone-driven delivery model."
+                        primaryButtonText="Let's talk"
+                        primaryButtonHref="/contact"
+                    />
                 </div>
             </main>
 
