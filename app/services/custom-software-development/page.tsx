@@ -5,6 +5,7 @@ import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 import { ServiceFeaturesSection } from "@/components/sections/ServiceFeaturesSection";
 import { ServiceProcessSection } from "@/components/sections/ServiceProcessSection";
 import { ServiceCTASection } from "@/components/sections/ServiceCTASection";
+import { ServiceScrollSection } from "@/components/sections/ServiceScrollSection";
 
 export default function CustomSoftwareDevelopmentPage() {
     return (
@@ -27,6 +28,8 @@ export default function CustomSoftwareDevelopmentPage() {
                 primaryButtonText="Schedule a Discovery Call"
                 primaryButtonHref="/contact"
             />
+
+            <ServiceScrollSection hue={200} />
         </main>
     );
 }
