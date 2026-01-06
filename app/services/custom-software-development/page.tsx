@@ -6,6 +6,7 @@ import { ServiceFeaturesSection } from "@/components/sections/ServiceFeaturesSec
 import { ServiceProcessSection } from "@/components/sections/ServiceProcessSection";
 import { ServiceCTASection } from "@/components/sections/ServiceCTASection";
 import { ServiceScrollSection } from "@/components/sections/ServiceScrollSection";
+import { IntegrationsSection } from "@/components/sections/IntegrationsSection";
 
 export default function CustomSoftwareDevelopmentPage() {
     return (
@@ -30,6 +31,8 @@ export default function CustomSoftwareDevelopmentPage() {
             />
 
             <ServiceScrollSection hue={200} />
+
+            <IntegrationsSection />
         </main>
     );
 }
