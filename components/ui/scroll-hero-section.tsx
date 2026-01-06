@@ -256,7 +256,7 @@ export function ScrollHeroSection({
                             scale: 1; 
                             border-radius: 0; 
                         }
-                        95% { 
+                        70% { 
                             scale: 1; 
                             border-radius: 0; 
                         }
