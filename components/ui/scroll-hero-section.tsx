@@ -234,23 +234,36 @@ export function ScrollHeroSection({
                     }
                 }
 
-                /* View-timeline animations for smooth card entry */
+                /* View-timeline animations for smooth card entry AND exit */
                 @supports (animation-timeline: view()) {
                     [data-animate='true'] .scroll-hero-main {
                         view-timeline: --section;
                     }
 
                     [data-animate='true'] .scroll-hero-main::before {
-                        transform-origin: 50% 100%;
-                        scale: 0.92;
+                        transform-origin: 50% 50%;
                         animation: scroll-hero-grow both ease-out;
                         animation-timeline: --section;
-                        animation-range: entry 0% entry 80%;
+                        animation-range: entry 0% exit 100%;
                     }
 
                     @keyframes scroll-hero-grow {
-                        from { scale: 0.92; border-radius: 2rem 2rem 0 0; }
-                        to { scale: 1; border-radius: 0; }
+                        0% { 
+                            scale: 0.92; 
+                            border-radius: 2rem 2rem 0 0; 
+                        }
+                        30% { 
+                            scale: 1; 
+                            border-radius: 0; 
+                        }
+                        95% { 
+                            scale: 1; 
+                            border-radius: 0; 
+                        }
+                        100% { 
+                            scale: 0.92; 
+                            border-radius: 0 0 2rem 2rem; 
+                        }
                     }
                 }
 
