@@ -11,6 +11,7 @@ const outfit = Outfit({
   display: "swap",
 });
 
+
 export const metadata: Metadata = {
   title: "Zylex — Software Development & Modernization",
   description: "Zylex helps businesses build, modernize, and scale mission-critical digital platforms through custom software development, application modernization, cloud & DevOps, AI and automation, and digital transformation services.",
