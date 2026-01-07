@@ -227,14 +227,64 @@ export default function DigitalTransformationPage() {
                 features={features}
             />
 
-            {/* Solutions Section - 3 Solutions (Timeline 1) */}
-            <ServiceProcessSection
-                title="Digital Transformation Solutions we offer"
-                titleHighlight="We combine strategy, process transformation, and implementation to help organizations move from legacy constraints to scalable, modern digital ecosystems."
-                processData={solutionsData}
-            />
+            {/* Solutions Section - 3 Solutions (Simple Card Grid) */}
+            <section className="relative py-24 md:py-32 px-4 md:px-6 lg:px-8 bg-black overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
 
-            {/* Engagement Approach - 4 Phases (Timeline 2) */}
+                <div className="max-w-[90rem] mx-auto relative z-10">
+                    <div className="mb-16 md:mb-20 max-w-5xl">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+                            Digital Transformation Solutions we offer
+                        </h2>
+                        <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl">
+                            We combine strategy, process transformation, and implementation to help organizations move from legacy constraints to scalable, modern digital ecosystems.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        {/* Solution 1 */}
+                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500">
+                            <div className="w-14 h-14 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6">
+                                <Lightbulb className="w-7 h-7" />
+                            </div>
+                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-sky-100 transition-colors">
+                                Digital Strategy & Consulting
+                            </h3>
+                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                We partner with you to define your digital vision, set clear transformation goals, and align every initiative with your core business objectives. As a leading digital transformation company, our consultants provide strategic guidance that ensures your digital investments create real business value.
+                            </p>
+                        </div>
+
+                        {/* Solution 2 */}
+                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-500">
+                            <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6">
+                                <Building2 className="w-7 h-7" />
+                            </div>
+                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-cyan-100 transition-colors">
+                                Digital Business Transformation
+                            </h3>
+                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                We help organizations evolve with changing markets, emerging technologies, and regulatory shifts. As trusted digital transformation service providers, we identify the right digital platforms and AI-driven solutions to strengthen capabilities, streamline operations, and accelerate innovation — enabling your business to operate smarter and scale with confidence.
+                            </p>
+                        </div>
+
+                        {/* Solution 3 */}
+                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500">
+                            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                                <RefreshCw className="w-7 h-7" />
+                            </div>
+                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-blue-100 transition-colors">
+                                Legacy Application Modernization
+                            </h3>
+                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                We transform outdated legacy systems into secure, scalable, and high-performing digital platforms. Our legacy application modernization services upgrade architecture, enhance reliability and security, and align your applications with modern technologies — while ensuring minimal disruption to ongoing operations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Engagement Approach - 4 Phases (Timeline) */}
             <ServiceProcessSection
                 title="How We Deliver Digital Transformation"
                 titleHighlight="Our Engagement Approach — Our transformation model balances strategy, execution discipline, and change enablement."
