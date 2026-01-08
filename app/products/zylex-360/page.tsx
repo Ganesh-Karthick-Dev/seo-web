@@ -4,6 +4,7 @@ import { Zylex360HeroSection } from "@/components/sections/Zylex360HeroSection";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { FullScreenScrollFX } from "@/components/ui/full-screen-scroll-fx";
 import { Features } from "@/components/ui/features-section";
+import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 import Image from "next/image";
 
 const scrollSections = [
@@ -80,6 +81,34 @@ export default function Zylex360Page() {
             </section>
 
             <Features />
+
+            <section className="w-full relative bg-black py-32">
+                <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="mb-20 max-w-4xl">
+                        <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
+                            Zylex360 <br />
+                            <span className="text-neutral-500">Built For</span>
+                        </h2>
+                    </div>
+                </div>
+
+                <div className="w-full max-w-5xl mx-auto p-4">
+                    <div className="flex flex-col items-start justify-center text-left gap-8">
+                        <TextGradientScroll
+                            text="✓ Global retailers expanding into new markets"
+                            className="font-bold text-white leading-relaxed text-2xl md:text-4xl"
+                        />
+                        <TextGradientScroll
+                            text="✓ Omnichannel distributors synchronizing online and offline sales"
+                            className="font-bold text-white leading-relaxed text-2xl md:text-4xl"
+                        />
+                        <TextGradientScroll
+                            text="✓ SME leaders consolidating their tech stack"
+                            className="font-bold text-white leading-relaxed text-2xl md:text-4xl"
+                        />
+                    </div>
+                </div>
+            </section>
         </main>
     );
 }
