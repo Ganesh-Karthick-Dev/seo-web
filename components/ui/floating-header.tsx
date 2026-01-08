@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MenuIcon, Building2, Users, Code2, Smartphone, ShoppingCart, Sparkles, Box, Bot, MessageSquare, Cloud, ChevronDown, Briefcase } from 'lucide-react';
+import { MenuIcon, Building2, Users, Code2, Smartphone, ShoppingCart, Sparkles, Box, Bot, MessageSquare, Cloud, ChevronDown, Briefcase, Package, Shield, Layers } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Sheet, SheetContent, SheetFooter } from '@/components/ui/sheet';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -70,13 +70,33 @@ const servicesData = [
     },
 ];
 
+// Products data
+const productsData = [
+    {
+        id: 1,
+        icon: Layers,
+        title: "Zylex 360",
+        description: "Complete business management and automation platform",
+        href: "/products/zylex-360",
+    },
+    {
+        id: 2,
+        icon: Shield,
+        title: "Temp Mail Blocker",
+        description: "Protect your forms from disposable email addresses",
+        href: "/products/temp-mail-blocker",
+    },
+];
+
 export function FloatingHeader() {
     const [open, setOpen] = React.useState(false);
     const [visible, setVisible] = useState(true);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [servicesOpen, setServicesOpen] = useState(false);
+    const [productsOpen, setProductsOpen] = useState(false);
     const lastScrollY = useRef(0);
     const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const productsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -111,6 +131,19 @@ export function FloatingHeader() {
     const handleServicesMouseLeave = () => {
         servicesTimeoutRef.current = setTimeout(() => {
             setServicesOpen(false);
+        }, 150);
+    };
+
+    const handleProductsMouseEnter = () => {
+        if (productsTimeoutRef.current) {
+            clearTimeout(productsTimeoutRef.current);
+        }
+        setProductsOpen(true);
+    };
+
+    const handleProductsMouseLeave = () => {
+        productsTimeoutRef.current = setTimeout(() => {
+            setProductsOpen(false);
         }, 150);
     };
 
@@ -267,6 +300,119 @@ export function FloatingHeader() {
                         </div>
                     </div>
 
+                    {/* Products Dropdown */}
+                    <div
+                        className="relative"
+                        onMouseEnter={handleProductsMouseEnter}
+                        onMouseLeave={handleProductsMouseLeave}
+                    >
+                        <button
+                            className={cn(
+                                "flex items-center gap-1 px-3 py-2 rounded-full transition-colors duration-200 h-9",
+                                productsOpen || pathname.startsWith('/products')
+                                    ? "bg-primary/10 text-primary"
+                                    : "text-muted-foreground hover:bg-muted",
+                            )}
+                        >
+                            <Package size={18} strokeWidth={2} className="flex-shrink-0" />
+                            <motion.div
+                                initial={false}
+                                animate={{
+                                    width: productsOpen || pathname.startsWith('/products') ? "auto" : "0px",
+                                    opacity: productsOpen || pathname.startsWith('/products') ? 1 : 0,
+                                    marginLeft: productsOpen || pathname.startsWith('/products') ? "8px" : "0px",
+                                }}
+                                transition={{
+                                    width: { type: "spring", stiffness: 350, damping: 32 },
+                                    opacity: { duration: 0.15 },
+                                    marginLeft: { duration: 0.15 },
+                                }}
+                                className="overflow-hidden flex items-center"
+                            >
+                                <span className="font-medium text-sm whitespace-nowrap select-none">
+                                    Products
+                                </span>
+                            </motion.div>
+                            <ChevronDown
+                                size={14}
+                                className={cn(
+                                    "transition-transform duration-300 ml-0.5",
+                                    productsOpen && "rotate-180"
+                                )}
+                            />
+                        </button>
+
+                        {/* Dropdown Panel */}
+                        <div
+                            className={cn(
+                                "absolute top-full left-1/2 -translate-x-1/2 pt-3",
+                                "transition-all duration-300 ease-out",
+                                productsOpen
+                                    ? "opacity-100 translate-y-0 pointer-events-auto"
+                                    : "opacity-0 -translate-y-2 pointer-events-none"
+                            )}
+                        >
+                            <div
+                                className={cn(
+                                    "w-[320px] rounded-2xl shadow-2xl overflow-hidden",
+                                    "bg-white dark:bg-neutral-900",
+                                    "shadow-xl shadow-black/10 dark:shadow-black/50",
+                                    "border border-neutral-200 dark:border-neutral-800",
+                                )}
+                            >
+                                {/* Header */}
+                                <div className="flex items-center gap-4 p-4 border-b border-neutral-100 dark:border-neutral-800">
+                                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20">
+                                        <Package className="h-5 w-5 text-primary" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h3 className="text-base font-semibold text-neutral-900 dark:text-white">Our Products</h3>
+                                        <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                                            Tools built by Zylex
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Products List */}
+                                <div className="px-2 py-3">
+                                    <div className="space-y-1">
+                                        {productsData.map((product, index) => {
+                                            const Icon = product.icon;
+                                            return (
+                                                <Link
+                                                    key={product.id}
+                                                    href={product.href}
+                                                    className={cn(
+                                                        "flex items-start gap-3 rounded-xl p-3",
+                                                        "transition-all duration-300 ease-out",
+                                                        "hover:bg-neutral-100 dark:hover:bg-neutral-800/50",
+                                                        "group",
+                                                        productsOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
+                                                    )}
+                                                    style={{
+                                                        transitionDelay: productsOpen ? `${index * 40}ms` : "0ms",
+                                                    }}
+                                                >
+                                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-700 group-hover:bg-primary/10 dark:group-hover:bg-primary/20 transition-colors duration-300">
+                                                        <Icon className="h-4 w-4 text-neutral-600 dark:text-neutral-300 group-hover:text-primary transition-colors duration-300" />
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-primary transition-colors duration-300">
+                                                            {product.title}
+                                                        </h4>
+                                                        <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">
+                                                            {product.description}
+                                                        </p>
+                                                    </div>
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Other Links */}
                     {regularLinks.map((link, idx) => {
                         const Icon = link.icon;
@@ -367,6 +513,37 @@ export function FloatingHeader() {
                                             >
                                                 <service.icon className="size-4 mr-2" />
                                                 {service.title}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Products Section with sub-items */}
+                                <div className="space-y-1">
+                                    <Link
+                                        className={buttonVariants({
+                                            variant: 'ghost',
+                                            className: 'justify-start font-semibold',
+                                        })}
+                                        href="/products"
+                                        onClick={() => setOpen(false)}
+                                    >
+                                        Products
+                                    </Link>
+                                    <div className="pl-4 space-y-0.5">
+                                        {productsData.map((product) => (
+                                            <Link
+                                                key={product.id}
+                                                className={buttonVariants({
+                                                    variant: 'ghost',
+                                                    size: 'sm',
+                                                    className: 'justify-start text-muted-foreground hover:text-foreground w-full',
+                                                })}
+                                                href={product.href}
+                                                onClick={() => setOpen(false)}
+                                            >
+                                                <product.icon className="size-4 mr-2" />
+                                                {product.title}
                                             </Link>
                                         ))}
                                     </div>
