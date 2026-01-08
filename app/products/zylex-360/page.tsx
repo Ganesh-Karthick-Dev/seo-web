@@ -5,6 +5,7 @@ import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { FullScreenScrollFX } from "@/components/ui/full-screen-scroll-fx";
 import { Features } from "@/components/ui/features-section";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
+import { TextRotate } from "@/components/ui/text-rotate";
 import Image from "next/image";
 
 const scrollSections = [
@@ -105,6 +106,35 @@ export default function Zylex360Page() {
                         <TextGradientScroll
                             text="✓ SME leaders consolidating their tech stack"
                             className="font-bold text-white leading-relaxed text-2xl md:text-4xl"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <section className="w-full relative bg-black py-32 flex items-center justify-center">
+                <div className="w-full max-w-5xl mx-auto p-4 flex flex-col items-center justify-center text-center">
+                    <p className="text-2xl md:text-4xl font-light text-white/60 mb-8">
+                        Ready to make your business
+                    </p>
+                    <div className="text-4xl md:text-7xl font-bold text-white flex flex-col md:flex-row items-center gap-4">
+                        <span>Make it</span>
+                        <TextRotate
+                            texts={[
+                                "seamless",
+                                "efficient",
+                                "scalable",
+                                "intelligent",
+                                "Zylex360",
+                            ]}
+                            mainClassName="text-white px-4 bg-blue-600 overflow-hidden py-2 justify-center rounded-lg"
+                            staggerFrom={"last"}
+                            initial={{ y: "100%" }}
+                            animate={{ y: 0 }}
+                            exit={{ y: "-120%" }}
+                            staggerDuration={0.025}
+                            splitLevelClassName="overflow-hidden pb-1"
+                            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                            rotationInterval={2000}
                         />
                     </div>
                 </div>
