@@ -10,6 +10,7 @@ import { HowWeWorkSection } from "@/components/sections/HowWeWorkSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { WhyChooseSection } from "@/components/sections/WhyChooseSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { Testimonial } from "@/components/ui/design-testimonial";
 import { NeonOrbs } from "@/components/ui/neon-orbs";
 import Link from "next/link";
 
@@ -55,6 +56,9 @@ export default function Home() {
 
       {/* Why Choose Zylex Section */}
       <WhyChooseSection />
+
+      {/* Testimonial Section */}
+      <Testimonial />
 
       {/* CTA Section */}
       <CTASection />
