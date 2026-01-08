@@ -3,6 +3,7 @@
 import { Zylex360HeroSection } from "@/components/sections/Zylex360HeroSection";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { FullScreenScrollFX } from "@/components/ui/full-screen-scroll-fx";
+import { Features } from "@/components/ui/features-section";
 import Image from "next/image";
 
 const scrollSections = [
@@ -77,6 +78,8 @@ export default function Zylex360Page() {
                     durations={{ change: 0.7, snap: 800 }}
                 />
             </section>
+
+            <Features />
         </main>
     );
 }
