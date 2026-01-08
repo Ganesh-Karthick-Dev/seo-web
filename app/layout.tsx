@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Outfit, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { FloatingHeader } from "@/components/ui/floating-header";
 import { Footer } from "@/components/sections/Footer";
@@ -8,6 +8,13 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -30,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${outfit.variable} font-sans antialiased`}
+        className={`${outfit.variable} ${bebasNeue.variable} font-sans antialiased`}
       >
         <FloatingHeader />
         {children}
