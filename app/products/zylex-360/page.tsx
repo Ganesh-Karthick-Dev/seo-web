@@ -6,6 +6,7 @@ import { FullScreenScrollFX } from "@/components/ui/full-screen-scroll-fx";
 import { Features } from "@/components/ui/features-section";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 import { TextRotate } from "@/components/ui/text-rotate";
+import { NoiseBackground } from "@/components/ui/noise-background";
 import Image from "next/image";
 
 const scrollSections = [
@@ -136,6 +137,21 @@ export default function Zylex360Page() {
                             transition={{ type: "spring", damping: 30, stiffness: 400 }}
                             rotationInterval={2000}
                         />
+                    </div>
+                    
+                    <div className="mt-12">
+                        <NoiseBackground
+                            containerClassName="w-fit p-2 rounded-full mx-auto"
+                            gradientColors={[
+                                "rgb(255, 100, 150)",
+                                "rgb(100, 150, 255)",
+                                "rgb(255, 200, 100)",
+                            ]}
+                        >
+                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-8 py-3 text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
+                                See Zylex360 in Action — Book Your Demo &rarr;
+                            </button>
+                        </NoiseBackground>
                     </div>
                 </div>
             </section>
