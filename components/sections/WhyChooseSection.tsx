@@ -12,23 +12,23 @@ gsap.registerPlugin(ScrollTrigger);
 const features = [
     {
         icon: Zap,
-        title: "10-day rapid delivery sprint",
-        description: "From idea to working prototype in as fast as 10 days — with predictable, milestone-driven execution.",
+        title: "Speed You Can Actually See",
+        description: "We work in focused 15-day sprints. You don't have to guess if we're working—you'll see real progress, fast.",
     },
     {
         icon: Cpu,
-        title: "Engineering first Problem solving",
-        description: "Solutions are designed for scalability, security, and real-world performance — not just short-term output.",
+        title: "Tech That Just Works",
+        description: "We build systems that survive the real world. Security and uptime aren't 'extra features'—they're the bare minimum, so your business stays up when it matters most.",
     },
     {
         icon: Shuffle,
-        title: "Flexible engagement model",
-        description: "Project-based, team extension, or advisory support based on maturity and need.",
+        title: "Built for Your Reality",
+        description: "No cookie-cutter templates or lazy shortcuts. Whether you need MVP development services for startups or enterprise-grade platforms, we build solutions that fit your specific context and grow exactly how you need them to.",
     },
     {
         icon: Rocket,
-        title: "Startup Agility meets enterprise grade stability",
-        description: "We adapt to your operating style — product-led, engineering-driven, or transformation-focused.",
+        title: "The Right Mix: Enterprise Discipline, Startup Speed",
+        description: "You get the professional rigor of a big consultancy, but with the energy and agility of a team that actually moves with you.",
     },
 ];
 
@@ -192,10 +192,10 @@ export function WhyChooseSection() {
                         <div className="mb-8 overflow-hidden">
                             <h2 ref={titleRef} className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6">
                                 Why Choose <br />
-                                <span className="text-orange-500">Zylex</span>
+                                <span className="text-orange-500">Zylex?</span>
                             </h2>
                             <p ref={descRef} className="text-xl text-neutral-400 max-w-lg leading-relaxed">
-                                With Zylex, you don't just get faster delivery — you get structured execution with clarity, consistency, and reliability.
+                                Because execution matters just as much as the idea.
                             </p>
                         </div>
 
