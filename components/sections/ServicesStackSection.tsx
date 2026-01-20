@@ -21,62 +21,63 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
     {
-        title: "Custom Software Development and Product Engineering",
-        description: "We build scalable, secure, and future-ready custom applications designed for your unique business needs.",
-        cta: "Build Your Custom Solution",
+        title: "Custom Software Development",
+        description: "We deliver software development services built exactly for your business—secure, scalable, and completely yours. No trying to fit a square peg in a round hole.",
+        cta: "Build Something Real",
         icon: Code2,
         gradient: "from-orange-500/20 to-amber-500/5"
     },
     {
-        title: "Web and Mobile Application Development",
-        description: "We create high-performance web and mobile applications that deliver exceptional user experiences.",
-        cta: "Start your App project",
+        title: "Web & Mobile Apps",
+        description: "Our custom web and mobile app development creates experiences that don't just function—they feel great to use. Fast, intuitive interfaces that your customers will actually love.",
+        cta: "Start Your App Journey",
         icon: Smartphone,
         gradient: "from-blue-500/20 to-cyan-500/5"
     },
     {
-        title: "3D Website Development",
-        description: "We build immersive 3D websites that create interactive, visually stunning brand experiences.",
-        cta: "Explore 3D possibilities",
+        title: "3D Web Experiences",
+        description: "Why be flat? We specialize in custom 3D website development services that grab attention and make your brand unforgettable in a crowded market.",
+        cta: "Enter the 3D Dimension",
         icon: Box,
         gradient: "from-purple-500/20 to-pink-500/5"
     },
     {
-        title: "Digital Transformation Services",
-        description: "We modernize legacy systems and re-architect applications while maintaining business continuity.",
-        cta: "Begin your Transformation",
+        title: "App Modernization & Digital Transformation",
+        description: "Need to upgrade without shutting down? We rebuild and improve your old systems while keeping your business running smoothly.",
+        cta: "Turn Legacy Chaos Into Structure",
         icon: RefreshCw,
         gradient: "from-green-500/20 to-emerald-500/5"
     },
     {
-        title: "E-Commerce",
-        description: "We build scalable, high-performance ecommerce platforms that enhance customer experience, boost conversions, and support sustainable growth.",
-        cta: "Grow your commerce Business",
+        title: "E-commerce Solutions",
+        description: "Sell without the stress. We build platforms that handle your biggest sales days without blinking.",
+        cta: "Grow Your Commerce Business",
         icon: ShoppingBag,
         gradient: "from-red-500/20 to-orange-500/5"
     },
     {
-        title: "AI, ML and Automation",
-        description: "We automate workflows and deliver practical AI solutions with real business impact.",
-        cta: "Discover AI solutions",
+        title: "AI and Automation",
+        description: "Forget the hype. Our AI and software development approach automates the boring stuff and finds real opportunities in your data that save you money.",
+        cta: "Get Smarter",
         icon: Bot,
         gradient: "from-indigo-500/20 to-violet-500/5"
     },
     {
-        title: "Cloud and DevOps Engineering",
-        description: "We modernize cloud infrastructure and automate delivery pipelines for reliable, faster releases.",
-        cta: "Modernize your Infrastructure",
+        title: "Cloud & DevOps",
+        description: "Make release day boring. We automate your updates so you can ship faster and safer, without the panic.",
+        cta: "Make Release Day Boring Again",
         icon: Cloud,
         gradient: "from-sky-500/20 to-blue-500/5"
     },
     {
-        title: "IT Consulting",
-        description: "We act as your strategic technology partner, helping you plan, validate, and execute with clarity and confidence.",
-        cta: "Get Expert Guidance",
+        title: "Strategic IT Consulting",
+        description: "We don't just take orders; we help you validate them. Get honest technical advice that protects your budget and keeps you on the right track.",
+        cta: "Get Expert Opinion",
         icon: Lightbulb,
         gradient: "from-yellow-500/20 to-amber-500/5"
     }
 ];
+
 
 export function ServicesStackSection() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -125,12 +126,9 @@ export function ServicesStackSection() {
                 {/* Left Aligned Title */}
                 <div className="mb-24 max-w-4xl">
                     <h2 ref={titleRef} className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
-                        Where we help you <br />
-                        <span className="text-neutral-500">Build, Modernize and Scale</span>
+                        What We Bring to Your Team <br />
+                        <span className="text-neutral-500">The technical skills you need to lead your industry.</span>
                     </h2>
-                    <p className="mt-6 text-xl text-neutral-400 max-w-2xl">
-                        Whether you're launching your first product or transforming enterprise systems, we provide the expertise you need at every stage.
-                    </p>
                 </div>
 
                 {/* Stacking Cards Container */}
