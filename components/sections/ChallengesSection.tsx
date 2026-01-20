@@ -167,9 +167,12 @@ export function ChallengesSection() {
                 {/* Left Aligned Title */}
                 <div className="mb-20 max-w-4xl">
                     <h2 ref={titleRef} className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
-                        AI-powered optimization <br />
-                        <span className="text-neutral-500">solving complex problems.</span>
+                        The Growth Blockers: <br />
+                        <span className="text-neutral-500">What&apos;s Really Stopping You?</span>
                     </h2>
+                    <p className="mt-6 text-xl text-neutral-400 max-w-2xl">
+                        You&apos;ve already proven people want your product. Now let&apos;s eliminate the technical bottlenecks slowing you down.
+                    </p>
                 </div>
 
                 {/* Bento Grid */}
@@ -186,14 +189,13 @@ export function ChallengesSection() {
                         <div className="relative z-20 h-full flex flex-col justify-center items-end p-12 text-right w-full">
                             <div className="max-w-md">
                                 <span className="text-xs font-bold text-orange-500 tracking-widest uppercase mb-2 block">
-                                    EFFICIENCY BOTTLENECKS
+                                    TIMELINE TRAP
                                 </span>
                                 <h3 className="text-3xl font-medium text-white mb-4 leading-tight">
-                                    Projects take longer <br /> than expected
+                                    The &quot;Where Is It?&quot; Trap
                                 </h3>
                                 <p className="text-neutral-400 text-sm leading-relaxed">
-                                    Timelines extend, progress slows, and momentum becomes harder to sustain.
-                                    Optimization is key to regaining control.
+                                    Deadlines shouldn&apos;t be suggestions. You need a partner who focuses on shipping, not excuses. We trade uncertainty for predictable sprints, so you always know when &quot;done&quot; is actually done.
                                 </p>
                             </div>
                         </div>
@@ -209,13 +211,13 @@ export function ChallengesSection() {
 
                         <div className="relative z-20 h-full flex flex-col justify-end p-10">
                             <span className="text-xs font-bold text-neutral-500 tracking-widest uppercase mb-2 block">
-                                SYSTEM FRAGILITY
+                                SCALABILITY
                             </span>
                             <h3 className="text-2xl font-medium text-white mb-3">
-                                Complex Integration <br /> creates fragile systems
+                                The Crash Ceiling
                             </h3>
                             <p className="text-neutral-400 text-sm">
-                                Multiple tools and systems create dependencies that lead to instability and performance issues.
+                                Success shouldn&apos;t break your site. You need infrastructure that handles 10x growth as easily as it handles today. We build tech that scales up, not falls down.
                             </p>
                         </div>
                     </div>
@@ -230,13 +232,13 @@ export function ChallengesSection() {
 
                         <div className="relative z-20 h-full flex flex-col justify-end p-10">
                             <span className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-2 block">
-                                GROWTH PAINS
+                                CODE QUALITY
                             </span>
                             <h3 className="text-2xl font-medium text-white mb-3">
-                                Scalability and performance <br /> break under growth
+                                The Messy Code Problem
                             </h3>
                             <p className="text-neutral-400 text-sm">
-                                Systems struggle under growing load, leading to latency and downtime risk.
+                                Bad code isn&apos;t just annoying—it&apos;s a business risk. You deserve a clean, organized system that speeds up new features instead of making every update a struggle.
                             </p>
                         </div>
                     </div>
@@ -254,26 +256,14 @@ export function ChallengesSection() {
                         <div className="relative z-20 h-full flex flex-col justify-center p-12">
                             <div className="max-w-md">
                                 <span className="text-xs font-bold text-neutral-500 tracking-widest uppercase mb-2 block">
-                                    PROCESS CHAOS
+                                    LEGACY SYSTEMS
                                 </span>
                                 <h3 className="text-3xl font-medium text-white mb-4 leading-tight">
-                                    Lack of Standardized <br /> Engineering Practices
+                                    The &quot;Old Tech&quot; Anchor
                                 </h3>
-                                <p className="text-neutral-400 text-sm leading-relaxed mb-6">
-                                    Inconsistent workflows and weak testing lead to rework, production issues, and delivery uncertainty.
+                                <p className="text-neutral-400 text-sm leading-relaxed">
+                                    Don&apos;t let outdated systems hold you back. We modernize your stack so your legacy tech becomes a strength, not something you have to work around.
                                 </p>
-
-                                <div className="flex items-center gap-4">
-                                    <div>
-                                        <div className="text-3xl font-bold text-white">-35%</div>
-                                        <div className="text-[10px] text-neutral-500 uppercase tracking-wider">Efficiency Loss</div>
-                                    </div>
-                                    <div className="w-px h-8 bg-white/10" />
-                                    <div>
-                                        <div className="text-3xl font-bold text-orange-500">+40%</div>
-                                        <div className="text-[10px] text-neutral-500 uppercase tracking-wider">Bug Rate</div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
