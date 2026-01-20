@@ -223,8 +223,8 @@ export function HowWeWorkSection() {
     return (
         <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
             {/* Subtle Background Elements */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
-            <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent" />
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Left Aligned Title */}
@@ -246,26 +246,26 @@ export function HowWeWorkSection() {
                                 "step-card relative h-full p-8 md:p-10 rounded-3xl",
                                 "border border-white/10 bg-zinc-900/50 backdrop-blur-sm",
                                 "transition-all duration-500",
-                                "hover:border-orange-500/30",
-                                "hover:shadow-[0_0_50px_-12px_rgba(249,115,22,0.25)]"
+                                "hover:border-blue-500/30",
+                                "hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.25)]"
                             )}>
                                 {/* Gradient Overlay on Hover */}
-                                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                 {/* Connecting Line (visual element) */}
-                                <div className="absolute -top-px left-10 w-px h-8 bg-gradient-to-b from-orange-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block" />
+                                <div className="absolute -top-px left-10 w-px h-8 bg-gradient-to-b from-blue-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block" />
 
                                 <div className="relative z-10">
                                     {/* Number & Icon Row */}
                                     <div className="flex items-center gap-6 mb-6">
                                         {/* Step Number */}
-                                        <span className="text-6xl md:text-7xl font-bold text-orange-500/20 group-hover:text-orange-500/40 transition-colors duration-500 select-none">
+                                        <span className="text-6xl md:text-7xl font-bold text-blue-500/20 group-hover:text-blue-500/40 transition-colors duration-500 select-none">
                                             {step.number}
                                         </span>
 
                                         {/* Icon */}
-                                        <div className="icon-box w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-orange-500/30 group-hover:bg-orange-500/10 transition-all duration-500">
-                                            <step.icon className="icon-svg w-7 h-7 text-white group-hover:text-orange-400 transition-colors duration-500" />
+                                        <div className="icon-box w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-blue-500/30 group-hover:bg-blue-500/10 transition-all duration-500">
+                                            <step.icon className="icon-svg w-7 h-7 text-white group-hover:text-blue-400 transition-colors duration-500" />
                                         </div>
                                     </div>
 
@@ -281,7 +281,7 @@ export function HowWeWorkSection() {
                                 </div>
 
                                 {/* Bottom Accent Line */}
-                                <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             </div>
                         </div>
                     ))}
@@ -291,9 +291,9 @@ export function HowWeWorkSection() {
                 <div ref={ctaRef} className="flex justify-center pt-8">
                     <Link
                         href="/contact"
-                        className="group relative flex h-14 items-center justify-center gap-2 rounded-full overflow-hidden bg-orange-600 px-10 text-white font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25"
+                        className="group relative flex h-14 items-center justify-center gap-2 rounded-full overflow-hidden bg-blue-600 px-10 text-white font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500" />
                         <span className="relative z-10 flex items-center gap-2 text-lg">
                             Let's Talk
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

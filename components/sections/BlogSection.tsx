@@ -18,9 +18,9 @@ const blogPosts = [
         titleBefore: "",
         titleAfter: "in Modern Software Development",
         description: "Discover how structured engineering practices lead to more reliable, maintainable, and scalable software solutions.",
-        highlightBg: "bg-orange-500/20",
-        highlightBorder: "border-orange-500/40",
-        pointerColor: "text-orange-500",
+        highlightBg: "bg-blue-500/20",
+        highlightBorder: "border-blue-500/40",
+        pointerColor: "text-blue-500",
     },
     {
         id: 2,
@@ -98,7 +98,7 @@ export function BlogSection() {
     return (
         <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
             {/* Background Elements */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent" />
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Left Aligned Title */}
@@ -120,7 +120,7 @@ export function BlogSection() {
                             href="#"
                             className="group block"
                         >
-                            <div className="relative rounded-3xl border border-white/10 bg-zinc-900/50 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-orange-500/30 hover:shadow-[0_0_50px_-12px_rgba(249,115,22,0.25)]">
+                            <div className="relative rounded-3xl border border-white/10 bg-zinc-900/50 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.25)]">
                                 {/* Blog Image */}
                                 <div className="h-48 w-full relative overflow-hidden">
                                     <Image
@@ -154,7 +154,7 @@ export function BlogSection() {
                                     </p>
 
                                     {/* Read More Link */}
-                                    <div className="flex items-center gap-2 text-orange-500 font-medium text-sm group-hover:text-orange-400 transition-colors">
+                                    <div className="flex items-center gap-2 text-blue-500 font-medium text-sm group-hover:text-blue-400 transition-colors">
                                         Read Article
                                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </div>

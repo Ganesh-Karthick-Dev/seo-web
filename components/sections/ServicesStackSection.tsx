@@ -25,7 +25,7 @@ const services = [
         description: "We deliver software development services built exactly for your business—secure, scalable, and completely yours. No trying to fit a square peg in a round hole.",
         cta: "Build Something Real",
         icon: Code2,
-        gradient: "from-orange-500/20 to-amber-500/5"
+        gradient: "from-blue-500/20 to-cyan-500/5"
     },
     {
         title: "Web & Mobile Apps",
@@ -53,7 +53,7 @@ const services = [
         description: "Sell without the stress. We build platforms that handle your biggest sales days without blinking.",
         cta: "Grow Your Commerce Business",
         icon: ShoppingBag,
-        gradient: "from-red-500/20 to-orange-500/5"
+        gradient: "from-red-500/20 to-blue-500/5"
     },
     {
         title: "AI and Automation",
@@ -74,7 +74,7 @@ const services = [
         description: "We don't just take orders; we help you validate them. Get honest technical advice that protects your budget and keeps you on the right track.",
         cta: "Get Expert Opinion",
         icon: Lightbulb,
-        gradient: "from-yellow-500/20 to-amber-500/5"
+        gradient: "from-yellow-500/20 to-cyan-500/5"
     }
 ];
 
@@ -140,7 +140,7 @@ export function ServicesStackSection() {
                             style={{ top: `${150 + index * 20}px` }}
                         >
                             <div className={cn(
-                                "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/90 backdrop-blur-xl transition-all duration-500 hover:border-orange-500/30 hover:shadow-[0_0_50px_-12px_rgba(249,115,22,0.3)]",
+                                "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/90 backdrop-blur-xl transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]",
                                 "h-[400px] flex flex-col",
                                 index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
                             )}>
@@ -166,7 +166,7 @@ export function ServicesStackSection() {
 
                                     <Link
                                         href="#"
-                                        className="inline-flex items-center gap-2 text-orange-500 font-medium hover:text-orange-400 transition-colors group/link"
+                                        className="inline-flex items-center gap-2 text-blue-500 font-medium hover:text-blue-400 transition-colors group/link"
                                     >
                                         {service.cta}
                                         <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />

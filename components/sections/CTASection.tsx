@@ -199,10 +199,10 @@ export function CTASection() {
             </div>
 
             {/* Dark Overlay with Orange Tint */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-orange-950/50 to-black/70" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-blue-950/50 to-black/70" />
 
             {/* Subtle Orange Glow */}
-            <div className="absolute inset-0 bg-gradient-to-t from-orange-600/20 via-transparent to-amber-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-cyan-500/10" />
 
             <div ref={containerRef} className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
@@ -228,7 +228,7 @@ export function CTASection() {
                         <Link
                             ref={buttonRef}
                             href="/contact"
-                            className="group relative flex h-14 items-center justify-center gap-3 rounded-full overflow-hidden bg-white px-10 text-orange-600 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-black/20"
+                            className="group relative flex h-14 items-center justify-center gap-3 rounded-full overflow-hidden bg-white px-10 text-blue-600 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-black/20"
                         >
                             <span className="relative z-10 flex items-center gap-2 text-lg">
                                 Let&apos;s Talk

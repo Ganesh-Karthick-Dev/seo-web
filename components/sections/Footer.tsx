@@ -135,7 +135,7 @@ export function Footer() {
                                     <input
                                         type="email"
                                         placeholder="Enter your email"
-                                        className="flex-1 h-12 px-4 rounded-full border border-neutral-300 bg-white text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                        className="flex-1 h-12 px-4 rounded-full border border-neutral-300 bg-white text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     />
                                     <button className="h-12 px-6 rounded-full bg-neutral-900 text-white font-medium hover:bg-neutral-800 transition-colors flex items-center gap-2">
                                         Subscribe
@@ -152,7 +152,7 @@ export function Footer() {
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-10 h-10 rounded-full bg-neutral-200 hover:bg-orange-500 flex items-center justify-center text-neutral-600 hover:text-white transition-all duration-300"
+                                        className="w-10 h-10 rounded-full bg-neutral-200 hover:bg-blue-500 flex items-center justify-center text-neutral-600 hover:text-white transition-all duration-300"
                                         aria-label={social.name}
                                     >
                                         <social.icon className="w-5 h-5" />
@@ -171,7 +171,7 @@ export function Footer() {
                                     <li key={item.name}>
                                         <Link
                                             href={item.href}
-                                            className="text-neutral-600 hover:text-orange-500 transition-colors text-sm"
+                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
                                         >
                                             {item.name}
                                         </Link>
@@ -190,7 +190,7 @@ export function Footer() {
                                     <li key={item.name}>
                                         <Link
                                             href={item.href}
-                                            className="text-neutral-600 hover:text-orange-500 transition-colors text-sm"
+                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
                                         >
                                             {item.name}
                                         </Link>
@@ -209,7 +209,7 @@ export function Footer() {
                                     <li key={item.name}>
                                         <Link
                                             href={item.href}
-                                            className="text-neutral-600 hover:text-orange-500 transition-colors text-sm"
+                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
                                         >
                                             {item.name}
                                         </Link>
@@ -228,7 +228,7 @@ export function Footer() {
                                     <li key={item.name}>
                                         <Link
                                             href={item.href}
-                                            className="text-neutral-600 hover:text-orange-500 transition-colors text-sm"
+                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
                                         >
                                             {item.name}
                                         </Link>
@@ -252,10 +252,10 @@ export function Footer() {
                             {/* Copyright & Legal */}
                             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-neutral-500">
                                 <span>© 2025 Zylex. All rights reserved</span>
-                                <Link href="/privacy" className="hover:text-orange-500 transition-colors">
+                                <Link href="/privacy" className="hover:text-blue-500 transition-colors">
                                     Privacy Policy
                                 </Link>
-                                <Link href="/terms" className="hover:text-orange-500 transition-colors">
+                                <Link href="/terms" className="hover:text-blue-500 transition-colors">
                                     Terms of Use
                                 </Link>
                             </div>

@@ -178,9 +178,9 @@ export function WhyChooseSection() {
             {/* Background Pattern */}
             <div className="absolute inset-0">
                 {/* Blueprint/Grid Pattern */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
                 {/* Gradient Overlay */}
-                <div className="absolute bottom-0 left-0 w-1/2 h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-500/10 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 w-1/2 h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent" />
             </div>
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -192,7 +192,7 @@ export function WhyChooseSection() {
                         <div className="mb-8 overflow-hidden">
                             <h2 ref={titleRef} className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6">
                                 Why Choose <br />
-                                <span className="text-orange-500">Zylex?</span>
+                                <span className="text-blue-500">Zylex?</span>
                             </h2>
                             <p ref={descRef} className="text-xl text-neutral-400 max-w-lg leading-relaxed">
                                 Because execution matters just as much as the idea.
@@ -229,20 +229,20 @@ export function WhyChooseSection() {
                                     "relative h-full p-6",
                                     "border border-white/10 bg-zinc-900/50 backdrop-blur-sm",
                                     "transition-all duration-500",
-                                    "hover:border-orange-500/30 hover:bg-zinc-900/80",
-                                    "hover:shadow-[0_0_30px_-12px_rgba(249,115,22,0.25)]",
+                                    "hover:border-blue-500/30 hover:bg-zinc-900/80",
+                                    "hover:shadow-[0_0_30px_-12px_rgba(59,130,246,0.25)]",
                                     "hover:translate-x-2"
                                 )}>
                                     {/* Hover Gradient */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                     {/* Left accent line on hover */}
-                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
+                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
 
                                     <div className="relative z-10 flex gap-5 items-start h-full">
                                         {/* Icon */}
-                                        <div className="icon-container flex-shrink-0 w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-orange-500/30 group-hover:bg-orange-500/10 transition-all duration-500">
-                                            <feature.icon className="w-6 h-6 text-white group-hover:text-orange-400 transition-colors duration-500" />
+                                        <div className="icon-container flex-shrink-0 w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-blue-500/30 group-hover:bg-blue-500/10 transition-all duration-500">
+                                            <feature.icon className="w-6 h-6 text-white group-hover:text-blue-400 transition-colors duration-500" />
                                         </div>
 
                                         {/* Content */}

@@ -77,7 +77,7 @@ export function Testimonial() {
     return (
         <section className="relative w-full py-24 md:py-32 overflow-hidden">
             {/* Background Elements */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent" />
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Title */}
