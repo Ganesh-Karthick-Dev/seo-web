@@ -101,7 +101,7 @@ export function NeonOrbs() {
                         }`}
                     style={{ transitionDelay: "500ms" }}
                 >
-                    Your Vision Deserves Better Execution
+                    Accelerate Beyond Manual Workflows
                 </h1>
                 <p
                     className={`text-lg md:text-xl font-light max-w-3xl mx-auto text-indigo-600/70 dark:text-white/60 transition-all duration-1000 ease-out mb-8 ${mounted
@@ -110,7 +110,7 @@ export function NeonOrbs() {
                         }`}
                     style={{ transitionDelay: "800ms" }}
                 >
-                    Building mission-critical SaaS products requires scalable solutions and engineering excellence.
+                    Your vision is too ambitious to be slowed by manual work. We engineer AI-driven systems that give your growth unshakeable stability. By automating the noise, we empower you to lead with absolute certainty while your team focuses on the only metric that matters: customer mastery.
                 </p>
                 <div
                     className={`transition-all duration-1000 ease-out ${mounted
