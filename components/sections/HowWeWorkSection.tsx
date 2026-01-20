@@ -12,26 +12,26 @@ gsap.registerPlugin(ScrollTrigger);
 const steps = [
     {
         number: "01",
-        title: "Begin with strategic alignment",
-        description: "We understand your goals, customers, constraints, and success metrics — before making technology decisions.",
+        title: "We Start With Your Business",
+        description: "Before we write a single line of code, we dig into your goals. Every technical choice we make is about driving a real result for you.",
         icon: Target,
     },
     {
         number: "02",
-        title: "Design for Scalability & Real-World Use",
-        description: "We architect solutions that scale smoothly, integrate well, and enable long-term growth.",
+        title: "We Build for Tomorrow",
+        description: "We don't just band-aid things. We design foundations that last, saving you from having to rewrite expensive code down the road.",
         icon: Scale,
     },
     {
         number: "03",
-        title: "Deliver With Structured & Transparent Milestones",
-        description: "We execute in predictable sprints with clear communication, progress visibility, and risk transparency.",
+        title: "No Black Boxes",
+        description: "You're always in the loop. We keep things transparent with clear updates and measurable progress, so you never have to wonder where your project stands.",
         icon: Milestone,
     },
     {
         number: "04",
-        title: "Optimize, Evolve & Scale",
-        description: "We refine performance, improve reliability, and expand capability as your business grows.",
+        title: "We Don't Just Ship and Disappear",
+        description: "Going live is just the beginning. We stick around to help you fine-tune and improve as your business grows.",
         icon: TrendingUp,
     },
 ];
@@ -230,8 +230,8 @@ export function HowWeWorkSection() {
                 {/* Left Aligned Title */}
                 <div ref={titleRef} className="mb-20 max-w-4xl">
                     <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
-                        How we work <br />
-                        <span className="text-neutral-500">From vision to reliable execution</span>
+                        How We Work <br />
+                        <span className="text-neutral-500">From &quot;Idea&quot; to &quot;Done&quot;</span>
                     </h2>
                 </div>
 
