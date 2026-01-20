@@ -167,7 +167,7 @@ export function ChallengesSection() {
                 {/* Left Aligned Title */}
                 <div className="mb-20 max-w-4xl">
                     <h2 ref={titleRef} className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
-                        The Growth Blockers: <br />
+                        The Growth Blockers <br />
                         <span className="text-neutral-500">What&apos;s Really Stopping You?</span>
                     </h2>
                     <p className="mt-6 text-xl text-neutral-400 max-w-2xl">
