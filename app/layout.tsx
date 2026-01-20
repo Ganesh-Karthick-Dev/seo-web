@@ -3,6 +3,7 @@ import { Outfit, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { FloatingHeader } from "@/components/ui/floating-header";
 import { Footer } from "@/components/sections/Footer";
+import { LenisProvider } from "@/components/providers/lenis-provider";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -39,9 +40,11 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${bebasNeue.variable} font-sans antialiased`}
       >
-        <FloatingHeader />
-        {children}
-        <Footer />
+        <LenisProvider>
+          <FloatingHeader />
+          {children}
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );
