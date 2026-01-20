@@ -96,7 +96,7 @@ export function BlogSection() {
     }, []);
 
     return (
-        <section ref={containerRef} className="relative w-full py-32 bg-black overflow-hidden">
+        <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
 

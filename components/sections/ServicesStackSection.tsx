@@ -119,7 +119,7 @@ export function ServicesStackSection() {
     }, []);
 
     return (
-        <section ref={containerRef} className="relative w-full py-32 bg-black">
+        <section ref={containerRef} className="relative w-full py-32">
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
                 {/* Left Aligned Title */}

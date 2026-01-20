@@ -38,25 +38,12 @@ const steps = [
 
 export function HowWeWorkSection() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const sectionBgRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
     const stepsRef = useRef<HTMLDivElement>(null);
     const ctaRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Background color transition - white when in section
-            gsap.to(sectionBgRef.current, {
-                backgroundColor: "#ffffff",
-                duration: 0.8,
-                ease: "power2.inOut",
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 60%",
-                    end: "bottom 40%",
-                    toggleActions: "play reverse play reverse",
-                },
-            });
 
             // Text color transitions for title
             const titleH2 = titleRef.current?.querySelector("h2");
@@ -235,13 +222,6 @@ export function HowWeWorkSection() {
 
     return (
         <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
-            {/* Animated Background */}
-            <div
-                ref={sectionBgRef}
-                className="absolute inset-0 bg-black transition-colors"
-                style={{ willChange: "background-color" }}
-            />
-
             {/* Subtle Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />

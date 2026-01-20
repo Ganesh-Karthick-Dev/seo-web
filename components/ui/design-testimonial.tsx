@@ -75,7 +75,7 @@ export function Testimonial() {
     const current = testimonials[activeIndex]
 
     return (
-        <section className="relative w-full py-24 md:py-32 bg-black/[0.96] overflow-hidden">
+        <section className="relative w-full py-24 md:py-32 overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-500/5 via-transparent to-transparent" />
 
