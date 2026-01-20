@@ -210,13 +210,13 @@ export function CTASection() {
                     {/* Headline */}
                     <div className="overflow-hidden mb-6">
                         <h2 ref={headlineRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">
-                            Accelerate delivery — without compromising quality, stability, or reliability.
+                            Ready to Lead Your Industry?
                         </h2>
                     </div>
 
                     {/* Description */}
                     <p ref={descRef} className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed mb-10">
-                        We align engineering decisions to your goals, growth plans, and long-term value.
+                        Don&apos;t let technology be the bottleneck. Partner with an engineering team that takes your success as seriously as you do.
                     </p>
 
                     {/* CTA Button Wrapper - Follows cursor freely */}
@@ -231,7 +231,7 @@ export function CTASection() {
                             className="group relative flex h-14 items-center justify-center gap-3 rounded-full overflow-hidden bg-white px-10 text-orange-600 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-black/20"
                         >
                             <span className="relative z-10 flex items-center gap-2 text-lg">
-                                Talk to our team
+                                Let&apos;s Talk
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </span>
 
