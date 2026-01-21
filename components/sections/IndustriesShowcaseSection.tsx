@@ -30,7 +30,8 @@ gsap.registerPlugin(ScrollTrigger);
 const industries = [
     {
         title: "E-Commerce & Retail",
-        description: "We design and develop scalable ecommerce platforms, multi-vendor marketplaces, order and inventory systems, and seamless omnichannel shopping experiences that improve conversions, speed, and operational performance.",
+        subtitle: "Dominating the Digital Storefront",
+        description: "Stop settling for systems that buckle under pressure. We build high-performance marketplaces and omnichannel ecosystems designed for longevity. The result? Flawless checkouts and inventory that never loses count.",
         icon: ShoppingCart,
         gradient: "from-orange-500/30 via-amber-500/20 to-transparent",
         accentColor: "text-orange-400",
@@ -38,7 +39,8 @@ const industries = [
     },
     {
         title: "SaaS & Technology Product Companies",
-        description: "We support product teams with platform engineering, MVP development, feature scaling, architecture modernization, and long-term product evolution for SaaS and B2B technology platforms.",
+        subtitle: "Architecture That Clears the Way",
+        description: "Eliminate technical debt and accelerate your evolution. We build solid foundations that turn your tech stack into a weapon, moving you from MVP to market leader at record speed.",
         icon: Code2,
         gradient: "from-blue-500/30 via-cyan-500/20 to-transparent",
         accentColor: "text-blue-400",
@@ -46,7 +48,8 @@ const industries = [
     },
     {
         title: "Fintech & Financial Services",
-        description: "We work with banks, fintech startups, and financial institutions to build secure platforms for payments, lending, investment management, compliance, and digital banking — designed for scale, performance, and regulatory alignment.",
+        subtitle: "Secure Finance. Absolute Precision",
+        description: "In finance, \"compliance\" is the floor, not the ceiling. We build secure, high-performance payment platforms with total transparency. You'll never wonder \"Where is it?\" with our predictable delivery.",
         icon: Landmark,
         gradient: "from-emerald-500/30 via-green-500/20 to-transparent",
         accentColor: "text-emerald-400",
@@ -54,7 +57,8 @@ const industries = [
     },
     {
         title: "Healthcare & HealthTech",
-        description: "We help healthcare providers, health startups, and medical platforms build patient portals, telehealth solutions, workflow systems, and interoperable health platforms that improve accessibility, efficiency, and care coordination.",
+        subtitle: "Frictionless Flow for Patient Care",
+        description: "We build interoperable portals and health platforms that prioritize data integrity. Reliability isn't optional here—we handle the technical complexity so you can focus on the human impact.",
         icon: HeartPulse,
         gradient: "from-rose-500/30 via-pink-500/20 to-transparent",
         accentColor: "text-rose-400",
@@ -62,7 +66,8 @@ const industries = [
     },
     {
         title: "Logistics, Supply Chain & Transportation",
-        description: "We build logistics and operations platforms including shipment tracking, fleet systems, route optimization, warehouse management, and real-time operations dashboards for high-movement environments.",
+        subtitle: "Operations That Never Miss a Beat",
+        description: "High-movement environments demand high-reliability tech. We build logistics platforms and operational dashboards that turn data into direction. Predictable execution (No Black Boxes) for a world that never stops.",
         icon: Truck,
         gradient: "from-amber-500/30 via-yellow-500/20 to-transparent",
         accentColor: "text-amber-400",
@@ -70,7 +75,8 @@ const industries = [
     },
     {
         title: "Manufacturing & Industrial",
-        description: "We help manufacturers digitize operations with workflow automation, production management systems, IoT dashboards, analytics platforms, and process optimization tools built for reliability and plant-level execution.",
+        subtitle: "Digitizing the Industrial Floor",
+        description: "Workflow automation built for the plant floor, not the boardroom. We build for longevity, ensuring your production systems are as robust as the machines they manage.",
         icon: Factory,
         gradient: "from-slate-500/30 via-zinc-500/20 to-transparent",
         accentColor: "text-slate-400",
@@ -78,7 +84,8 @@ const industries = [
     },
     {
         title: "EdTech & Learning Platforms",
-        description: "We build learning management systems, assessment platforms, content delivery applications, student portals, and virtual learning environments that scale with enrollments and usage demands.",
+        subtitle: "Learning Systems That Scale with You",
+        description: "Don't let an enrollment spike crash your classroom. We build virtual learning environments designed for massive usage. We trade technical noise for predictable performance, keeping your students connected.",
         icon: GraduationCap,
         gradient: "from-violet-500/30 via-purple-500/20 to-transparent",
         accentColor: "text-violet-400",
@@ -86,7 +93,8 @@ const industries = [
     },
     {
         title: "Real Estate",
-        description: "We develop property listing platforms, real-estate marketplaces, tenant management systems, virtual tour websites, and transaction workflows that streamline discovery, engagement, and operations.",
+        subtitle: "Transaction Tech Built for Speed",
+        description: "Property listing platforms and transaction workflows that remove the friction from discovery. We focus on the outcome—faster engagement and smoother operations—backed by an unbreakable foundation.",
         icon: Building2,
         gradient: "from-teal-500/30 via-cyan-500/20 to-transparent",
         accentColor: "text-teal-400",
@@ -94,7 +102,8 @@ const industries = [
     },
     {
         title: "Hospitality, Travel & Tourism",
-        description: "We build booking platforms, customer engagement portals, experience websites, operations panels, and mobile applications that enhance guest journeys and improve service delivery.",
+        subtitle: "Guest Journeys Reimagined",
+        description: "Booking platforms and customer portals that stay invisible so your service can stand out. We build for the guest journey, ensuring your tech stack handles peak season with zero stress.",
         icon: Plane,
         gradient: "from-sky-500/30 via-blue-500/20 to-transparent",
         accentColor: "text-sky-400",
@@ -102,7 +111,8 @@ const industries = [
     },
     {
         title: "Media, Entertainment & Digital Experiences",
-        description: "We create high-performance content platforms, interactive 3D websites, storytelling experiences, streaming dashboards, and marketing experience hubs focused on engagement and performance.",
+        subtitle: "Content Hubs That Command Attention",
+        description: "Why be flat when you can be immersive? We build interactive 3D sites and storytelling platforms with clear communication. Catchy experiences, high-performance results.",
         icon: Film,
         gradient: "from-fuchsia-500/30 via-pink-500/20 to-transparent",
         accentColor: "text-fuchsia-400",
@@ -110,7 +120,8 @@ const industries = [
     },
     {
         title: "Insurance & InsurTech",
-        description: "We support insurers with claims automation platforms, underwriting workflows, agent portals, risk analytics dashboards, and policy management systems designed for performance and compliance.",
+        subtitle: "Underwriting Accuracy at Scale",
+        description: "Precision engineering for an industry that demands it. We support insurers with claims platforms and risk analytics built for performance and compliance. Solid foundations for complex risk.",
         icon: Shield,
         gradient: "from-indigo-500/30 via-blue-500/20 to-transparent",
         accentColor: "text-indigo-400",
@@ -118,7 +129,8 @@ const industries = [
     },
     {
         title: "Energy, Utilities & Environment",
-        description: "We build monitoring dashboards, asset management platforms, reporting systems, and operations control tools that help organizations improve visibility, safety, and performance across distributed environments.",
+        subtitle: "Visibility Across Distributed Assets",
+        description: "Improving safety and performance requires data you can trust. We build monitoring dashboards and asset management platforms that solve the visibility problem, keeping critical infrastructure stable and safe.",
         icon: Zap,
         gradient: "from-yellow-500/30 via-lime-500/20 to-transparent",
         accentColor: "text-yellow-400",
@@ -126,7 +138,8 @@ const industries = [
     },
     {
         title: "Telecom & Connectivity Services",
-        description: "We design customer self-service portals, provisioning workflows, billing systems, operational dashboards, and network-support platforms that improve service delivery and operational control.",
+        subtitle: "Self-Service with Style and Speed",
+        description: "Stop frustrating your customers with legacy friction. We design portals and billing systems with predictable milestones. Improved service delivery, total operational control.",
         icon: Wifi,
         gradient: "from-cyan-500/30 via-teal-500/20 to-transparent",
         accentColor: "text-cyan-400",
@@ -134,7 +147,8 @@ const industries = [
     },
     {
         title: "Professional Services & Consulting Firms",
-        description: "We develop delivery management platforms, workflow automation systems, CRM extensions, proposal and reporting systems that improve collaboration, utilization, and execution efficiency.",
+        subtitle: "Execution Efficiency for Elite Teams",
+        description: "Delivery management platforms that fuel your team's utilization. Success isn't just \"shipping the code\"—it's providing the tools that help your team collaboration and growth.",
         icon: Briefcase,
         gradient: "from-neutral-500/30 via-stone-500/20 to-transparent",
         accentColor: "text-neutral-400",
@@ -142,7 +156,8 @@ const industries = [
     },
     {
         title: "Education",
-        description: "We partner with universities and training organizations to build academic portals, administration systems, learning applications, and collaboration platforms that enhance digital learning infrastructure.",
+        subtitle: "Campus Infrastructure (Built for the Long Term)",
+        description: "Replace fragmented academic systems with a cohesive digital foundation. We build administration portals and collaboration platforms that scale with your mission, not just your enrollment.",
         icon: BookOpen,
         gradient: "from-purple-500/30 via-violet-500/20 to-transparent",
         accentColor: "text-purple-400",
@@ -150,7 +165,8 @@ const industries = [
     },
     {
         title: "Automotive & Mobility",
-        description: "We create platforms for dealership operations, vehicle configurators, inventory systems, mobility apps, and digital experience solutions for automotive and EV-based businesses.",
+        subtitle: "Mobility Apps That Keep You Moving",
+        description: "From vehicle configurators to dealership systems, we build apps that feel great and perform even better. Better customer journeys, smoother operations—digital presence with zero drag.",
         icon: Car,
         gradient: "from-red-500/30 via-rose-500/20 to-transparent",
         accentColor: "text-red-400",
@@ -158,7 +174,8 @@ const industries = [
     },
     {
         title: "Construction, Infrastructure & Engineering",
-        description: "We build project management platforms, workflow automation tools, field-tracking systems, vendor and contract dashboards, and reporting applications for infrastructure-heavy businesses.",
+        subtitle: "Project Certainty Through Predictable Sprints",
+        description: "Infrastructure-heavy businesses can't afford the \"Where is it?\" trap. We build field-tracking systems and vendor dashboards using transparent execution. Engineering certainty for a world of concrete.",
         icon: HardHat,
         gradient: "from-orange-600/30 via-amber-600/20 to-transparent",
         accentColor: "text-orange-500",
@@ -166,7 +183,8 @@ const industries = [
     },
     {
         title: "Food, Delivery & On-Demand Services",
-        description: "We support on-demand and delivery startups with ordering platforms, operations dashboards, partner/vendor portals, and mobile applications optimized for real-time execution.",
+        subtitle: "Real-Time Powerhouses for Infinite Demand",
+        description: "On-demand startups live or die by execution. We build the ordering platforms and partner portals needed for massive scale, ensuring your service never misses a beat.",
         icon: UtensilsCrossed,
         gradient: "from-lime-500/30 via-green-500/20 to-transparent",
         accentColor: "text-lime-400",
@@ -242,16 +260,19 @@ export function IndustriesShowcaseSection() {
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header Section */}
-                <div ref={headerRef} className="mb-16 md:mb-24 max-w-4xl">
+                <div ref={headerRef} className="mb-16 md:mb-24 max-w-5xl">
                     <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-4">
                         Industries We Serve
                     </span>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
-                        The industries where our services create{" "}
+                        Industries Where We Fuel{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400">
-                            the strongest business and operational impact.
+                            the Future
                         </span>
                     </h2>
+                    <p className="text-lg md:text-xl text-neutral-400 leading-relaxed">
+                        We deliver industry specific software solutions that understand your market&apos;s unique demands. From regulatory complexity to operational scale, our software development for industries combines deep domain expertise with execution-focused engineering. Whether you&apos;re disrupting finance, transforming healthcare, or scaling e-commerce, we build the foundations that turn vision into market dominance.
+                    </p>
                 </div>
 
                 {/* Industry Cards Grid */}
@@ -300,9 +321,14 @@ export function IndustriesShowcaseSection() {
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="text-xl font-semibold text-white mb-3 tracking-tight group-hover:text-white transition-colors duration-300">
+                                    <h3 className="text-xl font-semibold text-white mb-1 tracking-tight group-hover:text-white transition-colors duration-300">
                                         {industry.title}
                                     </h3>
+
+                                    {/* Subtitle */}
+                                    <p className="text-sm font-medium text-orange-400/80 mb-3">
+                                        {industry.subtitle}
+                                    </p>
 
                                     {/* Description */}
                                     <p className="text-sm text-neutral-400 leading-relaxed flex-grow group-hover:text-neutral-300 transition-colors duration-300">
