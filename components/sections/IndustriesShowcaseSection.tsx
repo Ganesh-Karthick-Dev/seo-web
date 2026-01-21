@@ -260,18 +260,15 @@ export function IndustriesShowcaseSection() {
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header Section */}
-                <div ref={headerRef} className="mb-16 md:mb-24 max-w-5xl">
-                    <span className="inline-block text-xs font-bold tracking-[0.25em] text-orange-500 uppercase mb-4">
-                        Industries We Serve
-                    </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
-                        Industries Where We Fuel{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400">
-                            the Future
+                <div ref={headerRef} className="mb-24 max-w-5xl">
+                    <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-8">
+                        Industries Where We Fuel the Future <br />
+                        <span className="text-neutral-500">
+                            We deliver industry specific software solutions that understand your market&apos;s unique demands.
                         </span>
                     </h2>
                     <p className="text-lg md:text-xl text-neutral-400 leading-relaxed">
-                        We deliver industry specific software solutions that understand your market&apos;s unique demands. From regulatory complexity to operational scale, our software development for industries combines deep domain expertise with execution-focused engineering. Whether you&apos;re disrupting finance, transforming healthcare, or scaling e-commerce, we build the foundations that turn vision into market dominance.
+                        From regulatory complexity to operational scale, our software development for industries combines deep domain expertise with execution-focused engineering. Whether you&apos;re disrupting finance, transforming healthcare, or scaling e-commerce, we build the foundations that turn vision into market dominance.
                     </p>
                 </div>
 
