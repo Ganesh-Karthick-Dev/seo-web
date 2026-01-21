@@ -5,6 +5,17 @@ import { GradientCard } from '@/components/ui/gradient-card';
 import { CTA } from '@/components/ui/call-to-action';
 import { Search, PenTool, Code2, CheckCircle, Rocket } from 'lucide-react';
 
+export interface CardData {
+    badgeText: string;
+    badgeColor: string;
+    title: string;
+    description: string;
+    ctaText: string;
+    ctaHref: string;
+    gradient: "cyan" | "blue" | "gray" | "green" | "orange" | "purple" | "sky";
+    icon: React.ReactNode;
+}
+
 export interface ScrollHeroSectionProps {
     /** Enable view-timeline animations if supported */
     animate?: boolean;
@@ -16,10 +27,12 @@ export interface ScrollHeroSectionProps {
     titleHighlight?: string;
     /** Section description */
     description?: string;
+    /** Custom cards data */
+    cards?: CardData[];
 }
 
-// Card data for the 5 phases
-const cardData = [
+// Default Card data for the 5 phases
+const defaultCardData: CardData[] = [
     {
         badgeText: "Phase 1",
         badgeColor: "#06B6D4", // Cyan
@@ -27,7 +40,7 @@ const cardData = [
         description: "Analyze business requirements, map workflows, review existing systems, assess risks, define success metrics, and align technology decisions with business outcomes.",
         ctaText: "Clear implementation roadmap →",
         ctaHref: "/contact",
-        gradient: "cyan" as const,
+        gradient: "cyan",
         icon: <Search className="w-full h-full" />,
     },
     {
@@ -37,7 +50,7 @@ const cardData = [
         description: "Design scalable system architecture, define APIs and integration models, create database schemas, establish security frameworks, and plan performance.",
         ctaText: "Future-ready blueprint →",
         ctaHref: "/contact",
-        gradient: "blue" as const,
+        gradient: "blue",
         icon: <PenTool className="w-full h-full" />,
     },
     {
@@ -47,7 +60,7 @@ const cardData = [
         description: "Build custom features, implement business logic, develop user interfaces, integrate third-party systems, and automate workflows through structured sprints.",
         ctaText: "Production-ready software →",
         ctaHref: "/contact",
-        gradient: "cyan" as const,
+        gradient: "cyan",
         icon: <Code2 className="w-full h-full" />,
     },
     {
@@ -57,7 +70,7 @@ const cardData = [
         description: "Perform functional, regression, performance, and security testing — followed by user acceptance testing, deployment setup, and monitoring enablement.",
         ctaText: "Stable, high-performance app →",
         ctaHref: "/contact",
-        gradient: "blue" as const,
+        gradient: "blue",
         icon: <CheckCircle className="w-full h-full" />,
     },
     {
@@ -67,7 +80,7 @@ const cardData = [
         description: "Provide ongoing support, implement enhancements, improve performance, scale infrastructure, and evolve functionality as your business grows.",
         ctaText: "Continuously improving →",
         ctaHref: "/contact",
-        gradient: "cyan" as const,
+        gradient: "cyan",
         icon: <Rocket className="w-full h-full" />,
     },
 ];
@@ -78,6 +91,7 @@ export function ScrollHeroSection({
     title = "Our delivery approach",
     titleHighlight = "Structured, Transparent & Predictable Execution",
     description = "Our custom software development process follows an iterative, milestone-driven, and outcome-focused delivery model — ensuring clarity, engineering discipline, and business alignment at every stage.",
+    cards = defaultCardData,
 }: ScrollHeroSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -113,7 +127,7 @@ export function ScrollHeroSection({
 
                     {/* Gradient Cards Grid */}
                     <div className="scroll-hero-cards">
-                        {cardData.map((card, index) => (
+                        {cards.map((card, index) => (
                             <GradientCard
                                 key={index}
                                 badgeText={card.badgeText}
