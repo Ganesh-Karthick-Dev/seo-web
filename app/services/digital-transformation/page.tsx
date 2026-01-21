@@ -1,39 +1,45 @@
 
-
 import React from "react";
-import { Sparkles, Server, Workflow, TrendingUp, Database, Lightbulb, Building2, RefreshCw, Search, Layers, Code2, Rocket, Award, Target, Shield, MessageSquare, Handshake } from "lucide-react";
+import { Sparkles, Server, Workflow, TrendingUp, Database, Lightbulb, Building2, RefreshCw, Search, Layers, Code2, Rocket, Award, Target, Shield, MessageSquare, Handshake, Zap, Lock, Eye } from "lucide-react";
 import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 import { ServiceFeaturesSection } from "@/components/sections/ServiceFeaturesSection";
 import { ServiceProcessSection } from "@/components/sections/ServiceProcessSection";
 import { ServiceCTASection } from "@/components/sections/ServiceCTASection";
+import { IntegrationsSection } from "@/components/sections/IntegrationsSection";
 import { BlogSection } from "@/components/sections/BlogSection";
+import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 
-// Features - 4 Problems where Digital Transformation creates impact
+export const metadata = {
+    title: "digital transformation services | Eliminate Legacy Constraints | Zylex",
+    description: "Zylex digital transformation services destroy legacy anchors—from app modernization to legacy modernization and transformation. Absolute execution.",
+};
+
+// Features - The Technical Ceilings
 const features = [
     {
-        icon: <Server className="w-full h-full" />,
-        title: "When Legacy Systems Hold the Business Back",
-        description: "Outdated applications slow innovation, increase risk, and make scaling difficult. Our legacy modernization and transformation initiatives help organizations evolve without disrupting operations.",
+        icon: <Layers className="w-full h-full" />,
+        title: "The Legacy Anchor (Architecture Rigidity)",
+        description: "Brittle codebases aren't just a nuisance—they're a liability that kills innovation and makes scaling a fantasy. We overhaul your legacy stack through app modernisation initiatives that balance high-stakes transformation with low-risk execution, allowing you to evolve without breaking the operations that drive your current success.",
     },
     {
         icon: <Workflow className="w-full h-full" />,
-        title: "When Processes Are Manual, Fragmented, or Inefficient",
-        description: "We streamline workflows through business process digital transformation, automation, and integration — improving productivity and visibility across teams.",
+        title: "The Execution Void (Process Friction)",
+        description: "Fragmented workflows and manual \"patchwork\" are a silent drain on your survival. We harden your operations through structured modernization and deep integration—delivering absolute visibility and terminal velocity instead of another spreadsheet.",
     },
     {
-        icon: <TrendingUp className="w-full h-full" />,
-        title: "When Growth Requires Technology Alignment",
-        description: "We help align technology investments with business strategy — ensuring every transformation initiative supports measurable outcomes and future-scale capability.",
+        icon: <Target className="w-full h-full" />,
+        title: "The Strategic Blindspot (Technical Misalignment)",
+        description: "Buying tools is easy; engineering a market dominance foundation is rare. We ensure every modernization initiative is mapped to your unshakeable business goals through proven digital strategy, ensuring technology supports your future-scale capability—not just your vendor's bottom line.",
     },
     {
         icon: <Database className="w-full h-full" />,
-        title: "When Data Exists — But Insights Don't",
-        description: "We enable connected systems, unified data, and actionable analytics to support smarter decision-making across the organization.",
+        title: "The Insight Blackout (Fragmented Intelligence)",
+        description: "Data exists everywhere, but without connection, it's just overhead. We build unified data ecosystems and actionable intelligence layers that turn fragmented information into decisive, faster decision-making across the entire organization.",
     },
 ];
 
-// Solutions we offer - 3 items (Timeline 1)
-const solutionsData = [
+// Core Capabilities - App Modernization
+const capabilitiesData = [
     {
         title: "01",
         content: (
@@ -43,11 +49,11 @@ const solutionsData = [
                         <Lightbulb className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
-                        Digital Strategy & Consulting
+                        Execution-Driven Strategy & Roadmap
                     </h4>
                 </div>
                 <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
-                    We partner with you to define your digital vision, set clear transformation goals, and align every initiative with your core business objectives. As a leading digital transformation company, our consultants provide strategic guidance that ensures your digital investments create real business value.
+                    <strong className="text-white">Vision Requires a Technical Engine.</strong> We partner with you to define a roadmap that removes friction and aligns every modernization initiative with your core business objectives. We provide the strategic path that ensures your technical investments create actual value—focused on building the foundations that move your business forward.
                 </p>
             </div>
         ),
@@ -58,14 +64,14 @@ const solutionsData = [
             <div className="pb-10">
                 <div className="flex items-center gap-4 mb-4">
                     <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
-                        <Building2 className="w-6 h-6" />
+                        <TrendingUp className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
-                        Digital Business Transformation
+                        Operational Evolution & Systems Scaling
                     </h4>
                 </div>
                 <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
-                    We help organizations evolve with changing markets, emerging technologies, and regulatory shifts. As trusted digital transformation service providers, we identify the right digital platforms and AI-driven solutions to strengthen capabilities, streamline operations, and accelerate innovation — enabling your business to operate smarter and scale with confidence.
+                    <strong className="text-white">Stay at the Forefront of Your Industry.</strong> We help you evolve alongside shifting markets and emerging tech. Our digital transformation solutions identify the high-stakes platforms and integrated AI capabilities that strengthen your operations and accelerate the innovation required to maintain your market lead.
                 </p>
             </div>
         ),
@@ -79,19 +85,19 @@ const solutionsData = [
                         <RefreshCw className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
-                        Legacy Application Modernization
+                        Technical Foundation Modernization
                     </h4>
                 </div>
                 <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
-                    We transform outdated legacy systems into secure, scalable, and high-performing digital platforms. Our legacy application modernization services upgrade architecture, enhance reliability and security, and align your applications with modern technologies — while ensuring minimal disruption to ongoing operations.
+                    <strong className="text-white">Legacy Constraints Shouldn't Hold Back Your Roadmap.</strong> We transform brittle, outdated systems into secure, scalable, and high-performing digital pillars through legacy modernization and transformation. We upgrade your architecture and security while ensuring your daily operations continue with professional rigor and zero downtime.
                 </p>
             </div>
         ),
     },
 ];
 
-// Engagement Approach - 4 Phases (Timeline 2)
-const phasesData = [
+// Delivery Framework - 4 Phases
+const deliveryData = [
     {
         title: "01",
         content: (
@@ -101,14 +107,11 @@ const phasesData = [
                         <Search className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
-                        Discovery & Business Alignment
+                        Phase 1 — High-Stakes Audit & Alignment
                     </h4>
                 </div>
-                <p className="text-neutral-400 text-base md:text-lg leading-relaxed mb-4">
-                    <strong className="text-white">What We Do:</strong> Assess existing systems, workflows, risks, business goals, and capability gaps — ensuring transformation priorities align with strategic outcomes.
-                </p>
                 <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
-                    <strong className="text-white">What You Get:</strong> A clear transformation roadmap with milestones, investment mapping, dependencies, and execution priorities.
+                    We audit your technical debt and capability gaps. You get a clear execution blueprint with investment mapping and prioritized milestones that align with your unshakeable outcomes—not a generic slide deck.
                 </p>
             </div>
         ),
@@ -122,14 +125,11 @@ const phasesData = [
                         <Layers className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
-                        Solution & Transformation Architecture
+                        Phase 2 — Blueprints for Absolute Scale
                     </h4>
                 </div>
-                <p className="text-neutral-400 text-base md:text-lg leading-relaxed mb-4">
-                    <strong className="text-white">What We Do:</strong> Define modernization architecture, integration plans, platform evolution strategy, security alignment, and scalability models.
-                </p>
                 <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
-                    <strong className="text-white">What You Get:</strong> Future-ready transformation blueprint with phased execution plan and technology validation.
+                    We define the modernization pillars and integration strategy. You get a future-ready technical foundation that has been battle-tested against your specific constraints.
                 </p>
             </div>
         ),
@@ -140,17 +140,14 @@ const phasesData = [
             <div className="pb-10">
                 <div className="flex items-center gap-4 mb-4">
                     <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400">
-                        <Code2 className="w-6 h-6" />
+                        <Rocket className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
-                        Implementation & Rollout
+                        Phase 3 — Hardened Execution
                     </h4>
                 </div>
-                <p className="text-neutral-400 text-base md:text-lg leading-relaxed mb-4">
-                    <strong className="text-white">What We Do:</strong> Execute transformation initiatives through structured delivery cycles with progress visibility, governance, and controlled change management.
-                </p>
                 <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
-                    <strong className="text-white">What You Get:</strong> Predictable implementation, stable releases, and business-aligned delivery outcomes.
+                    Velocity without the excuses. We execute through rigorous delivery cycles with absolute transparency (no hiding behind status reports). You get predictable implementation, stable releases, and outcomes that actually move the needle.
                 </p>
             </div>
         ),
@@ -161,50 +158,35 @@ const phasesData = [
             <div className="pb-10">
                 <div className="flex items-center gap-4 mb-4">
                     <div className="p-3 rounded-xl bg-violet-500/10 text-violet-400">
-                        <Rocket className="w-6 h-6" />
+                        <Award className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
-                        Optimization, Scale & Continuous Evolution
+                        Phase 4 — Operational Dominance
                     </h4>
                 </div>
-                <p className="text-neutral-400 text-base md:text-lg leading-relaxed mb-4">
-                    <strong className="text-white">What We Do:</strong> Improve performance, maturity, automation, and operational scalability as systems and teams evolve.
-                </p>
                 <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
-                    <strong className="text-white">What You Get:</strong> A mature, scalable, digital-first organization — built for long-term growth.
+                    Enduring Performance. We continuously sharpen performance and maturity as your organization scales. You get a mature, digital-first operation built for long-term dominance and zero regrets.
                 </p>
             </div>
         ),
     },
 ];
 
-// Why Choose - 5 points
-const whyChooseBenefits = [
-    {
-        icon: <Award className="w-7 h-7" />,
-        title: "Proven Transformation Success",
-        description: "We've helped businesses modernize systems, digitize workflows, and improve operational efficiency across industries.",
-    },
-    {
-        icon: <Target className="w-7 h-7" />,
-        title: "Strategy-Led, Business-Aligned Approach",
-        description: "Every initiative is planned around outcomes — productivity, scalability, and long-term value.",
-    },
-    {
-        icon: <Shield className="w-7 h-7" />,
-        title: "Smooth & Low-Risk Modernization",
-        description: "We upgrade legacy platforms and migrate systems without disrupting daily operations.",
-    },
-    {
-        icon: <MessageSquare className="w-7 h-7" />,
-        title: "Transparent, Milestone-Driven Delivery",
-        description: "Clear execution roadmap, measurable progress, and predictable implementation.",
-    },
-    {
-        icon: <Handshake className="w-7 h-7" />,
-        title: "Long-Term Growth Partnership",
-        description: "Post-deployment optimization, enhancements, and continuous capability expansion.",
-    },
+// Tech Stack
+const techLeft = [
+    { label: "AWS", icon: "aws", color: "#FF9900" },
+    { label: "Azure", icon: "azure", color: "#0078D4" },
+    { label: "Docker", icon: "docker", color: "#2496ED" },
+    { label: "React", icon: "react", color: "#61DAFB" },
+    { label: "Next.js", icon: "nextjs", color: "#000000" },
+];
+
+const techRight = [
+    { label: "PostgreSQL", icon: "postgresql", color: "#4169E1" },
+    { label: "GraphQL", icon: "graphql", color: "#E10098" },
+    { label: "Auth0", icon: "auth0", color: "#EB5424" },
+    { label: "Terraform", icon: "terraform", color: "#7B42BC" },
+    { label: "Datadog", icon: "datadog", color: "#632CA6" },
 ];
 
 export default function DigitalTransformationPage() {
@@ -212,127 +194,88 @@ export default function DigitalTransformationPage() {
         <main className="bg-black min-h-screen">
             {/* Hero Section */}
             <ServiceHeroSection
-                title="Empower your business with innovative digital transformation solutions"
-                subtitle="Digital Transformation"
-                description="Modern businesses don't just need new tools — they need transformation that improves efficiency, strengthens operations, and accelerates growth. Our Digital Transformation Services help modernize systems, streamline workflows, and build digital capabilities that create lasting business value."
+                title="App Modernization: Turn Your Legacy Constraints into Unshakeable Engineering Advantages"
+                subtitle="App Modernization & Digital Transformation"
+                description="Outdated software doesn't just slow you down—it anchors your growth and leaks revenue. We specialize in hard-hitting application modernization that destroys technical friction and rebuilds your systems into high-performance digital foundations. Our digital transformation services deliver absolute engineering execution—no excuses, no downtime, no 'weekend emergency calls' as your standard operating procedure."
                 ctaText="Let's Talk"
                 ctaHref="/contact"
                 icon={<Sparkles className="w-4 h-4 text-cyan-400" />}
             />
 
-            {/* Features Section - 4 Problems */}
+            {/* Features Section - The Technical Ceilings */}
             <ServiceFeaturesSection
-                title="Where Digital Transformation Creates the Highest Business Impact"
-                titleHighlight=""
+                title="The Technical Ceilings: What's Blocking Your Dominance?"
+                titleHighlight="If your current technology dictates your speed, you've already lost. We solve the execution failures that brittle systems create."
                 features={features}
             />
 
-            {/* Solutions Section - 3 Solutions (Simple Card Grid) */}
-            <section className="relative py-24 md:py-32 px-4 md:px-6 lg:px-8 bg-black overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
-
-                <div className="max-w-[90rem] mx-auto relative z-10">
-                    <div className="mb-16 md:mb-20 max-w-5xl">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
-                            Digital Transformation Solutions we offer
-                        </h2>
-                        <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl">
-                            We combine strategy, process transformation, and implementation to help organizations move from legacy constraints to scalable, modern digital ecosystems.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        {/* Solution 1 */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6">
-                                <Lightbulb className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-sky-100 transition-colors">
-                                Digital Strategy & Consulting
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                We partner with you to define your digital vision, set clear transformation goals, and align every initiative with your core business objectives. As a leading digital transformation company, our consultants provide strategic guidance that ensures your digital investments create real business value.
-                            </p>
-                        </div>
-
-                        {/* Solution 2 */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6">
-                                <Building2 className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-cyan-100 transition-colors">
-                                Digital Business Transformation
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                We help organizations evolve with changing markets, emerging technologies, and regulatory shifts. As trusted digital transformation service providers, we identify the right digital platforms and AI-driven solutions to strengthen capabilities, streamline operations, and accelerate innovation — enabling your business to operate smarter and scale with confidence.
-                            </p>
-                        </div>
-
-                        {/* Solution 3 */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
-                                <RefreshCw className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-blue-100 transition-colors">
-                                Legacy Application Modernization
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                We transform outdated legacy systems into secure, scalable, and high-performing digital platforms. Our legacy application modernization services upgrade architecture, enhance reliability and security, and align your applications with modern technologies — while ensuring minimal disruption to ongoing operations.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Engagement Approach - 4 Phases (Timeline) */}
+            {/* Solutions Section - App Modernization */}
             <ServiceProcessSection
-                title="How We Deliver Digital Transformation"
-                titleHighlight="Our Engagement Approach — Our transformation model balances strategy, execution discipline, and change enablement."
-                processData={phasesData}
+                title="App Modernization: From Legacy Constraints to High-Performance Pillars"
+                titleHighlight="Build the technical momentum your vision deserves."
+                processData={capabilitiesData}
             />
 
-            {/* Why Choose Section - 5 Points */}
-            <section className="w-full py-24 lg:py-32 bg-black relative overflow-hidden">
-                <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
-                </div>
+            {/* Delivery Framework */}
+            <ServiceProcessSection
+                title="Our Delivery Framework: Structured for Certainty"
+                titleHighlight="We skip the process-for-the-sake-of-process bloat. Every milestone is a hard step toward market dominance."
+                processData={deliveryData}
+            />
 
-                <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">
-                    <div className="mb-16 max-w-4xl">
-                        <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
-                            Why Businesses Choose Zylex for Digital Transformation
-                        </h2>
-                    </div>
+            {/* Tech Stack Section */}
+            <IntegrationsSection
+                title="The Tech Stack"
+                titleHighlight="We select technologies based on your specific requirements for scale, security, and long-term sustainability."
+                leftTechItems={techLeft}
+                rightTechItems={techRight}
+            />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {whyChooseBenefits.map((benefit, index) => (
-                            <div
-                                key={index}
-                                className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500"
-                            >
-                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white mb-6">
-                                    {benefit.icon}
-                                </div>
-                                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
-                                    {benefit.title}
-                                </h3>
-                                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                    {benefit.description}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            {/* Why Choose Section */}
+            <WhyChooseUsSection
+                title="Why Choose Zylex for App Modernization?"
+                titleHighlight="Because your systems should be a high-performance engine, not an anchor."
+                benefits={[
+                    {
+                        icon: <Award className="w-7 h-7" />,
+                        title: "Real-World Experience",
+                        description: "We've overhauled crumbling legacy systems for industry leaders who can't afford to be \"down.\" We know exactly what fails and how to engineer past it.",
+                        accent: "from-cyan-400 to-blue-600",
+                    },
+                    {
+                        icon: <Target className="w-7 h-7" />,
+                        title: "Outcome-Led, Zero-Fluff",
+                        description: "We don't implement tech for the sake of checking a box. We plan every effort around your productivity, scale, and long-term business value. Our digital transformation services focus on measurable outcomes, not vanity metrics.",
+                        accent: "from-cyan-400 to-sky-500",
+                    },
+                    {
+                        icon: <Shield className="w-7 h-7" />,
+                        title: "Zero-Disruption Reality",
+                        description: "We specialize in migrating systems without the disruption that kills momentum. Low risk, high impact, no \"Monday morning surprises.\"",
+                        accent: "from-blue-400 to-indigo-600",
+                    },
+                    {
+                        icon: <Eye className="w-7 h-7" />,
+                        title: "Radical Transparency",
+                        description: "You see the progress in every cycle. Our roadmap ensures you have a clear view of reality—not a corporate \"re-interpretation\" of status.",
+                        accent: "from-cyan-400 to-blue-500",
+                    },
+                    {
+                        icon: <Handshake className="w-7 h-7" />,
+                        title: "Relentless Support",
+                        description: "We stay engaged post-deployment, providing the continuous tuning and enhancements needed to keep you at the front of the pack.",
+                        accent: "from-sky-400 to-blue-600",
+                    },
+                ]}
+            />
 
-            {/* Blog Section - Resources */}
+            {/* Blog Section */}
             <BlogSection />
 
             {/* Final CTA */}
             <ServiceCTASection
-                title="Ready to Move From Technology Adoption to Real Digital Transformation?"
-                description="Whether you're modernizing legacy systems, digitizing operations, or building data-driven capabilities — we help you execute transformation initiatives with clarity, measurable outcomes, and minimal business disruption."
+                title="Stop Managing Debt. Start Shipping Mastery."
+                description="Your vision is too ambitious for brittle architecture. Rebuild your foundation into a high-performance engine that scales without the excuses. No legacy anchors. Just absolute execution."
                 primaryButtonText="Let's Talk"
                 primaryButtonHref="/contact"
             />

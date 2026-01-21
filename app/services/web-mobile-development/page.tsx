@@ -8,7 +8,7 @@ import { ServiceScrollSection } from "@/components/sections/ServiceScrollSection
 import { IntegrationsSection } from "@/components/sections/IntegrationsSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { BlogSection } from "@/components/sections/BlogSection";
-import { CTASection } from "@/components/sections/CTASection";
+
 
 export const metadata = {
     title: "Website and App Development Services That Users Love | Zylex",
@@ -198,11 +198,11 @@ export default function WebMobileApplicationDevelopmentPage() {
 
             <BlogSection />
 
-            <CTASection
+            <ServiceCTASection
                 title="Ready to Build the Digital Pillar of Your Industry?"
-                subtitle="Don't just ship code—ship an unshakeable advantage. Partner with an engineering team that specializes in high-performance reality and turn your roadmap into a market-leading outcome."
-                ctaText="Let's Talk"
-                ctaHref="/contact"
+                description="Don't just ship code—ship an unshakeable advantage. Partner with an engineering team that specializes in high-performance reality and turn your roadmap into a market-leading outcome."
+                primaryButtonText="Let's Talk"
+                primaryButtonHref="/contact"
             />
         </main>
     );

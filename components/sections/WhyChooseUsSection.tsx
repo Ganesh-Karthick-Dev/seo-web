@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { ShinyButton } from "@/components/ui/shiny-button";
 
-const benefits = [
+const defaultBenefits = [
     {
         icon: <Award className="w-7 h-7" />,
         title: "Engineering excellence built into every stage of delivery",
@@ -53,8 +53,21 @@ const benefits = [
     },
 ];
 
+interface BenefitItem {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+    accent: string;
+}
+
+interface WhyChooseUsSectionProps {
+    title?: string;
+    titleHighlight?: string;
+    benefits?: BenefitItem[];
+}
+
 interface BenefitRowProps {
-    benefit: typeof benefits[0];
+    benefit: BenefitItem;
     index: number;
 }
 
@@ -134,7 +147,11 @@ const BenefitRow = ({ benefit, index }: BenefitRowProps) => {
     );
 };
 
-export function WhyChooseUsSection() {
+export function WhyChooseUsSection({
+    title = "Why Businesses Choose Zylex",
+    titleHighlight = "for Custom Software Development",
+    benefits = defaultBenefits
+}: WhyChooseUsSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -176,8 +193,8 @@ export function WhyChooseUsSection() {
 
                                 {/* Title */}
                                 <h2 className="font-bold text-white leading-[1.1] mb-6" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
-                                    Why Businesses Choose Zylex
-                                    <span className="block text-neutral-500 mt-2">for Custom Software Development</span>
+                                    {title}
+                                    <span className="block text-neutral-500 mt-2">{titleHighlight}</span>
                                 </h2>
 
                                 {/* Description */}

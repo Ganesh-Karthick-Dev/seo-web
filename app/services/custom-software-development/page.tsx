@@ -9,7 +9,7 @@ import { ServiceScrollSection } from "@/components/sections/ServiceScrollSection
 import { IntegrationsSection } from "@/components/sections/IntegrationsSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { BlogSection } from "@/components/sections/BlogSection";
-import { CTASection } from "@/components/sections/CTASection";
+
 import { Layers, Rocket, RefreshCw, Cog, AppWindow, Box, Zap, Building2, Link2, Award, Target, MessageSquare, Settings, Shield, Handshake } from "lucide-react";
 
 export const metadata = {
@@ -217,11 +217,11 @@ export default function CustomSoftwareDevelopmentPage() {
 
             <BlogSection />
 
-            <CTASection
+            <ServiceCTASection
                 title="Ready to Build Software That Actually Scales?"
-                subtitle="Stop struggling with off-the-shelf limitations. Partner with the specialists in custom software development to build the high-performance foundations your vision demands."
-                ctaText="Let's Talk"
-                ctaHref="/contact"
+                description="Stop struggling with off-the-shelf limitations. Partner with the specialists in custom software development to build the high-performance foundations your vision demands."
+                primaryButtonText="Let's Talk"
+                primaryButtonHref="/contact"
             />
         </main>
     );
