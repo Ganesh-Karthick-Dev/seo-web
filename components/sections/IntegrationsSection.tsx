@@ -241,7 +241,7 @@ export function IntegrationsSection({
                         {/* Center - Favicon Logo */}
                         <div
                             ref={centerRef}
-                            className="z-10 flex size-20 md:size-24 items-center justify-center rounded-full border-2 border-neutral-200 bg-white p-4 shadow-[0_0_30px_rgba(14,165,233,0.3)]"
+                            className="z-10 flex size-20 md:size-24 items-center justify-center rounded-full border-2 border-neutral-200 bg-white p-4 shadow-[0_0_30px_rgba(6,182,212,0.3)]"
                         >
                             <Image
                                 src="/favicon_io/favicon-32x32.png"

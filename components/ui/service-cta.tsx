@@ -22,7 +22,7 @@ export function ServiceCTA({
     secondaryButtonHref = "/case-studies",
 }: ServiceCTAProps) {
     return (
-        <div className="relative mx-auto flex w-full max-w-4xl flex-col justify-between gap-y-8 border-y border-white/10 bg-[radial-gradient(50%_80%_at_50%_0%,rgba(56,189,248,0.1),transparent)] px-6 md:px-12 py-12 md:py-16">
+        <div className="relative mx-auto flex w-full max-w-4xl flex-col justify-between gap-y-8 border-y border-white/10 bg-[radial-gradient(50%_80%_at_50%_0%,rgba(6,182,212,0.1),transparent)] px-6 md:px-12 py-12 md:py-16">
             {/* Corner plus icons */}
             <PlusIcon
                 className="absolute top-[-16px] left-[-16px] z-10 size-8 text-white"
@@ -69,7 +69,7 @@ export function ServiceCTA({
                         </Link>
                     </Button>
                 )}
-                <Button asChild className="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2.5 h-auto">
+                <Button asChild className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2.5 h-auto">
                     <Link href={primaryButtonHref}>
                         {primaryButtonText}
                         <ArrowRightIcon className="size-4 ml-2" />

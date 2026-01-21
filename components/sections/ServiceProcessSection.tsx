@@ -21,7 +21,7 @@ const defaultProcessData: ProcessItem[] = [
         content: (
             <div className="pb-10">
                 <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-sky-500/10 text-sky-400">
+                    <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
                         <AppWindow className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
@@ -75,7 +75,7 @@ const defaultProcessData: ProcessItem[] = [
         content: (
             <div className="pb-10">
                 <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-violet-500/10 text-violet-400">
+                    <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
                         <Building2 className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
@@ -93,7 +93,7 @@ const defaultProcessData: ProcessItem[] = [
         content: (
             <div className="pb-10">
                 <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400">
+                    <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400">
                         <Link2 className="w-6 h-6" />
                     </div>
                     <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
@@ -116,7 +116,7 @@ export function ServiceProcessSection({
     return (
         <section className="relative bg-black overflow-hidden">
             {/* Background effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_left,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_left,rgba(6,182,212,0.08),transparent_50%)] pointer-events-none" />
 
             {/* Header */}
             <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 pt-24 md:pt-32">

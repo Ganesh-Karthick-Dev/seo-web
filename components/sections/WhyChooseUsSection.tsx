@@ -19,31 +19,31 @@ const benefits = [
         icon: <Award className="w-7 h-7" />,
         title: "Engineering excellence built into every stage of delivery",
         description: "Architecture-driven design, clean code standards, security discipline, and scalability planning from day one.",
-        accent: "from-sky-400 to-blue-600",
+        accent: "from-cyan-400 to-blue-600",
     },
     {
         icon: <Target className="w-7 h-7" />,
         title: "Predictable execution with milestone-driven delivery",
         description: "Structured sprints, clear acceptance criteria, risk visibility, and measurable progress at every phase.",
-        accent: "from-emerald-400 to-teal-600",
+        accent: "from-cyan-400 to-sky-500",
     },
     {
         icon: <MessageSquare className="w-7 h-7" />,
         title: "Transparent communication and complete project visibility",
         description: "Open collaboration, sprint reviews, documentation, and alignment across stakeholders and engineering teams.",
-        accent: "from-violet-400 to-purple-600",
+        accent: "from-blue-400 to-indigo-600",
     },
     {
         icon: <Settings className="w-7 h-7" />,
         title: "Flexible engagement models for startup and enterprise",
         description: "MVP development, product engineering, team extension, or enterprise delivery — tailored to maturity and scale.",
-        accent: "from-amber-400 to-orange-600",
+        accent: "from-cyan-400 to-blue-500",
     },
     {
         icon: <Shield className="w-7 h-7" />,
         title: "Software designed for performance and reliability",
         description: "High-availability architecture, integration-ready systems, and platforms built to support business expansion.",
-        accent: "from-rose-400 to-pink-600",
+        accent: "from-sky-400 to-blue-600",
     },
     {
         icon: <Handshake className="w-7 h-7" />,
@@ -151,7 +151,7 @@ export function WhyChooseUsSection() {
                 style={{ y: backgroundY }}
             >
                 <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px]" />
             </motion.div>
 
             <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">

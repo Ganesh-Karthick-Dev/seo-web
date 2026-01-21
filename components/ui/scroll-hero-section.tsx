@@ -22,42 +22,42 @@ export interface ScrollHeroSectionProps {
 const cardData = [
     {
         badgeText: "Phase 1",
-        badgeColor: "#0EA5E9", // Sky
+        badgeColor: "#06B6D4", // Cyan
         title: "Discovery & Strategic Alignment",
         description: "Analyze business requirements, map workflows, review existing systems, assess risks, define success metrics, and align technology decisions with business outcomes.",
         ctaText: "Clear implementation roadmap →",
         ctaHref: "/contact",
-        gradient: "sky" as const,
+        gradient: "cyan" as const,
         icon: <Search className="w-full h-full" />,
     },
     {
         badgeText: "Phase 2",
-        badgeColor: "#8B5CF6", // Purple
+        badgeColor: "#3B82F6", // Blue
         title: "Architecture & Solution Design",
         description: "Design scalable system architecture, define APIs and integration models, create database schemas, establish security frameworks, and plan performance.",
         ctaText: "Future-ready blueprint →",
         ctaHref: "/contact",
-        gradient: "purple" as const,
+        gradient: "blue" as const,
         icon: <PenTool className="w-full h-full" />,
     },
     {
         badgeText: "Phase 3",
-        badgeColor: "#F59E0B", // Amber
+        badgeColor: "#06B6D4", // Cyan
         title: "Development & Integration",
         description: "Build custom features, implement business logic, develop user interfaces, integrate third-party systems, and automate workflows through structured sprints.",
         ctaText: "Production-ready software →",
         ctaHref: "/contact",
-        gradient: "orange" as const,
+        gradient: "cyan" as const,
         icon: <Code2 className="w-full h-full" />,
     },
     {
         badgeText: "Phase 4",
-        badgeColor: "#10B981", // Green
+        badgeColor: "#3B82F6", // Blue
         title: "Quality Validation & Release",
         description: "Perform functional, regression, performance, and security testing — followed by user acceptance testing, deployment setup, and monitoring enablement.",
         ctaText: "Stable, high-performance app →",
         ctaHref: "/contact",
-        gradient: "green" as const,
+        gradient: "blue" as const,
         icon: <CheckCircle className="w-full h-full" />,
     },
     {
@@ -67,7 +67,7 @@ const cardData = [
         description: "Provide ongoing support, implement enhancements, improve performance, scale infrastructure, and evolve functionality as your business grows.",
         ctaText: "Continuously improving →",
         ctaHref: "/contact",
-        gradient: "sky" as const,
+        gradient: "cyan" as const,
         icon: <Rocket className="w-full h-full" />,
     },
 ];

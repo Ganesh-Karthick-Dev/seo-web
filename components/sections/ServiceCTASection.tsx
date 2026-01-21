@@ -23,7 +23,7 @@ export function ServiceCTASection({
     return (
         <section className="relative bg-black overflow-hidden py-24 md:py-32 px-4 md:px-6 lg:px-8">
             {/* Background effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.05),transparent_60%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.05),transparent_60%)] pointer-events-none" />
 
             <ServiceCTA
                 title={title}

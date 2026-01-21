@@ -70,7 +70,7 @@ const AnimatedBorder = ({ delay = 0 }: { delay?: number }) => {
 
     return (
         <div ref={containerRef} className="absolute inset-0 pointer-events-none z-30">
-            <svg 
+            <svg
                 className="absolute inset-0 w-full h-full"
                 viewBox={`0 0 ${w} ${h}`}
                 preserveAspectRatio="none"
@@ -209,8 +209,8 @@ export function ServiceFeaturesSection({
             className="relative py-24 md:py-32 lg:py-40 px-4 md:px-6 lg:px-8 bg-black overflow-hidden"
         >
             {/* Background effects */}
-            <div className="absolute inset-0 bg-gradient-to-b from-sky-500/5 via-transparent to-sky-500/5 pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(56,189,248,0.1),transparent_50%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(6,182,212,0.1),transparent_50%)] pointer-events-none" />
 
             <div className="max-w-[90rem] mx-auto relative z-10">
                 {/* Left Aligned Title */}
@@ -231,12 +231,12 @@ export function ServiceFeaturesSection({
                     className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6 auto-rows-[280px] md:auto-rows-[320px]"
                 >
                     {/* Card 1: Large Left - Span 7 */}
-                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 overflow-hidden hover:border-sky-500/30 transition-all duration-500">
+                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 overflow-hidden hover:border-cyan-500/30 transition-all duration-500">
                         {/* Animated Border */}
                         <AnimatedBorder delay={0.3} />
 
                         {/* Big Icon Background - Right Side */}
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 text-sky-500/10 group-hover:text-sky-500/15 transition-colors duration-500">
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 text-cyan-500/10 group-hover:text-cyan-500/15 transition-colors duration-500">
                             {features[0].icon}
                         </div>
 
@@ -246,7 +246,7 @@ export function ServiceFeaturesSection({
                         {/* Content */}
                         <div className="relative z-20 h-full flex flex-col justify-center p-8 md:p-12">
                             <div className="max-w-md">
-                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight group-hover:text-sky-100 transition-colors duration-300">
+                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight group-hover:text-cyan-100 transition-colors duration-300">
                                     {features[0].title}
                                 </h3>
                                 <p className="text-neutral-400 text-base leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
@@ -281,12 +281,12 @@ export function ServiceFeaturesSection({
                     </div>
 
                     {/* Card 3: Medium Left - Span 5 */}
-                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 overflow-hidden hover:border-blue-500/30 transition-all duration-500">
+                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 overflow-hidden hover:border-cyan-500/30 transition-all duration-500">
                         {/* Animated Border */}
                         <AnimatedBorder delay={0.7} />
 
                         {/* Big Icon Background - Right Side */}
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-40 md:w-52 h-40 md:h-52 text-blue-500/10 group-hover:text-blue-500/15 transition-colors duration-500">
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-40 md:w-52 h-40 md:h-52 text-cyan-500/10 group-hover:text-cyan-500/15 transition-colors duration-500">
                             {features[2].icon}
                         </div>
 
@@ -295,7 +295,7 @@ export function ServiceFeaturesSection({
 
                         {/* Content */}
                         <div className="relative z-20 h-full flex flex-col justify-center p-8 md:p-10">
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 leading-tight group-hover:text-blue-100 transition-colors duration-300">
+                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 leading-tight group-hover:text-cyan-100 transition-colors duration-300">
                                 {features[2].title}
                             </h3>
                             <p className="text-neutral-400 text-sm leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
@@ -305,12 +305,12 @@ export function ServiceFeaturesSection({
                     </div>
 
                     {/* Card 4: Large Right - Span 7 */}
-                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 overflow-hidden hover:border-sky-500/30 transition-all duration-500">
+                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 overflow-hidden hover:border-cyan-500/30 transition-all duration-500">
                         {/* Animated Border */}
                         <AnimatedBorder delay={0.9} />
 
                         {/* Big Icon Background - Right Side */}
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 text-sky-500/10 group-hover:text-sky-500/15 transition-colors duration-500">
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 text-cyan-500/10 group-hover:text-cyan-500/15 transition-colors duration-500">
                             {features[3].icon}
                         </div>
 
@@ -320,7 +320,7 @@ export function ServiceFeaturesSection({
                         {/* Content */}
                         <div className="relative z-20 h-full flex flex-col justify-center p-8 md:p-12">
                             <div className="max-w-md">
-                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight group-hover:text-sky-100 transition-colors duration-300">
+                                <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 leading-tight group-hover:text-cyan-100 transition-colors duration-300">
                                     {features[3].title}
                                 </h3>
                                 <p className="text-neutral-400 text-base leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
