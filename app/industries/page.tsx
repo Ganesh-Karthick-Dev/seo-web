@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ParticleEffectHero from "@/components/ui/particle-effect-for-hero";
 import ScrollMorphHero from "@/components/ui/scroll-morph-hero";
 import { IndustriesShowcaseSection } from "@/components/sections/IndustriesShowcaseSection";
+import { CrossIndustryExpertiseSection } from "@/components/sections/CrossIndustryExpertiseSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { IndustriesCTASection } from "@/components/sections/IndustriesCTASection";
 
@@ -21,6 +22,9 @@ export default function Industries() {
 
             {/* Industries Details Section */}
             <IndustriesShowcaseSection />
+
+            {/* Cross-Industry Expertise Section */}
+            <CrossIndustryExpertiseSection />
 
             {/* Blog Section */}
             <BlogSection />
