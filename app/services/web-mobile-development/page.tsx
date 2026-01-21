@@ -28,30 +28,30 @@ export default function WebMobileApplicationDevelopmentPage() {
             />
 
             <ServiceFeaturesSection
-                title="Strategic Impact: When \" Good Enough\" Apps Stop Scaling"
-            titleHighlight="Stop letting technical friction dictate your user experience. We solve the execution gaps that hold your product back."
-            features={[
-                {
-                    icon: <TrendingUp className="w-full h-full" />,
-                    title: "The Performance Ceiling (Scale Issues)",
-                    description: "When users, workflows, and data volume increase, \"pretty\" apps start to break. Our web application development services restore the stability and flexibility needed to support your most ambitious growth phases.",
-                },
-                {
-                    icon: <Rocket className="w-full h-full" />,
-                    title: "The Complexity Trap (Delivery Lag)",
-                    description: "Expansion shouldn't kill your momentum. We untangle dependencies and technical overhead through a structured development approach that ensures predictable feature delivery and sustainable long-term growth.",
-                },
-                {
-                    icon: <RefreshCw className="w-full h-full" />,
-                    title: "The Innovation Anchor (Legacy Constraints)",
-                    description: "Outdated code blocks the integrations and automation your business needs to stay competitive. We modernize your legacy stack using structured engineering services—without disrupting the operations that generate your revenue today.",
-                },
-                {
-                    icon: <Smartphone className="w-full h-full" />,
-                    title: "The Unified Experience Gap (Mobile Friction)",
-                    description: "Maintaining separate codebases is an expensive, fragmented mess. Our cross-platform mobile app development services deliver a native feel on iOS and Android from a single, maintainable source—getting you to market faster.",
-                },
-            ]}
+                title={'Strategic Impact: When "Good Enough" Apps Stop Scaling'}
+                titleHighlight="Stop letting technical friction dictate your user experience. We solve the execution gaps that hold your product back."
+                features={[
+                    {
+                        icon: <TrendingUp className="w-full h-full" />,
+                        title: "The Performance Ceiling (Scale Issues)",
+                        description: "When users, workflows, and data volume increase, \"pretty\" apps start to break. Our web application development services restore the stability and flexibility needed to support your most ambitious growth phases.",
+                    },
+                    {
+                        icon: <Rocket className="w-full h-full" />,
+                        title: "The Complexity Trap (Delivery Lag)",
+                        description: "Expansion shouldn't kill your momentum. We untangle dependencies and technical overhead through a structured development approach that ensures predictable feature delivery and sustainable long-term growth.",
+                    },
+                    {
+                        icon: <RefreshCw className="w-full h-full" />,
+                        title: "The Innovation Anchor (Legacy Constraints)",
+                        description: "Outdated code blocks the integrations and automation your business needs to stay competitive. We modernize your legacy stack using structured engineering services—without disrupting the operations that generate your revenue today.",
+                    },
+                    {
+                        icon: <Smartphone className="w-full h-full" />,
+                        title: "The Unified Experience Gap (Mobile Friction)",
+                        description: "Maintaining separate codebases is an expensive, fragmented mess. Our cross-platform mobile app development services deliver a native feel on iOS and Android from a single, maintainable source—getting you to market faster.",
+                    },
+                ]}
             />
 
             <ServiceProcessSection
