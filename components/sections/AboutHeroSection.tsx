@@ -191,9 +191,9 @@ export function AboutHeroSection() {
             className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black"
         >
             {/* Animated Background Orbs */}
-            <div className="hero-orb-1 absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-orange-500/20 blur-[120px] pointer-events-none" />
-            <div className="hero-orb-2 absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-amber-500/15 blur-[100px] pointer-events-none" />
-            <div className="hero-orb-3 absolute top-1/2 right-1/3 w-[300px] h-[300px] rounded-full bg-orange-600/10 blur-[80px] pointer-events-none" />
+            <div className="hero-orb-1 absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-cyan-500/20 blur-[120px] pointer-events-none" />
+            <div className="hero-orb-2 absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-blue-500/15 blur-[100px] pointer-events-none" />
+            <div className="hero-orb-3 absolute top-1/2 right-1/3 w-[300px] h-[300px] rounded-full bg-indigo-600/10 blur-[80px] pointer-events-none" />
 
             {/* Subtle Grid Pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
@@ -225,8 +225,7 @@ export function AboutHeroSection() {
                         </span>
                         <span
                             ref={zylexRef}
-                            className="inline-block bg-[linear-gradient(to_top,#facc15,#f97316,#dc2626,#ea580c,#facc15)] bg-clip-text text-transparent bg-[length:100%_200%] bg-[position:50%_0%]"
-                            style={{ willChange: "background-position" }}
+                            className="inline-block text-cyan-500"
                         >
                             Zylex.
                         </span>
@@ -258,11 +257,11 @@ export function AboutHeroSection() {
                     >
                         <span className="word inline-block">Focused</span>{" "}
                         <span className="word inline-block">on</span>{" "}
-                        <span className="word inline-block text-orange-400 font-semibold">Business</span>{" "}
-                        <span className="word inline-block text-orange-400 font-semibold">Impact.</span>
+                        <span className="word inline-block text-cyan-400 font-semibold">Business</span>{" "}
+                        <span className="word inline-block text-cyan-400 font-semibold">Impact.</span>
                         <span
                             ref={cursorRef}
-                            className="inline-block w-[3px] md:w-[4px] h-[1.2em] bg-orange-500 ml-1 opacity-0 align-middle"
+                            className="inline-block w-[3px] md:w-[4px] h-[1.2em] bg-cyan-500 ml-1 opacity-0 align-middle"
                         />
                     </div>
                 </div>

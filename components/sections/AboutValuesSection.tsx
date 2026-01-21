@@ -12,41 +12,41 @@ const values = [
         icon: Gem,
         title: "Engineering Excellence",
         description: "We build for scale, performance, and longevity — not quick fixes that need constant rework.",
-        color: "text-orange-500",
-        bgColor: "bg-orange-500/10",
-        borderColor: "border-orange-500/30",
+        color: "text-cyan-500",
+        bgColor: "bg-cyan-500/10",
+        borderColor: "border-cyan-500/30",
     },
     {
         icon: Eye,
         title: "Transparency First",
         description: "Clear communication, honest timelines, and no hidden surprises. You always know where your project stands.",
-        color: "text-amber-400",
-        bgColor: "bg-amber-400/10",
-        borderColor: "border-amber-400/30",
+        color: "text-cyan-500",
+        bgColor: "bg-cyan-500/10",
+        borderColor: "border-cyan-500/30",
     },
     {
         icon: Handshake,
         title: "Long-Term Partnership",
         description: "We don't disappear after launch. We stay invested in your success as your systems grow and evolve.",
-        color: "text-yellow-400",
-        bgColor: "bg-yellow-400/10",
-        borderColor: "border-yellow-400/30",
+        color: "text-cyan-500",
+        bgColor: "bg-cyan-500/10",
+        borderColor: "border-cyan-500/30",
     },
     {
         icon: Target,
         title: "Outcome Over Output",
         description: "We measure success by business impact — faster launches, smoother operations, and technology that drives growth.",
-        color: "text-orange-400",
-        bgColor: "bg-orange-400/10",
-        borderColor: "border-orange-400/30",
+        color: "text-cyan-500",
+        bgColor: "bg-cyan-500/10",
+        borderColor: "border-cyan-500/30",
     },
     {
         icon: ListChecks,
         title: "Structured Execution",
         description: "Disciplined processes, predictable milestones, and accountability at every stage of delivery.",
-        color: "text-amber-500",
-        bgColor: "bg-amber-500/10",
-        borderColor: "border-amber-500/30",
+        color: "text-cyan-500",
+        bgColor: "bg-cyan-500/10",
+        borderColor: "border-cyan-500/30",
     },
 ];
 
@@ -134,7 +134,7 @@ export function AboutValuesSection() {
         <section ref={sectionRef} className="relative w-full py-32 bg-black overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(249,115,22,0.06)_0%,_transparent_50%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(6,182,212,0.06)_0%,_transparent_50%)]" />
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
             </div>
 

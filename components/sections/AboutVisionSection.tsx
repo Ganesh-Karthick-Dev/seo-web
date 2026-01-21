@@ -132,11 +132,11 @@ export function AboutVisionSection() {
             {/* Parallax Background Elements - Large and noticeable */}
             <div
                 ref={parallaxBg1Ref}
-                className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-orange-500/10 blur-[100px] pointer-events-none"
+                className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none"
             />
             <div
                 ref={parallaxBg2Ref}
-                className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-amber-500/8 blur-[80px] pointer-events-none"
+                className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-cyan-500/8 blur-[80px] pointer-events-none"
             />
 
             {/* Grid Pattern */}
@@ -150,7 +150,7 @@ export function AboutVisionSection() {
                         <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6">
                             We Build Technology That <br />
                             <span className="text-neutral-500">Keeps Up With Your</span>{" "}
-                            <span className="text-orange-500">Vision.</span>
+                            <span className="text-cyan-500">Vision.</span>
                         </h2>
                     </div>
 
@@ -165,21 +165,21 @@ export function AboutVisionSection() {
                             >
                                 That&apos;s why <span className="text-white font-semibold">Zylex exists</span>.
                                 We&apos;re a team of engineers, architects, and strategists who believe great software
-                                isn&apos;t just functional — it&apos;s <span className="text-orange-400 font-semibold">reliable</span>,
-                                <span className="text-orange-400 font-semibold"> scalable</span>, and
+                                isn&apos;t just functional — it&apos;s <span className="text-cyan-400 font-semibold">reliable</span>,
+                                <span className="text-cyan-400 font-semibold"> scalable</span>, and
                                 <span className="text-white font-semibold"> built to evolve</span> with your business.
                             </p>
 
                             {/* Paragraph 2 - with left border accent */}
                             <div
                                 ref={para2Ref}
-                                className="border-l-2 border-orange-500/40 pl-6"
+                                className="border-l-2 border-cyan-500/40 pl-6"
                             >
                                 <p className="text-lg md:text-xl text-neutral-400 leading-relaxed">
                                     We&apos;ve seen too many companies held back by fragile systems and partners
                                     who prioritize speed over sustainability. So we built Zylex differently —
-                                    obsessed with <span className="text-orange-400 font-medium">engineering excellence</span>,
-                                    <span className="text-orange-400 font-medium"> transparent execution</span>, and
+                                    obsessed with <span className="text-cyan-400 font-medium">engineering excellence</span>,
+                                    <span className="text-cyan-400 font-medium"> transparent execution</span>, and
                                     solutions designed for the <span className="text-white font-medium">long term</span>.
                                 </p>
                             </div>
@@ -193,15 +193,15 @@ export function AboutVisionSection() {
                                 className="relative p-8 border border-white/10 bg-zinc-900/50 backdrop-blur-sm"
                             >
                                 {/* Accent corner */}
-                                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-orange-500/50" />
-                                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-orange-500/50" />
+                                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-cyan-500/50" />
+                                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-cyan-500/50" />
 
                                 <p className="text-xl md:text-2xl text-neutral-200 leading-relaxed font-medium">
-                                    Whether you&apos;re <span className="text-orange-400">launching a product</span>,
-                                    <span className="text-amber-400"> scaling a platform</span>, or
-                                    <span className="text-orange-500"> modernizing legacy systems</span> —
-                                    we&apos;re here to turn <span className="underline decoration-orange-500/50 decoration-2 underline-offset-4">ambitious visions</span> into
-                                    <span className="underline decoration-orange-500/50 decoration-2 underline-offset-4"> reliable execution</span>.
+                                    Whether you&apos;re <span className="text-cyan-400">launching a product</span>,
+                                    <span className="text-cyan-400"> scaling a platform</span>, or
+                                    <span className="text-cyan-500"> modernizing legacy systems</span> —
+                                    we&apos;re here to turn <span className="underline decoration-cyan-500/50 decoration-2 underline-offset-4">ambitious visions</span> into
+                                    <span className="underline decoration-cyan-500/50 decoration-2 underline-offset-4"> reliable execution</span>.
                                 </p>
                             </div>
                         </div>

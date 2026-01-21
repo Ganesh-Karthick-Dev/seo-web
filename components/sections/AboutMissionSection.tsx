@@ -115,7 +115,7 @@ export function AboutMissionSection() {
             <div ref={triggerRef} className="relative min-h-screen">
                 {/* Background */}
                 <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,_rgba(249,115,22,0.08)_0%,_transparent_50%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,_rgba(6,182,212,0.08)_0%,_transparent_50%)]" />
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
                 </div>
 
@@ -126,7 +126,7 @@ export function AboutMissionSection() {
                         <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
                             Our Mission <br />
                             <span className="text-neutral-500">To Transform How Businesses</span>{" "}
-                            <span className="text-orange-500">Execute.</span>
+                            <span className="text-cyan-500">Execute.</span>
                         </h2>
                     </div>
 
