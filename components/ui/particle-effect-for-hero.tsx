@@ -381,18 +381,16 @@ const HeroContent: React.FC = () => {
     return (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-4">
             <div className="max-w-5xl w-full text-center space-y-8">
-                <div className="inline-block animate-fade-in-up">
-                    <span className="py-1 px-3 border border-white/20 rounded-full text-xs font-mono text-white/60 tracking-widest uppercase bg-white/5 backdrop-blur-sm">
-                        Industries
-                    </span>
-                </div>
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-b from-white/80 to-white/50 tracking-wide animate-fade-in-up">
+                    High-Performance Engineering. Unstoppable Business Velocity.
+                </h2>
 
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 tracking-tight">
-                    Industries we serve
+                    Own the Edge. We&apos;ll Build the Foundation to Hold It.
                 </h1>
 
                 <p className="max-w-3xl mx-auto text-lg md:text-xl text-white/60 font-light leading-relaxed">
-                    Delivering scalable, high-performance digital solutions across diverse industry domains.
+                    You define the future. We build the unshakeable architecture that carries you there—engineered for 10x growth, not just launch day.
                 </p>
 
                 <div className="pt-8 pointer-events-auto">
