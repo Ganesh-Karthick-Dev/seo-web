@@ -24,8 +24,8 @@ interface ServiceHeroProps {
     gradientColors?: string[];
     highlights?: string[];
 
-    // Icon for the service (Lucide icon component)
-    icon?: React.ComponentType<{ className?: string }>;
+    // Icon for the service (Rendered ReactNode)
+    icon?: React.ReactNode;
 }
 
 export function ServiceHeroSection({
@@ -38,7 +38,7 @@ export function ServiceHeroSection({
     secondaryCtaHref,
     gradientColors = ["#38bdf8", "#ffffff", "#38bdf8", "#ffffff", "#38bdf8", "#ffffff"],
     highlights = [],
-    icon: Icon,
+    icon,
 }: ServiceHeroProps) {
     const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -112,7 +112,7 @@ export function ServiceHeroSection({
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
                     >
-                        {Icon && <Icon className="w-4 h-4 text-sky-400" />}
+                        {icon && <div className="flex items-center justify-center">{icon}</div>}
                         <span className="text-sm font-medium text-white/90">{subtitle}</span>
                     </motion.div>
 

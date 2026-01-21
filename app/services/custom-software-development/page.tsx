@@ -1,4 +1,4 @@
-"use client";
+
 
 import { Code2 } from "lucide-react";
 import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
@@ -26,7 +26,7 @@ export default function CustomSoftwareDevelopmentPage() {
                 description="Big ambitions need a solid foundation. You focus on defining the future; we'll build the high-performance technical catalyst that makes it actually happen. Our custom software development services deliver unshakeable systems that scale with your growth—no square pegs in round holes."
                 ctaText="Let's Talk"
                 ctaHref="/contact"
-                icon={Code2}
+                icon={<Code2 className="w-4 h-4 text-cyan-400" />}
             />
 
             <ServiceFeaturesSection
