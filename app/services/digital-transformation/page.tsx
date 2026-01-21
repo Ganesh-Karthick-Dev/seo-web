@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { Sparkles, Server, Workflow, TrendingUp, Database, Lightbulb, Building2, RefreshCw, Search, Layers, Code2, Rocket, Award, Target, Shield, MessageSquare, Handshake } from "lucide-react";
@@ -217,7 +217,7 @@ export default function DigitalTransformationPage() {
                 description="Modern businesses don't just need new tools — they need transformation that improves efficiency, strengthens operations, and accelerates growth. Our Digital Transformation Services help modernize systems, streamline workflows, and build digital capabilities that create lasting business value."
                 ctaText="Let's Talk"
                 ctaHref="/contact"
-                icon={Sparkles}
+                icon={<Sparkles className="w-4 h-4 text-cyan-400" />}
             />
 
             {/* Features Section - 4 Problems */}

@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { Box, Sparkles, Eye, Heart, Gem, Paintbrush, Code2, Users, Search, Layers, Monitor, Rocket, Award, Lightbulb, Settings, MessageSquare, Handshake } from "lucide-react";
@@ -183,7 +183,7 @@ export default function ThreeDWebsiteDevelopmentPage() {
                 description="Our 3D website development services help you create immersive, visually engaging, and interactive web experiences — from product visualization and virtual showrooms to 3D storytelling pages — built to be fast, intuitive, and performance-optimized."
                 ctaText="Let's Talk"
                 ctaHref="/contact"
-                icon={Box}
+                icon={<Box className="w-4 h-4 text-cyan-400" />}
             />
 
             {/* Features Section - 4 Problems */}

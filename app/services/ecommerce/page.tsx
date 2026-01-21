@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { ShoppingCart, Store, Building2, TrendingUp, Users, Search, Paintbrush, Code2, TestTube, Award, Zap, MessageSquare, Handshake, Target } from "lucide-react";
@@ -166,7 +166,7 @@ export default function EcommercePage() {
                 description="As a leading ecommerce development company, we specialize in creating high-performance online stores that drive sales and deliver exceptional customer experiences. Our custom ecommerce development solutions are designed to meet your unique business requirements, whether you're launching your first online store or scaling an enterprise platform."
                 ctaText="Let's Talk"
                 ctaHref="/contact"
-                icon={ShoppingCart}
+                icon={<ShoppingCart className="w-4 h-4 text-cyan-400" />}
             />
 
             {/* Features Section - Services we offer */}

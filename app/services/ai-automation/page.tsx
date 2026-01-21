@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { Brain, Cog, Database, TrendingUp, Zap, Sparkles, MessageSquare, BarChart3, Settings, Code2, Search, Layers, Rocket, Monitor, Award, Target, Shield, Building2, Handshake } from "lucide-react";
@@ -198,7 +198,7 @@ export default function AIAutomationPage() {
                 description="Our AI development services help you design and deploy practical AI, machine learning, and automation solutions that enhance decision-making, streamline operations, and drive growth — delivering secure, scalable, business-ready AI, not experimental prototypes."
                 ctaText="Let's Talk"
                 ctaHref="/contact"
-                icon={Brain}
+                icon={<Brain className="w-4 h-4 text-cyan-400" />}
             />
 
             {/* Features Section - 4 Problems */}

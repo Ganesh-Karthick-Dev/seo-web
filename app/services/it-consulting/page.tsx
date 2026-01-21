@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { Users, Target, Server, TrendingUp, Cog, Lightbulb, Building2, Settings, Layers, Search, Paintbrush, Code2, Rocket, Monitor, Award, Shield, MessageSquare, RefreshCw, Handshake } from "lucide-react";
@@ -165,7 +165,7 @@ export default function ITConsultingPage() {
                 description="We help businesses make smarter technology decisions, modernize legacy systems, streamline operations, and align IT strategy with real business outcomes — not just technical implementation."
                 ctaText="Let's Talk"
                 ctaHref="/contact"
-                icon={Users}
+                icon={<Users className="w-4 h-4 text-cyan-400" />}
             />
 
             {/* Features Section - 4 Problems */}

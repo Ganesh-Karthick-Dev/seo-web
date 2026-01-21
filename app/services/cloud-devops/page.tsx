@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { Cloud, Rocket, Server, RefreshCw, Layers, Search, Paintbrush, Code2, Monitor, Gauge, Award, Shield, MessageSquare, Zap, Handshake } from "lucide-react";
@@ -198,7 +198,7 @@ export default function CloudDevOpsPage() {
                 description="Our Cloud and DevOps engineering services help organizations modernize infrastructure, automate delivery pipelines, and build scalable cloud-native systems. We improve deployment reliability, accelerate release cycles, and optimize cloud operations — while ensuring stability and business continuity."
                 ctaText="Let's Talk"
                 ctaHref="/contact"
-                icon={Cloud}
+                icon={<Cloud className="w-4 h-4 text-cyan-400" />}
             />
 
             {/* Features Section - 4 Problems */}
