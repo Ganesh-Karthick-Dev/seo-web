@@ -283,40 +283,51 @@ export function IndustriesShowcaseSection() {
                             <div
                                 key={index}
                                 className={cn(
-                                    "group relative rounded-2xl bg-zinc-900/60 backdrop-blur-sm border border-white/[0.08] overflow-hidden",
+                                    "group relative rounded-2xl bg-zinc-900/60 backdrop-blur-sm border border-white/[0.08] overflow-visible",
                                     "hover:border-white/20 transition-all duration-500 cursor-pointer",
                                     "hover:scale-[1.02] hover:shadow-2xl",
                                     industry.borderGlow
                                 )}
                             >
+                                {/* Floating Icon - Appears on Hover (Top Center, Half Out, Tilted) */}
+                                <div className={cn(
+                                    "absolute -top-8 left-1/2 -translate-x-1/2 z-20",
+                                    "w-16 h-16 rounded-2xl flex items-center justify-center",
+                                    "bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/20",
+                                    "shadow-2xl shadow-black/50",
+                                    "opacity-0 scale-50 rotate-[-20deg] translate-y-8",
+                                    "group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-[-12deg] group-hover:translate-y-0",
+                                    "transition-all duration-500 ease-out"
+                                )}>
+                                    <Icon className={cn("w-8 h-8", industry.accentColor)} />
+                                </div>
+
+                                {/* Background Pulsing Icon - Hidden on Hover */}
+                                <div className={cn(
+                                    "absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden rounded-2xl",
+                                    "opacity-100 group-hover:opacity-0 transition-opacity duration-500"
+                                )}>
+                                    <Icon
+                                        className={cn(
+                                            "w-40 h-40 text-white/[0.08] animate-pulse",
+                                        )}
+                                        strokeWidth={0.5}
+                                    />
+                                </div>
+
                                 {/* Gradient Background */}
                                 <div
                                     className={cn(
-                                        "absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+                                        "absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl",
                                         industry.gradient
                                     )}
                                 />
 
                                 {/* Glossy Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none rounded-2xl" />
 
                                 {/* Content */}
                                 <div className="relative z-10 p-8 h-full flex flex-col">
-                                    {/* Icon */}
-                                    <div className={cn(
-                                        "w-14 h-14 rounded-xl flex items-center justify-center mb-6",
-                                        "bg-white/[0.05] border border-white/[0.08]",
-                                        "group-hover:bg-white/[0.08] group-hover:border-white/15 transition-all duration-300"
-                                    )}>
-                                        <Icon
-                                            className={cn(
-                                                "w-7 h-7 transition-all duration-300",
-                                                "text-white/70 group-hover:text-white",
-                                                `group-hover:${industry.accentColor}`
-                                            )}
-                                        />
-                                    </div>
-
                                     {/* Title */}
                                     <h3 className="text-xl font-semibold text-white mb-1 tracking-tight group-hover:text-white transition-colors duration-300">
                                         {industry.title}
