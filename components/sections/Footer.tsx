@@ -29,7 +29,7 @@ const industries = [
 ];
 
 const company = [
-    { name: "About Us", href: "/about" },
+    { name: "About Us", href: "/about-us" },
     { name: "Our Team", href: "/team" },
     { name: "Careers", href: "/careers" },
     { name: "Contact", href: "/contact" },

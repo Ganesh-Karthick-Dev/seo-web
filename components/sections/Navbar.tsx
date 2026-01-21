@@ -325,7 +325,7 @@ export function Navbar() {
 
                             {/* About Us - Standalone */}
                             <Link
-                                href="/about"
+                                href="/about-us"
                                 className="px-4 py-2 rounded-xl text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all duration-300"
                             >
                                 About Us
@@ -486,7 +486,7 @@ export function Navbar() {
                                     ))}
 
                                     <Link
-                                        href="/about"
+                                        href="/about-us"
                                         onClick={() => setMobileMenuOpen(false)}
                                         className="block p-3 rounded-xl font-medium text-white hover:bg-white/5 transition-colors"
                                     >
