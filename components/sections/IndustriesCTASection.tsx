@@ -140,17 +140,17 @@ export function IndustriesCTASection() {
                                                 </span>
                                                 <h3 className="pb-2 font-bold">
                                                     <span className="text-2xl md:text-4xl text-white leading-tight">
-                                                        Ready to transform your industry?
+                                                        Ready to Lead Your Industry?
                                                     </span>
                                                 </h3>
                                             </div>
                                             <p className="mb-6 text-neutral-400 text-sm leading-relaxed">
-                                                Partner with our engineering team to build scalable, future-ready solutions tailored for your business.
+                                                Don't let technical bottlenecks hold you back. Partner with an engineering team that delivers industry specific software solutions designed for your market's unique demands—built to scale, engineered to dominate.
                                             </p>
                                             <div className="flex flex-wrap gap-3">
                                                 <Link href="/contact">
                                                     <Button className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0 gap-2">
-                                                        Start Your Project
+                                                        Let's Talk
                                                         <ArrowRight className="w-4 h-4" />
                                                     </Button>
                                                 </Link>
