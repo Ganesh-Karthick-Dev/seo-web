@@ -64,7 +64,7 @@ export function IndustriesCTASection() {
                                 <Particles
                                     className="absolute inset-0 -z-10 opacity-10 transition-opacity duration-1000 ease-in-out group-hover/item:opacity-100"
                                     quantity={200}
-                                    color={"#f97316"}
+                                    color={"#06b6d4"}
                                     vy={-0.2}
                                 />
                                 <div className="flex justify-center">
@@ -75,7 +75,7 @@ export function IndustriesCTASection() {
                                             ref={scope}
                                         >
                                             {/* Center Logo */}
-                                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
+                                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center">
                                                 <Rocket className="w-8 h-8 text-white" />
                                             </div>
 
@@ -105,7 +105,7 @@ export function IndustriesCTASection() {
                                                 id="tag-1"
                                                 className="absolute right-12 top-10 rounded-full border border-white/20 bg-zinc-800/80 px-3 py-1.5 text-xs text-white opacity-50 backdrop-blur-sm flex items-center gap-2"
                                             >
-                                                <Lightbulb className="w-3 h-3 text-orange-400" />
+                                                <Lightbulb className="w-3 h-3 text-cyan-400" />
                                                 Consulting
                                             </div>
 
@@ -115,7 +115,7 @@ export function IndustriesCTASection() {
                                                     width="16.8"
                                                     height="18.2"
                                                     viewBox="0 0 12 13"
-                                                    className="fill-orange-500"
+                                                    className="fill-cyan-500"
                                                     stroke="white"
                                                     strokeWidth="1"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +126,7 @@ export function IndustriesCTASection() {
                                                         d="M12 5.50676L0 0L2.83818 13L6.30623 7.86537L12 5.50676V5.50676Z"
                                                     />
                                                 </svg>
-                                                <span className="relative -top-1 left-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-2 py-0.5 text-[10px] text-white font-medium">
+                                                <span className="relative -top-1 left-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-2 py-0.5 text-[10px] text-white font-medium">
                                                     Zylex
                                                 </span>
                                             </div>
@@ -135,7 +135,7 @@ export function IndustriesCTASection() {
                                         {/* Content Section */}
                                         <div className="-mt-16 flex h-full flex-col justify-center p-2 md:-mt-0 md:ml-10 md:w-[400px]">
                                             <div className="flex flex-col">
-                                                <span className="text-xs font-bold tracking-[0.2em] text-orange-500 uppercase mb-3">
+                                                <span className="text-xs font-bold tracking-[0.2em] text-cyan-500 uppercase mb-3">
                                                     Let&apos;s Build Together
                                                 </span>
                                                 <h3 className="pb-2 font-bold">
@@ -149,7 +149,7 @@ export function IndustriesCTASection() {
                                             </p>
                                             <div className="flex flex-wrap gap-3">
                                                 <Link href="/contact">
-                                                    <Button className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0 gap-2">
+                                                    <Button className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white border-0 gap-2">
                                                         Let's Talk
                                                         <ArrowRight className="w-4 h-4" />
                                                     </Button>

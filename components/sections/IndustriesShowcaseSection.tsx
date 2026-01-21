@@ -255,16 +255,16 @@ export function IndustriesShowcaseSection() {
             </div>
 
             {/* Ambient Glow Effects */}
-            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
             <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none" />
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header Section */}
                 <div ref={headerRef} className="mb-24 max-w-5xl">
                     <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-8">
-                        Industries Where We Fuel the Future <br />
+                        Industries We Serve <br />
                         <span className="text-neutral-500">
-                            We deliver industry specific software solutions that understand your market&apos;s unique demands.
+                            The industries where our services create the strongest business and operational impact.
                         </span>
                     </h2>
                     <p className="text-lg md:text-xl text-neutral-400 leading-relaxed">
@@ -363,6 +363,6 @@ export function IndustriesShowcaseSection() {
                     })}
                 </div>
             </div>
-        </section>
+        </section >
     );
 }

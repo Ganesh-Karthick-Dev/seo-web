@@ -104,9 +104,9 @@ export function CrossIndustryExpertiseSection() {
         >
             {/* Floating Orbs Background */}
             <div ref={floatingOrbsRef} className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute top-20 left-[10%] w-72 h-72 bg-gradient-to-br from-blue-500/20 to-purple-500/10 rounded-full blur-[80px]" />
-                <div className="absolute top-1/2 right-[5%] w-96 h-96 bg-gradient-to-br from-orange-500/15 to-rose-500/10 rounded-full blur-[100px]" />
-                <div className="absolute bottom-20 left-[30%] w-64 h-64 bg-gradient-to-br from-cyan-500/15 to-blue-500/10 rounded-full blur-[70px]" />
+                <div className="absolute top-20 left-[10%] w-72 h-72 bg-gradient-to-br from-blue-500/20 to-cyan-500/10 rounded-full blur-[80px]" />
+                <div className="absolute top-1/2 right-[5%] w-96 h-96 bg-gradient-to-br from-indigo-500/15 to-blue-500/10 rounded-full blur-[100px]" />
+                <div className="absolute bottom-20 left-[30%] w-64 h-64 bg-gradient-to-br from-cyan-500/15 to-teal-500/10 rounded-full blur-[70px]" />
             </div>
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -135,7 +135,7 @@ export function CrossIndustryExpertiseSection() {
                         <p className="text-xl md:text-2xl text-neutral-300 leading-relaxed font-light">
                             When you partner with Zylex for custom software for businesses, you get more than developers. You get
                             <span className="text-white font-medium"> engineers who understand</span> regulatory compliance, operational complexity, and the technical precision your industry demands. We don&apos;t just build software—
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400 font-medium">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 font-medium">
                                 we build competitive advantages
                             </span>.
                         </p>
@@ -155,10 +155,10 @@ export function CrossIndustryExpertiseSection() {
                             <div className="relative z-10 p-8 md:p-10">
                                 {/* Quote Section */}
                                 <div className="mb-10">
-                                    <div className="text-6xl text-orange-500/30 font-serif leading-none mb-4">&ldquo;</div>
+                                    <div className="text-6xl text-cyan-500/30 font-serif leading-none mb-4">&ldquo;</div>
                                     <p className="text-xl md:text-2xl text-white font-light leading-relaxed">
                                         We don&apos;t just build software—we build
-                                        <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400"> competitive advantages</span>.
+                                        <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400"> competitive advantages</span>.
                                     </p>
                                 </div>
 
@@ -186,15 +186,15 @@ export function CrossIndustryExpertiseSection() {
                             </div>
 
                             {/* Corner Accents */}
-                            <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-orange-500/30 to-transparent rounded-full blur-3xl" />
+                            <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-cyan-500/30 to-transparent rounded-full blur-3xl" />
                             <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl" />
                         </div>
 
                         {/* Floating Badge */}
                         <div className="absolute -top-4 -right-4 md:-top-6 md:-right-6 z-20">
                             <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl blur-lg opacity-50" />
-                                <div className="relative px-5 py-3 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl shadow-2xl">
+                                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl blur-lg opacity-50" />
+                                <div className="relative px-5 py-3 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl shadow-2xl">
                                     <span className="text-sm font-bold text-white uppercase tracking-wider">Proven Results</span>
                                 </div>
                             </div>
