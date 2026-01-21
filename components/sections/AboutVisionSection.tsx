@@ -163,11 +163,7 @@ export function AboutVisionSection() {
                                 ref={para1Ref}
                                 className="text-xl md:text-2xl text-neutral-300 leading-relaxed"
                             >
-                                That&apos;s why <span className="text-white font-semibold">Zylex exists</span>.
-                                We&apos;re a team of engineers, architects, and strategists who believe great software
-                                isn&apos;t just functional — it&apos;s <span className="text-cyan-400 font-semibold">reliable</span>,
-                                <span className="text-cyan-400 font-semibold"> scalable</span>, and
-                                <span className="text-white font-semibold"> built to evolve</span> with your business.
+                                Let&apos;s be honest: you&apos;ve seen too many projects start with big promises and end with fragile systems, missed deadlines, and code that&apos;s a nightmare to update. That&apos;s why <span className="text-white font-semibold">Zylex exists</span>.
                             </p>
 
                             {/* Paragraph 2 - with left border accent */}
@@ -176,11 +172,7 @@ export function AboutVisionSection() {
                                 className="border-l-2 border-cyan-500/40 pl-6"
                             >
                                 <p className="text-lg md:text-xl text-neutral-400 leading-relaxed">
-                                    We&apos;ve seen too many companies held back by fragile systems and partners
-                                    who prioritize speed over sustainability. So we built Zylex differently —
-                                    obsessed with <span className="text-cyan-400 font-medium">engineering excellence</span>,
-                                    <span className="text-cyan-400 font-medium"> transparent execution</span>, and
-                                    solutions designed for the <span className="text-white font-medium">long term</span>.
+                                    We&apos;re a technology solutions company built differently. As a team of engineers, architects, and strategists, we believe great software isn&apos;t just about &quot;getting it done&quot;—it&apos;s about <span className="text-cyan-400 font-medium">reliability</span>, <span className="text-cyan-400 font-medium">scale</span>, and actually moving the needle for your business. We built Zylex because we&apos;re obsessed with <span className="text-cyan-400 font-medium">engineering excellence</span>, <span className="text-cyan-400 font-medium">transparent execution</span>, and solutions designed for the <span className="text-white font-medium">long term</span>.
                                 </p>
                             </div>
                         </div>
@@ -197,11 +189,7 @@ export function AboutVisionSection() {
                                 <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-cyan-500/50" />
 
                                 <p className="text-xl md:text-2xl text-neutral-200 leading-relaxed font-medium">
-                                    Whether you&apos;re <span className="text-cyan-400">launching a product</span>,
-                                    <span className="text-cyan-400"> scaling a platform</span>, or
-                                    <span className="text-cyan-500"> modernizing legacy systems</span> —
-                                    we&apos;re here to turn <span className="underline decoration-cyan-500/50 decoration-2 underline-offset-4">ambitious visions</span> into
-                                    <span className="underline decoration-cyan-500/50 decoration-2 underline-offset-4"> reliable execution</span>.
+                                    As your technology partner, we don&apos;t just deliver projects—we build <span className="text-cyan-400">foundations</span> that evolve with your vision. Whether you need <span className="text-cyan-400">SaaS product development</span> that scales from launch to enterprise or <span className="text-cyan-500">mission-critical platforms</span> that handle millions of users, we engineer systems that survive the <span className="underline decoration-cyan-500/50 decoration-2 underline-offset-4">real world</span>.
                                 </p>
                             </div>
                         </div>

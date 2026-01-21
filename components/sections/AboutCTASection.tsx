@@ -209,13 +209,13 @@ export function AboutCTASection() {
                     {/* Headline */}
                     <div className="overflow-hidden mb-6">
                         <h2 ref={headlineRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">
-                            Ready to Build What Outperforms the Ordinary?
+                            Move From Fragile Systems to Lasting Stability.
                         </h2>
                     </div>
 
                     {/* Description */}
                     <p ref={descRef} className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed mb-10">
-                        Partner with us to shape your next digital milestone — through disciplined delivery, scalable architecture, and solutions engineered for real-world impact.
+                        You don&apos;t have to work around technical debt anymore. Partner with a technology solutions company that builds reliable, scalable foundations—ready for growth today and tomorrow.
                     </p>
 
                     {/* CTA Button Wrapper - Follows cursor freely */}

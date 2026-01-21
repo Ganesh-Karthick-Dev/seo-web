@@ -10,40 +10,40 @@ gsap.registerPlugin(ScrollTrigger);
 const values = [
     {
         icon: Gem,
-        title: "Engineering Excellence",
-        description: "We build for scale, performance, and longevity — not quick fixes that need constant rework.",
+        title: "Engineering Excellence (No Band-Aids)",
+        description: "We build for longevity and performance, not just the launch day. You get a solid foundation that handles 10x growth, not a quick fix that needs constant rework.",
         color: "text-cyan-500",
         bgColor: "bg-cyan-500/10",
         borderColor: "border-cyan-500/30",
     },
     {
         icon: Eye,
-        title: "Transparency First",
-        description: "Clear communication, honest timelines, and no hidden surprises. You always know where your project stands.",
-        color: "text-cyan-500",
-        bgColor: "bg-cyan-500/10",
-        borderColor: "border-cyan-500/30",
-    },
-    {
-        icon: Handshake,
-        title: "Long-Term Partnership",
-        description: "We don't disappear after launch. We stay invested in your success as your systems grow and evolve.",
+        title: "Transparency First (No Black Boxes)",
+        description: "You'll never have to wonder \"Where is it?\" We trade uncertainty for predictable sprints and clear communication, so you always know exactly where your project stands.",
         color: "text-cyan-500",
         bgColor: "bg-cyan-500/10",
         borderColor: "border-cyan-500/30",
     },
     {
         icon: Target,
-        title: "Outcome Over Output",
-        description: "We measure success by business impact — faster launches, smoother operations, and technology that drives growth.",
+        title: "Outcome Over Output (Result-Driven)",
+        description: "We don't just ship code; we solve business problems. As a digital solutions provider, we measure success by your impact—faster launches, smoother operations, and technology that fuels your growth.",
+        color: "text-cyan-500",
+        bgColor: "bg-cyan-500/10",
+        borderColor: "border-cyan-500/30",
+    },
+    {
+        icon: Handshake,
+        title: "Long-Term Partnership (We're In It With You)",
+        description: "We don't just \"hand over\" and disappear. We stay invested in your success, ensuring your systems evolve and thrive as your business reaches new milestones.",
         color: "text-cyan-500",
         bgColor: "bg-cyan-500/10",
         borderColor: "border-cyan-500/30",
     },
     {
         icon: ListChecks,
-        title: "Structured Execution",
-        description: "Disciplined processes, predictable milestones, and accountability at every stage of delivery.",
+        title: "Structured Execution (Enterprise Rigor, Startup Speed)",
+        description: "You get the professional discipline of a big consultancy with the energy and agility of a team that actually moves as fast as you do. As a software services firm, we combine enterprise-grade standards with startup velocity.",
         color: "text-cyan-500",
         bgColor: "bg-cyan-500/10",
         borderColor: "border-cyan-500/30",
@@ -143,7 +143,7 @@ export function AboutValuesSection() {
                 <div ref={titleRef} className="mb-20 max-w-4xl">
                     <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
                         What Drives Us <br />
-                        <span className="text-neutral-500">Our Core Values</span>
+                        <span className="text-neutral-500 text-3xl md:text-4xl block mt-4">The principles that keep your business moving forward.</span>
                     </h2>
                 </div>
 

@@ -265,6 +265,21 @@ export function AboutHeroSection() {
                         />
                     </div>
                 </div>
+
+                {/* Subtext */}
+                <p className="max-w-2xl mx-auto mt-8 text-lg text-neutral-400 leading-relaxed animate-fade-in-up delay-1000">
+                    You focus on the big picture. We&apos;ll build the engineering engine that makes it actually happen.
+                </p>
+
+                {/* CTA Button */}
+                <div className="mt-10 animate-fade-in-up delay-1200">
+                    <a
+                        href="/contact"
+                        className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-cyan-600 rounded-full hover:bg-cyan-500 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 focus:ring-offset-black"
+                    >
+                        Let&apos;s Talk
+                    </a>
+                </div>
             </div>
 
             {/* Scroll Indicator - Bottom Center */}
