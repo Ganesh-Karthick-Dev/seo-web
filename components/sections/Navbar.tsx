@@ -120,16 +120,16 @@ const industriesData = [
 // Resources data
 const resourcesData = [
     {
-        title: "Blog",
-        description: "Latest insights, tips, and industry news",
-        href: "/resources/blog",
+        title: "Navbar",
+        description: "View our navigation component",
+        href: "/resources/navbar",
         icon: BookOpen,
         gradient: "from-orange-500 to-amber-400"
     },
     {
-        title: "Case Studies",
-        description: "Success stories from our clients",
-        href: "/resources/case-studies",
+        title: "Footer",
+        description: "View our footer component",
+        href: "/resources/footer",
         icon: Briefcase,
         gradient: "from-amber-500 to-orange-400"
     },

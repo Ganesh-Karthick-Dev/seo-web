@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { MenuIcon, Building2, Users, Code2, Smartphone, ShoppingCart, Sparkles, Box, Bot, MessageSquare, Cloud, ChevronDown, Briefcase, Package, Shield, Layers } from 'lucide-react';
+import { MenuIcon, Building2, Users, Code2, Smartphone, ShoppingCart, Sparkles, Box, Bot, MessageSquare, Cloud, ChevronDown, Briefcase, Package, Shield, Layers, BookOpen } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Sheet, SheetContent, SheetFooter } from '@/components/ui/sheet';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -88,15 +88,35 @@ const productsData = [
     },
 ];
 
+// Resources data
+const resourcesData = [
+    {
+        id: 1,
+        icon: BookOpen,
+        title: "Navbar",
+        description: "View our navigation component",
+        href: "/resources/navbar",
+    },
+    {
+        id: 2,
+        icon: Briefcase,
+        title: "Footer",
+        description: "View our footer component",
+        href: "/resources/footer",
+    },
+];
+
 export function FloatingHeader() {
     const [open, setOpen] = React.useState(false);
     const [visible, setVisible] = useState(true);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [servicesOpen, setServicesOpen] = useState(false);
     const [productsOpen, setProductsOpen] = useState(false);
+    const [resourcesOpen, setResourcesOpen] = useState(false);
     const lastScrollY = useRef(0);
     const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const productsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -144,6 +164,19 @@ export function FloatingHeader() {
     const handleProductsMouseLeave = () => {
         productsTimeoutRef.current = setTimeout(() => {
             setProductsOpen(false);
+        }, 150);
+    };
+
+    const handleResourcesMouseEnter = () => {
+        if (resourcesTimeoutRef.current) {
+            clearTimeout(resourcesTimeoutRef.current);
+        }
+        setResourcesOpen(true);
+    };
+
+    const handleResourcesMouseLeave = () => {
+        resourcesTimeoutRef.current = setTimeout(() => {
+            setResourcesOpen(false);
         }, 150);
     };
 
@@ -417,6 +450,23 @@ export function FloatingHeader() {
                             </div>
                         </div>
                     </div>
+
+                    {/* Resources Link */}
+                    <Link href="/resources">
+                        <button
+                            className={cn(
+                                "flex items-center gap-1 px-3 py-2 rounded-full transition-colors duration-200 h-9",
+                                pathname.startsWith('/resources')
+                                    ? "bg-primary/10 text-primary"
+                                    : "text-muted-foreground hover:bg-muted",
+                            )}
+                        >
+                            <BookOpen size={18} strokeWidth={2} className="flex-shrink-0" />
+                            <span className="font-medium text-sm whitespace-nowrap select-none ml-2">
+                                Resources
+                            </span>
+                        </button>
+                    </Link>
 
                     {/* Other Links */}
                     {regularLinks.map((link, idx) => {
