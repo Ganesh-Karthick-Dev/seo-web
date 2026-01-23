@@ -161,7 +161,12 @@ const DropdownMenu = ({ items, isOpen, columns = 2 }: DropdownMenuProps) => {
                     className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50"
                 >
                     {/* Glassmorphic container */}
-                    <div className="relative p-2 rounded-2xl bg-neutral-900/95 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] max-h-[calc(100vh-120px)] overflow-y-auto overscroll-contain">
+                    <div
+                        data-lenis-prevent="true"
+                        onWheel={(e) => e.stopPropagation()}
+                        onTouchMove={(e) => e.stopPropagation()}
+                        className="relative p-2 rounded-2xl bg-neutral-900/95 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] max-h-[calc(100vh-120px)] overflow-y-auto overscroll-contain"
+                    >
                         {/* Orange gradient glow effect */}
                         <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/10 via-transparent to-amber-500/10 pointer-events-none" />
 

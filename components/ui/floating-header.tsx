@@ -261,7 +261,12 @@ export function FloatingHeader() {
                                 </div>
 
                                 {/* Services List */}
-                                <div className="px-2 py-3 max-h-[400px] overflow-y-auto">
+                                <div
+                                    className="px-2 py-3 max-h-[80vh] overflow-y-auto"
+                                    data-lenis-prevent="true"
+                                    onWheel={(e) => e.stopPropagation()}
+                                    onTouchMove={(e) => e.stopPropagation()}
+                                >
                                     <div className="space-y-1">
                                         {servicesData.map((service, index) => {
                                             const Icon = service.icon;
