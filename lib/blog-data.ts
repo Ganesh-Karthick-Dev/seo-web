@@ -36,6 +36,13 @@ export interface BlogPost {
             points: string[];
         };
     };
+    businessValue: {
+        title: string;
+        points: {
+            highlight: string;
+            description: string;
+        }[];
+    };
 }
 
 export const blogPosts: BlogPost[] = [
@@ -107,6 +114,27 @@ export const blogPosts: BlogPost[] = [
                     "One-click deployments"
                 ]
             }
+        },
+        businessValue: {
+            title: "Business Value",
+            points: [
+                {
+                    highlight: "40% faster development",
+                    description: "with AI-assisted coding reducing time spent on boilerplate and debugging"
+                },
+                {
+                    highlight: "Global performance",
+                    description: "with edge computing delivering sub-50ms latency to users worldwide"
+                },
+                {
+                    highlight: "Zero DevOps overhead",
+                    description: "thanks to automated infrastructure and one-click deployments"
+                },
+                {
+                    highlight: "Future-proof architecture",
+                    description: "built on modern standards that scale with your business needs"
+                }
+            ]
         }
     },
     {
@@ -177,6 +205,27 @@ export const blogPosts: BlogPost[] = [
                     "Automated metadata generation"
                 ]
             }
+        },
+        businessValue: {
+            title: "Business Value",
+            points: [
+                {
+                    highlight: "Increased organic traffic",
+                    description: "with search engines properly indexing all your content"
+                },
+                {
+                    highlight: "Better conversion rates",
+                    description: "from improved click-through rates and social media previews"
+                },
+                {
+                    highlight: "Reduced maintenance",
+                    description: "with automated metadata and sitemap generation"
+                },
+                {
+                    highlight: "Competitive advantage",
+                    description: "by outranking competitors still using client-side rendering"
+                }
+            ]
         }
     },
     {
@@ -247,6 +296,27 @@ export const blogPosts: BlogPost[] = [
                     "Delightful micro-animations"
                 ]
             }
+        },
+        businessValue: {
+            title: "Business Value",
+            points: [
+                {
+                    highlight: "Lower bounce rates",
+                    description: "with intuitive navigation and engaging micro-interactions"
+                },
+                {
+                    highlight: "Wider audience reach",
+                    description: "through WCAG-compliant accessible design"
+                },
+                {
+                    highlight: "Increased engagement",
+                    description: "with responsive, reactive UI elements"
+                },
+                {
+                    highlight: "Brand differentiation",
+                    description: "through modern, premium visual aesthetics"
+                }
+            ]
         }
     },
     {
@@ -317,6 +387,27 @@ export const blogPosts: BlogPost[] = [
                     "Excellent mobile experience"
                 ]
             }
+        },
+        businessValue: {
+            title: "Business Value",
+            points: [
+                {
+                    highlight: "98+ Lighthouse scores",
+                    description: "ensuring top performance rankings and better SEO"
+                },
+                {
+                    highlight: "Reduced bounce rates",
+                    description: "with sub-second load times keeping users engaged"
+                },
+                {
+                    highlight: "Lower bandwidth costs",
+                    description: "through automatic image optimization and code splitting"
+                },
+                {
+                    highlight: "Better mobile experience",
+                    description: "with optimized assets for all device types"
+                }
+            ]
         }
     }
 ];
