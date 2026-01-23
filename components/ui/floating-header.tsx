@@ -174,9 +174,9 @@ export function FloatingHeader() {
         >
             <nav className="mx-auto flex items-center justify-between p-1.5">
                 <Link href="/" className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 duration-100">
-                    <div className="relative w-28 h-8 overflow-hidden">
+                    <div className="relative w-32 h-10 overflow-hidden">
                         <Image
-                            src="/logo/crop_logo.webp"
+                            src="/logo/zylex-dark-caption.svg"
                             alt="Zylex Logo"
                             fill
                             className="object-contain"
@@ -473,7 +473,7 @@ export function FloatingHeader() {
                     })}
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 pr-3">
                     <Link href="/contact">
                         <Button size="sm">Let&apos;s Talk</Button>
                     </Link>

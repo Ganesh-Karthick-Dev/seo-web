@@ -287,12 +287,12 @@ export function Navbar() {
                     >
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-3 group">
-                            <div className="relative w-40 h-12 overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-300">
+                            <div className="relative w-44 h-14 overflow-hidden rounded-lg group-hover:scale-105 transition-transform duration-300">
                                 <Image
-                                    src="/logo/crop_logo.webp"
-                                    alt="SEOPro Logo"
+                                    src="/logo/zylex-dark-caption.svg"
+                                    alt="Zylex Logo"
                                     fill
-                                    className="object-contain invert mix-blend-screen"
+                                    className="object-contain"
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                             </div>
@@ -420,12 +420,12 @@ export function Navbar() {
                                 {/* Header */}
                                 <div className="flex items-center justify-between p-4 border-b border-white/10">
                                     <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                                        <div className="relative w-40 h-12 overflow-hidden rounded-lg">
+                                        <div className="relative w-36 h-12 overflow-hidden rounded-lg">
                                             <Image
-                                                src="/logo/crop_logo.webp"
-                                                alt="SEOPro Logo"
+                                                src="/logo/zylex-dark-caption.svg"
+                                                alt="Zylex Logo"
                                                 fill
-                                                className="object-contain invert mix-blend-screen"
+                                                className="object-contain"
                                             />
                                         </div>
 
