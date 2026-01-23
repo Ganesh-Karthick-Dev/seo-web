@@ -29,13 +29,11 @@ export interface BlogPost {
     beforeAfter: {
         before: {
             title: string;
-            description: string;
-            image?: string;
+            points: string[];
         };
         after: {
             title: string;
-            description: string;
-            image?: string;
+            points: string[];
         };
     };
 }
@@ -88,12 +86,26 @@ export const blogPosts: BlogPost[] = [
         },
         beforeAfter: {
             before: {
-                title: "Traditional Workflow",
-                description: "Manual optimization, slow builds, server management, and hours spent on boilerplate code. High latency for global users."
+                title: "Before",
+                points: [
+                    "Manual optimization requiring hours of work",
+                    "Slow builds taking 10+ minutes",
+                    "Server management and DevOps overhead",
+                    "Hours spent on boilerplate code",
+                    "High latency for global users",
+                    "Complex deployment pipelines"
+                ]
             },
             after: {
-                title: "Modern Workflow",
-                description: "AI-assisted coding, instant deployments to the edge, automatic optimization, and zero-config infrastructure. Near-instant load times."
+                title: "After",
+                points: [
+                    "AI-assisted coding reducing dev time by 40%",
+                    "Instant deployments to the edge",
+                    "Automatic optimization at build time",
+                    "Zero-config infrastructure",
+                    "Near-instant load times globally",
+                    "One-click deployments"
+                ]
             }
         }
     },
@@ -144,12 +156,26 @@ export const blogPosts: BlogPost[] = [
         },
         beforeAfter: {
             before: {
-                title: "Client-Side Rendering",
-                description: "Search engines see a blank page. Users wait for JS to load. Poor rankings and low organic traffic."
+                title: "Before",
+                points: [
+                    "Search engines see a blank page",
+                    "Users wait for JS to load",
+                    "Poor rankings in search results",
+                    "Low organic traffic",
+                    "No social media previews",
+                    "Manual meta tag management"
+                ]
             },
             after: {
-                title: "Next.js SSR/ISR",
-                description: "Search engines see full content instantly. Fast First Contentful Paint. Higher rankings and better click-through rates."
+                title: "After",
+                points: [
+                    "Search engines see full content instantly",
+                    "Fast First Contentful Paint",
+                    "Higher rankings and visibility",
+                    "Better click-through rates",
+                    "Rich social media previews",
+                    "Automated metadata generation"
+                ]
             }
         }
     },
@@ -200,12 +226,26 @@ export const blogPosts: BlogPost[] = [
         },
         beforeAfter: {
             before: {
-                title: "Static Interfaces",
-                description: "Flat, lifeless buttons. No feedback on clicks. Hard to read text. Users feel lost and leave."
+                title: "Before",
+                points: [
+                    "Flat, lifeless buttons with no feedback",
+                    "Hard to read text and poor contrast",
+                    "Users feel lost in the interface",
+                    "High bounce rates",
+                    "No accessibility support",
+                    "Static, unengaging designs"
+                ]
             },
             after: {
-                title: "Dynamic Experiences",
-                description: "Responsive elements that react to touch. Clear visual hierarchy. delightful animations. Users stay engaged."
+                title: "After",
+                points: [
+                    "Responsive elements that react to touch",
+                    "Clear visual hierarchy and readability",
+                    "Intuitive navigation flow",
+                    "Users stay engaged longer",
+                    "WCAG compliant accessibility",
+                    "Delightful micro-animations"
+                ]
             }
         }
     },
@@ -256,17 +296,29 @@ export const blogPosts: BlogPost[] = [
         },
         beforeAfter: {
             before: {
-                title: "Unoptimized Site",
-                description: "Lighthouse score: 45. 3s+ load time. Janky scrolling. Images load slowly layout shifts."
+                title: "Before",
+                points: [
+                    "Lighthouse score: 45",
+                    "3+ second load time",
+                    "Janky scrolling experience",
+                    "Images load slowly with layout shifts",
+                    "Large unoptimized bundles",
+                    "Poor mobile performance"
+                ]
             },
             after: {
-                title: "Optimized Next.js App",
-                description: "Lighthouse score: 98. <0.8s load time. Silky smooth interactions. Stable layout."
+                title: "After",
+                points: [
+                    "Lighthouse score: 98",
+                    "Sub-second load time",
+                    "Silky smooth interactions",
+                    "Stable layout with optimized images",
+                    "Route-based code splitting",
+                    "Excellent mobile experience"
+                ]
             }
         }
     }
-    // Note: Only updated first 4 for brevity as they are the ones displayed in the grid initially. 
-    // In a real app, all would need this structure.
 ];
 
 export function getAllBlogPosts() {
