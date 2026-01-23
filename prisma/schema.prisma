@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  excerpt   String
+  date      String
+  readTime  String
+  category  String
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Author
+  authorName   String
+  authorRole   String
+  authorAvatar String
+
+  // Pain Point Section
+  painPointTitle       String
+  painPointDescription String
+  painPointPoints      String[] // Array of strings
+
+  // Solution Section
+  solutionTitle       String
+  solutionDescription String
+  solutionFeatures    Json // Array of {title, description, icon}
+
+  // Before/After Section
+  beforeTitle  String
+  beforePoints String[] // Array of strings
+  afterTitle   String
+  afterPoints  String[] // Array of strings
+
+  // Business Value Section
+  businessValueTitle  String
+  businessValuePoints Json // Array of {highlight, description}
+
+  @@map("blog_posts")
+}
