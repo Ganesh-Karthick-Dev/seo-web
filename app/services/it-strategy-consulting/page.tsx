@@ -26,7 +26,7 @@ const features = [
     {
         icon: <Server className="w-full h-full" />,
         title: "The Complexity Trap (Operational Anchors)",
-        description: "Scale shouldn't feel like pulling teeth. We re-engineer your infrastructure architecture across cloud, hybrid, and on-prem environments—replacing 'reactive troubleshooting' with the unshakeable reliability your future-scale demands.",
+        description: "Scale shouldn't feel like pulling teeth. We re-engineer your infrastructure architecture across cloud, hybrid, and on-prem environments—replacing \"reactive troubleshooting\" with the unshakeable reliability your future-scale demands.",
     },
     {
         icon: <TrendingUp className="w-full h-full" />,
@@ -61,7 +61,7 @@ const deliveryPhases: CardData[] = [
         badgeText: "Phase 3",
         badgeColor: "#06B6D4", // Cyan
         title: "Implementation & Hardened Validation",
-        description: "We deploy in high-stakes phases, benchmarking every release against your requirements. We validate for performance and security, ensuring the 'breakthrough' is a stable reality in the real world.",
+        description: "We deploy in high-stakes phases, benchmarking every release against your requirements. We validate for performance and security, ensuring the \"breakthrough\" is a stable reality in the real world.",
         ctaText: "Validation →",
         ctaHref: "/contact",
         gradient: "cyan",
@@ -94,12 +94,12 @@ const whyPartnerBenefits = [
     {
         icon: <Award className="w-7 h-7" />,
         title: "Engineering Excellence as the North Star",
-        description: "Strategy must produce results, not just reports. We design IT roadmaps that support growth and revenue outcomes—not tools or trends. We focus on the high-stakes engineering that moves your business forward, so we don't have to have 'emergency meetings' about why the roadmap failed.",
+        description: "Strategy must produce results, not just reports. We design IT roadmaps that support growth and revenue outcomes—not tools or trends. We focus on the high-stakes engineering that moves your business forward, so we don't have to have \"emergency meetings\" about why the roadmap failed.",
     },
     {
         icon: <Shield className="w-7 h-7" />,
         title: "Hardened Expertise, Not Theoretical Advice",
-        description: "We bring the maturity of those who actually ship. Our technology and consulting expertise comes from hands-on experience in high-growth startups and complex enterprise landscapes. We don't just 'tell' you the path; we provide the engineering authority that comes from actually building the road.",
+        description: "We bring the maturity of those who actually ship. Our technology and consulting expertise comes from hands-on experience in high-growth startups and complex enterprise landscapes. We don't just \"tell\" you the path; we provide the engineering authority that comes from actually building the road.",
     },
     {
         icon: <MessageSquare className="w-7 h-7" />,
@@ -130,7 +130,7 @@ export default function ITConsultingPage() {
             <ServiceHeroSection
                 title="IT Strategy & Consulting: Stop Navigating Friction. Start Engineering Terminal Velocity."
                 subtitle="Your Vision Sets the Direction. We Engineer the Breakthrough."
-                description="Traditional consulting is just expensive overhead. We act as the engineering catalyst that transforms strategic debt into unshakeable growth engines. Our IT consulting services re-engineer your technical foundation to ensure you ship results, not apologies. From roadmap design to full-scale modernization—no technical noise, no 'it's complicated' excuses. Just absolute momentum."
+                description={'Traditional consulting is just expensive overhead. We act as the engineering catalyst that transforms strategic debt into unshakeable growth engines. Our IT consulting services re-engineer your technical foundation to ensure you ship results, not apologies. From roadmap design to full-scale modernization—no technical noise, no "it\'s complicated" excuses. Just absolute momentum.'}
                 ctaText="Let's Talk"
                 ctaHref="/contact"
                 icon={<Users className="w-4 h-4 text-cyan-400" />}
@@ -234,7 +234,7 @@ export default function ITConsultingPage() {
             <ServiceScrollSection
                 hue={200} // Cyan/Blue
                 title="The Engineering Blueprint: Structured for Precision"
-                titleHighlight="We skip the 'wait and see' approach. Every milestone is a hard step toward market dominance."
+                titleHighlight={'We skip the "wait and see" approach. Every milestone is a hard step toward market dominance.'}
                 description=""
                 cards={deliveryPhases}
             />
@@ -247,31 +247,31 @@ export default function ITConsultingPage() {
                     {
                         icon: <Award className="w-7 h-7" />,
                         title: "Engineering Excellence as the North Star",
-                        description: "Strategy must produce results, not just reports. We design IT roadmaps that support growth and revenue outcomes—not tools or trends. We focus on the high-stakes engineering that moves your business forward.",
+                        description: "Strategy must produce results, not just reports. We design IT roadmaps that support growth and revenue outcomes—not tools or trends. We focus on the high-stakes engineering that moves your business forward, so we don't have to have \"emergency meetings\" about why the roadmap failed.",
                         accent: "from-cyan-400 to-blue-600",
                     },
                     {
                         icon: <Shield className="w-7 h-7" />,
                         title: "Hardened Expertise, Not Theoretical Advice",
-                        description: "We bring the maturity of those who actually ship. Our technology and consulting expertise comes from hands-on experience in high-growth startups and complex enterprise landscapes.",
+                        description: "We bring the maturity of those who actually ship. Our technology and consulting expertise comes from hands-on experience in high-growth startups and complex enterprise landscapes. We don't just \"tell\" you the path; we provide the engineering authority that comes from actually building the road.",
                         accent: "from-cyan-400 to-sky-500",
                     },
                     {
                         icon: <MessageSquare className="w-7 h-7" />,
                         title: "Radical Transparency & Milestone-Driven Delivery",
-                        description: "Execution is the only metric that matters. We swap guesswork for predictable progress. You get absolute risk visibility and decision transparency at every phase.",
+                        description: "Execution is the only metric that matters. We swap guesswork for predictable progress. You get absolute risk visibility and decision transparency at every phase, ensuring everyone is aligned on the path to the breakthrough.",
                         accent: "from-blue-400 to-indigo-600",
                     },
                     {
                         icon: <RefreshCw className="w-7 h-7" />,
                         title: "Modernization Without the Disruption",
-                        description: "Dominance requires stability. We strengthen your infrastructure and processes without breaking the operations that drive your current success. We specialize in zero-disruption execution.",
+                        description: "Dominance requires stability. We strengthen your infrastructure and processes without breaking the operations that drive your current success. We specialize in zero-disruption execution—ensuring uptime and security are never sacrificed for speed.",
                         accent: "from-cyan-400 to-blue-500",
                     },
                     {
                         icon: <Handshake className="w-7 h-7" />,
                         title: "An Unshakeable Strategic Partnership",
-                        description: "We are your partners in growth, not just another vendor. We stay engaged beyond the plan to support implementation and optimization. Our IT consulting services build technical foundations that evolve and dominate as your business scales.",
+                        description: "We are your partners in growth, not just another vendor. We stay engaged beyond the plan to support implementation and optimization. Our IT consulting services build technical foundations that evolve and dominate as your business scales, because engineering is better when both teams are on the same side.",
                         accent: "from-sky-400 to-blue-600",
                     },
                 ]}
