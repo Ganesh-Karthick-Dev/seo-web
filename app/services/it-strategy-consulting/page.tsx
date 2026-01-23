@@ -7,6 +7,7 @@ import { ServiceFeaturesSection } from "@/components/sections/ServiceFeaturesSec
 import { ServiceProcessSection } from "@/components/sections/ServiceProcessSection";
 import { ServiceCTASection } from "@/components/sections/ServiceCTASection";
 import { ServiceScrollSection } from "@/components/sections/ServiceScrollSection";
+import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { CardData } from "@/components/ui/scroll-hero-section";
 
@@ -142,81 +143,94 @@ export default function ITConsultingPage() {
                 features={features}
             />
 
-            {/* Services Section - Core Capabilities */}
-            <section className="relative py-24 md:py-32 px-4 md:px-6 lg:px-8 bg-black overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
-
-                <div className="max-w-[90rem] mx-auto relative z-10">
-                    <div className="mb-16 md:mb-20 max-w-5xl">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
-                            Hardened Consulting Capabilities: Built for the Breakthrough
-                        </h2>
-                        <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl">
-                            We don't just "build plans"—we engineer the unshakeable architecture that secures your future.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Service 1 - Strategy & Advisory */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6">
-                                <Lightbulb className="w-7 h-7" />
+            {/* Process Section - Core Capabilities (Refactored) */}
+            <ServiceProcessSection
+                title="Hardened Consulting Capabilities"
+                titleHighlight="Built for the Breakthrough"
+                processData={[
+                    {
+                        title: "01",
+                        content: (
+                            <div className="pb-10">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
+                                        <Lightbulb className="w-6 h-6" />
+                                    </div>
+                                    <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
+                                        Strategic Advisory & Roadmap Engineering
+                                    </h4>
+                                </div>
+                                <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
+                                    <strong className="text-white">Secure Your Competitive Advantage.</strong> We design high-stakes IT strategies built for the real world. Our it strategy and consulting approach delivers technical due diligence, digital transformation blueprints, and vendor evaluations—ensuring your IT investments directly support revenue, scalability, and absolute outcome certainty.
+                                </p>
                             </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
-                                Strategic Advisory & Roadmap Engineering
-                            </h3>
-                            <p className="text-neutral-500 text-sm mb-4">Secure Your Competitive Advantage</p>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                We design high-stakes IT strategies built for the real world. Our it strategy and consulting approach delivers technical due diligence, digital transformation blueprints, and vendor evaluations—ensuring your IT investments directly support revenue, scalability, and absolute outcome certainty.
-                            </p>
-                        </div>
-
-                        {/* Service 2 - Enterprise IT Consulting */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6">
-                                <Building2 className="w-7 h-7" />
+                        ),
+                    },
+                    {
+                        title: "02",
+                        content: (
+                            <div className="pb-10">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
+                                        <Building2 className="w-6 h-6" />
+                                    </div>
+                                    <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
+                                        Enterprise Architecture & Operational Hardening
+                                    </h4>
+                                </div>
+                                <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
+                                    <strong className="text-white">Engineering Unshakeable Foundations.</strong> We evaluate the gaps, destroy the redundancies, and define a target-state architecture that survives the real world. We simplify your systems so your vision has the room it needs to dominate, not just "exist."
+                                </p>
                             </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 group-hover:text-cyan-100 transition-colors">
-                                Enterprise Architecture & Operational Hardening
-                            </h3>
-                            <p className="text-neutral-500 text-sm mb-4">Engineering Unshakeable Foundations</p>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                We evaluate the gaps, destroy the redundancies, and define a target-state architecture that survives the real world. We simplify your systems so your vision has the room it needs to dominate, not just "exist."
-                            </p>
-                        </div>
-
-                        {/* Service 3 - IT Infrastructure & Operations */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
-                                <Server className="w-7 h-7" />
+                        ),
+                    },
+                    {
+                        title: "03",
+                        content: (
+                            <div className="pb-10">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
+                                        <Server className="w-6 h-6" />
+                                    </div>
+                                    <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
+                                        Infrastructural Certainty & Cloud Modernization
+                                    </h4>
+                                </div>
+                                <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
+                                    <strong className="text-white">Architectures Built for Heroic Scale.</strong> We identify the gaps across your network, compute, and security layers. We build the resilient, high-performance environments that allow you to move faster than the market—ensuring your operations are unshakeable.
+                                </p>
                             </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 group-hover:text-blue-100 transition-colors">
-                                Infrastructural Certainty & Cloud Modernization
-                            </h3>
-                            <p className="text-neutral-500 text-sm mb-4">Architectures Built for Heroic Scale</p>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                We identify the gaps across your network, compute, and security layers. We build the resilient, high-performance environments that allow you to move faster than the market—ensuring your operations are unshakeable.
-                            </p>
-                        </div>
-
-                        {/* Service 4 - IT Process Consulting */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-violet-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 mb-6">
-                                <Settings className="w-7 h-7" />
+                        ),
+                    },
+                    {
+                        title: "04",
+                        content: (
+                            <div className="pb-10">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
+                                        <Settings className="w-6 h-6" />
+                                    </div>
+                                    <h4 className="text-xl md:text-2xl font-bold text-white" style={{ transformStyle: "preserve-3d" }}>
+                                        Execution Discipline & Process Optimization
+                                    </h4>
+                                </div>
+                                <p className="text-neutral-400 text-base md:text-lg leading-relaxed">
+                                    <strong className="text-white">Improve Delivery Velocity across the Team.</strong> We skip the "it's complicated" narrative. From ITSM optimization to DevOps enablement, we harden your delivery speed and team coordination—ensuring every release is a stable, disruption-free step toward your next milestone.
+                                </p>
                             </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 group-hover:text-violet-100 transition-colors">
-                                Execution Discipline & Process Optimization
-                            </h3>
-                            <p className="text-neutral-500 text-sm mb-4">Improve Delivery Velocity across the Team</p>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                We skip the "it's complicated" narrative. From ITSM optimization to DevOps enablement, we harden your delivery speed and team coordination—ensuring every release is a stable, disruption-free step toward your next milestone.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        ),
+                    },
+                ]}
+            />
 
-            {/* Delivery Framework - ServiceScrollSection with custom phases */}
+            {/* Mid-page CTA */}
+            <ServiceCTASection
+                title="Get the engineering powerhouse your vision deserves."
+                primaryButtonText="Let's Talk"
+                primaryButtonHref="/contact"
+            />
+
+            {/* Delivery Framework - ServiceScrollSection */}
             <ServiceScrollSection
                 hue={200} // Cyan/Blue
                 title="The Engineering Blueprint: Structured for Precision"
@@ -225,43 +239,43 @@ export default function ITConsultingPage() {
                 cards={deliveryPhases}
             />
 
-            {/* Why Partner Section - 5 Points */}
-            <section className="w-full py-24 lg:py-32 bg-black relative overflow-hidden">
-                <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
-                </div>
-
-                <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">
-                    <div className="mb-16 max-w-4xl">
-                        <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
-                            Why Partner with Zylex for IT Strategy
-                        </h2>
-                        <p className="text-neutral-400 text-lg mt-4">
-                            Because your roadmap shouldn't require a leap of faith.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {whyPartnerBenefits.map((benefit, index) => (
-                            <div
-                                key={index}
-                                className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500"
-                            >
-                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white mb-6">
-                                    {benefit.icon}
-                                </div>
-                                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
-                                    {benefit.title}
-                                </h3>
-                                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                    {benefit.description}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            {/* Why Choose Us Section (Refactored) */}
+            <WhyChooseUsSection
+                title="Why Partner with Zylex for IT Strategy"
+                titleHighlight="Because your roadmap shouldn't require a leap of faith."
+                benefits={[
+                    {
+                        icon: <Award className="w-7 h-7" />,
+                        title: "Engineering Excellence as the North Star",
+                        description: "Strategy must produce results, not just reports. We design IT roadmaps that support growth and revenue outcomes—not tools or trends. We focus on the high-stakes engineering that moves your business forward.",
+                        accent: "from-cyan-400 to-blue-600",
+                    },
+                    {
+                        icon: <Shield className="w-7 h-7" />,
+                        title: "Hardened Expertise, Not Theoretical Advice",
+                        description: "We bring the maturity of those who actually ship. Our technology and consulting expertise comes from hands-on experience in high-growth startups and complex enterprise landscapes.",
+                        accent: "from-cyan-400 to-sky-500",
+                    },
+                    {
+                        icon: <MessageSquare className="w-7 h-7" />,
+                        title: "Radical Transparency & Milestone-Driven Delivery",
+                        description: "Execution is the only metric that matters. We swap guesswork for predictable progress. You get absolute risk visibility and decision transparency at every phase.",
+                        accent: "from-blue-400 to-indigo-600",
+                    },
+                    {
+                        icon: <RefreshCw className="w-7 h-7" />,
+                        title: "Modernization Without the Disruption",
+                        description: "Dominance requires stability. We strengthen your infrastructure and processes without breaking the operations that drive your current success. We specialize in zero-disruption execution.",
+                        accent: "from-cyan-400 to-blue-500",
+                    },
+                    {
+                        icon: <Handshake className="w-7 h-7" />,
+                        title: "An Unshakeable Strategic Partnership",
+                        description: "We are your partners in growth, not just another vendor. We stay engaged beyond the plan to support implementation and optimization. Our IT consulting services build technical foundations that evolve and dominate as your business scales.",
+                        accent: "from-sky-400 to-blue-600",
+                    },
+                ]}
+            />
 
             {/* Blog Section - Resources */}
             <BlogSection />

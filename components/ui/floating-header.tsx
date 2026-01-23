@@ -59,7 +59,7 @@ const servicesData = [
         icon: MessageSquare,
         title: "IT Consulting",
         description: "Strategic IT guidance to optimize your technology investments",
-        href: "/services/it-consulting",
+        href: "/services/it-strategy-consulting",
     },
     {
         id: 8,
