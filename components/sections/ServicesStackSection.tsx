@@ -3,18 +3,9 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-    Code2,
-    Smartphone,
-    Box,
-    RefreshCw,
-    ShoppingBag,
-    Bot,
-    Cloud,
-    Lightbulb,
-    ArrowRight
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -24,56 +15,56 @@ const services = [
         title: "Custom Software Development",
         description: "We deliver software development services built exactly for your business—secure, scalable, and completely yours. No trying to fit a square peg in a round hole.",
         cta: "Build Something Real",
-        icon: Code2,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=800&fit=crop",
         gradient: "from-blue-500/20 to-cyan-500/5"
     },
     {
         title: "Web & Mobile Apps",
         description: "Our custom web and mobile app development creates experiences that don't just function—they feel great to use. Fast, intuitive interfaces that your customers will actually love.",
         cta: "Start Your App Journey",
-        icon: Smartphone,
+        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=800&fit=crop",
         gradient: "from-blue-500/20 to-cyan-500/5"
     },
     {
         title: "3D Web Experiences",
         description: "Why be flat? We specialize in custom 3D website development services that grab attention and make your brand unforgettable in a crowded market.",
         cta: "Enter the 3D Dimension",
-        icon: Box,
+        image: "https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=600&h=800&fit=crop",
         gradient: "from-purple-500/20 to-pink-500/5"
     },
     {
         title: "App Modernization & Digital Transformation",
         description: "Need to upgrade without shutting down? We rebuild and improve your old systems while keeping your business running smoothly.",
         cta: "Turn Legacy Chaos Into Structure",
-        icon: RefreshCw,
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=800&fit=crop",
         gradient: "from-green-500/20 to-emerald-500/5"
     },
     {
         title: "E-commerce Solutions",
         description: "Sell without the stress. We build platforms that handle your biggest sales days without blinking.",
         cta: "Grow Your Commerce Business",
-        icon: ShoppingBag,
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=800&fit=crop",
         gradient: "from-red-500/20 to-blue-500/5"
     },
     {
         title: "AI and Automation",
         description: "Forget the hype. Our AI and software development approach automates the boring stuff and finds real opportunities in your data that save you money.",
         cta: "Get Smarter",
-        icon: Bot,
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=800&fit=crop",
         gradient: "from-indigo-500/20 to-violet-500/5"
     },
     {
         title: "Cloud & DevOps",
         description: "Make release day boring. We automate your updates so you can ship faster and safer, without the panic.",
         cta: "Make Release Day Boring Again",
-        icon: Cloud,
+        image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&h=800&fit=crop",
         gradient: "from-sky-500/20 to-blue-500/5"
     },
     {
         title: "Strategic IT Consulting",
         description: "We don't just take orders; we help you validate them. Get honest technical advice that protects your budget and keeps you on the right track.",
         cta: "Get Expert Opinion",
-        icon: Lightbulb,
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=800&fit=crop",
         gradient: "from-yellow-500/20 to-cyan-500/5"
     }
 ];
@@ -153,10 +144,6 @@ export function ServicesStackSection() {
 
                                 {/* Content Side */}
                                 <div className="relative z-10 flex-1 p-8 md:p-12 flex flex-col justify-center">
-                                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                                        <service.icon className="w-7 h-7 text-white" />
-                                    </div>
-
                                     <h3 className="text-3xl font-bold text-white mb-4">
                                         {service.title}
                                     </h3>
@@ -173,34 +160,24 @@ export function ServicesStackSection() {
                                     </Link>
                                 </div>
 
-                                {/* Visual Side (Hero Icon) */}
+                                {/* Visual Side (Image) */}
                                 <div className={cn(
-                                    "relative w-full md:w-1/3 bg-white/5 overflow-hidden hidden md:flex items-center justify-center group-hover:bg-white/10 transition-colors duration-500",
+                                    "relative w-full md:w-1/3 overflow-hidden hidden md:flex items-center justify-center",
                                     index % 2 === 1 ? "border-r border-white/5" : "border-l border-white/5"
                                 )}>
+                                    {/* Image */}
+                                    <Image
+                                        src={service.image}
+                                        alt={service.title}
+                                        fill
+                                        className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                                    />
 
-                                    {/* Background Decor */}
-                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-50" />
-                                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
-
-                                    {/* Animated Rings */}
-                                    <div className="absolute w-64 h-64 rounded-full border border-white/5 animate-[spin_10s_linear_infinite]" />
-                                    <div className="absolute w-48 h-48 rounded-full border border-white/10 animate-[spin_15s_linear_infinite_reverse]" />
-
-                                    {/* Large Hero Icon */}
-                                    <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
-                                        <div className={cn(
-                                            "absolute inset-0 blur-2xl opacity-30 bg-gradient-to-tr",
-                                            service.gradient
-                                        )} />
-                                        <service.icon
-                                            strokeWidth={1}
-                                            className={cn(
-                                                "w-32 h-32 drop-shadow-2xl",
-                                                "text-white/90"
-                                            )}
-                                        />
-                                    </div>
+                                    {/* Overlay gradient */}
+                                    <div className={cn(
+                                        "absolute inset-0 bg-gradient-to-r opacity-60",
+                                        index % 2 === 1 ? "from-transparent to-zinc-900" : "from-zinc-900 to-transparent"
+                                    )} />
                                 </div>
 
                             </div>
