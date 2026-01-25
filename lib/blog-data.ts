@@ -1,4 +1,5 @@
 import { prisma } from './prisma';
+import type { BlogPost as PrismaBlogPost } from '@prisma/client';
 
 export interface BlogPost {
     id: string;
@@ -52,7 +53,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         orderBy: { createdAt: 'desc' },
     });
 
-    return posts.map(post => ({
+    return posts.map((post: PrismaBlogPost) => ({
         id: post.id,
         title: post.title,
         slug: post.slug,

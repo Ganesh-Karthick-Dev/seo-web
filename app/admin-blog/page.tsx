@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, Trash2, Edit2, Save, X, Sparkles } from "lucide-react";
+import { Plus, Trash2, Edit2, Save, X, Sparkles, Wand2 } from "lucide-react";
 
 interface BlogPost {
     id: string;
@@ -55,6 +55,54 @@ const emptyPost: Omit<BlogPost, "id" | "createdAt" | "updatedAt"> = {
     afterPoints: [""],
     businessValueTitle: "Business Value",
     businessValuePoints: [{ highlight: "", description: "" }],
+};
+
+// Professional sample data for Dev Fill button
+const samplePost: Omit<BlogPost, "id" | "createdAt" | "updatedAt"> = {
+    title: "How AI-Powered Automation Transforms Business Operations",
+    slug: "ai-powered-automation-transforms-business",
+    excerpt: "Discover how modern AI automation solutions are revolutionizing business workflows, reducing manual tasks by up to 80%, and delivering unprecedented ROI for forward-thinking organizations.",
+    date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+    readTime: "8 min read",
+    category: "AI & Automation",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    authorName: "Zylex Team",
+    authorRole: "Technology Experts",
+    authorAvatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150",
+    painPointTitle: "The Manual Work Trap",
+    painPointDescription: "Businesses are drowning in repetitive tasks that drain resources and limit growth potential. Teams spend countless hours on work that could be automated.",
+    painPointPoints: [
+        "Teams waste 40+ hours weekly on repetitive data entry and processing tasks",
+        "Human errors cost organizations an average of $12.9 million annually in data quality issues",
+        "Slow response times frustrate customers and lead to 67% higher churn rates"
+    ],
+    solutionTitle: "Intelligent Automation Excellence",
+    solutionDescription: "Our AI-powered automation platform learns your workflows, adapts to your needs, and scales seamlessly as your business grows.",
+    solutionFeatures: [
+        { title: "Smart Process Mining", description: "AI analyzes your existing workflows to identify automation opportunities with the highest ROI potential", icon: "Bot" },
+        { title: "No-Code Automation Builder", description: "Create powerful automations without writing a single line of code using our visual workflow designer", icon: "Zap" },
+        { title: "Real-Time Analytics", description: "Monitor performance, track savings, and optimize automations with comprehensive dashboards", icon: "Eye" }
+    ],
+    beforeTitle: "Before Automation",
+    beforePoints: [
+        "Manual data entry consuming 15+ hours per week",
+        "Inconsistent processes leading to frequent errors",
+        "Slow customer response times averaging 24+ hours",
+        "Limited scalability due to workforce constraints"
+    ],
+    afterTitle: "After Automation",
+    afterPoints: [
+        "80% reduction in manual processing time",
+        "99.9% accuracy in automated workflows",
+        "Average customer response time under 5 minutes",
+        "Unlimited scalability without additional headcount"
+    ],
+    businessValueTitle: "Measurable Business Impact",
+    businessValuePoints: [
+        { highlight: "300% ROI", description: "achieved within the first year of implementation across our client base" },
+        { highlight: "85% reduction", description: "in operational costs for routine business processes" },
+        { highlight: "50% faster", description: "time-to-market for new products and services" }
+    ],
 };
 
 export default function AdminBlogPage() {
@@ -232,6 +280,14 @@ export default function AdminBlogPage() {
                                             >
                                                 <Sparkles className="w-4 h-4" />
                                                 {aiGenerating ? "Generating..." : "AI Generate"}
+                                            </Button>
+                                            <Button
+                                                type="button"
+                                                onClick={() => setCurrentPost({ ...currentPost.id ? { id: currentPost.id } : {}, ...samplePost })}
+                                                className="gap-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shrink-0"
+                                            >
+                                                <Wand2 className="w-4 h-4" />
+                                                Dev Fill
                                             </Button>
                                         </div>
                                     </div>
