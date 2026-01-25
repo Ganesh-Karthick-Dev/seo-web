@@ -319,9 +319,7 @@ export default function Contact() {
                                                 />
                                             </div>
 
-                                            <p className="text-sm text-neutral-500 mt-4 text-center">
-                                                💡 Tip: Replace the Calendly URL with your actual Calendly link in the code
-                                            </p>
+
                                         </div>
                                     ) : (
                                         <div>
