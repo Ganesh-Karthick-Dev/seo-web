@@ -9,10 +9,16 @@ import { Button } from "@/components/ui/button";
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-    const posts = await getAllBlogPosts();
-    return posts.map((post) => ({
-        slug: post.slug,
-    }));
+    try {
+        const posts = await getAllBlogPosts();
+        return posts.map((post) => ({
+            slug: post.slug,
+        }));
+    } catch (error) {
+        // Database not accessible during build - pages will be generated on-demand
+        console.warn('generateStaticParams: Database not accessible, skipping static generation');
+        return [];
+    }
 }
 
 interface BlogPostPageProps {
