@@ -452,21 +452,55 @@ export function FloatingHeader() {
                     </div>
 
                     {/* Resources Link */}
-                    <Link href="/resources">
-                        <button
-                            className={cn(
-                                "flex items-center gap-1 px-3 py-2 rounded-full transition-colors duration-200 h-9",
-                                pathname.startsWith('/resources')
-                                    ? "bg-primary/10 text-primary"
-                                    : "text-muted-foreground hover:bg-muted",
-                            )}
-                        >
-                            <BookOpen size={18} strokeWidth={2} className="flex-shrink-0" />
-                            <span className="font-medium text-sm whitespace-nowrap select-none ml-2">
-                                Resources
-                            </span>
-                        </button>
-                    </Link>
+                    {(() => {
+                        const isResourcesActive = pathname.startsWith('/resources');
+                        const isResourcesHovered = hoveredIndex === -1;
+                        const showResourcesLabel = isResourcesActive || isResourcesHovered;
+                        
+                        return (
+                            <Link
+                                href="/resources"
+                                onMouseEnter={() => setHoveredIndex(-1)}
+                                onMouseLeave={() => setHoveredIndex(null)}
+                                className={cn(
+                                    "flex items-center gap-0 px-3 py-2 rounded-full transition-colors duration-200 relative h-9",
+                                    isResourcesActive
+                                        ? "bg-primary/10 text-primary"
+                                        : "text-muted-foreground hover:bg-muted",
+                                )}
+                            >
+                                <BookOpen
+                                    size={18}
+                                    strokeWidth={2}
+                                    aria-hidden
+                                    className="transition-colors duration-200 flex-shrink-0"
+                                />
+                                <motion.div
+                                    initial={false}
+                                    animate={{
+                                        width: showResourcesLabel ? "auto" : "0px",
+                                        opacity: showResourcesLabel ? 1 : 0,
+                                        marginLeft: showResourcesLabel ? "8px" : "0px",
+                                    }}
+                                    transition={{
+                                        width: { type: "spring", stiffness: 350, damping: 32 },
+                                        opacity: { duration: 0.15 },
+                                        marginLeft: { duration: 0.15 },
+                                    }}
+                                    className="overflow-hidden flex items-center"
+                                >
+                                    <span
+                                        className={cn(
+                                            "font-medium text-sm whitespace-nowrap select-none",
+                                            isResourcesActive ? "text-primary" : "text-foreground",
+                                        )}
+                                    >
+                                        Resources
+                                    </span>
+                                </motion.div>
+                            </Link>
+                        );
+                    })()}
 
                     {/* Other Links */}
                     {regularLinks.map((link, idx) => {
