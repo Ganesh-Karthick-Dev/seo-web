@@ -215,6 +215,39 @@ export function HowWeWorkSection() {
                     },
                 }
             );
+
+            // CTA Button color transition
+            const ctaButton = ctaRef.current?.querySelector(".cta-button");
+            const ctaText = ctaRef.current?.querySelector(".cta-text");
+
+            if (ctaButton) {
+                gsap.to(ctaButton, {
+                    borderColor: "#171717",
+                    backgroundColor: "transparent",
+                    duration: 0.8,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 60%",
+                        end: "bottom 40%",
+                        toggleActions: "play reverse play reverse",
+                    },
+                });
+            }
+
+            if (ctaText) {
+                gsap.to(ctaText, {
+                    color: "#171717",
+                    duration: 0.8,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 60%",
+                        end: "bottom 40%",
+                        toggleActions: "play reverse play reverse",
+                    },
+                });
+            }
         }, containerRef);
 
         return () => ctx.revert();
@@ -291,11 +324,10 @@ export function HowWeWorkSection() {
                 <div ref={ctaRef} className="flex justify-center pt-8">
                     <Link
                         href="/contact"
-                        className="group relative flex h-14 items-center justify-center gap-2 rounded-full overflow-hidden bg-blue-600 px-10 text-white font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+                        className="cta-button group relative flex h-14 items-center justify-center gap-2 rounded-full px-10 font-medium transition-all hover:scale-105 border-2 border-white text-white bg-transparent"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500" />
-                        <span className="relative z-10 flex items-center gap-2 text-lg">
-                            Let's Talk
+                        <span className="cta-text relative z-10 flex items-center gap-2 text-lg">
+                            Let&apos;s Talk
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </Link>

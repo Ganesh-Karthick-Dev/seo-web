@@ -192,7 +192,7 @@ export function CTASection() {
                 style={{ willChange: "transform" }}
             >
                 <img
-                    src="/aboutus/19852073_6186486.webp"
+                    src="/home/cta-bg.jpg"
                     alt=""
                     className="w-full h-full object-cover"
                 />
