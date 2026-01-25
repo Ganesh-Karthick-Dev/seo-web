@@ -176,7 +176,7 @@ export function NeonOrbs() {
                         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-br from-slate-200 to-slate-400 bg-clip-text text-transparent">
                             Accelerate Beyond Manual Workflows
                         </h1>
-                        <p className="text-lg sm:text-xl md:text-2xl font-light max-w-2xl mx-auto text-slate-400 mb-8 text-justify">
+                        <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-2xl mx-auto text-slate-400 mb-8 text-justify leading-relaxed">
                             Your vision is too ambitious to be slowed by manual work. We engineer AI-driven systems that give your growth unshakeable stability. By automating the noise, we empower you to lead with absolute certainty while your team focuses on the only metric that matters: customer mastery.
                         </p>
                         <a
