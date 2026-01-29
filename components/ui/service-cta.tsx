@@ -18,8 +18,8 @@ export function ServiceCTA({
     description = "Schedule a free consultation to discuss your project requirements and explore how we can help.",
     primaryButtonText = "Start Your Project",
     primaryButtonHref = "/contact",
-    secondaryButtonText = "View Case Studies",
-    secondaryButtonHref = "/case-studies",
+    secondaryButtonText,
+    secondaryButtonHref,
 }: ServiceCTAProps) {
     return (
         <div className="relative mx-auto flex w-full max-w-4xl flex-col justify-between gap-y-8 border-y border-white/10 bg-[radial-gradient(50%_80%_at_50%_0%,rgba(6,182,212,0.1),transparent)] px-6 md:px-12 py-12 md:py-16">
