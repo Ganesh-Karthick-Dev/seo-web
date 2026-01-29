@@ -10,7 +10,7 @@ import { BlogSection } from "@/components/sections/BlogSection";
 import { WhyChooseSection } from "@/components/sections/WhyChooseSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { Testimonial } from "@/components/ui/design-testimonial";
-import { NeonOrbs } from "@/components/ui/neon-orbs";
+import ParticleEffectHero from "@/components/ui/particle-effect-for-hero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,8 +67,12 @@ export default function Home() {
         style={{ backgroundColor: "#000000" }}
       />
 
-      {/* Hero Section with Neon Orbs */}
-      <NeonOrbs />
+      {/* Hero Section with Particle Effect (Moved from Industries) */}
+      <ParticleEffectHero
+        subtitle="High-Performance Engineering. Unstoppable Business Velocity."
+        title="Accelerate Beyond Manual Workflows"
+        description="Your vision is too ambitious to be slowed by manual work. We engineer AI-driven systems that give your growth unshakeable stability. By automating the noise, we empower you to lead with absolute certainty while your team focuses on the only metric that matters: customer mastery."
+      />
 
       {/* Challenges Section */}
       <ChallengesSection />

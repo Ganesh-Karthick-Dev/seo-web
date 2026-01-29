@@ -377,28 +377,45 @@ const Navigation: React.FC = () => {
     )
 }
 
-const HeroContent: React.FC = () => {
+interface ParticleEffectHeroProps {
+    subtitle: string;
+    title: string;
+    description: string;
+    buttonText?: string;
+    buttonHref?: string;
+}
+
+const HeroContent: React.FC<{
+    subtitle: string;
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonHref: string;
+}> = ({ subtitle, title, description, buttonText, buttonHref }) => {
     return (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-4">
             <div className="max-w-5xl w-full text-center space-y-8">
                 <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-b from-white/80 to-white/50 tracking-wide animate-fade-in-up">
-                    High-Performance Engineering. Unstoppable Business Velocity.
+                    {subtitle}
                 </h2>
 
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 tracking-tight">
-                    Own the Edge. We&apos;ll Build the Foundation to Hold It.
+                    {title}
                 </h1>
 
                 <p className="max-w-3xl mx-auto text-lg md:text-xl text-white/60 font-light leading-relaxed">
-                    You define the future. We build the unshakeable architecture that carries you there—engineered for 10x growth, not just launch day.
+                    {description}
                 </p>
 
                 <div className="pt-8 pointer-events-auto">
-                    <button className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold tracking-wide overflow-hidden transition-transform hover:scale-105 active:scale-95">
-                        <span className="relative z-10">Let&apos;s Talk</span>
+                    <a
+                        href={buttonHref}
+                        className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold tracking-wide overflow-hidden transition-transform hover:scale-105 active:scale-95"
+                    >
+                        <span className="relative z-10">{buttonText}</span>
                         <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
                         <div className="absolute inset-0 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out opacity-10"></div>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -407,11 +424,23 @@ const HeroContent: React.FC = () => {
 
 // --- Main App Component ---
 
-export default function ParticleEffectHero() {
+export default function ParticleEffectHero({
+    subtitle,
+    title,
+    description,
+    buttonText = "Let's Talk",
+    buttonHref = "/contact"
+}: ParticleEffectHeroProps) {
     return (
         <div className="relative w-full h-screen bg-black overflow-hidden selection:bg-blue-500 selection:text-white">
             <AntiGravityCanvas />
-            <HeroContent />
+            <HeroContent
+                subtitle={subtitle}
+                title={title}
+                description={description}
+                buttonText={buttonText}
+                buttonHref={buttonHref}
+            />
 
             {/* Scroll Indicator */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30 animate-pulse pointer-events-none">

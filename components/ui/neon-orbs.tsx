@@ -4,7 +4,19 @@ import { useEffect, useState } from "react"
 import { motion } from "motion/react"
 import { LampContainer } from "@/components/ui/lamp"
 
-export function NeonOrbs() {
+interface NeonOrbsProps {
+    title: string;
+    description: string;
+    buttonText?: string;
+    buttonHref?: string;
+}
+
+export function NeonOrbs({
+    title,
+    description,
+    buttonText = "Let's Talk",
+    buttonHref = "/contact"
+}: NeonOrbsProps) {
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
@@ -15,6 +27,7 @@ export function NeonOrbs() {
         <>
             {/* DESKTOP/LAPTOP VERSION (lg and up) */}
             <div className="hidden lg:flex relative w-full h-screen overflow-hidden items-center justify-center bg-slate-100 dark:bg-[#050a18] transition-colors duration-500">
+                {/* ... existing orbs code ... */}
                 {/* Top-left orb */}
                 <div
                     className={`absolute transition-all duration-1000 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}`}
@@ -69,23 +82,23 @@ export function NeonOrbs() {
                         className={`text-6xl xl:text-7xl font-bold tracking-tight mb-6 transition-all duration-1000 ease-out ${mounted ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-8 blur-sm"}`}
                         style={{ transitionDelay: "500ms" }}
                     >
-                        Accelerate Beyond Manual Workflows
+                        {title}
                     </h1>
                     <p
                         className={`text-lg xl:text-xl font-light max-w-3xl mx-auto text-indigo-600/70 dark:text-white/60 transition-all duration-1000 ease-out mb-8 ${mounted ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-4 blur-sm"}`}
                         style={{ transitionDelay: "800ms" }}
                     >
-                        Your vision is too ambitious to be slowed by manual work. We engineer AI-driven systems that give your growth unshakeable stability. By automating the noise, we empower you to lead with absolute certainty while your team focuses on the only metric that matters: customer mastery.
+                        {description}
                     </p>
                     <div
                         className={`transition-all duration-1000 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                         style={{ transitionDelay: "1100ms" }}
                     >
                         <a
-                            href="/contact"
+                            href={buttonHref}
                             className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 dark:bg-white dark:hover:bg-white/90 text-white dark:text-indigo-900 rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25"
                         >
-                            Let&apos;s Talk
+                            {buttonText}
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
@@ -174,16 +187,16 @@ export function NeonOrbs() {
                         className="text-center px-4"
                     >
                         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-br from-slate-200 to-slate-400 bg-clip-text text-transparent">
-                            Accelerate Beyond Manual Workflows
+                            {title}
                         </h1>
                         <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-2xl mx-auto text-slate-400 mb-8 text-justify leading-relaxed">
-                            Your vision is too ambitious to be slowed by manual work. We engineer AI-driven systems that give your growth unshakeable stability. By automating the noise, we empower you to lead with absolute certainty while your team focuses on the only metric that matters: customer mastery.
+                            {description}
                         </p>
                         <a
-                            href="/contact"
+                            href={buttonHref}
                             className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-white/90 text-slate-900 rounded-full font-semibold text-sm sm:text-base transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25"
                         >
-                            Let&apos;s Talk
+                            {buttonText}
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
