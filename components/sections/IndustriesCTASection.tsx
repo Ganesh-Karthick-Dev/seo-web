@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Code2, Lightbulb, Rocket, Palette, Mail, Phone, ArrowRight } from "lucide-react";
+import { Code2, Lightbulb, Rocket, Palette, Mail, ArrowRight } from "lucide-react";
 import { useAnimate } from "motion/react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -165,18 +165,6 @@ export function IndustriesCTASection() {
                                                     )}
                                                 >
                                                     <Mail className="h-5 w-5" />
-                                                </Link>
-                                                <Link
-                                                    href="tel:+1234567890"
-                                                    className={cn(
-                                                        buttonVariants({
-                                                            variant: "outline",
-                                                            size: "icon",
-                                                        }),
-                                                        "border-white/20 bg-transparent hover:bg-white/10 text-white"
-                                                    )}
-                                                >
-                                                    <Phone className="h-5 w-5" />
                                                 </Link>
                                             </div>
                                         </div>
