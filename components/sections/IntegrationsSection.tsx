@@ -140,19 +140,19 @@ const Icons: Record<string, () => React.ReactElement> = {
 
 // Default tech items for Custom Software Development
 const defaultLeftTechItems = [
-    { label: "Frontend", icon: "react", color: "#61DAFB" },
-    { label: "Backend", icon: "nodejs", color: "#339933" },
-    { label: "Databases", icon: "postgresql", color: "#4169E1" },
-    { label: "APIs", icon: "graphql", color: "#E10098" },
-    { label: "Cloud", icon: "aws", color: "#FF9900" },
+    { label: "React / Next.js", icon: "react", color: "#61DAFB" },
+    { label: "Node.js / Python", icon: "nodejs", color: "#339933" },
+    { label: "Postgres / Mongo", icon: "postgresql", color: "#4169E1" },
+    { label: "GraphQL / REST", icon: "graphql", color: "#E10098" },
+    { label: "AWS / Azure", icon: "aws", color: "#FF9900" },
 ];
 
 const defaultRightTechItems = [
-    { label: "DevOps", icon: "docker", color: "#2496ED" },
-    { label: "Messaging", icon: "kafka", color: "#ffffff" },
-    { label: "Security", icon: "auth0", color: "#EB5424" },
-    { label: "Observability", icon: "prometheus", color: "#E6522C" },
-    { label: "Architecture", icon: "kubernetes", color: "#326CE5" },
+    { label: "Docker / CI-CD", icon: "docker", color: "#2496ED" },
+    { label: "Kafka / Redis", icon: "kafka", color: "#ffffff" },
+    { label: "Auth0 / IAM", icon: "auth0", color: "#EB5424" },
+    { label: "Prometheus / ELK", icon: "prometheus", color: "#E6522C" },
+    { label: "Kubernetes / K8s", icon: "kubernetes", color: "#326CE5" },
 ];
 
 interface TechItem {
