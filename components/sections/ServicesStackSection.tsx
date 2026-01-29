@@ -130,7 +130,7 @@ export function ServicesStackSection() {
                             className="sticky top-32 group"
                             style={{
                                 top: `${150 + index * 20}px`,
-                                scale: 0.93 + (index * 0.01),
+                                scale: 0.82 + (index * 0.025),
                                 transformOrigin: "top center"
                             }}
                         >
