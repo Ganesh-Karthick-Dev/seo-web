@@ -128,7 +128,11 @@ export function ServicesStackSection() {
                         <div
                             key={index}
                             className="sticky top-32 group"
-                            style={{ top: `${150 + index * 20}px` }}
+                            style={{
+                                top: `${150 + index * 20}px`,
+                                scale: 0.93 + (index * 0.01),
+                                transformOrigin: "top center"
+                            }}
                         >
                             <div className={cn(
                                 "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/90 backdrop-blur-xl transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]",
