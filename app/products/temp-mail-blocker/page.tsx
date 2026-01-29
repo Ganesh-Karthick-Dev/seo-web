@@ -41,6 +41,50 @@ export default function TempMailBlockerPage() {
         <main className="relative w-full bg-[#030308]">
             <TempMailHeroSection />
 
+            <section className="w-full relative bg-black py-32 flex items-center justify-center">
+                <div className="w-full max-w-5xl mx-auto p-4 flex flex-col items-center justify-center text-center">
+                    <p className="text-2xl md:text-4xl font-light text-white/60 mb-8">
+                        Ready to secure your pipeline?
+                    </p>
+                    <div className="text-4xl md:text-7xl font-bold text-white flex flex-col md:flex-row items-center gap-4">
+                        <span>Make it</span>
+                        <TextRotate
+                            texts={[
+                                "Clean",
+                                "Secure",
+                                "Real",
+                                "Verified",
+                                "Temp Mail Blocker",
+                            ]}
+                            mainClassName="text-white px-4 bg-blue-600 overflow-hidden py-2 justify-center rounded-lg"
+                            staggerFrom={"last"}
+                            initial={{ y: "100%" }}
+                            animate={{ y: 0 }}
+                            exit={{ y: "-120%" }}
+                            staggerDuration={0.025}
+                            splitLevelClassName="overflow-hidden pb-1"
+                            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                            rotationInterval={2000}
+                        />
+                    </div>
+
+                    <div className="mt-12">
+                        <NoiseBackground
+                            containerClassName="w-fit p-2 rounded-full mx-auto"
+                            gradientColors={[
+                                "rgb(255, 100, 150)",
+                                "rgb(100, 150, 255)",
+                                "rgb(255, 200, 100)",
+                            ]}
+                        >
+                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-8 py-3 text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
+                                Start Free Trial — No Credit Card Required &rarr;
+                            </button>
+                        </NoiseBackground>
+                    </div>
+                </div>
+            </section>
+
             <section className="flex flex-col overflow-hidden">
                 <ContainerScroll
                     titleComponent={
@@ -112,49 +156,6 @@ export default function TempMailBlockerPage() {
                 </div>
             </section>
 
-            <section className="w-full relative bg-black py-32 flex items-center justify-center">
-                <div className="w-full max-w-5xl mx-auto p-4 flex flex-col items-center justify-center text-center">
-                    <p className="text-2xl md:text-4xl font-light text-white/60 mb-8">
-                        Ready to secure your pipeline?
-                    </p>
-                    <div className="text-4xl md:text-7xl font-bold text-white flex flex-col md:flex-row items-center gap-4">
-                        <span>Make it</span>
-                        <TextRotate
-                            texts={[
-                                "Clean",
-                                "Secure",
-                                "Real",
-                                "Verified",
-                                "Temp Mail Blocker",
-                            ]}
-                            mainClassName="text-white px-4 bg-blue-600 overflow-hidden py-2 justify-center rounded-lg"
-                            staggerFrom={"last"}
-                            initial={{ y: "100%" }}
-                            animate={{ y: 0 }}
-                            exit={{ y: "-120%" }}
-                            staggerDuration={0.025}
-                            splitLevelClassName="overflow-hidden pb-1"
-                            transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                            rotationInterval={2000}
-                        />
-                    </div>
-
-                    <div className="mt-12">
-                        <NoiseBackground
-                            containerClassName="w-fit p-2 rounded-full mx-auto"
-                            gradientColors={[
-                                "rgb(255, 100, 150)",
-                                "rgb(100, 150, 255)",
-                                "rgb(255, 200, 100)",
-                            ]}
-                        >
-                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-8 py-3 text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
-                                Start Free Trial — No Credit Card Required &rarr;
-                            </button>
-                        </NoiseBackground>
-                    </div>
-                </div>
-            </section>
         </main>
     );
 }
