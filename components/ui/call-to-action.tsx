@@ -19,8 +19,8 @@ function CTA({
     description = "Managing a small business today is already tough. Avoid further complications by ditching outdated, tedious trade methods. Our goal is to streamline SMB trade, making it easier and faster than ever.",
     primaryButtonText = "Sign up here",
     primaryButtonHref = "/contact",
-    secondaryButtonText = "Jump on a call",
-    secondaryButtonHref = "/contact",
+    secondaryButtonText,
+    secondaryButtonHref,
 }: CTAProps) {
     return (
         <div className="w-full py-20 lg:py-32">
