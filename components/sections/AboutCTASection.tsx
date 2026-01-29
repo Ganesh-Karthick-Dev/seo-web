@@ -191,7 +191,7 @@ export function AboutCTASection() {
                 style={{ willChange: "transform" }}
             >
                 <img
-                    src="/home/cta-bg.jpg"
+                    src="/C:/Users/ganes/.gemini/antigravity/brain/fd744e3d-a059-415c-9bad-d68743456be7/global_cta_bg_1769655030245.png"
                     alt=""
                     className="w-full h-full object-cover"
                 />

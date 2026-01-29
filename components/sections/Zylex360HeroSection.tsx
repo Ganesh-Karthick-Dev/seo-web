@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Link from 'next/link';
 import { ArrowRight, ShoppingCart, Users, BarChart3, Package } from 'lucide-react';
+import Image from 'next/image';
 
 export function Zylex360HeroSection() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -36,8 +37,16 @@ export function Zylex360HeroSection() {
 
     return (
         <section ref={containerRef} className="relative min-h-screen w-full bg-[#030308] flex items-center overflow-hidden">
-            {/* Subtle gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#030308] via-[#0a0a15] to-[#030308]" />
+            <div className="absolute inset-0">
+                <Image
+                    src="/C:/Users/ganes/.gemini/antigravity/brain/fd744e3d-a059-415c-9bad-d68743456be7/zylex360_hero_bg_1769654570418.png"
+                    alt="Zylex360 Background"
+                    fill
+                    className="object-cover opacity-60"
+                    priority
+                />
+                <div className="absolute inset-0 bg-linear-to-b from-[#030308]/80 via-transparent to-[#030308]" />
+            </div>
 
             {/* Content */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-32 pb-20">

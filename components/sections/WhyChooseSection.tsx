@@ -202,7 +202,7 @@ export function WhyChooseSection() {
                         {/* Image - Sharp Corners, Fills Remaining Space */}
                         <div ref={imageRef} className="relative flex-1 min-h-[300px] overflow-hidden border border-white/10">
                             <Image
-                                src="/why-choose/team-collab.png"
+                                src="/C:/Users/ganes/.gemini/antigravity/brain/fd744e3d-a059-415c-9bad-d68743456be7/team_collab_bg_1769655047871.png"
                                 alt="Zylex Team Collaboration"
                                 fill
                                 className="object-cover"

@@ -112,9 +112,9 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             initialIndex = 0,
 
             colors = {
-                text: "rgba(245,245,245,0.92)",
-                overlay: "rgba(0,0,0,0.35)",
-                pageBg: "#ffffff",
+                text: "rgba(255,255,255,0.98)",
+                overlay: "rgba(0,0,0,0.45)",
+                pageBg: "#030308",
                 stageBg: "#000000",
             },
 
@@ -133,8 +133,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
         const fixedSectionRef = useRef<HTMLDivElement | null>(null);
 
         const bgRefs = useRef<HTMLImageElement[]>([]);
-        const wordRefs = useRef<HTMLSpanElement[][]>([]);
-
+        const contentRef = useRef<HTMLDivElement | null>(null);
         const leftTrackRef = useRef<HTMLDivElement | null>(null);
         const rightTrackRef = useRef<HTMLDivElement | null>(null);
         const leftItemRefs = useRef<HTMLDivElement[]>([]);
@@ -156,20 +155,12 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
         }, []);
         const motionOff = reduceMotion ?? prefersReduced;
 
-        // Split words for center title
-        const tempWordBucket = useRef<HTMLSpanElement[]>([]);
-        const splitWords = (text: string) => {
-            const words = text.split(/\s+/).filter(Boolean);
-            return words.map((w, i) => (
-                <span className="fx-word-mask" key={i}>
-                    <span className="fx-word" ref={(el) => { if (el) tempWordBucket.current.push(el); }}>{w}</span>
-                    {i < words.length - 1 ? " " : null}
-                </span>
-            ));
-        };
-        const WordsCollector = ({ onReady }: { onReady: () => void }) => {
-            useEffect(() => onReady(), []); // eslint-disable-line
-            return null;
+        // Helper to get elements for animation
+        const getSectionWords = (idx: number) => {
+            if (!contentRef.current) return [];
+            const activeSection = contentRef.current.querySelector(`.fx-featured[data-idx="${idx}"]`);
+            if (!activeSection) return [];
+            return gsap.utils.toArray<HTMLElement>(activeSection.querySelectorAll(".fx-word"));
         };
 
         // Compute scroll snap positions
@@ -239,13 +230,14 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             if (bgRefs.current[0]) gsap.set(bgRefs.current[0], { opacity: 1, scale: 1 });
 
             // initial center words
-            wordRefs.current.forEach((words, sIdx) => {
-                words.forEach((w) => {
-                    gsap.set(w, {
+            sections.forEach((_, sIdx) => {
+                const words = getSectionWords(sIdx);
+                if (words.length) {
+                    gsap.set(words, {
                         yPercent: sIdx === index ? 0 : 100,
                         opacity: sIdx === index ? 1 : 0,
                     });
-                });
+                }
             });
 
             computePositions();
@@ -261,10 +253,8 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                     if (motionOff || isSnappingRef.current) return;
                     const prog = self.progress;
                     const target = Math.min(total - 1, Math.floor(prog * total));
-                    if (target !== lastIndexRef.current && !isAnimatingRef.current) {
-                        const next = lastIndexRef.current + (target > lastIndexRef.current ? 1 : -1);
-                        // programmatic one-step snap without extra sound
-                        goTo(next, false);
+                    if (target !== lastIndexRef.current) {
+                        goTo(target, false);
                     }
                     if (progressFillRef.current) {
                         const p = (lastIndexRef.current / (total - 1 || 1)) * 100;
@@ -317,25 +307,28 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
             const D = durations.change ?? 0.7;
 
-            // center title word animation (mask slide)
-            const outWords = wordRefs.current[from] || [];
-            const inWords = wordRefs.current[to] || [];
-            if (outWords.length) {
-                gsap.to(outWords, {
+            // center title word animation
+            const fromWords = getSectionWords(from);
+            const toWords = getSectionWords(to);
+
+            if (fromWords.length) {
+                gsap.killTweensOf(fromWords);
+                gsap.to(fromWords, {
                     yPercent: down ? -100 : 100,
                     opacity: 0,
                     duration: D * 0.6,
-                    stagger: down ? 0.03 : -0.03,
-                    ease: "power3.out",
+                    stagger: down ? 0.02 : -0.02,
+                    ease: "power2.in",
                 });
             }
-            if (inWords.length) {
-                gsap.set(inWords, { yPercent: down ? 100 : -100, opacity: 0 });
-                gsap.to(inWords, {
+            if (toWords.length) {
+                gsap.killTweensOf(toWords);
+                gsap.set(toWords, { yPercent: down ? 100 : -100, opacity: 0 });
+                gsap.to(toWords, {
                     yPercent: 0,
                     opacity: 1,
                     duration: D,
-                    stagger: down ? 0.05 : -0.05,
+                    stagger: down ? 0.04 : -0.04,
                     ease: "power3.out",
                 });
             }
@@ -532,23 +525,25 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                                     </div>
 
                                     {/* Center title (masked words if string) */}
-                                    <div className="fx-center">
+                                    <div className="fx-center" ref={contentRef}>
                                         {sections.map((s, sIdx) => {
-                                            tempWordBucket.current = [];
                                             const isString = typeof s.title === "string";
+                                            const titleContent = isString ? (s.title as string).split(/\s+/).filter(Boolean).map((w, i, arr) => (
+                                                <span className="fx-word-mask" key={i}>
+                                                    <span className="fx-word">{w}</span>
+                                                    {i < arr.length - 1 ? " " : null}
+                                                </span>
+                                            )) : s.title;
+
                                             return (
-                                                <div key={`C-${s.id ?? sIdx}`} className={`fx-featured ${sIdx === index ? "active" : ""}`}>
+                                                <div
+                                                    key={`C-${s.id ?? sIdx}`}
+                                                    className={`fx-featured ${sIdx === index ? "active" : ""}`}
+                                                    data-idx={sIdx}
+                                                >
                                                     <h3 className="fx-featured-title">
-                                                        {isString ? splitWords(s.title as string) : s.title}
+                                                        {titleContent}
                                                     </h3>
-                                                    <WordsCollector
-                                                        onReady={() => {
-                                                            if (tempWordBucket.current.length) {
-                                                                wordRefs.current[sIdx] = [...tempWordBucket.current];
-                                                            }
-                                                            tempWordBucket.current = [];
-                                                        }}
-                                                    />
                                                 </div>
                                             );
                                         })}
@@ -667,7 +662,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             letter-spacing: 0em;
             line-height: 1;
             margin: calc(var(--fx-row-gap) / 2) 0;
-            opacity: 0.35;
+            opacity: 0.5;
             transition: opacity 0.3s ease, transform 0.3s ease;
             position: relative;
             font-size: clamp(1rem, 2.4vw, 1.8rem);
@@ -695,7 +690,9 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-featured-title {
             margin: 0; color: var(--fx-text);
             font-weight: 900; letter-spacing: -0.01em;
-            font-size: clamp(2rem, 7.5vw, 6rem);
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            text-shadow: 0 0 30px rgba(255,255,255,0.2);
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
           }
           .fx-word-mask { display: inline-block; overflow: hidden; vertical-align: middle; }
           .fx-word { display: inline-block; vertical-align: middle; }
