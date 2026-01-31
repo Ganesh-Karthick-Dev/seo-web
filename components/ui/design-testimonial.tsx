@@ -186,9 +186,9 @@ export function Testimonial() {
                                     <motion.blockquote
                                         key={activeIndex}
                                         className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white leading-[1.15] tracking-tight"
-                                        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                                        initial={reduceMotion ? undefined : { opacity: 0, y: 24 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        exit={reduceMotion ? false : { opacity: 0, y: -12 }}
+                                        exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
                                         transition={{
                                             duration: reduceMotion ? 0.2 : 0.5,
                                             ease: [0.22, 1, 0.36, 1],

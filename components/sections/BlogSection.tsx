@@ -11,10 +11,10 @@ import type { BlogPost } from "@/lib/blog-data";
 gsap.registerPlugin(ScrollTrigger);
 
 interface BlogSectionProps {
-    initialBlogPosts: BlogPost[];
+    initialBlogPosts?: BlogPost[];
 }
 
-export function BlogSection({ initialBlogPosts }: BlogSectionProps) {
+export function BlogSection({ initialBlogPosts = [] }: BlogSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
     const cardsRef = useRef<HTMLDivElement>(null);
