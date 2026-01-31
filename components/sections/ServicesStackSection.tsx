@@ -15,6 +15,7 @@ const services = [
         title: "Custom Software Development",
         description: "We deliver software development services built exactly for your business—secure, scalable, and completely yours. No trying to fit a square peg in a round hole.",
         cta: "Build Something Real",
+        href: "/services/custom-software-development",
         image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=800&fit=crop",
         gradient: "from-blue-500/20 to-cyan-500/5"
     },
@@ -22,6 +23,7 @@ const services = [
         title: "Web & Mobile Apps",
         description: "Our custom web and mobile app development creates experiences that don't just function—they feel great to use. Fast, intuitive interfaces that your customers will actually love.",
         cta: "Start Your App Journey",
+        href: "/services/web-mobile-development",
         image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=800&fit=crop",
         gradient: "from-blue-500/20 to-cyan-500/5"
     },
@@ -29,6 +31,7 @@ const services = [
         title: "3D Web Experiences",
         description: "Why be flat? We specialize in custom 3D website development services that grab attention and make your brand unforgettable in a crowded market.",
         cta: "Enter the 3D Dimension",
+        href: "/services/3d-website-development",
         image: "https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=600&h=800&fit=crop",
         gradient: "from-purple-500/20 to-pink-500/5"
     },
@@ -36,6 +39,7 @@ const services = [
         title: "App Modernization & Digital Transformation",
         description: "Need to upgrade without shutting down? We rebuild and improve your old systems while keeping your business running smoothly.",
         cta: "Turn Legacy Chaos Into Structure",
+        href: "/services/digital-transformation",
         image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=800&fit=crop",
         gradient: "from-green-500/20 to-emerald-500/5"
     },
@@ -43,6 +47,7 @@ const services = [
         title: "E-commerce Solutions",
         description: "Sell without the stress. We build platforms that handle your biggest sales days without blinking.",
         cta: "Grow Your Commerce Business",
+        href: "/services/ecommerce",
         image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=800&fit=crop",
         gradient: "from-red-500/20 to-blue-500/5"
     },
@@ -50,6 +55,7 @@ const services = [
         title: "AI and Automation",
         description: "Forget the hype. Our AI and software development approach automates the boring stuff and finds real opportunities in your data that save you money.",
         cta: "Get Smarter",
+        href: "/services/ai-automation",
         image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=800&fit=crop",
         gradient: "from-indigo-500/20 to-violet-500/5"
     },
@@ -57,6 +63,7 @@ const services = [
         title: "Cloud & DevOps",
         description: "Make release day boring. We automate your updates so you can ship faster and safer, without the panic.",
         cta: "Make Release Day Boring Again",
+        href: "/services/cloud-devops",
         image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&h=800&fit=crop",
         gradient: "from-sky-500/20 to-blue-500/5"
     },
@@ -64,6 +71,7 @@ const services = [
         title: "Strategic IT Consulting",
         description: "We don't just take orders; we help you validate them. Get honest technical advice that protects your budget and keeps you on the right track.",
         cta: "Get Expert Opinion",
+        href: "/services/it-strategy-consulting",
         image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=800&fit=crop",
         gradient: "from-yellow-500/20 to-cyan-500/5"
     }
@@ -156,7 +164,7 @@ export function ServicesStackSection() {
                                     </p>
 
                                     <Link
-                                        href="#"
+                                        href={service.href}
                                         className="inline-flex items-center gap-2 text-blue-500 font-medium hover:text-blue-400 transition-colors group/link"
                                     >
                                         {service.cta}
