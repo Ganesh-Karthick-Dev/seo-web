@@ -1,6 +1,9 @@
 import { getAllBlogPosts } from "@/lib/blog-data";
 import HomeClient from "./home-client";
 
+// Revalidate every 60s so Insights & Resources gets fresh posts (same as /resources)
+export const revalidate = 60;
+
 export default async function Home() {
   let firstThree: Awaited<ReturnType<typeof getAllBlogPosts>> = [];
   try {
