@@ -3,50 +3,18 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import type { BlogPost } from "@/lib/blog-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const blogPosts = [
-    {
-        id: 1,
-        image: "/blog/engineering-excellence.png",
-        highlightWord: "Engineering Excellence",
-        titleBefore: "",
-        titleAfter: "in Modern Software Development",
-        description: "Discover how structured engineering practices lead to more reliable, maintainable, and scalable software solutions.",
-        highlightBg: "bg-blue-500/20",
-        highlightBorder: "border-blue-500/40",
-        pointerColor: "text-blue-500",
-    },
-    {
-        id: 2,
-        image: "/blog/digital-transformation.png",
-        highlightWord: "Digital Transformation",
-        titleBefore: "The Path to",
-        titleAfter: "That Actually Works",
-        description: "Why most digital transformations fail and how strategic alignment ensures successful modernization.",
-        highlightBg: "bg-purple-500/20",
-        highlightBorder: "border-purple-500/40",
-        pointerColor: "text-purple-500",
-    },
-    {
-        id: 3,
-        image: "/blog/scalable-architecture.png",
-        highlightWord: "Scalable Architecture",
-        titleBefore: "Building",
-        titleAfter: "for Growing Businesses",
-        description: "Essential patterns and practices for architecting systems that grow seamlessly with your business needs.",
-        highlightBg: "bg-emerald-500/20",
-        highlightBorder: "border-emerald-500/40",
-        pointerColor: "text-emerald-500",
-    },
-];
+interface BlogSectionProps {
+    initialBlogPosts: BlogPost[];
+}
 
-export function BlogSection() {
+export function BlogSection({ initialBlogPosts }: BlogSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
     const cardsRef = useRef<HTMLDivElement>(null);
@@ -112,12 +80,12 @@ export function BlogSection() {
                     </p>
                 </div>
 
-                {/* Blog Cards Grid */}
+                {/* Blog Cards Grid - first 3 from Resources */}
                 <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                    {blogPosts.map((post) => (
+                    {initialBlogPosts.map((post) => (
                         <Link
                             key={post.id}
-                            href="#"
+                            href={`/resources/blog/${post.slug}`}
                             className="group block"
                         >
                             <div className="relative rounded-3xl border border-white/10 bg-zinc-900/50 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.25)]">
@@ -125,7 +93,7 @@ export function BlogSection() {
                                 <div className="h-48 w-full relative overflow-hidden">
                                     <Image
                                         src={post.image}
-                                        alt={post.highlightWord}
+                                        alt={post.title}
                                         fill
                                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
@@ -135,25 +103,17 @@ export function BlogSection() {
 
                                 {/* Content */}
                                 <div className="p-6 md:p-8">
-                                    {/* Title with PointerHighlight */}
-                                    <div className="text-lg md:text-xl font-bold text-white tracking-tight leading-snug mb-4">
-                                        {post.titleBefore && <span>{post.titleBefore} </span>}
-                                        <PointerHighlight
-                                            rectangleClassName={`${post.highlightBg} ${post.highlightBorder} leading-relaxed`}
-                                            pointerClassName={`${post.pointerColor} h-3 w-3`}
-                                            containerClassName="inline-block mx-1"
-                                        >
-                                            <span className="relative z-10 px-1">{post.highlightWord}</span>
-                                        </PointerHighlight>
-                                        {post.titleAfter && <span> {post.titleAfter}</span>}
-                                    </div>
+                                    {/* Title */}
+                                    <h3 className="text-lg md:text-xl font-bold text-white tracking-tight leading-snug mb-4 line-clamp-2">
+                                        {post.title}
+                                    </h3>
 
                                     {/* Description */}
-                                    <p className="text-neutral-400 text-sm leading-relaxed mb-6">
-                                        {post.description}
+                                    <p className="text-neutral-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                                        {post.excerpt}
                                     </p>
 
-                                    {/* Read More Link */}
+                                    {/* Read Article Link */}
                                     <div className="flex items-center gap-2 text-blue-500 font-medium text-sm group-hover:text-blue-400 transition-colors">
                                         Read Article
                                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -164,10 +124,10 @@ export function BlogSection() {
                     ))}
                 </div>
 
-                {/* View All CTA */}
+                {/* View All CTA - links to Resources page */}
                 <div className="flex justify-center mt-16">
                     <Link
-                        href="/blog"
+                        href="/resources"
                         className="group flex items-center gap-2 text-lg text-neutral-400 hover:text-white transition-colors font-medium"
                     >
                         View All Articles
