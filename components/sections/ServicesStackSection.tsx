@@ -129,8 +129,8 @@ export function ServicesStackSection() {
                             key={index}
                             className="sticky top-32 group"
                             style={{
-                                top: `${150 + index * 20}px`,
-                                scale: 0.82 + (index * 0.025),
+                                top: "150px",
+                                scale: 1,
                                 transformOrigin: "top center"
                             }}
                         >
