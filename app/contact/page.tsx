@@ -7,13 +7,11 @@ import {
     Calendar,
     Mail,
     MessageSquare,
-    Phone,
-    MapPin,
     ArrowRight,
     Sparkles,
-    Clock,
     CheckCircle,
-    AlertCircle
+    AlertCircle,
+    Linkedin
 } from "lucide-react";
 
 export default function Contact() {
@@ -24,16 +22,16 @@ export default function Contact() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        designation: "",
         company: "",
-        phone: "",
         message: "",
     });
 
     const [errors, setErrors] = useState({
         name: "",
         email: "",
+        designation: "",
         company: "",
-        phone: "",
         message: "",
     });
 
@@ -42,46 +40,32 @@ export default function Contact() {
         const newErrors = {
             name: "",
             email: "",
+            designation: "",
             company: "",
-            phone: "",
             message: "",
         };
 
-        // Name validation
         if (!formData.name.trim()) {
             newErrors.name = "Full Name is required";
             isValid = false;
         }
 
-        // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!formData.email.trim()) {
-            newErrors.email = "Email Address is required";
+            newErrors.email = "Email is required";
             isValid = false;
         } else if (!emailRegex.test(formData.email)) {
             newErrors.email = "Please enter a valid email address";
             isValid = false;
         }
 
-        // Phone validation (10 digits)
-        const phoneRegex = /^\d{10}$/;
-        if (!formData.phone.trim()) {
-            newErrors.phone = "Phone Number is required";
-            isValid = false;
-        } else if (!phoneRegex.test(formData.phone.replace(/\D/g, ''))) {
-            newErrors.phone = "Phone number must be exactly 10 digits";
-            isValid = false;
-        }
-
-        // Company validation
         if (!formData.company.trim()) {
             newErrors.company = "Company Name is required";
             isValid = false;
         }
 
-        // Message validation
         if (!formData.message.trim()) {
-            newErrors.message = "Message is required";
+            newErrors.message = "Your message is required";
             isValid = false;
         }
 
@@ -112,8 +96,8 @@ export default function Contact() {
                 setFormData({
                     name: "",
                     email: "",
+                    designation: "",
                     company: "",
-                    phone: "",
                     message: "",
                 });
                 setTimeout(() => setFormSubmitted(false), 5000);
@@ -147,27 +131,17 @@ export default function Contact() {
     const contactInfo = [
         {
             icon: Mail,
-            title: "Email Us",
-            value: "hello@seopro.com",
-            link: "mailto:hello@seopro.com",
+            title: "Email",
+            value: "connect@zylex.io",
+            link: "mailto:connect@zylex.io",
+            external: false,
         },
         {
-            icon: Phone,
-            title: "Call Us",
-            value: "+1 (555) 123-4567",
-            link: "tel:+15551234567",
-        },
-        {
-            icon: MapPin,
-            title: "Visit Us",
-            value: "123 Business Ave, NY 10001",
-            link: "#",
-        },
-        {
-            icon: Clock,
-            title: "Business Hours",
-            value: "Mon-Fri: 9AM - 6PM EST",
-            link: "#",
+            icon: Linkedin,
+            title: "LinkedIn",
+            value: "Zylex.io",
+            link: "https://www.linkedin.com/company/zylex-io",
+            external: true,
         },
     ];
 
@@ -200,7 +174,7 @@ export default function Contact() {
 
                         <p className="max-w-2xl mx-auto text-lg text-neutral-400">
                             Ready to transform your digital presence? Schedule a free consultation
-                            or send us a message. We&apos;re here to help you succeed.
+                            or send us a message.
                         </p>
                     </motion.div>
 
@@ -221,6 +195,8 @@ export default function Contact() {
                                         <a
                                             key={idx}
                                             href={item.link}
+                                            target={item.external ? "_blank" : undefined}
+                                            rel={item.external ? "noopener noreferrer" : undefined}
                                             className="group flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors"
                                         >
                                             <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-sky-500 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -237,14 +213,14 @@ export default function Contact() {
 
                             {/* Why Choose Us Card */}
                             <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-sky-500/10 border border-white/10">
-                                <h3 className="text-lg font-semibold text-white mb-4">Why Choose Us?</h3>
+                                <h3 className="text-lg font-semibold text-white mb-4">Why Choose Us</h3>
                                 <ul className="space-y-3">
                                     {[
-                                        "Free initial consultation",
-                                        "Customized strategies",
-                                        "Transparent pricing",
+                                        "15-day rapid sprint",
+                                        "Transparent process & delivery",
                                         "Proven track record",
-                                        "24/7 support available",
+                                        "Customised strategies and solutions",
+                                        "Built to scale, built to last",
                                     ].map((item, idx) => (
                                         <li key={idx} className="flex items-center gap-3 text-neutral-300">
                                             <CheckCircle className="w-5 h-5 text-cyan-400 flex-shrink-0" />
@@ -325,7 +301,7 @@ export default function Contact() {
                                         <div>
                                             <div className="mb-6">
                                                 <h3 className="text-xl font-semibold text-white mb-2">
-                                                    Send Us a Message
+                                                    Send us a message
                                                 </h3>
                                                 <p className="text-neutral-400">
                                                     Fill out the form below and we&apos;ll get back to you within 24 hours.
@@ -356,7 +332,7 @@ export default function Contact() {
 
                                                     <div>
                                                         <label htmlFor="email" className="block text-sm font-medium text-neutral-300 mb-2">
-                                                            Email Address *
+                                                            Email *
                                                         </label>
                                                         <input
                                                             type="email"
@@ -377,6 +353,21 @@ export default function Contact() {
 
                                                 <div className="grid sm:grid-cols-2 gap-5">
                                                     <div>
+                                                        <label htmlFor="designation" className="block text-sm font-medium text-neutral-300 mb-2">
+                                                            Designation
+                                                        </label>
+                                                        <input
+                                                            type="text"
+                                                            id="designation"
+                                                            name="designation"
+                                                            value={formData.designation}
+                                                            onChange={handleChange}
+                                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500/50 focus:bg-white/10 transition-all"
+                                                            placeholder="e.g. CTO, Product Manager"
+                                                        />
+                                                    </div>
+
+                                                    <div>
                                                         <label htmlFor="company" className="block text-sm font-medium text-neutral-300 mb-2">
                                                             Company Name *
                                                         </label>
@@ -395,31 +386,11 @@ export default function Contact() {
                                                             </p>
                                                         )}
                                                     </div>
-
-                                                    <div>
-                                                        <label htmlFor="phone" className="block text-sm font-medium text-neutral-300 mb-2">
-                                                            Phone Number *
-                                                        </label>
-                                                        <input
-                                                            type="tel"
-                                                            id="phone"
-                                                            name="phone"
-                                                            value={formData.phone}
-                                                            onChange={handleChange}
-                                                            className={`w-full px-4 py-3 rounded-xl bg-white/5 border ${errors.phone ? 'border-red-500' : 'border-white/10'} text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500/50 focus:bg-white/10 transition-all`}
-                                                            placeholder="10-digit number"
-                                                        />
-                                                        {errors.phone && (
-                                                            <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                                                                <AlertCircle className="w-3 h-3" /> {errors.phone}
-                                                            </p>
-                                                        )}
-                                                    </div>
                                                 </div>
 
                                                 <div>
                                                     <label htmlFor="message" className="block text-sm font-medium text-neutral-300 mb-2">
-                                                        Your Message *
+                                                        Your message *
                                                     </label>
                                                     <textarea
                                                         id="message"
@@ -428,7 +399,7 @@ export default function Contact() {
                                                         onChange={handleChange}
                                                         rows={5}
                                                         className={`w-full px-4 py-3 rounded-xl bg-white/5 border ${errors.message ? 'border-red-500' : 'border-white/10'} text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500/50 focus:bg-white/10 transition-all resize-none`}
-                                                        placeholder="Tell us about your project and goals..."
+                                                        placeholder="Tell us about your project, goals and timeline"
                                                     />
                                                     {errors.message && (
                                                         <p className="mt-1 text-xs text-red-500 flex items-center gap-1">

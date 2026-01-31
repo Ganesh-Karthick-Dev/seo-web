@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { name, email, company, phone, message } = body;
+        const { name, email, company, designation, message } = body;
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -51,8 +51,8 @@ export async function POST(req: Request) {
                   <div class="value"><a href="mailto:${email}" style="color: #ea580c; text-decoration: none;">${email}</a></div>
                 </div>
                 <div class="field">
-                  <div class="label">Phone</div>
-                  <div class="value">${phone || 'Not provided'}</div>
+                  <div class="label">Designation</div>
+                  <div class="value">${designation || 'Not provided'}</div>
                 </div>
                 <div class="field">
                   <div class="label">Company</div>
