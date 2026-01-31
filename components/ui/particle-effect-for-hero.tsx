@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { MousePointer2, Info, ArrowRight } from 'lucide-react';
 
 // --- Types ---
@@ -48,22 +48,34 @@ const randomRange = (min: number, max: number) => Math.random() * (max - min) + 
 
 // --- Components ---
 
+// Cap particles for low-end devices (small viewport or reduced motion)
+const getParticleCap = (width: number, height: number, reducedMotion: boolean) => {
+    if (reducedMotion) return { main: 0, bg: 20 };
+    const area = width * height;
+    const main = Math.min(Math.floor(area * PARTICLE_DENSITY), 180);
+    const bg = Math.min(Math.floor(area * BG_PARTICLE_DENSITY), 60);
+    return { main, bg };
+};
+
 const AntiGravityCanvas: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const [debugInfo, setDebugInfo] = useState({ count: 0, fps: 0 });
 
-    // Mutable state refs to avoid re-renders during animation loop
+    // Mutable state refs to avoid re-renders during animation loop (no per-frame setState)
     const particlesRef = useRef<Particle[]>([]);
     const backgroundParticlesRef = useRef<BackgroundParticle[]>([]);
     const mouseRef = useRef<MouseState>({ x: -1000, y: -1000, isActive: false });
     const frameIdRef = useRef<number>(0);
     const lastTimeRef = useRef<number>(0);
+    const reducedMotionRef = useRef(false);
 
     // Initialize Particles
     const initParticles = useCallback((width: number, height: number) => {
+        reducedMotionRef.current = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const { main: maxMain, bg: maxBg } = getParticleCap(width, height, reducedMotionRef.current);
+
         // 1. Main Interactive Particles
-        const particleCount = Math.floor(width * height * PARTICLE_DENSITY);
+        const particleCount = maxMain;
         const newParticles: Particle[] = [];
 
         for (let i = 0; i < particleCount; i++) {
@@ -85,7 +97,7 @@ const AntiGravityCanvas: React.FC = () => {
         particlesRef.current = newParticles;
 
         // 2. Background Ambient Particles (Stars/Dust)
-        const bgCount = Math.floor(width * height * BG_PARTICLE_DENSITY);
+        const bgCount = maxBg;
         const newBgParticles: BackgroundParticle[] = [];
 
         for (let i = 0; i < bgCount; i++) {
@@ -100,8 +112,6 @@ const AntiGravityCanvas: React.FC = () => {
             });
         }
         backgroundParticlesRef.current = newBgParticles;
-
-        setDebugInfo(prev => ({ ...prev, count: particleCount + bgCount }));
     }, []);
 
     // Animation Loop
@@ -111,12 +121,7 @@ const AntiGravityCanvas: React.FC = () => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Calculate Delta Time for smooth animation (optional, but good for FPS calculation)
-        const delta = time - lastTimeRef.current;
         lastTimeRef.current = time;
-        if (delta > 0) {
-            setDebugInfo(prev => ({ ...prev, fps: Math.round(1000 / delta) }));
-        }
 
         // Clear Canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -199,7 +204,9 @@ const AntiGravityCanvas: React.FC = () => {
             p.vy += springDy * RETURN_SPEED;
         }
 
-        // Phase 2: Resolve Collisions
+        // Phase 2: Resolve Collisions (skip on reduced motion or high particle count for perf)
+        const doCollisions = !reducedMotionRef.current && particles.length <= 120;
+        if (doCollisions) {
         for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
                 const p1 = particles[i];
@@ -257,6 +264,7 @@ const AntiGravityCanvas: React.FC = () => {
                     }
                 }
             }
+        }
         }
 
         // Phase 3: Integration & Drawing
@@ -346,12 +354,6 @@ const AntiGravityCanvas: React.FC = () => {
             onMouseLeave={handleMouseLeave}
         >
             <canvas ref={canvasRef} className="block w-full h-full" />
-
-            {/* Debug Info Overlay (Hidden in production usually, but cool for tech demos) */}
-            <div className="absolute bottom-4 right-4 pointer-events-none text-xs text-white/20 font-mono text-right">
-                <p>{debugInfo.count} entities</p>
-                <p>{debugInfo.fps} FPS</p>
-            </div>
         </div>
     );
 };

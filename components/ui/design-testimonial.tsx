@@ -5,6 +5,9 @@ import type React from "react"
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "motion/react"
 
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
 const testimonials = [
     {
         quote: "Zylex delivered our MVP in just 12 days. What impressed us most was their engineering-first approach — the codebase is clean, scalable, and production-ready.",
@@ -41,20 +44,40 @@ const testimonials = [
 export function Testimonial() {
     const [activeIndex, setActiveIndex] = useState(0)
     const containerRef = useRef<HTMLDivElement>(null)
+    const sectionRef = useRef<HTMLElement>(null)
+    const [reduceMotion, setReduceMotion] = useState(false)
+    const [tickerInView, setTickerInView] = useState(true)
 
-    // Mouse position for magnetic effect
+    useEffect(() => {
+        setReduceMotion(prefersReducedMotion())
+        const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+        const handler = () => setReduceMotion(mq.matches)
+        mq.addEventListener("change", handler)
+        return () => mq.removeEventListener("change", handler)
+    }, [])
+
+    useEffect(() => {
+        if (!sectionRef.current) return
+        const el = sectionRef.current
+        const io = new IntersectionObserver(
+            ([e]) => setTickerInView(e.isIntersecting),
+            { threshold: 0.1 }
+        )
+        io.observe(el)
+        return () => io.disconnect()
+    }, [])
+
+    // Mouse position for magnetic effect (disabled when reduced motion)
     const mouseX = useMotionValue(0)
     const mouseY = useMotionValue(0)
-
     const springConfig = { damping: 25, stiffness: 200 }
     const x = useSpring(mouseX, springConfig)
     const y = useSpring(mouseY, springConfig)
-
-    // Transform for parallax on the large number
     const numberX = useTransform(x, [-200, 200], [-20, 20])
     const numberY = useTransform(y, [-200, 200], [-10, 10])
 
     const handleMouseMove = (e: React.MouseEvent) => {
+        if (reduceMotion) return
         const rect = containerRef.current?.getBoundingClientRect()
         if (rect) {
             const centerX = rect.left + rect.width / 2
@@ -75,7 +98,7 @@ export function Testimonial() {
     const current = testimonials[activeIndex]
 
     return (
-        <section className="relative w-full py-24 md:py-32 overflow-hidden">
+        <section ref={sectionRef} className="relative w-full py-24 md:py-32 overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent" />
 
@@ -163,36 +186,15 @@ export function Testimonial() {
                                     <motion.blockquote
                                         key={activeIndex}
                                         className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white leading-[1.15] tracking-tight"
-                                        initial="hidden"
-                                        animate="visible"
-                                        exit="exit"
+                                        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={reduceMotion ? false : { opacity: 0, y: -12 }}
+                                        transition={{
+                                            duration: reduceMotion ? 0.2 : 0.5,
+                                            ease: [0.22, 1, 0.36, 1],
+                                        }}
                                     >
-                                        {current.quote.split(" ").map((word, i) => (
-                                            <motion.span
-                                                key={i}
-                                                className="inline-block mr-[0.3em]"
-                                                variants={{
-                                                    hidden: { opacity: 0, y: 20, rotateX: 90 },
-                                                    visible: {
-                                                        opacity: 1,
-                                                        y: 0,
-                                                        rotateX: 0,
-                                                        transition: {
-                                                            duration: 0.5,
-                                                            delay: i * 0.05,
-                                                            ease: [0.22, 1, 0.36, 1],
-                                                        },
-                                                    },
-                                                    exit: {
-                                                        opacity: 0,
-                                                        y: -10,
-                                                        transition: { duration: 0.2, delay: i * 0.02 },
-                                                    },
-                                                }}
-                                            >
-                                                {word}
-                                            </motion.span>
-                                        ))}
+                                        {current.quote}
                                     </motion.blockquote>
                                 </AnimatePresence>
                             </div>
@@ -285,12 +287,20 @@ export function Testimonial() {
                         </div>
                     </div>
 
-                    {/* Bottom ticker - subtle repeating company names */}
+                    {/* Bottom ticker - only animate when section in view and not reduced motion */}
                     <div className="absolute -bottom-16 left-0 right-0 overflow-hidden opacity-[0.08] pointer-events-none">
                         <motion.div
                             className="flex whitespace-nowrap text-4xl md:text-6xl font-bold tracking-tight text-white"
-                            animate={{ x: [0, -1000] }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            animate={
+                                reduceMotion || !tickerInView
+                                    ? { x: 0 }
+                                    : { x: [0, -1000] }
+                            }
+                            transition={{
+                                duration: 20,
+                                repeat: reduceMotion || !tickerInView ? 0 : Infinity,
+                                ease: "linear",
+                            }}
                         >
                             {[...Array(10)].map((_, i) => (
                                 <span key={i} className="mx-8">

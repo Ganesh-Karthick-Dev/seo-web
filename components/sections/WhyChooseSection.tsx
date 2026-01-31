@@ -39,9 +39,17 @@ export function WhyChooseSection() {
     const imageRef = useRef<HTMLDivElement>(null);
     const imageOverlayRef = useRef<HTMLDivElement>(null);
     const cardsRef = useRef<HTMLDivElement>(null);
+    const reducedMotionRef = useRef(
+        typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+
+    useEffect(() => {
+        reducedMotionRef.current = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }, []);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            const reducedMotion = reducedMotionRef.current;
             // Timeline for left side
             const leftTl = gsap.timeline({
                 scrollTrigger: {
@@ -108,22 +116,22 @@ export function WhyChooseSection() {
                 );
             }
 
-            // Cards animation - staggered slide from right with rotation
+            // Cards animation - stagger only (no 3D rotate on reduced motion)
             const cards = cardsRef.current?.children;
             if (cards) {
                 gsap.fromTo(
                     cards,
                     {
-                        x: 100,
+                        x: reducedMotion ? 40 : 100,
                         opacity: 0,
-                        rotateY: 15,
+                        ...(reducedMotion ? {} : { rotateY: 15 }),
                     },
                     {
                         x: 0,
                         opacity: 1,
-                        rotateY: 0,
-                        duration: 0.9,
-                        stagger: 0.12,
+                        ...(reducedMotion ? {} : { rotateY: 0 }),
+                        duration: reducedMotion ? 0.5 : 0.9,
+                        stagger: reducedMotion ? 0.08 : 0.12,
                         ease: "power3.out",
                         immediateRender: false,
                         scrollTrigger: {
@@ -133,40 +141,43 @@ export function WhyChooseSection() {
                     }
                 );
 
-                // Icon pulse animation on each card
-                Array.from(cards).forEach((card, index) => {
-                    const icon = card.querySelector(".icon-container");
-                    if (icon) {
-                        gsap.fromTo(
-                            icon,
-                            { scale: 0, rotate: -180 },
-                            {
-                                scale: 1,
-                                rotate: 0,
-                                duration: 0.6,
-                                ease: "back.out(1.7)",
-                                delay: 0.3 + index * 0.12,
-                                scrollTrigger: {
-                                    trigger: cardsRef.current,
-                                    start: "top 80%",
-                                },
-                            }
-                        );
-                    }
-                });
+                if (!reducedMotion) {
+                    Array.from(cards).forEach((card, index) => {
+                        const icon = card.querySelector(".icon-container");
+                        if (icon) {
+                            gsap.fromTo(
+                                icon,
+                                { scale: 0, rotate: -180 },
+                                {
+                                    scale: 1,
+                                    rotate: 0,
+                                    duration: 0.6,
+                                    ease: "back.out(1.7)",
+                                    delay: 0.3 + index * 0.12,
+                                    scrollTrigger: {
+                                        trigger: cardsRef.current,
+                                        start: "top 80%",
+                                    },
+                                }
+                            );
+                        }
+                    });
+                }
             }
 
-            // Floating animation for the image (subtle parallax on scroll)
-            gsap.to(imageRef.current, {
-                y: -30,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 1,
-                },
-            });
+            // Floating parallax only when not reduced motion
+            if (!reducedMotion && imageRef.current) {
+                gsap.to(imageRef.current, {
+                    y: -30,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1,
+                    },
+                });
+            }
 
         }, containerRef);
 
@@ -202,7 +213,7 @@ export function WhyChooseSection() {
                         {/* Image - Sharp Corners, Fills Remaining Space */}
                         <div ref={imageRef} className="relative flex-1 min-h-[300px] overflow-hidden border border-white/10">
                             <Image
-                                src="/C:/Users/ganes/.gemini/antigravity/brain/fd744e3d-a059-415c-9bad-d68743456be7/team_collab_bg_1769655047871.png"
+                                src="/why-choose/team-collab.png"
                                 alt="Zylex Team Collaboration"
                                 fill
                                 className="object-cover"

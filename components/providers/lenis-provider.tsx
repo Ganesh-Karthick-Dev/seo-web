@@ -5,14 +5,18 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
-        // Initialize Lenis with advanced butter-smooth settings
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reducedMotion) {
+            (window as unknown as { lenis: Lenis | undefined }).lenis = undefined;
+            return;
+        }
+
         const lenis = new Lenis({
             // Smoothness duration - higher = smoother but more delayed feel
             duration: 1.4,
@@ -86,6 +90,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
         return () => {
             lenis.destroy();
             lenisRef.current = null;
+            (window as unknown as { lenis: Lenis | undefined }).lenis = undefined;
             gsap.ticker.remove((time) => {
                 lenis.raf(time * 1000);
             });

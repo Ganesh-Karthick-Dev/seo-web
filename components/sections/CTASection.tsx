@@ -110,60 +110,50 @@ export function CTASection() {
         return () => ctx.revert();
     }, []);
 
-    // Button follows cursor freely with extra smoothness
+    // Button follows cursor only when section is in view and user has not requested reduced motion (saves rAF on low-end)
     useEffect(() => {
         const container = containerRef.current;
         const buttonWrapper = buttonWrapperRef.current;
+        const section = sectionRef.current;
 
-        if (!container || !buttonWrapper) return;
+        if (!container || !buttonWrapper || !section) return;
 
-        // Get original button position
+        const reducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reducedMotion) return;
+
         let originalX = 0;
         let originalY = 0;
         let isInitialized = false;
-
-        // For extra smoothness - lerped position
         let currentX = 0;
         let currentY = 0;
         let targetX = 0;
         let targetY = 0;
         let animationId: number;
+        let inView = false;
 
-        const lerp = (start: number, end: number, factor: number) => {
-            return start + (end - start) * factor;
-        };
+        const lerp = (start: number, end: number, factor: number) => start + (end - start) * factor;
 
         const handleMouseMove = (e: MouseEvent) => {
+            if (!inView) return;
             const rect = container.getBoundingClientRect();
             const wrapperRect = buttonWrapper.getBoundingClientRect();
-
-            // Initialize original position on first move
             if (!isInitialized) {
                 originalX = wrapperRect.left - rect.left + wrapperRect.width / 2;
                 originalY = wrapperRect.top - rect.top + wrapperRect.height / 2;
                 isInitialized = true;
             }
-
-            // Get cursor position relative to container
-            const cursorX = e.clientX - rect.left;
-            const cursorY = e.clientY - rect.top;
-
-            // Set target position
-            targetX = cursorX - originalX;
-            targetY = cursorY - originalY;
+            targetX = e.clientX - rect.left - originalX;
+            targetY = e.clientY - rect.top - originalY;
         };
 
-        // Smooth animation loop with lerp
         const animate = () => {
-            // Lerp towards target with smooth factor (lower = smoother)
+            if (!inView) {
+                animationId = requestAnimationFrame(animate);
+                return;
+            }
             currentX = lerp(currentX, targetX, 0.06);
             currentY = lerp(currentY, targetY, 0.06);
-
-            gsap.set(buttonWrapper, {
-                x: currentX,
-                y: currentY,
-            });
-
+            gsap.set(buttonWrapper, { x: currentX, y: currentY });
             animationId = requestAnimationFrame(animate);
         };
 
@@ -172,11 +162,27 @@ export function CTASection() {
             targetY = 0;
         };
 
+        const io = new IntersectionObserver(
+            ([e]) => {
+                inView = e.isIntersecting;
+                if (!inView) {
+                    gsap.set(buttonWrapper, { x: 0, y: 0 });
+                    currentX = 0;
+                    currentY = 0;
+                    targetX = 0;
+                    targetY = 0;
+                }
+            },
+            { threshold: 0.2 }
+        );
+        io.observe(section);
+
         container.addEventListener("mousemove", handleMouseMove);
         container.addEventListener("mouseleave", handleMouseLeave);
         animationId = requestAnimationFrame(animate);
 
         return () => {
+            io.disconnect();
             container.removeEventListener("mousemove", handleMouseMove);
             container.removeEventListener("mouseleave", handleMouseLeave);
             cancelAnimationFrame(animationId);
