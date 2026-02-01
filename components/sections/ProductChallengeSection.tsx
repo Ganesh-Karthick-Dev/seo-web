@@ -25,6 +25,23 @@ type ProductChallengeSectionProps = {
 const tempmailIcons: LucideIcon[] = [BarChart2, Clock, Database, Mail];
 const zylexIcons: LucideIcon[] = [Layers, Package, CreditCard, Globe];
 
+// Subtle film grain overlay - fine uniform texture like frosted glass, static & performant
+const FilmGrainOverlay = () => (
+    <div
+        className="absolute inset-0 rounded-xl md:rounded-2xl pointer-events-none overflow-hidden"
+        aria-hidden
+    >
+        <div
+            className="absolute inset-0 opacity-[0.12] mix-blend-screen"
+            style={{
+                backgroundImage: "url(https://assets.aceternity.com/noise.webp)",
+                backgroundRepeat: "repeat",
+                backgroundSize: "192px 192px",
+            }}
+        />
+    </div>
+);
+
 const CardVisual = ({
     index,
     accent,
@@ -217,6 +234,7 @@ export function ProductChallengeSection({
                                     )}
                                 >
                                     <CardVisual index={i} accent={accent} />
+                                    <FilmGrainOverlay />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
                                     <div className="relative z-10 h-full flex flex-col justify-end p-4 sm:p-6 md:p-8">
