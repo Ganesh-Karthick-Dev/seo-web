@@ -1,24 +1,16 @@
-import { getAllBlogPosts, getBlogPost } from "@/lib/blog-data";
+import { getBlogPost } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Calendar, Clock, ChevronLeft, Twitter, Linkedin, AlertCircle, CheckCircle2, ArrowRight, Bot, Zap, Settings, Server, Tag, Map, MousePointer, Eye, Layers, Scissors, Code, Check, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-// Enable ISR
+// ISR: generate on first request, revalidate every 60s (no DB at build)
 export const revalidate = 60;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
-    try {
-        const posts = await getAllBlogPosts();
-        return posts.map((post) => ({
-            slug: post.slug,
-        }));
-    } catch (error) {
-        // Database not accessible during build - pages will be generated on-demand
-        console.warn('generateStaticParams: Database not accessible, skipping static generation');
-        return [];
-    }
+    return []; // DB not reachable at build - all blog pages generated on first request
 }
 
 interface BlogPostPageProps {
