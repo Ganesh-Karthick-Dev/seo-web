@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardHeader } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { Zap, Trash2, TrendingUp, Plug, LucideIcon } from 'lucide-react'
 import { ReactNode } from 'react'
@@ -15,104 +15,25 @@ export function TempMailFeatures() {
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-                    {/* Card 1: Real-Time Blocking */}
                     <FeatureCard>
-                        <CardHeader className="pb-3">
-                            <CardHeading
-                                icon={Zap}
-                                title="Real-Time Blocking"
-                                description="Instantly validates against 100,000+ disposable domains via API, JavaScript, or native plugins."
-                            />
+                        <CardHeader className="pb-0">
+                            <CardHeading icon={Zap} title="Real-Time Blocking" description="Instantly validates against 100,000+ disposable domains via API, JavaScript, or native plugins." />
                         </CardHeader>
-
-                        <div className="relative flex-1 min-h-[300px] w-full mt-6 border-t border-dashed border-white/10">
-                            <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.05),transparent_125%)]"></div>
-                            <div className="relative h-full w-full p-6">
-                                <DualModeImage
-                                    darkSrc="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
-                                    lightSrc="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
-                                    alt="real time blocking"
-                                    width={1207}
-                                    height={929}
-                                    className="w-full h-full object-cover rounded-lg shadow-2xl"
-                                />
-                            </div>
-                        </div>
                     </FeatureCard>
-
-                    {/* Card 2: Database Cleanup */}
                     <FeatureCard>
-                        <CardHeader className="pb-3">
-                            <CardHeading
-                                icon={Trash2}
-                                title="Database Cleanup"
-                                description="Scan existing CRM records to identify and purge temporary accounts."
-                            />
+                        <CardHeader className="pb-0">
+                            <CardHeading icon={Trash2} title="Database Cleanup" description="Scan existing CRM records to identify and purge temporary accounts." />
                         </CardHeader>
-
-                        <div className="relative flex-1 min-h-[300px] w-full mt-6 border-t border-dashed border-white/10">
-                            <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.05),transparent_125%)]"></div>
-                            <div className="relative h-full w-full p-6">
-                                <DualModeImage
-                                    darkSrc="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop"
-                                    lightSrc="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop"
-                                    alt="database cleanup"
-                                    width={1207}
-                                    height={929}
-                                    className="w-full h-full object-cover rounded-lg shadow-2xl"
-                                />
-                            </div>
-                        </div>
                     </FeatureCard>
-
-                    {/* Card 3: Better ROI */}
                     <FeatureCard>
-                        <CardHeader className="pb-3">
-                            <CardHeading
-                                icon={TrendingUp}
-                                title="Better ROI"
-                                description="Focus your marketing budget on real business opportunities."
-                            />
+                        <CardHeader className="pb-0">
+                            <CardHeading icon={TrendingUp} title="Better ROI" description="Focus your marketing budget on real business opportunities." />
                         </CardHeader>
-
-                        <div className="relative flex-1 min-h-[300px] w-full mt-6 border-t border-dashed border-white/10">
-                            <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.05),transparent_125%)]"></div>
-                            <div className="relative h-full w-full p-6">
-                                <DualModeImage
-                                    darkSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
-                                    lightSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
-                                    alt="better roi"
-                                    width={1207}
-                                    height={929}
-                                    className="w-full h-full object-cover rounded-lg shadow-2xl"
-                                />
-                            </div>
-                        </div>
                     </FeatureCard>
-
-                    {/* Card 4: Plug & Play */}
                     <FeatureCard>
-                        <CardHeader className="pb-3">
-                            <CardHeading
-                                icon={Plug}
-                                title="Plug & Play"
-                                description="Integrate with your signup flow in minutes, not days."
-                            />
+                        <CardHeader className="pb-0">
+                            <CardHeading icon={Plug} title="Plug & Play" description="Integrate with your signup flow in minutes, not days." />
                         </CardHeader>
-
-                        <div className="relative flex-1 min-h-[300px] w-full mt-6 border-t border-dashed border-white/10">
-                            <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.05),transparent_125%)]"></div>
-                            <div className="relative h-full w-full p-6">
-                                <DualModeImage
-                                    darkSrc="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"
-                                    lightSrc="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"
-                                    alt="plug and play"
-                                    width={1207}
-                                    height={929}
-                                    className="w-full h-full object-cover rounded-lg shadow-2xl"
-                                />
-                            </div>
-                        </div>
                     </FeatureCard>
                 </div>
             </div>
@@ -148,39 +69,24 @@ interface CardHeadingProps {
 }
 
 const CardHeading = ({ icon: Icon, title, description }: CardHeadingProps) => (
-    <div className="p-6">
-        <span className="text-muted-foreground flex items-center gap-2">
-            <Icon className="size-4 text-orange-500" />
-            <span className="text-sm font-medium uppercase tracking-wider text-neutral-400">{title}</span>
-        </span>
-        <p className="mt-4 text-2xl font-semibold text-white leading-snug">{description}</p>
+    <div className="p-6 flex items-center justify-between gap-4 w-full">
+        <div className="flex-1 min-w-0">
+            <span className="text-muted-foreground flex items-center gap-2">
+                <Icon className="size-4 text-orange-500 flex-shrink-0" />
+                <span className="text-sm font-medium uppercase tracking-wider text-neutral-400">{title}</span>
+            </span>
+            <p className="mt-4 text-2xl font-semibold text-white leading-snug">{description}</p>
+        </div>
+        <CrispIcon icon={Icon} />
     </div>
 )
 
-interface DualModeImageProps {
-    darkSrc: string
-    lightSrc: string
-    alt: string
-    width: number
-    height: number
-    className?: string
+interface CrispIconProps {
+    icon: LucideIcon
 }
 
-const DualModeImage = ({ darkSrc, lightSrc, alt, width, height, className }: DualModeImageProps) => (
-    <>
-        <img
-            src={darkSrc}
-            className={cn('hidden dark:block rounded-lg opacity-80', className)}
-            alt={`${alt} dark`}
-            width={width}
-            height={height}
-        />
-        <img
-            src={lightSrc}
-            className={cn('shadow dark:hidden rounded-lg', className)}
-            alt={`${alt} light`}
-            width={width}
-            height={height}
-        />
-    </>
+const CrispIcon = ({ icon: Icon }: CrispIconProps) => (
+    <div className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl bg-blue-500/10 border border-white/5 flex-shrink-0">
+        <Icon className="w-7 h-7 md:w-8 md:h-8 text-blue-400" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+    </div>
 )

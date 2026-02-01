@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardHeader } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { Globe, Package, Users, BarChart3, LucideIcon } from 'lucide-react'
 import { ReactNode } from 'react'
@@ -15,104 +15,25 @@ export function Features() {
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-                    {/* Card 1: Global Commerce */}
                     <FeatureCard>
-                        <CardHeader className="pb-3">
-                            <CardHeading
-                                icon={Globe}
-                                title="Global Commerce"
-                                description="Multi-currency and multi-language storefronts, managed from one interface."
-                            />
+                        <CardHeader className="pb-0">
+                            <CardHeading icon={Globe} title="Global Commerce" description="Multi-currency and multi-language storefronts, managed from one interface." />
                         </CardHeader>
-
-                        <div className="relative flex-1 min-h-[300px] w-full mt-6 border-t border-dashed border-white/10">
-                            <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.05),transparent_125%)]"></div>
-                            <div className="relative h-full w-full p-6">
-                                <DualModeImage
-                                    darkSrc="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=3840&auto=format&fit=crop"
-                                    lightSrc="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=3840&auto=format&fit=crop"
-                                    alt="global commerce"
-                                    width={1207}
-                                    height={929}
-                                    className="w-full h-full object-cover rounded-lg shadow-2xl"
-                                />
-                            </div>
-                        </div>
                     </FeatureCard>
-
-                    {/* Card 2: Real-Time Inventory */}
                     <FeatureCard>
-                        <CardHeader className="pb-3">
-                            <CardHeading
-                                icon={Package}
-                                title="Real-Time Inventory"
-                                description="Automatic synchronization across all sales channels and warehouses."
-                            />
+                        <CardHeader className="pb-0">
+                            <CardHeading icon={Package} title="Real-Time Inventory" description="Automatic synchronization across all sales channels and warehouses." />
                         </CardHeader>
-
-                        <div className="relative flex-1 min-h-[300px] w-full mt-6 border-t border-dashed border-white/10">
-                            <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.05),transparent_125%)]"></div>
-                            <div className="relative h-full w-full p-6">
-                                <DualModeImage
-                                    darkSrc="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=3840&auto=format&fit=crop"
-                                    lightSrc="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=3840&auto=format&fit=crop"
-                                    alt="inventory management"
-                                    width={1207}
-                                    height={929}
-                                    className="w-full h-full object-cover rounded-lg shadow-2xl"
-                                />
-                            </div>
-                        </div>
                     </FeatureCard>
-
-                    {/* Card 3: Complete CRM */}
                     <FeatureCard>
-                        <CardHeader className="pb-3">
-                            <CardHeading
-                                icon={Users}
-                                title="Complete CRM"
-                                description="Track every customer touchpoint from lead to loyalty."
-                            />
+                        <CardHeader className="pb-0">
+                            <CardHeading icon={Users} title="Complete CRM" description="Track every customer touchpoint from lead to loyalty." />
                         </CardHeader>
-
-                        <div className="relative flex-1 min-h-[300px] w-full mt-6 border-t border-dashed border-white/10">
-                            <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.05),transparent_125%)]"></div>
-                            <div className="relative h-full w-full p-6">
-                                <DualModeImage
-                                    darkSrc="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=3840&auto=format&fit=crop"
-                                    lightSrc="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=3840&auto=format&fit=crop"
-                                    alt="crm relationship"
-                                    width={1207}
-                                    height={929}
-                                    className="w-full h-full object-cover rounded-lg shadow-2xl"
-                                />
-                            </div>
-                        </div>
                     </FeatureCard>
-
-                    {/* Card 4: Enterprise Resource Planning */}
                     <FeatureCard>
-                        <CardHeader className="pb-3">
-                            <CardHeading
-                                icon={BarChart3}
-                                title="Enterprise Resource Planning"
-                                description="Streamline procurement, finance, and logistics in one system."
-                            />
+                        <CardHeader className="pb-0">
+                            <CardHeading icon={BarChart3} title="Enterprise Resource Planning" description="Streamline procurement, finance, and logistics in one system." />
                         </CardHeader>
-
-                        <div className="relative flex-1 min-h-[300px] w-full mt-6 border-t border-dashed border-white/10">
-                            <div className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,rgba(255,255,255,0.05),transparent_125%)]"></div>
-                            <div className="relative h-full w-full p-6">
-                                <DualModeImage
-                                    darkSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
-                                    lightSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
-                                    alt="erp dashboard"
-                                    width={1207}
-                                    height={929}
-                                    className="w-full h-full object-cover rounded-lg shadow-2xl"
-                                />
-                            </div>
-                        </div>
                     </FeatureCard>
                 </div>
             </div>
@@ -148,39 +69,24 @@ interface CardHeadingProps {
 }
 
 const CardHeading = ({ icon: Icon, title, description }: CardHeadingProps) => (
-    <div className="p-6">
-        <span className="text-muted-foreground flex items-center gap-2">
-            <Icon className="size-4 text-orange-500" />
-            <span className="text-sm font-medium uppercase tracking-wider text-neutral-400">{title}</span>
-        </span>
-        <p className="mt-4 text-2xl font-semibold text-white leading-snug">{description}</p>
+    <div className="p-6 flex items-center justify-between gap-4 w-full">
+        <div className="flex-1 min-w-0">
+            <span className="text-muted-foreground flex items-center gap-2">
+                <Icon className="size-4 text-orange-500 flex-shrink-0" />
+                <span className="text-sm font-medium uppercase tracking-wider text-neutral-400">{title}</span>
+            </span>
+            <p className="mt-4 text-2xl font-semibold text-white leading-snug">{description}</p>
+        </div>
+        <CrispIcon icon={Icon} />
     </div>
 )
 
-interface DualModeImageProps {
-    darkSrc: string
-    lightSrc: string
-    alt: string
-    width: number
-    height: number
-    className?: string
+interface CrispIconProps {
+    icon: LucideIcon
 }
 
-const DualModeImage = ({ darkSrc, lightSrc, alt, width, height, className }: DualModeImageProps) => (
-    <>
-        <img
-            src={darkSrc}
-            className={cn('hidden dark:block rounded-lg opacity-80', className)}
-            alt={`${alt} dark`}
-            width={width}
-            height={height}
-        />
-        <img
-            src={lightSrc}
-            className={cn('shadow dark:hidden rounded-lg', className)}
-            alt={`${alt} light`}
-            width={width}
-            height={height}
-        />
-    </>
+const CrispIcon = ({ icon: Icon }: CrispIconProps) => (
+    <div className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-xl bg-blue-500/10 border border-white/5 flex-shrink-0">
+        <Icon className="w-7 h-7 md:w-8 md:h-8 text-blue-400" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+    </div>
 )
