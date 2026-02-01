@@ -119,6 +119,13 @@ export function FloatingHeader() {
     const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const pathname = usePathname();
 
+    // Close dropdowns when route changes (after navigation)
+    useEffect(() => {
+        setServicesOpen(false);
+        setProductsOpen(false);
+        setResourcesOpen(false);
+    }, [pathname]);
+
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
@@ -307,6 +314,7 @@ export function FloatingHeader() {
                                                 <Link
                                                     key={service.id}
                                                     href={service.href}
+                                                    onClick={() => setServicesOpen(false)}
                                                     className={cn(
                                                         "flex items-start gap-3 rounded-xl p-3",
                                                         "transition-all duration-300 ease-out",
@@ -420,6 +428,7 @@ export function FloatingHeader() {
                                                 <Link
                                                     key={product.id}
                                                     href={product.href}
+                                                    onClick={() => setProductsOpen(false)}
                                                     className={cn(
                                                         "flex items-start gap-3 rounded-xl p-3",
                                                         "transition-all duration-300 ease-out",
