@@ -94,6 +94,14 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     }));
 }
 
+export async function getBlogPostsForSitemap(): Promise<{ slug: string; updatedAt: Date }[]> {
+    const posts = await prisma.blogPost.findMany({
+        select: { slug: true, updatedAt: true },
+        orderBy: { updatedAt: "desc" },
+    });
+    return posts;
+}
+
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     const post = await prisma.blogPost.findUnique({
         where: { slug },
