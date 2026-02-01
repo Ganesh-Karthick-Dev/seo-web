@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { TempMailHeroSection } from "@/components/sections/TempMailHeroSection";
 import { ProductChallengeSection } from "@/components/sections/ProductChallengeSection";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
@@ -52,9 +53,14 @@ export default function TempMailBlockerPage() {
                                 "rgb(255, 200, 100)",
                             ]}
                         >
-                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-6 sm:px-8 py-3 text-sm sm:text-base text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
+                            <Link
+                                href="https://tempmailblocker.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-6 sm:px-8 py-3 text-sm sm:text-base text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)] text-center"
+                            >
                                 Start Free Trial — No Credit Card Required &rarr;
-                            </button>
+                            </Link>
                         </NoiseBackground>
                     </div>
                 </div>

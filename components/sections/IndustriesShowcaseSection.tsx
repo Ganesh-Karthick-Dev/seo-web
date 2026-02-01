@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -343,6 +345,14 @@ export function IndustriesShowcaseSection() {
                                         {industry.description}
                                     </p>
 
+                                    {/* View details link */}
+                                    <Link
+                                        href="/industries"
+                                        className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
+                                    >
+                                        view details
+                                        <ArrowRight className="w-4 h-4" />
+                                    </Link>
                                 </div>
                             </div>
                         );

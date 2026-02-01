@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useCallback } from 'react';
-import { MousePointer2, Info, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { MousePointer2, ArrowRight } from 'lucide-react';
 
 // --- Types ---
 
@@ -410,14 +411,14 @@ const HeroContent: React.FC<{
                 </p>
 
                 <div className="pt-8 pointer-events-auto">
-                    <a
+                    <Link
                         href={buttonHref}
                         className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold tracking-wide overflow-hidden transition-transform hover:scale-105 active:scale-95"
                     >
                         <span className="relative z-10">{buttonText}</span>
                         <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
                         <div className="absolute inset-0 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out opacity-10"></div>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -115,7 +115,7 @@ export function BlogSection({ initialBlogPosts = [] }: BlogSectionProps) {
 
                                     {/* Read Article Link */}
                                     <div className="flex items-center gap-2 text-blue-500 font-medium text-sm group-hover:text-blue-400 transition-colors">
-                                        Read Article
+                                        Read more
                                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@ export function BlogSection({ initialBlogPosts = [] }: BlogSectionProps) {
                         href="/resources"
                         className="group flex items-center gap-2 text-lg text-neutral-400 hover:text-white transition-colors font-medium"
                     >
-                        View All Articles
+                        view all blogs
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>

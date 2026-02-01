@@ -60,6 +60,7 @@ export default function CustomSoftwareDevelopmentPage() {
             <ServiceProcessSection
                 title="From Concept to Scale"
                 titleHighlight="Our Core Engineering Capabilities"
+                ctaLink={{ text: "View case studies", href: "/resources" }}
                 processData={[
                     {
                         title: "01",

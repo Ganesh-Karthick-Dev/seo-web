@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Zylex360HeroSection } from "@/components/sections/Zylex360HeroSection";
 import { ProductChallengeSection } from "@/components/sections/ProductChallengeSection";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
@@ -52,9 +53,12 @@ export default function Zylex360Page() {
                                 "rgb(255, 200, 100)",
                             ]}
                         >
-                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-6 sm:px-8 py-3 text-sm sm:text-base text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
+                            <Link
+                                href="/contact"
+                                className="block h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-6 sm:px-8 py-3 text-sm sm:text-base text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)] text-center"
+                            >
                                 See Zylex360 in Action — Book Your Demo &rarr;
-                            </button>
+                            </Link>
                         </NoiseBackground>
                     </div>
                 </div>

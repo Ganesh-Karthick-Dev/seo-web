@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Timeline } from "@/components/ui/timeline";
 import { AppWindow, Box, Zap, Building2, Link2 } from "lucide-react";
 
@@ -13,6 +15,8 @@ interface ServiceProcessSectionProps {
     title?: string;
     titleHighlight?: string;
     processData?: ProcessItem[];
+    /** Optional CTA below section - e.g. { text: "View case studies", href: "/resources" } */
+    ctaLink?: { text: string; href: string };
 }
 
 const defaultProcessData: ProcessItem[] = [
@@ -112,6 +116,7 @@ export function ServiceProcessSection({
     title = "From Idea to Enterprise Scale",
     titleHighlight = "Our Core Software Capabilities",
     processData = defaultProcessData,
+    ctaLink,
 }: ServiceProcessSectionProps) {
     return (
         <section className="relative bg-black overflow-hidden">
@@ -132,6 +137,19 @@ export function ServiceProcessSection({
 
             {/* Timeline */}
             <Timeline data={processData} />
+
+            {/* Optional CTA Link */}
+            {ctaLink && (
+                <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 pb-16">
+                    <Link
+                        href={ctaLink.href}
+                        className="inline-flex items-center gap-2 text-cyan-400 font-medium hover:text-cyan-300 transition-colors"
+                    >
+                        {ctaLink.text}
+                        <ArrowRight className="w-4 h-4" />
+                    </Link>
+                </div>
+            )}
         </section>
     );
 }

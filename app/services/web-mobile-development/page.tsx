@@ -57,6 +57,7 @@ export default function WebMobileApplicationDevelopmentPage() {
             <ServiceProcessSection
                 title="Core Capabilities"
                 titleHighlight="From Web Platforms to Mobile Ecosystems"
+                ctaLink={{ text: "View case studies", href: "/resources" }}
                 processData={[
                     {
                         title: "01",
