@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run generate-sitemap",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "generate-sitemap": "npx tsx scripts/generate-sitemap.ts"

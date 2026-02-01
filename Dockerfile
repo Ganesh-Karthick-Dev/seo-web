@@ -17,5 +17,5 @@ RUN npm run build
 
 EXPOSE 3000
 
-# Push schema, generate sitemap (DB reachable at runtime), then start app
-CMD npx prisma db push --skip-generate && npm run generate-sitemap && npm start
+# Push schema, then start app (sitemap served dynamically like /resources)
+CMD npx prisma db push --skip-generate && npm start

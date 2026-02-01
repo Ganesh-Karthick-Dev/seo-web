@@ -1,7 +1,6 @@
 /**
  * Generates sitemap.xml and robots.txt in project root and public/ for SEO.
- * Run: npm run generate-sitemap (or via postbuild)
- * Deletes existing files and replaces with fresh output.
+ * Run at container startup only (DB reachable). Not run during build.
  */
 
 import { writeFileSync, existsSync, unlinkSync } from "fs";
