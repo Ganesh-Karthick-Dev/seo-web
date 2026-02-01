@@ -197,7 +197,7 @@ export default function Contact() {
                                             href={item.link}
                                             target={item.external ? "_blank" : undefined}
                                             rel={item.external ? "noopener noreferrer" : undefined}
-                                            className="group flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors"
+                                            className="group flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer"
                                         >
                                             <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-sky-500 flex items-center justify-center group-hover:scale-110 transition-transform">
                                                 <item.icon className="w-5 h-5 text-white" />

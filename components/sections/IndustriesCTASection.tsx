@@ -155,7 +155,8 @@ export function IndustriesCTASection() {
                                                     </Button>
                                                 </Link>
                                                 <Link
-                                                    href="mailto:info@zylex.com"
+                                                    href="mailto:connect@zylex.io"
+                                                    aria-label="Email us at connect@zylex.io"
                                                     className={cn(
                                                         buttonVariants({
                                                             variant: "outline",
