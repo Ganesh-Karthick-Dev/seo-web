@@ -41,7 +41,8 @@ export default function TempMailBlockerPage() {
         <main className="relative w-full bg-[#030308]">
             <TempMailHeroSection />
 
-            <section className="w-full relative bg-black py-32 flex items-center justify-center">
+            <section className="w-full flex justify-center py-8">
+                <div className="w-[60%] relative bg-neutral-900/60 py-32 flex items-center justify-center rounded-3xl">
                 <div className="w-full max-w-5xl mx-auto p-4 flex flex-col items-center justify-center text-center">
                     <p className="text-2xl md:text-4xl font-light text-white/60 mb-8">
                         Ready to secure your pipeline?
@@ -82,6 +83,7 @@ export default function TempMailBlockerPage() {
                             </button>
                         </NoiseBackground>
                     </div>
+                </div>
                 </div>
             </section>
 
