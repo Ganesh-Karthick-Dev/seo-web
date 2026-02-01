@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useMemo } from "react";
 import { motion } from "motion/react";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
-import { GradientWave } from "@/components/ui/gradient-wave";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import gsap from "gsap";
 
@@ -21,7 +20,6 @@ interface ServiceHeroProps {
     secondaryCtaHref?: string;
 
     // Visual
-    gradientColors?: string[];
     highlights?: string[];
 
     // Icon for the service (Rendered ReactNode)
@@ -36,7 +34,6 @@ export function ServiceHeroSection({
     ctaHref = "/contact",
     secondaryCtaText,
     secondaryCtaHref,
-    gradientColors = ["#38bdf8", "#ffffff", "#38bdf8", "#ffffff", "#38bdf8", "#ffffff"],
     highlights = [],
     icon,
 }: ServiceHeroProps) {
@@ -84,21 +81,7 @@ export function ServiceHeroSection({
     }, [title]);
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-sky-400">
-            {/* Animated Gradient Background */}
-            <GradientWave
-                colors={gradientColors}
-                isPlaying={true}
-                darkenTop={false}
-                noiseSpeed={0.00001}
-                noiseFrequency={[0.0001, 0.0009]}
-                deform={{
-                    incline: 0.5,
-                    noiseAmp: 250,
-                    noiseFlow: 5,
-                }}
-            />
-
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sky-500 via-sky-600 to-blue-700">
             {/* Dark overlay for better text readability */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 z-[1]" />
 

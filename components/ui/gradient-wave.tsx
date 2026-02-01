@@ -24,7 +24,7 @@ class MiniGl {
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
-        const gl = this.canvas.getContext("webgl", { antialias: true });
+        const gl = this.canvas.getContext("webgl", { antialias: false, alpha: false });
         if (!gl) throw new Error("WebGL not supported");
         this.gl = gl;
 
@@ -418,7 +418,7 @@ ${fields}
     }
 
     render(): void {
-        this.gl.clearColor(0, 0, 0, 0);
+        this.gl.clearColor(0.23, 0.73, 0.98, 1);
         this.gl.clearDepth(1);
         this.meshes.forEach((m) => m.draw());
     }
@@ -630,14 +630,14 @@ void main() {
         window.addEventListener("resize", () => this.resize());
     }
 
-    resize(): void {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
+    resize(w?: number, h?: number): void {
+        const width = w ?? window.innerWidth;
+        const height = h ?? window.innerHeight;
         this.minigl.setSize(width, height);
         this.minigl.setOrthographicCamera();
 
-        const xSegCount = Math.ceil(width * 0.02);
-        const ySegCount = Math.ceil(height * 0.05);
+        const xSegCount = Math.min(64, Math.ceil(width * 0.018));
+        const ySegCount = Math.min(48, Math.ceil(height * 0.04));
         this.mesh.geometry.setTopology(xSegCount, ySegCount);
         this.mesh.geometry.setSize(width, height);
         this.mesh.material.uniforms.u_shadow_power.value = width < 600 ? 5 : 6;
@@ -646,7 +646,7 @@ void main() {
     animate = (timestamp: number): void => {
         if (!this.isPlaying) return;
 
-        this.time += Math.min(timestamp - this.last, 1000 / 15);
+        this.time += Math.min(timestamp - this.last, 1000 / 20);
         this.last = timestamp;
         this.mesh.material.uniforms.u_time.value = this.time;
         this.minigl.render();
@@ -655,6 +655,7 @@ void main() {
     };
 
     start(): void {
+        if (this.isPlaying) return;
         this.isPlaying = true;
         this.animationId = requestAnimationFrame(this.animate);
     }
@@ -675,6 +676,8 @@ interface GradientWaveProps {
     darkenTop?: boolean;
     noiseSpeed?: number;
     noiseFrequency?: [number, number];
+    /** Pause animation when element is off-screen to save GPU */
+    pauseWhenInvisible?: boolean;
     deform?: {
         incline?: number;
         offsetTop?: number;
@@ -695,6 +698,7 @@ export function GradientWave({
     darkenTop = false,
     noiseSpeed = 0.00001,
     noiseFrequency = [0.0001, 0.0009],
+    pauseWhenInvisible = false,
     deform = { incline: 0.5, noiseAmp: 250, noiseFlow: 5 },
 }: GradientWaveProps) {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -703,6 +707,7 @@ export function GradientWave({
     useEffect(() => {
         if (!containerRef.current) return;
 
+        let io: IntersectionObserver | null = null;
         const canvas = document.createElement("canvas");
         Object.assign(canvas.style, {
             position: "absolute",
@@ -718,6 +723,11 @@ export function GradientWave({
             const gradient = new Gradient(canvas, colors);
             gradientRef.current = gradient;
 
+            const rect = containerRef.current.getBoundingClientRect();
+            const w = Math.ceil(rect.width) || window.innerWidth;
+            const h = Math.ceil(rect.height) || window.innerHeight;
+            gradient.resize(w, h);
+
             gradient.mesh.material.uniforms.u_shadow_power.value = shadowPower;
             gradient.mesh.material.uniforms.u_darken_top.value = darkenTop ? 1 : 0;
             gradient.mesh.material.uniforms.u_global.value.noiseFreq.value =
@@ -730,12 +740,26 @@ export function GradientWave({
                 ...deform,
             });
 
+            if (pauseWhenInvisible && containerRef.current) {
+                io = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting && isPlaying) {
+                            gradientRef.current?.start();
+                        } else {
+                            gradientRef.current?.stop();
+                        }
+                    },
+                    { rootMargin: "100px", threshold: 0 }
+                );
+                io.observe(containerRef.current);
+            }
             if (isPlaying) gradient.start();
         } catch (error) {
             console.error("Failed to initialize gradient:", error);
         }
 
         return () => {
+            io?.disconnect();
             gradientRef.current?.stop();
             if (containerRef.current?.contains(canvas)) {
                 containerRef.current.removeChild(canvas);
@@ -749,6 +773,7 @@ export function GradientWave({
         noiseSpeed,
         noiseFrequency,
         deform,
+        pauseWhenInvisible,
     ]);
 
     return (
