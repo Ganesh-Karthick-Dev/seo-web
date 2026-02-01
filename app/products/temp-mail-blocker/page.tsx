@@ -98,14 +98,17 @@ export default function TempMailBlockerPage() {
                         </>
                     }
                 >
-                    <Image
-                        src="/products/temp_mail_dashboard.png"
-                        alt="Temp Mail Blocker Dashboard"
-                        height={720}
-                        width={1400}
-                        className="mx-auto rounded-2xl object-cover h-full object-left-top"
-                        draggable={false}
-                    />
+                    <div className="relative w-full h-full">
+                        <Image
+                            src="/products/temp_mail_dashboard.png"
+                            alt="Temp Mail Blocker Dashboard"
+                            fill
+                            className="object-contain rounded-2xl"
+                            sizes="(max-width: 768px) 100vw, 1280px"
+                            draggable={false}
+                            priority
+                        />
+                    </div>
                 </ContainerScroll>
             </section>
 
