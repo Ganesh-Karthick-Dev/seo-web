@@ -84,9 +84,11 @@ export function ServicesStackSection() {
     const cardsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        const title = titleRef.current;
+        if (!title) return;
+
         const ctx = gsap.context(() => {
-            // Title Animation
-            gsap.fromTo(titleRef.current,
+            gsap.fromTo(title,
                 { x: -50, opacity: 0 },
                 {
                     x: 0,
@@ -95,24 +97,13 @@ export function ServicesStackSection() {
                     ease: "power3.out",
                     immediateRender: false,
                     scrollTrigger: {
-                        trigger: titleRef.current,
+                        trigger: title,
                         start: "top 85%",
-                    }
+                        toggleActions: "play none none none",
+                        scroller: document.documentElement,
+                    },
                 }
             );
-
-            // Cards Stacking Animation
-            const cards = cardsRef.current?.children;
-            if (cards) {
-                Array.from(cards).forEach((card, index) => {
-                    ScrollTrigger.create({
-                        trigger: card,
-                        start: "top top+=150",
-                        end: "bottom top",
-                        scrub: true,
-                    });
-                });
-            }
         }, containerRef);
 
         return () => ctx.revert();
@@ -143,7 +134,7 @@ export function ServicesStackSection() {
                             }}
                         >
                             <div className={cn(
-                                "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/90 backdrop-blur-xl transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]",
+                                "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/95 transition-[border-color,box-shadow] duration-300 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]",
                                 "h-[400px] flex flex-col",
                                 index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
                             )}>
@@ -182,7 +173,9 @@ export function ServicesStackSection() {
                                         src={service.image}
                                         alt={service.title}
                                         fill
-                                        className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                        loading="lazy"
+                                        className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                                     />
 
                                     {/* Overlay gradient */}

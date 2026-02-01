@@ -16,7 +16,7 @@ const GridVisual = () => (
                 <div
                     key={i}
                     className={cn(
-                        "w-12 h-16 rounded-lg border border-white/10 transition-all duration-1000",
+                        "w-12 h-16 rounded-lg border border-white/10",
                         [1, 4, 7].includes(i) ? "border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)] bg-blue-500/10" : "bg-transparent"
                     )}
                 />
@@ -27,22 +27,14 @@ const GridVisual = () => (
 
 const WaveVisual = () => (
     <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -right-10 -top-20 w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent blur-3xl" />
-        <svg className="absolute top-0 right-0 w-full h-full opacity-60" viewBox="0 0 400 200" preserveAspectRatio="none">
-            <path d="M0,100 C100,150 200,50 400,100" fill="none" stroke="url(#blueGradient)" strokeWidth="40" strokeLinecap="round" filter="url(#glow)" />
-            <path d="M0,100 C100,150 200,50 400,100" fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.5" />
+        <div className="absolute -right-10 -top-20 w-[150%] h-[150%] bg-gradient-to-br from-blue-500/25 via-transparent to-transparent" />
+        <svg className="absolute top-0 right-0 w-full h-full opacity-50" viewBox="0 0 400 200" preserveAspectRatio="none">
+            <path d="M0,100 C100,150 200,50 400,100" fill="none" stroke="url(#challengesBlueGrad)" strokeWidth="30" strokeLinecap="round" />
             <defs>
-                <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <linearGradient id="challengesBlueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#3b82f6" />
                     <stop offset="100%" stopColor="#22d3ee" />
                 </linearGradient>
-                <filter id="glow">
-                    <feGaussianBlur stdDeviation="10" result="coloredBlur" />
-                    <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                </filter>
             </defs>
         </svg>
     </div>
@@ -52,14 +44,14 @@ const ChartVisual = () => (
     <div className="absolute inset-0 flex items-center justify-center p-8">
         <div className="relative w-full h-32 border-t border-b border-white/10 flex items-end justify-between px-2">
             {[30, 50, 45, 70, 60, 85, 80, 95, 60, 40].map((h, i) => (
-                <div key={i} className="relative group">
+                <div key={i} className="relative">
                     <div
-                        className="w-2 bg-blue-500/20 rounded-t-sm transition-all duration-1000"
+                        className="w-2 bg-blue-500/20 rounded-t-sm"
                         style={{ height: `${h}%` }}
                     />
                     <div
-                        className="absolute bottom-0 w-2 bg-blue-500 rounded-t-sm shadow-[0_0_10px_rgba(59,130,246,0.5)] animate-pulse"
-                        style={{ height: `${h * 0.3}%`, animationDelay: `${i * 0.1}s` }}
+                        className="absolute bottom-0 w-2 bg-blue-500/80 rounded-t-sm"
+                        style={{ height: `${h * 0.3}%` }}
                     />
                 </div>
             ))}
@@ -74,19 +66,14 @@ const ChartVisual = () => (
 const NetworkVisual = () => (
     <div className="absolute inset-0 flex items-center justify-center">
         <div className="relative w-full h-full">
-            <div className="absolute top-1/2 left-1/2 w-6 h-6 bg-transparent border-2 border-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10">
-                <div className="absolute inset-0 bg-blue-500/50 rounded-full animate-ping" />
-            </div>
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg, i) => (
+            <div className="absolute top-1/2 left-1/2 w-6 h-6 border-2 border-white/60 rounded-full -translate-x-1/2 -translate-y-1/2 z-10" />
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
                 <div
-                    key={i}
+                    key={deg}
                     className="absolute top-1/2 left-1/2 w-32 h-[1px] bg-gradient-to-r from-white/20 to-transparent origin-left"
                     style={{ transform: `rotate(${deg}deg) translateY(-50%)` }}
                 >
-                    <div
-                        className="absolute right-0 w-1 h-1 bg-white/50 rounded-full"
-                        style={{ animation: `pulse 2s infinite ${i * 0.2}s` }}
-                    />
+                    <div className="absolute right-0 w-1 h-1 bg-white/50 rounded-full" />
                 </div>
             ))}
         </div>
@@ -114,6 +101,8 @@ export function ChallengesSection() {
                     scrollTrigger: {
                         trigger: titleRef.current,
                         start: "top 85%",
+                        toggleActions: "play none none none",
+                        scroller: document.documentElement,
                     }
                 }
             );
@@ -125,8 +114,8 @@ export function ChallengesSection() {
                     scrollTrigger: {
                         trigger: gridRef.current,
                         start: "top 75%",
-                        end: "bottom top", // Fades out when the bottom of the grid leaves the top of the viewport
-                        toggleActions: "play reverse play reverse"
+                        toggleActions: "play none none none",
+                        scroller: document.documentElement,
                     }
                 });
 
@@ -179,7 +168,7 @@ export function ChallengesSection() {
                 <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[350px]">
 
                     {/* Card 1: Projects (Large Left) - Span 7 */}
-                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-500">
+                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/95 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-300">
                         {/* Glossy Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
 
@@ -202,7 +191,7 @@ export function ChallengesSection() {
                     </div>
 
                     {/* Card 2: Integration (Medium Right) - Span 5 */}
-                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-500">
+                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/95 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-300">
                         {/* Glossy Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
 
@@ -223,7 +212,7 @@ export function ChallengesSection() {
                     </div>
 
                     {/* Card 3: Scalability (Medium Left) - Span 5 */}
-                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-500">
+                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/95 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-300">
                         {/* Glossy Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
 
@@ -244,7 +233,7 @@ export function ChallengesSection() {
                     </div>
 
                     {/* Card 4: Standards (Large Right) - Span 7 */}
-                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-500">
+                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/95 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-300">
                         {/* Glossy Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
 
