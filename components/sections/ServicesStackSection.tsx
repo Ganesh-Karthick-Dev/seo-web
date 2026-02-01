@@ -110,12 +110,12 @@ export function ServicesStackSection() {
                     const nextCard = cardsRef.current?.children[i + 1];
                     if (!nextCard) continue;
 
-                    const scaleDown = 0.97 - 0.01 * i;
+                    const scaleDown = 0.85 - 0.02 * i;
 
                     gsap.fromTo(cardInner,
                         { scale: 1 },
                         {
-                            scale: scaleDown,
+                            scale: Math.max(0.75, scaleDown),
                             ease: "none",
                             scrollTrigger: {
                                 trigger: nextCard,
@@ -145,12 +145,12 @@ export function ServicesStackSection() {
                 </div>
 
                 {/* Stacking Cards Container */}
-                <div ref={cardsRef} className="flex flex-col gap-8 pb-32">
+                <div ref={cardsRef} className="flex flex-col gap-0 pb-32">
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="sticky top-32 group"
-                            style={{ top: "150px" }}
+                            className="sticky top-32 group -mb-8 last:mb-0"
+                            style={{ top: "150px", zIndex: index + 1 }}
                         >
                             <div
                                 data-card-inner
