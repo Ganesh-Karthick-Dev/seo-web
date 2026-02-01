@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Install OpenSSL for Prisma
 RUN apk add --no-cache openssl
@@ -17,5 +17,5 @@ RUN npm run build
 
 EXPOSE 3000
 
-# Push schema, then start app (sitemap served dynamically like /resources)
+# Push schema, then start app
 CMD npx prisma db push --skip-generate && npm start

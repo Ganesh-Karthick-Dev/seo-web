@@ -4,8 +4,7 @@ import Image from "next/image";
 import { getAllBlogPosts, BlogPost } from "@/lib/blog-data";
 import ResourcesClient from "./resources-client";
 
-export const dynamic = "force-dynamic"; // DB at runtime only, not at build
-export const revalidate = 60;
+export const revalidate = 60; // ISR - revalidate every 60 seconds
 
 export default async function ResourcesPage() {
     let blogPosts: BlogPost[] = [];

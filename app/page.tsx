@@ -1,8 +1,7 @@
 import { getAllBlogPosts } from "@/lib/blog-data";
 import HomeClient from "./home-client";
 
-export const dynamic = "force-dynamic"; // DB at runtime only, not at build
-export const revalidate = 60;
+export const revalidate = 60; // Revalidate every 60s so Insights & Resources gets fresh posts
 
 export default async function Home() {
   let firstThree: Awaited<ReturnType<typeof getAllBlogPosts>> = [];
