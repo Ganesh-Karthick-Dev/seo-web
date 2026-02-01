@@ -4,6 +4,8 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion } from "motion/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { cn } from "@/lib/utils";
+import { industries } from "@/lib/industries-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,18 +13,20 @@ gsap.registerPlugin(ScrollTrigger);
 export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
 
 interface FlipCardProps {
-    src: string;
+    icon: (typeof industries)[number]["icon"];
+    accentColor: string;
     index: number;
     total: number;
     target: { x: number; y: number; rotation: number; scale: number; opacity: number };
 }
 
 // --- FlipCard Component ---
-const IMG_WIDTH = 60;
-const IMG_HEIGHT = 85;
+const CARD_WIDTH = 60;
+const CARD_HEIGHT = 85;
 
 function FlipCard({
-    src,
+    icon: Icon,
+    accentColor,
     index,
     target,
 }: FlipCardProps) {
@@ -42,8 +46,8 @@ function FlipCard({
             }}
             style={{
                 position: "absolute",
-                width: IMG_WIDTH,
-                height: IMG_HEIGHT,
+                width: CARD_WIDTH,
+                height: CARD_HEIGHT,
                 transformStyle: "preserve-3d",
                 perspective: "1000px",
             }}
@@ -55,17 +59,12 @@ function FlipCard({
                 transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
                 whileHover={{ rotateY: 180 }}
             >
-                {/* Front Face */}
+                {/* Front Face - Industry Icon */}
                 <div
-                    className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-gray-200"
+                    className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-white dark:bg-zinc-800 flex items-center justify-center border border-neutral-200 dark:border-neutral-700"
                     style={{ backfaceVisibility: "hidden" }}
                 >
-                    <img
-                        src={src}
-                        alt={`industry-${index}`}
-                        className="h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-transparent" />
+                    <Icon className={cn("w-8 h-8", accentColor)} strokeWidth={1.5} />
                 </div>
 
                 {/* Back Face */}
@@ -82,33 +81,6 @@ function FlipCard({
         </motion.div>
     );
 }
-
-// --- Main Component ---
-const TOTAL_IMAGES = 20;
-
-// Industry-related images
-const IMAGES = [
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=80",
-    "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=300&q=80",
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=80",
-    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&q=80",
-    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=300&q=80",
-    "https://images.unsplash.com/photo-1506765515384-028b60a970df?w=300&q=80",
-    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&q=80",
-    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=300&q=80",
-    "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?w=300&q=80",
-    "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=300&q=80",
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&q=80",
-    "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=300&q=80",
-    "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&q=80",
-    "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=300&q=80",
-    "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=300&q=80",
-    "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=300&q=80",
-    "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=300&q=80",
-    "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=300&q=80",
-    "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=300&q=80",
-    "https://images.unsplash.com/photo-1496568816309-51d7c20e3b21?w=300&q=80",
-];
 
 const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
 
@@ -170,9 +142,11 @@ export default function ScrollMorphHero() {
         return () => { clearTimeout(timer1); clearTimeout(timer2); };
     }, []);
 
+    const totalCards = industries.length;
+
     // --- Random Scatter Positions ---
     const scatterPositions = useMemo(() => {
-        return IMAGES.map(() => ({
+        return industries.map(() => ({
             x: (Math.random() - 0.5) * 1500,
             y: (Math.random() - 0.5) * 1000,
             rotation: (Math.random() - 0.5) * 180,
@@ -232,14 +206,14 @@ export default function ScrollMorphHero() {
 
                     {/* Main Container */}
                     <div className="relative flex items-center justify-center w-full h-full">
-                        {IMAGES.slice(0, TOTAL_IMAGES).map((src, i) => {
+                        {industries.map((industry, i) => {
                             let target = { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 };
 
                             if (introPhase === "scatter") {
                                 target = scatterPositions[i];
                             } else if (introPhase === "line") {
                                 const lineSpacing = 70;
-                                const lineTotalWidth = TOTAL_IMAGES * lineSpacing;
+                                const lineTotalWidth = totalCards * lineSpacing;
                                 const lineX = i * lineSpacing - lineTotalWidth / 2;
                                 target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
                             } else {
@@ -247,7 +221,7 @@ export default function ScrollMorphHero() {
                                 const minDimension = Math.min(containerSize.width, containerSize.height);
 
                                 const circleRadius = Math.min(minDimension * 0.35, 350);
-                                const circleAngle = (i / TOTAL_IMAGES) * 360;
+                                const circleAngle = (i / totalCards) * 360;
                                 const circleRad = (circleAngle * Math.PI) / 180;
                                 const circlePos = {
                                     x: Math.cos(circleRad) * circleRadius,
@@ -261,7 +235,7 @@ export default function ScrollMorphHero() {
                                 const arcCenterY = arcApexY + arcRadius;
                                 const spreadAngle = isMobile ? 100 : 130;
                                 const startAngle = -90 - (spreadAngle / 2);
-                                const step = spreadAngle / (TOTAL_IMAGES - 1);
+                                const step = spreadAngle / (totalCards - 1 || 1);
 
                                 const maxRotation = spreadAngle * 0.8;
                                 const boundedRotation = -rotateValue * maxRotation;
@@ -288,9 +262,10 @@ export default function ScrollMorphHero() {
                             return (
                                 <FlipCard
                                     key={i}
-                                    src={src}
+                                    icon={industry.icon}
+                                    accentColor={industry.accentColor}
                                     index={i}
-                                    total={TOTAL_IMAGES}
+                                    total={totalCards}
                                     target={target}
                                 />
                             );
