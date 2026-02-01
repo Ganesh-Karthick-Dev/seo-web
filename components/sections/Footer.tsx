@@ -24,6 +24,15 @@ const products = [
     { name: "Zylex360", href: "/products/zylex-360" },
 ];
 
+const industries = [
+    { name: "Healthcare", href: "/industries" },
+    { name: "Fintech", href: "/industries" },
+    { name: "E-Commerce", href: "/industries" },
+    { name: "Education", href: "/industries" },
+    { name: "Real Estate", href: "/industries" },
+    { name: "Logistics", href: "/industries" },
+];
+
 const company = [
     { name: "About Us", href: "/about-us" },
     { name: "Industries", href: "/industries" },
@@ -161,6 +170,25 @@ export function Footer() {
                             </h4>
                             <ul className="space-y-3">
                                 {products.map((item) => (
+                                    <li key={item.name}>
+                                        <Link
+                                            href={item.href}
+                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Industries */}
+                        <div>
+                            <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider mb-6">
+                                Industries
+                            </h4>
+                            <ul className="space-y-3">
+                                {industries.map((item) => (
                                     <li key={item.name}>
                                         <Link
                                             href={item.href}
