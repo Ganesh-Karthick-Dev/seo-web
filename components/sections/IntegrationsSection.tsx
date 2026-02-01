@@ -1,7 +1,6 @@
 "use client";
 
 import React, { forwardRef, useRef } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 
@@ -238,18 +237,21 @@ export function IntegrationsSection({
                             })}
                         </div>
 
-                        {/* Center - Favicon Logo */}
+                        {/* Center - Zylex Z Logo */}
                         <div
                             ref={centerRef}
-                            className="z-10 flex size-20 md:size-24 items-center justify-center rounded-full border-2 border-neutral-200 bg-white p-4 shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+                            className="z-10 flex size-20 md:size-24 items-center justify-center rounded-full border-2 border-white/20 bg-neutral-900 p-3 shadow-[0_0_30px_rgba(6,182,212,0.3)] overflow-hidden"
                         >
-                            <Image
-                                src="/favicon_io/favicon-32x32.png"
-                                alt="Logo"
-                                width={48}
-                                height={48}
-                                className="w-10 h-10 md:w-12 md:h-12"
-                            />
+                            <svg
+                                viewBox="195 355 265 305"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-full h-full object-contain"
+                                preserveAspectRatio="xMidYMid meet"
+                            >
+                                <path d="M430.5 380H224.5L222 429H360.5C395.5 395.5 430.5 380 430.5 380Z" fill="white" stroke="#1D3655"/>
+                                <path d="M453 370.82C388.136 412.306 317.226 471.882 210.5 620.5L208 648.5L436 645L437.5 599H324C308.5 599 286.905 604.5 278.5 609C270.095 613.5 271.5 612.5 271.5 612.5C374 498 447 379.5 447 379.5L453 370.82Z" fill="#0F9CEE"/>
+                            </svg>
                         </div>
 
                         {/* Right Column */}
