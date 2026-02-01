@@ -17,5 +17,5 @@ RUN npm run build
 
 EXPOSE 3000
 
-# Push database schema on container start, then start the app
-CMD npx prisma db push --skip-generate && npm start
+# Push schema, generate sitemap (DB reachable at runtime), then start app
+CMD npx prisma db push --skip-generate && npm run generate-sitemap && npm start
