@@ -82,7 +82,6 @@ export function ServicesStackSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const cardsRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         const title = titleRef.current;
         if (!title) return;
@@ -100,10 +99,34 @@ export function ServicesStackSection() {
                         trigger: title,
                         start: "top 85%",
                         toggleActions: "play none none none",
-                        scroller: document.documentElement,
                     },
                 }
             );
+
+            const cards = cardsRef.current?.querySelectorAll("[data-card-inner]");
+            if (cards && cards.length > 1) {
+                for (let i = 0; i < cards.length - 1; i++) {
+                    const cardInner = cards[i] as HTMLElement;
+                    const nextCard = cardsRef.current?.children[i + 1];
+                    if (!nextCard) continue;
+
+                    const scaleDown = 0.97 - 0.01 * i;
+
+                    gsap.fromTo(cardInner,
+                        { scale: 1 },
+                        {
+                            scale: scaleDown,
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: nextCard,
+                                start: "top 80%",
+                                end: "top 20%",
+                                scrub: 1,
+                            },
+                        }
+                    );
+                }
+            }
         }, containerRef);
 
         return () => ctx.revert();
@@ -127,15 +150,14 @@ export function ServicesStackSection() {
                         <div
                             key={index}
                             className="sticky top-32 group"
-                            style={{
-                                top: "150px",
-                                scale: 1,
-                                transformOrigin: "top center"
-                            }}
+                            style={{ top: "150px" }}
                         >
-                            <div className={cn(
-                                "relative overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-blue-400/50 hover:shadow-lg",
-                                "h-[500px] flex flex-col",
+                            <div
+                                data-card-inner
+                                style={{ transformOrigin: "center top" }}
+                                className={cn(
+                                "relative overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-blue-400/50 hover:shadow-xl",
+                                "h-[560px] flex flex-col",
                                 index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
                             )}>
 
