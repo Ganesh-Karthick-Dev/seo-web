@@ -9,35 +9,31 @@ import Link from "next/link";
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-    { name: "Custom Software Development", href: "/services/custom-software" },
-    { name: "Web & Mobile Apps", href: "/services/web-mobile" },
-    { name: "3D Website Development", href: "/services/3d-websites" },
+    { name: "Custom Software Development", href: "/services/custom-software-development" },
+    { name: "Web & Mobile Development", href: "/services/web-mobile-development" },
+    { name: "3D Website Development", href: "/services/3d-website-development" },
     { name: "Digital Transformation", href: "/services/digital-transformation" },
     { name: "E-Commerce", href: "/services/ecommerce" },
-    { name: "AI, ML & Automation", href: "/services/ai-ml" },
+    { name: "AI & Automation", href: "/services/ai-automation" },
     { name: "Cloud & DevOps", href: "/services/cloud-devops" },
-    { name: "IT Consulting", href: "/services/consulting" },
+    { name: "IT Strategy Consulting", href: "/services/it-strategy-consulting" },
 ];
 
-const industries = [
-    { name: "Healthcare", href: "/industries/healthcare" },
-    { name: "Fintech", href: "/industries/fintech" },
-    { name: "E-Commerce", href: "/industries/ecommerce" },
-    { name: "Education", href: "/industries/education" },
-    { name: "Real Estate", href: "/industries/real-estate" },
-    { name: "Logistics", href: "/industries/logistics" },
+const products = [
+    { name: "Temp Mail Blocker", href: "/products/temp-mail-blocker" },
+    { name: "Zylex360", href: "/products/zylex-360" },
 ];
 
 const company = [
     { name: "About Us", href: "/about-us" },
+    { name: "Industries", href: "/industries" },
+    { name: "Contact", href: "/contact" },
     { name: "Privacy Policy", href: "/privacy" },
     { name: "Terms of Use", href: "/terms" },
-    { name: "Contact", href: "/contact" },
 ];
 
 const resources = [
-    { name: "Blog", href: "/blog" },
-    { name: "Case Studies", href: "/case-studies" },
+    { name: "Resources", href: "/resources" },
 ];
 
 const socials = [
@@ -158,13 +154,13 @@ export function Footer() {
                             </ul>
                         </div>
 
-                        {/* Industries */}
+                        {/* Products */}
                         <div>
                             <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider mb-6">
-                                Industries
+                                Products
                             </h4>
                             <ul className="space-y-3">
-                                {industries.map((item) => (
+                                {products.map((item) => (
                                     <li key={item.name}>
                                         <Link
                                             href={item.href}
