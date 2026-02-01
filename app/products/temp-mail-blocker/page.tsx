@@ -7,6 +7,7 @@ import { TempMailFeatures } from "@/components/ui/temp-mail-features";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { NoiseBackground } from "@/components/ui/noise-background";
+import { CTA3 } from "@/components/ui/cta-3";
 import Image from "next/image";
 
 export default function TempMailBlockerPage() {
@@ -127,6 +128,19 @@ export default function TempMailBlockerPage() {
                         />
                     </div>
                 </div>
+            </section>
+
+            <section className="w-full py-16 md:py-24 px-4">
+                <CTA3
+                    variant="dark"
+                    title="Ready to clean your pipeline?"
+                    subtitle="Start your free trial today. No credit card required."
+                    primaryButtonText="Visit Site"
+                    primaryButtonHref="https://tempmailblocker.com/"
+                    primaryButtonExternal
+                    secondaryButtonText="Contact Sales"
+                    secondaryButtonHref="/contact"
+                />
             </section>
 
         </main>

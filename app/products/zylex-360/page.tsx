@@ -7,6 +7,7 @@ import { Features } from "@/components/ui/features-section";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { NoiseBackground } from "@/components/ui/noise-background";
+import { CTA3 } from "@/components/ui/cta-3";
 import Image from "next/image";
 
 export default function Zylex360Page() {
@@ -127,6 +128,18 @@ export default function Zylex360Page() {
                         />
                     </div>
                 </div>
+            </section>
+
+            <section className="w-full py-16 md:py-24 px-4">
+                <CTA3
+                    variant="dark"
+                    title="Ready to unify your operations?"
+                    subtitle="Book a demo and see Zylex360 in action."
+                    primaryButtonText="Visit Site"
+                    primaryButtonHref="/contact"
+                    secondaryButtonText="Contact Sales"
+                    secondaryButtonHref="/contact"
+                />
             </section>
 
         </main>
