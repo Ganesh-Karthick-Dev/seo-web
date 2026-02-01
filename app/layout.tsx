@@ -22,8 +22,8 @@ const bebasNeue = Bebas_Neue({
 
 
 export const metadata: Metadata = {
-  title: "Zylex — Software Development & Modernization",
-  description: "Zylex helps businesses build, modernize, and scale mission-critical digital platforms through custom software development, application modernization, cloud & DevOps, AI and automation, and digital transformation services.",
+  title: "Zylex | Strategic AI & SaaS Development Agency for US Startups",
+  description: "Ship production-ready SaaS platforms in 15 days. We provide elite engineering for AI automation, custom software, and cloud infrastructure.",
   icons: {
     icon: "/favicon_io/favicon.ico",
     shortcut: "/favicon_io/favicon.ico",

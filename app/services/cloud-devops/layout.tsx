@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Cloud & DevOps Engineering Services | Infrastructure, CI/CD & Cloud Migration",
-    description: "Our Cloud and DevOps engineering services help organizations modernize infrastructure, automate delivery pipelines, and build scalable cloud-native systems.",
+  title: "Scalable Cloud Infrastructure & Modern DevOps Practices | Zylex",
+  description:
+    "Make release day boring. We automate your updates and scale your infrastructure to handle 10x growth without blinking.",
 };
 
 export default function CloudDevOpsLayout({

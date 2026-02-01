@@ -4,6 +4,12 @@ import Image from "next/image";
 import { getAllBlogPosts, BlogPost } from "@/lib/blog-data";
 import ResourcesClient from "./resources-client";
 
+export const metadata = {
+  title: "SaaS Development Resources & Tech Strategy Insights | Zylex",
+  description:
+    "Expert perspectives on software dev, digital transformation, and engineering best practices from the Zylex core team.",
+};
+
 export const revalidate = 60; // ISR - revalidate every 60 seconds
 
 export default async function ResourcesPage() {

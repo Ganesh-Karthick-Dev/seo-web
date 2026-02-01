@@ -13,8 +13,9 @@ import { BlogSection } from "@/components/sections/BlogSection";
 import { Layers, Rocket, RefreshCw, Cog, AppWindow, Box, Zap, Building2, Link2, Award, Target, MessageSquare, Settings, Shield, Handshake } from "lucide-react";
 
 export const metadata = {
-    title: "Custom Software Development Services: Scale Vision | Zylex",
-    description: "Zylex custom software development services: MVP application development and software product development built for scale. Absolute execution.",
+  title: "Custom Software Development Services: 15-Day Rapid Delivery | Zylex",
+  description:
+    "Build scalable, high-performance digital products. Our engineering-first approach ensures absolute execution for MVPs and enterprise modernization.",
 };
 
 export default function CustomSoftwareDevelopmentPage() {
