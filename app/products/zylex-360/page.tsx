@@ -1,53 +1,26 @@
 "use client";
 
 import { Zylex360HeroSection } from "@/components/sections/Zylex360HeroSection";
+import { ProductChallengeSection } from "@/components/sections/ProductChallengeSection";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import { FullScreenScrollFX } from "@/components/ui/full-screen-scroll-fx";
 import { Features } from "@/components/ui/features-section";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { NoiseBackground } from "@/components/ui/noise-background";
 import Image from "next/image";
 
-const scrollSections = [
-    {
-        leftLabel: "Departments",
-        title: "Data Silos",
-        rightLabel: "Across",
-        background: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
-    },
-    {
-        leftLabel: "Channels",
-        title: "Inventory Errors",
-        rightLabel: "Warehouses",
-        background: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-        leftLabel: "Duplicate",
-        title: "High Overhead",
-        rightLabel: "Licenses",
-        background: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-        leftLabel: "Global",
-        title: "Scaling Roadblocks",
-        rightLabel: "Expansion",
-        background: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
-    },
-];
-
 export default function Zylex360Page() {
     return (
         <main className="relative w-full bg-[#030308]">
             <Zylex360HeroSection />
 
-            <section className="w-full flex justify-center py-8">
-                <div className="w-[60%] relative bg-neutral-900/60 py-32 flex items-center justify-center rounded-3xl">
+            <section className="w-full flex justify-center py-6 md:py-8 px-4">
+                <div className="w-full md:w-[85%] lg:w-[70%] xl:w-[60%] relative bg-neutral-900/60 py-16 md:py-24 lg:py-32 flex items-center justify-center rounded-2xl md:rounded-3xl">
                 <div className="w-full max-w-5xl mx-auto p-4 flex flex-col items-center justify-center text-center">
-                    <p className="text-2xl md:text-4xl font-light text-white/60 mb-8">
+                    <p className="text-xl md:text-2xl lg:text-4xl font-light text-white/60 mb-6 md:mb-8">
                         Ready to make your business
                     </p>
-                    <div className="text-4xl md:text-7xl font-bold text-white flex flex-col md:flex-row items-center gap-4">
+                    <div className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white flex flex-col md:flex-row items-center gap-3 md:gap-4 text-center md:text-left">
                         <span>Make it</span>
                         <TextRotate
                             texts={[
@@ -69,16 +42,16 @@ export default function Zylex360Page() {
                         />
                     </div>
 
-                    <div className="mt-12">
+                    <div className="mt-8 md:mt-12">
                         <NoiseBackground
-                            containerClassName="w-fit p-2 rounded-full mx-auto"
+                            containerClassName="w-full max-w-sm sm:w-fit p-2 rounded-full mx-auto"
                             gradientColors={[
                                 "rgb(255, 100, 150)",
                                 "rgb(100, 150, 255)",
                                 "rgb(255, 200, 100)",
                             ]}
                         >
-                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-8 py-3 text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
+                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-6 sm:px-8 py-3 text-sm sm:text-base text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
                                 See Zylex360 in Action — Book Your Demo &rarr;
                             </button>
                         </NoiseBackground>
@@ -114,22 +87,17 @@ export default function Zylex360Page() {
                 </ContainerScroll>
             </section>
 
-            <section className="relative w-full">
-                <FullScreenScrollFX
-                    sections={scrollSections}
-                    header={
-                        <div className="flex flex-col items-center gap-4 pt-10">
-                            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight uppercase">The Challenge</h2>
-                            <p className="text-white/60 text-lg md:text-xl max-w-2xl text-center font-light uppercase tracking-widest">
-                                Most businesses juggle 5+ disconnected systems, creating:
-                            </p>
-                        </div>
-                    }
-                    footer={<div className="text-white/50 text-sm">Zylex360 Platform</div>}
-                    showProgress
-                    durations={{ change: 0.7, snap: 800 }}
-                />
-            </section>
+            <ProductChallengeSection
+                title="The Challenge"
+                subtitle="Most businesses juggle 5+ disconnected systems, creating:"
+                items={[
+                    "Data silos across departments",
+                    "Inventory errors between channels and warehouses",
+                    "High overhead from duplicate software licenses",
+                    "Scaling roadblocks for global expansion",
+                ]}
+                variant="zylex"
+            />
 
             <Features />
 

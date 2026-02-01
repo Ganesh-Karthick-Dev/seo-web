@@ -1,53 +1,26 @@
 "use client";
 
 import { TempMailHeroSection } from "@/components/sections/TempMailHeroSection";
+import { ProductChallengeSection } from "@/components/sections/ProductChallengeSection";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import { FullScreenScrollFX } from "@/components/ui/full-screen-scroll-fx";
 import { TempMailFeatures } from "@/components/ui/temp-mail-features";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { NoiseBackground } from "@/components/ui/noise-background";
 import Image from "next/image";
 
-const scrollSections = [
-    {
-        leftLabel: "Metrics",
-        title: "Fake Conversions",
-        rightLabel: "Inflated",
-        background: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
-    },
-    {
-        leftLabel: "Sales",
-        title: "Wasted Time",
-        rightLabel: "Prospects",
-        background: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2684&auto=format&fit=crop",
-    },
-    {
-        leftLabel: "CRM",
-        title: "Junk Contacts",
-        rightLabel: "Costs",
-        background: "https://images.unsplash.com/photo-1504384308090-c54be3855463?q=80&w=2664&auto=format&fit=crop",
-    },
-    {
-        leftLabel: "Email",
-        title: "High Bounce Rates",
-        rightLabel: "Reputation",
-        background: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1470&auto=format&fit=crop",
-    },
-];
-
 export default function TempMailBlockerPage() {
     return (
         <main className="relative w-full bg-[#030308]">
             <TempMailHeroSection />
 
-            <section className="w-full flex justify-center py-8">
-                <div className="w-[60%] relative bg-neutral-900/60 py-32 flex items-center justify-center rounded-3xl">
+            <section className="w-full flex justify-center py-6 md:py-8 px-4">
+                <div className="w-full md:w-[85%] lg:w-[70%] xl:w-[60%] relative bg-neutral-900/60 py-16 md:py-24 lg:py-32 flex items-center justify-center rounded-2xl md:rounded-3xl">
                 <div className="w-full max-w-5xl mx-auto p-4 flex flex-col items-center justify-center text-center">
-                    <p className="text-2xl md:text-4xl font-light text-white/60 mb-8">
+                    <p className="text-xl md:text-2xl lg:text-4xl font-light text-white/60 mb-6 md:mb-8">
                         Ready to secure your pipeline?
                     </p>
-                    <div className="text-4xl md:text-7xl font-bold text-white flex flex-col md:flex-row items-center gap-4">
+                    <div className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-white flex flex-col md:flex-row items-center gap-3 md:gap-4 text-center md:text-left">
                         <span>Make it</span>
                         <TextRotate
                             texts={[
@@ -69,16 +42,16 @@ export default function TempMailBlockerPage() {
                         />
                     </div>
 
-                    <div className="mt-12">
+                    <div className="mt-8 md:mt-12">
                         <NoiseBackground
-                            containerClassName="w-fit p-2 rounded-full mx-auto"
+                            containerClassName="w-full max-w-sm sm:w-fit p-2 rounded-full mx-auto"
                             gradientColors={[
                                 "rgb(255, 100, 150)",
                                 "rgb(100, 150, 255)",
                                 "rgb(255, 200, 100)",
                             ]}
                         >
-                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-8 py-3 text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
+                            <button className="h-full w-full cursor-pointer rounded-full bg-linear-to-r from-neutral-100 via-neutral-100 to-white px-6 sm:px-8 py-3 text-sm sm:text-base text-black font-medium shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] transition-all duration-100 active:scale-98 dark:from-black dark:via-black dark:to-neutral-900 dark:text-white dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]">
                                 Start Free Trial — No Credit Card Required &rarr;
                             </button>
                         </NoiseBackground>
@@ -114,22 +87,17 @@ export default function TempMailBlockerPage() {
                 </ContainerScroll>
             </section>
 
-            <section className="relative w-full">
-                <FullScreenScrollFX
-                    sections={scrollSections}
-                    header={
-                        <div className="flex flex-col items-center gap-4 pt-10">
-                            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight uppercase">The Cost of Disposable Emails</h2>
-                            <p className="text-white/60 text-lg md:text-xl max-w-2xl text-center font-light uppercase tracking-widest">
-                                Temporary email addresses sabotage B2B growth by:
-                            </p>
-                        </div>
-                    }
-                    footer={<div className="text-white/50 text-sm">Temp Mail Blocker Platform</div>}
-                    showProgress
-                    durations={{ change: 0.7, snap: 800 }}
-                />
-            </section>
+            <ProductChallengeSection
+                title="The Cost of Disposable Emails"
+                subtitle="Temporary email addresses sabotage B2B growth by:"
+                items={[
+                    "Inflating metrics with fake conversions",
+                    "Wasting sales time on non-existent prospects",
+                    "Increasing CRM costs through junk contacts",
+                    "Damaging email reputation with high bounce rates",
+                ]}
+                variant="tempmail"
+            />
 
             <TempMailFeatures />
 
