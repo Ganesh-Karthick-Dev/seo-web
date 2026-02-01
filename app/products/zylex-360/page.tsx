@@ -99,7 +99,7 @@ export default function Zylex360Page() {
                     }
                 >
                     <Image
-                        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop"
+                        src="/products/zylex_360_dashboard.png"
                         alt="Zylex360 Dashboard"
                         height={720}
                         width={1400}

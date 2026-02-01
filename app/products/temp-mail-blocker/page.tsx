@@ -99,7 +99,7 @@ export default function TempMailBlockerPage() {
                     }
                 >
                     <Image
-                        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop"
+                        src="/products/temp_mail_dashboard.png"
                         alt="Temp Mail Blocker Dashboard"
                         height={720}
                         width={1400}
