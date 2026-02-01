@@ -134,29 +134,29 @@ export function ServicesStackSection() {
                             }}
                         >
                             <div className={cn(
-                                "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/95 transition-[border-color,box-shadow] duration-300 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]",
-                                "h-[400px] flex flex-col",
+                                "relative overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-blue-400/50 hover:shadow-lg",
+                                "h-[500px] flex flex-col",
                                 index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
                             )}>
 
                                 {/* Gradient Background */}
                                 <div className={cn(
-                                    "absolute inset-0 bg-gradient-to-br opacity-20 transition-opacity duration-500 group-hover:opacity-30",
+                                    "absolute inset-0 bg-gradient-to-br opacity-30 transition-opacity duration-500 group-hover:opacity-40",
                                     service.gradient
                                 )} />
 
                                 {/* Content Side */}
                                 <div className="relative z-10 flex-1 p-8 md:p-12 flex flex-col justify-center">
-                                    <h3 className="text-3xl font-bold text-white mb-4">
+                                    <h3 className="text-3xl font-bold text-black mb-4">
                                         {service.title}
                                     </h3>
-                                    <p className="text-lg text-neutral-400 mb-8 max-w-xl leading-relaxed">
+                                    <p className="text-lg text-neutral-600 mb-8 max-w-xl leading-relaxed">
                                         {service.description}
                                     </p>
 
                                     <Link
                                         href={service.href}
-                                        className="inline-flex items-center gap-2 text-blue-500 font-medium hover:text-blue-400 transition-colors group/link"
+                                        className="inline-flex items-center gap-2 text-blue-600 font-medium hover:text-blue-500 transition-colors group/link"
                                     >
                                         {service.cta}
                                         <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
@@ -166,7 +166,7 @@ export function ServicesStackSection() {
                                 {/* Visual Side (Image) */}
                                 <div className={cn(
                                     "relative w-full md:w-1/3 overflow-hidden hidden md:flex items-center justify-center",
-                                    index % 2 === 1 ? "border-r border-white/5" : "border-l border-white/5"
+                                    index % 2 === 1 ? "border-r border-neutral-100" : "border-l border-neutral-100"
                                 )}>
                                     {/* Image */}
                                     <Image
@@ -175,14 +175,8 @@ export function ServicesStackSection() {
                                         fill
                                         sizes="(max-width: 768px) 100vw, 33vw"
                                         loading="lazy"
-                                        className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                                        className="object-cover"
                                     />
-
-                                    {/* Overlay gradient */}
-                                    <div className={cn(
-                                        "absolute inset-0 bg-gradient-to-r opacity-60",
-                                        index % 2 === 1 ? "from-transparent to-zinc-900" : "from-zinc-900 to-transparent"
-                                    )} />
                                 </div>
 
                             </div>
