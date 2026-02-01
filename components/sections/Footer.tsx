@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Linkedin, Twitter, Youtube, Instagram, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -56,38 +56,40 @@ export function Footer() {
     const bgTextRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
+        const container = containerRef.current;
+        const bgText = bgTextRef.current;
+        const content = contentRef.current;
+        if (!container || !bgText || !content) return;
+
         const ctx = gsap.context(() => {
-            // Background ZYLEX text animation
+            const triggerConfig = {
+                trigger: container,
+                start: "top 95%",
+                toggleActions: "play none none none",
+                scroller: document.documentElement, // Match Lenis scrollerProxy
+            };
+
+            // Animate only y-offset (no opacity) so content stays visible if ScrollTrigger delays
             gsap.fromTo(
-                bgTextRef.current,
-                {
-                    y: 100,
-                    opacity: 0,
-                },
+                bgText,
+                { y: 60 },
                 {
                     y: 0,
-                    opacity: 1,
                     duration: 1.5,
                     ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: "top 95%", // Trigger earlier
-                        toggleActions: "play none none none", // Don't reset
-                    },
+                    scrollTrigger: triggerConfig,
                 }
             );
 
-            // Fade in content
             gsap.fromTo(
-                contentRef.current,
-                { y: 30, opacity: 0 },
+                content,
+                { y: 24 },
                 {
                     y: 0,
-                    opacity: 1,
                     duration: 1,
                     ease: "power3.out",
                     scrollTrigger: {
-                        trigger: containerRef.current,
+                        ...triggerConfig,
                         start: "top 90%",
                     },
                 }
