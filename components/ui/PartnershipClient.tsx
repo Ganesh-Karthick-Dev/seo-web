@@ -17,7 +17,10 @@ import {
     Ban,
     Palette,
     FileCheck,
-    AlertTriangle
+    AlertTriangle,
+    Clock,
+    TrendingUp,
+    Trophy
 } from "lucide-react";
 import { Hero } from "@/components/ui/hero-1";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
@@ -370,107 +373,222 @@ function EstimatorToolSection() {
     const PhaseIcon = currentPhaseData.icon;
 
     return (
-        <section id="estimator" className="py-24 relative">
-            {/* Section Header */}
-            <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-                    <Sparkles className="w-4 h-4 text-blue-400" />
-                    <span className="text-blue-400 text-sm font-medium">10-Phase Project Estimator</span>
-                </div>
-
-                <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                    Build Your <span className="text-blue-400">MVP Estimate</span>
-                </h2>
-
-                <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
-                    See exactly what you&apos;ll save compared to traditional agencies. We deliver in 15 days what others take 90 days to build.
-                </p>
+        <section id="estimator" className="py-24 relative overflow-hidden">
+            {/* Background Gradient Effects */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Section Header */}
+            <div className="text-center mb-16 relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 mb-8 backdrop-blur-sm"
+                >
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    </span>
+                    <span className="text-blue-300 text-sm font-medium">10-Phase Project Estimator</span>
+                </motion.div>
+
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="text-4xl md:text-6xl font-bold text-white mb-6"
+                >
+                    Build Your{" "}
+                    <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+                        MVP Estimate
+                    </span>
+                </motion.h2>
+
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-lg text-neutral-400 max-w-2xl mx-auto mb-8"
+                >
+                    See exactly what you&apos;ll save compared to traditional agencies.
+                    <span className="block mt-2 text-blue-400 font-medium">
+                        We deliver in 15 days what others take 90 days to build.
+                    </span>
+                </motion.p>
+
+                {/* Stats Preview */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="inline-flex items-center gap-6 px-6 py-3 rounded-2xl bg-neutral-900/50 border border-neutral-800 backdrop-blur-sm"
+                >
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-white">$10K</div>
+                        <div className="text-xs text-neutral-500">Starting at</div>
+                    </div>
+                    <div className="w-px h-8 bg-neutral-700" />
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-white">15</div>
+                        <div className="text-xs text-neutral-500">Days to Launch</div>
+                    </div>
+                    <div className="w-px h-8 bg-neutral-700" />
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-green-400">85%</div>
+                        <div className="text-xs text-neutral-500">Avg. Savings</div>
+                    </div>
+                </motion.div>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-10">
                 {/* Left: Phase Navigator */}
                 <div className="lg:col-span-2 space-y-6">
-                    {/* Progress Bar */}
-                    <div className="flex items-center gap-1 mb-8 overflow-x-auto pb-2">
-                        {estimatorPhases.map((phase, index) => (
-                            <div key={phase.id} className="flex items-center">
-                                <button
-                                    onClick={() => setCurrentPhase(index)}
-                                    className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm font-semibold transition-all flex-shrink-0 ${isPhaseComplete(phase.id)
-                                        ? "bg-blue-500 text-white"
-                                        : currentPhase === index
-                                            ? "bg-blue-600 text-white ring-2 ring-blue-400"
-                                            : "bg-neutral-800 text-neutral-500 hover:bg-neutral-700"
-                                        }`}
-                                >
-                                    {isPhaseComplete(phase.id) ? <Check className="w-4 h-4" /> : index + 1}
-                                </button>
-                                {index < estimatorPhases.length - 1 && (
-                                    <div
-                                        className={`w-4 md:w-8 h-1 mx-0.5 rounded-full transition-all ${isPhaseComplete(phase.id) ? "bg-blue-500" : "bg-neutral-800"
-                                            }`}
-                                    />
-                                )}
-                            </div>
-                        ))}
+                    {/* Progress Bar with Labels */}
+                    <div className="mb-8">
+                        <div className="flex items-center gap-1 overflow-x-auto pb-4 scrollbar-hide">
+                            {estimatorPhases.map((phase, index) => {
+                                const PIcon = phase.icon;
+                                return (
+                                    <div key={phase.id} className="flex items-center group">
+                                        <button
+                                            onClick={() => setCurrentPhase(index)}
+                                            className={`relative w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center transition-all flex-shrink-0 ${isPhaseComplete(phase.id)
+                                                ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25"
+                                                : currentPhase === index
+                                                    ? "bg-blue-600 text-white ring-2 ring-blue-400 ring-offset-2 ring-offset-neutral-950"
+                                                    : "bg-neutral-800/80 text-neutral-500 hover:bg-neutral-700 hover:text-neutral-300"
+                                                }`}
+                                        >
+                                            {isPhaseComplete(phase.id) ? (
+                                                <Check className="w-5 h-5" />
+                                            ) : (
+                                                <PIcon className="w-5 h-5" />
+                                            )}
+
+                                            {/* Tooltip */}
+                                            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-neutral-400 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
+                                                {phase.title}
+                                            </span>
+                                        </button>
+                                        {index < estimatorPhases.length - 1 && (
+                                            <div
+                                                className={`w-3 md:w-6 h-0.5 mx-0.5 rounded-full transition-all ${isPhaseComplete(phase.id)
+                                                    ? "bg-gradient-to-r from-blue-500 to-blue-400"
+                                                    : "bg-neutral-800"
+                                                    }`}
+                                            />
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
 
                     {/* Current Phase Card */}
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentPhase}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.3 }}
-                            className="bg-neutral-900/80 backdrop-blur-xl rounded-2xl border border-neutral-800 p-6 md:p-8"
+                            className="relative bg-gradient-to-br from-neutral-900/90 to-neutral-950/90 backdrop-blur-xl rounded-3xl border border-neutral-800/80 p-6 md:p-8 overflow-hidden"
                         >
+                            {/* Subtle gradient glow */}
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+
                             {/* Phase Header */}
-                            <div className="flex items-start gap-4 mb-6">
-                                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                                    <PhaseIcon className="w-6 h-6 text-blue-400" />
+                            <div className="flex items-start gap-4 mb-8 relative">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20">
+                                    <PhaseIcon className="w-7 h-7 text-white" />
                                 </div>
-                                <div>
-                                    <div className="text-sm text-blue-400 font-medium mb-1">Phase {currentPhaseData.phase} of 10</div>
-                                    <h3 className="text-xl md:text-2xl font-bold text-white">{currentPhaseData.title}</h3>
-                                    <p className="text-neutral-400 mt-1">{currentPhaseData.description}</p>
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-1">
+                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs text-blue-400 font-medium">
+                                            Phase {currentPhaseData.phase}/10
+                                        </span>
+                                        {currentPhaseData.multiSelect && (
+                                            <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs text-purple-400 font-medium">
+                                                Multi-select
+                                            </span>
+                                        )}
+                                    </div>
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white">{currentPhaseData.title}</h3>
+                                    <p className="text-neutral-400 mt-2">{currentPhaseData.description}</p>
                                 </div>
                             </div>
 
                             {/* Options Grid */}
-                            <div className="grid sm:grid-cols-2 gap-3">
+                            <div className="grid sm:grid-cols-2 gap-4">
                                 {currentPhaseData.options.map((option) => {
                                     const isSelected = isOptionSelected(currentPhaseData.id, option.id);
+                                    const savingsPercent = option.competitorCost > 0
+                                        ? Math.round(((option.competitorCost - option.ourCost) / option.competitorCost) * 100)
+                                        : 0;
+
                                     return (
                                         <motion.button
                                             key={option.id}
-                                            whileHover={{ scale: 1.01 }}
-                                            whileTap={{ scale: 0.99 }}
+                                            whileHover={{ scale: 1.02, y: -2 }}
+                                            whileTap={{ scale: 0.98 }}
                                             onClick={() => handleOptionToggle(currentPhaseData.id, option.id, option)}
-                                            className={`p-4 rounded-xl border-2 text-left transition-all ${isSelected
-                                                ? "border-blue-500 bg-blue-500/10"
-                                                : "border-neutral-700 bg-neutral-800/50 hover:border-neutral-600"
+                                            className={`relative p-5 rounded-2xl border-2 text-left transition-all group ${isSelected
+                                                ? "border-blue-500 bg-gradient-to-br from-blue-500/15 to-blue-600/10 shadow-lg shadow-blue-500/10"
+                                                : "border-neutral-700/50 bg-neutral-800/30 hover:border-neutral-600 hover:bg-neutral-800/50"
                                                 }`}
                                         >
-                                            <div className="flex items-start justify-between gap-2">
-                                                <div className="font-medium text-white text-sm md:text-base">{option.label}</div>
-                                                {currentPhaseData.multiSelect && (
+                                            {/* Savings badge */}
+                                            {savingsPercent > 0 && (
+                                                <span className={`absolute -top-2 -right-2 px-2 py-0.5 rounded-full text-xs font-bold ${isSelected
+                                                    ? "bg-green-500 text-white"
+                                                    : "bg-green-500/20 text-green-400 border border-green-500/30"
+                                                    }`}>
+                                                    Save {savingsPercent}%
+                                                </span>
+                                            )}
+
+                                            <div className="flex items-start justify-between gap-3">
+                                                <div className="flex-1">
+                                                    <div className={`font-semibold text-base md:text-lg transition-colors ${isSelected ? "text-white" : "text-neutral-200 group-hover:text-white"
+                                                        }`}>{option.label}</div>
+                                                </div>
+                                                {currentPhaseData.multiSelect ? (
                                                     <div
-                                                        className={`w-5 h-5 rounded flex-shrink-0 flex items-center justify-center ${isSelected ? "bg-blue-500" : "border border-neutral-600"
+                                                        className={`w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center transition-all ${isSelected
+                                                            ? "bg-blue-500"
+                                                            : "border-2 border-neutral-600 group-hover:border-neutral-500"
                                                             }`}
                                                     >
-                                                        {isSelected && <Check className="w-3 h-3 text-white" />}
+                                                        {isSelected && <Check className="w-4 h-4 text-white" />}
+                                                    </div>
+                                                ) : (
+                                                    <div
+                                                        className={`w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center transition-all ${isSelected
+                                                            ? "bg-blue-500 ring-2 ring-blue-400/50"
+                                                            : "border-2 border-neutral-600 group-hover:border-neutral-500"
+                                                            }`}
+                                                    >
+                                                        {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
                                                     </div>
                                                 )}
                                             </div>
-                                            <div className="flex items-center gap-3 mt-2 text-xs">
-                                                <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">
+
+                                            <div className="flex items-center gap-3 mt-3">
+                                                <span className={`px-2.5 py-1 rounded-lg text-sm font-medium ${isSelected
+                                                    ? "bg-blue-500/30 text-blue-300"
+                                                    : "bg-blue-500/10 text-blue-400"
+                                                    }`}>
                                                     ${option.ourCost.toLocaleString()}
                                                 </span>
-                                                <span className="text-neutral-500 line-through">
+                                                <span className="text-neutral-500 line-through text-sm">
                                                     ${option.competitorCost.toLocaleString()}
                                                 </span>
-                                                <span className="text-neutral-500">+{option.days}d</span>
+                                                <span className="text-neutral-500 text-sm ml-auto flex items-center gap-1">
+                                                    <Clock className="w-3 h-3" />
+                                                    {option.days}d
+                                                </span>
                                             </div>
                                         </motion.button>
                                     );
@@ -501,96 +619,205 @@ function EstimatorToolSection() {
                 {/* Right: Results Panel */}
                 <div className="lg:col-span-1">
                     <div className="sticky top-32 space-y-6">
-                        {/* Live Comparison */}
-                        <div className="bg-neutral-900/80 backdrop-blur-xl rounded-2xl border border-neutral-800 p-6">
-                            <h3 className="text-lg font-semibold text-white mb-4">Live Comparison</h3>
+                        {/* Live Comparison Card */}
+                        <div className="relative bg-gradient-to-br from-neutral-900/90 to-neutral-950/90 backdrop-blur-xl rounded-3xl border border-neutral-800/80 p-6 overflow-hidden">
+                            {/* Background accent */}
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500" />
 
-                            {/* Our Cost */}
-                            <div className="mb-4 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                                <div className="text-sm text-blue-400 mb-1">Zylex (15 Days)</div>
-                                <div className="text-3xl font-bold text-white">
-                                    ${totals.ourCost.toLocaleString()}
-                                </div>
+                            <div className="flex items-center gap-2 mb-6">
+                                <TrendingUp className="w-5 h-5 text-blue-400" />
+                                <h3 className="text-lg font-semibold text-white">Live Comparison</h3>
                             </div>
 
+                            {/* Our Cost - Highlighted */}
+                            <motion.div
+                                layout
+                                className="mb-4 p-5 rounded-2xl bg-gradient-to-br from-blue-500/15 to-blue-600/10 border border-blue-500/30 relative overflow-hidden"
+                            >
+                                <div className="absolute top-2 right-2">
+                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-500/20 text-xs text-blue-300 font-medium">
+                                        <Clock className="w-3 h-3" /> 15 Days
+                                    </span>
+                                </div>
+                                <div className="text-sm text-blue-400 mb-2 font-medium">Zylex Engineering</div>
+                                <motion.div
+                                    key={totals.ourCost}
+                                    initial={{ scale: 1.1 }}
+                                    animate={{ scale: 1 }}
+                                    className="text-4xl font-bold text-white"
+                                >
+                                    ${totals.ourCost.toLocaleString()}
+                                </motion.div>
+                            </motion.div>
+
                             {/* Competitor Cost */}
-                            <div className="mb-4 p-4 rounded-xl bg-neutral-800/50 border border-neutral-700">
-                                <div className="text-sm text-neutral-400 mb-1">Traditional Agency ({totals.competitorDays}+ days)</div>
+                            <div className="mb-4 p-4 rounded-xl bg-neutral-800/40 border border-neutral-700/50">
+                                <div className="flex items-center justify-between mb-2">
+                                    <span className="text-sm text-neutral-500">Traditional Agency</span>
+                                    <span className="text-xs text-neutral-600 flex items-center gap-1">
+                                        <Clock className="w-3 h-3" /> {totals.competitorDays}+ days
+                                    </span>
+                                </div>
                                 <div className="text-2xl font-bold text-neutral-500 line-through">
                                     ${totals.competitorCost.toLocaleString()}
                                 </div>
                             </div>
 
-                            {/* Savings */}
-                            {totals.savings > 0 && (
-                                <motion.div
-                                    initial={{ scale: 0.95, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    className="p-4 rounded-xl bg-green-500/10 border border-green-500/20"
-                                >
-                                    <div className="text-sm text-green-400 mb-1">You Save</div>
-                                    <div className="text-2xl font-bold text-green-400">
-                                        ${totals.savings.toLocaleString()}
-                                        <span className="text-lg ml-2">({totals.savingsPercent}%)</span>
-                                    </div>
-                                </motion.div>
-                            )}
-
-                            {/* Progress */}
-                            <div className="mt-6 pt-4 border-t border-neutral-800">
-                                <div className="flex justify-between text-sm text-neutral-400 mb-2">
-                                    <span>Progress</span>
-                                    <span>{completedPhases}/10 phases</span>
-                                </div>
-                                <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
+                            {/* Savings - Animated & Highlighted */}
+                            <AnimatePresence>
+                                {totals.savings > 0 && (
                                     <motion.div
-                                        className="h-full bg-gradient-to-r from-blue-500 to-blue-400"
+                                        initial={{ scale: 0.8, opacity: 0, y: 20 }}
+                                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                                        exit={{ scale: 0.8, opacity: 0 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                        className="relative p-5 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/10 border border-green-500/30 overflow-hidden"
+                                    >
+                                        {/* Shine effect */}
+                                        <div className="absolute inset-0 pointer-events-none opacity-50">
+                                            <div className="absolute -top-4 -left-4 w-24 h-24 bg-green-400/20 rounded-full blur-2xl" />
+                                        </div>
+
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <Trophy className="w-5 h-5 text-green-400" />
+                                            <span className="text-sm text-green-400 font-medium">Total Savings</span>
+                                        </div>
+                                        <motion.div
+                                            key={totals.savings}
+                                            initial={{ scale: 1.2 }}
+                                            animate={{ scale: 1 }}
+                                            className="text-3xl font-bold text-green-400"
+                                        >
+                                            ${totals.savings.toLocaleString()}
+                                            <span className="text-xl ml-2 text-green-500">({totals.savingsPercent}%)</span>
+                                        </motion.div>
+
+                                        {/* Achievement badge */}
+                                        {Number(totals.savingsPercent) >= 80 && (
+                                            <motion.div
+                                                initial={{ opacity: 0, x: -10 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/20 border border-yellow-500/30"
+                                            >
+                                                <span className="text-yellow-400 text-xs font-medium">🏆 Massive Savings!</span>
+                                            </motion.div>
+                                        )}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Progress with milestone indicators */}
+                            <div className="mt-6 pt-5 border-t border-neutral-800">
+                                <div className="flex justify-between text-sm mb-3">
+                                    <span className="text-neutral-400 flex items-center gap-2">
+                                        Progress
+                                        {completedPhases === 10 && (
+                                            <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-blue-500/20 text-xs text-blue-400">Complete!</span>
+                                        )}
+                                    </span>
+                                    <span className="text-white font-medium">{completedPhases}/10</span>
+                                </div>
+                                <div className="w-full h-3 bg-neutral-800 rounded-full overflow-hidden">
+                                    <motion.div
+                                        className="h-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 relative"
                                         initial={{ width: 0 }}
                                         animate={{ width: `${(completedPhases / 10) * 100}%` }}
-                                    />
+                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    >
+                                        {/* Shine effect */}
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                                    </motion.div>
+                                </div>
+
+                                {/* Milestone dots */}
+                                <div className="flex justify-between mt-2 px-0.5">
+                                    {[2, 5, 8, 10].map((milestone) => (
+                                        <div key={milestone} className="flex flex-col items-center">
+                                            <div className={`w-1.5 h-1.5 rounded-full ${completedPhases >= milestone ? "bg-blue-400" : "bg-neutral-700"}`} />
+                                            <span className={`text-xs mt-1 ${completedPhases >= milestone ? "text-blue-400" : "text-neutral-600"}`}>
+                                                {milestone === 10 ? "✓" : milestone}
+                                            </span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
 
-                        {/* Email Gate */}
+                        {/* Email Gate - Premium CTA */}
                         {showEmailGate && (
                             <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="bg-neutral-900/80 backdrop-blur-xl rounded-2xl border border-neutral-800 p-6"
+                                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                                className="relative bg-gradient-to-br from-neutral-900/90 to-neutral-950/90 backdrop-blur-xl rounded-3xl border border-neutral-800/80 p-6 overflow-hidden"
                             >
+                                {/* Premium border glow */}
+                                <div className="absolute inset-0 rounded-3xl border border-blue-500/20 pointer-events-none" />
+                                <div className="absolute -top-12 -right-12 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
                                 {!isSubmitted ? (
                                     <>
-                                        <h3 className="text-lg font-semibold text-white mb-2">🎉 Get Your Full Roadmap</h3>
-                                        <p className="text-sm text-neutral-400 mb-4">
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                                                <Sparkles className="w-5 h-5 text-white" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-lg font-bold text-white">Get Your Roadmap</h3>
+                                                <p className="text-xs text-neutral-400">
+                                                    {allPhasesComplete ? "Estimate ready!" : `${10 - completedPhases} phases left`}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <p className="text-sm text-neutral-400 mb-5">
                                             {allPhasesComplete
-                                                ? "Your estimate is ready! Enter your email to receive the detailed breakdown."
-                                                : "Complete your estimate and receive a detailed Technical Roadmap."}
+                                                ? "Your estimate is complete! Enter your email to receive a detailed Technical Roadmap with timeline & milestones."
+                                                : "Complete your estimate to unlock your personalized Technical Roadmap."}
                                         </p>
 
                                         <div className="space-y-4">
-                                            <input
-                                                type="email"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                placeholder="work-email@company.com"
-                                                className="w-full px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 transition-all"
-                                            />
+                                            <div className="relative">
+                                                <input
+                                                    type="email"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    placeholder="work-email@company.com"
+                                                    className="w-full px-4 py-3.5 bg-neutral-800/80 border border-neutral-700 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                                />
+                                                {isValidEmail(email) && (
+                                                    <motion.div
+                                                        initial={{ scale: 0 }}
+                                                        animate={{ scale: 1 }}
+                                                        className="absolute right-3 top-1/2 -translate-y-1/2"
+                                                    >
+                                                        <Check className="w-5 h-5 text-green-400" />
+                                                    </motion.div>
+                                                )}
+                                            </div>
 
-                                            <button
+                                            <motion.button
+                                                whileHover={{ scale: 1.02 }}
+                                                whileTap={{ scale: 0.98 }}
                                                 onClick={handleSubmit}
                                                 disabled={!isValidEmail(email) || isSubmitting}
-                                                className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+                                                className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
                                             >
                                                 {isSubmitting ? (
-                                                    "Sending..."
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                                        Sending...
+                                                    </div>
                                                 ) : (
                                                     <>
                                                         <Send className="w-4 h-4" />
                                                         Send Me The Roadmap
                                                     </>
                                                 )}
-                                            </button>
+                                            </motion.button>
+
+                                            <p className="text-xs text-neutral-500 text-center">
+                                                📧 We&apos;ll send you a detailed PDF with your project scope
+                                            </p>
                                         </div>
                                     </>
                                 ) : (
