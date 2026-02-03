@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Hero } from "@/components/ui/hero-1";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { DitheringCard } from "@/components/ui/hero-dithering-card";
 import { Rocket, Cpu, Cloud, Code2, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -477,15 +478,24 @@ function Section2() {
     );
 }
 
+// ============================================
+// SECTION 3 - AGENCY ECOSYSTEM
+// ============================================
+
 function Section3() {
     return (
-        <section className="py-24 min-h-[60vh] flex items-center justify-center">
-            <div className="text-center">
-                <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-700 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-neutral-600">3</span>
-                </div>
-                <p className="text-neutral-600 text-sm">Section 3 - Awaiting Content</p>
-            </div>
+        <section className="py-24 px-4 md:px-6">
+            <DitheringCard
+                badge="White-Label Partnership"
+                title={
+                    <>
+                        The Agency Owner
+                    </>
+                }
+                description="I have clients needing dev work. I need a white-label partner. Let Zylex become your silent engineering arm."
+                ctaText="Partner With Us"
+                ctaHref="#estimator"
+            />
         </section>
     );
 }
