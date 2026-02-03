@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { MousePointer2, ArrowRight } from 'lucide-react';
+import { MousePointer2, ArrowRight, Info } from 'lucide-react';
 
 // --- Types ---
 
@@ -208,64 +208,64 @@ const AntiGravityCanvas: React.FC = () => {
         // Phase 2: Resolve Collisions (skip on reduced motion or high particle count for perf)
         const doCollisions = !reducedMotionRef.current && particles.length <= 120;
         if (doCollisions) {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const p1 = particles[i];
-                const p2 = particles[j];
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p1 = particles[i];
+                    const p2 = particles[j];
 
-                const dx = p2.x - p1.x;
-                const dy = p2.y - p1.y;
-                const distSq = dx * dx + dy * dy;
-                const minDist = p1.size + p2.size;
+                    const dx = p2.x - p1.x;
+                    const dy = p2.y - p1.y;
+                    const distSq = dx * dx + dy * dy;
+                    const minDist = p1.size + p2.size;
 
-                if (distSq < minDist * minDist) {
-                    const dist = Math.sqrt(distSq);
+                    if (distSq < minDist * minDist) {
+                        const dist = Math.sqrt(distSq);
 
-                    if (dist > 0.01) { // Avoid division by zero
-                        const nx = dx / dist; // Normal X
-                        const ny = dy / dist; // Normal Y
+                        if (dist > 0.01) { // Avoid division by zero
+                            const nx = dx / dist; // Normal X
+                            const ny = dy / dist; // Normal Y
 
-                        // Static Resolution: Push particles apart so they don't overlap
-                        const overlap = minDist - dist;
-                        const pushX = nx * overlap * 0.5;
-                        const pushY = ny * overlap * 0.5;
+                            // Static Resolution: Push particles apart so they don't overlap
+                            const overlap = minDist - dist;
+                            const pushX = nx * overlap * 0.5;
+                            const pushY = ny * overlap * 0.5;
 
-                        p1.x -= pushX;
-                        p1.y -= pushY;
-                        p2.x += pushX;
-                        p2.y += pushY;
+                            p1.x -= pushX;
+                            p1.y -= pushY;
+                            p2.x += pushX;
+                            p2.y += pushY;
 
-                        // Dynamic Resolution: Elastic Collision
-                        // Relative velocity
-                        const dvx = p1.vx - p2.vx;
-                        const dvy = p1.vy - p2.vy;
+                            // Dynamic Resolution: Elastic Collision
+                            // Relative velocity
+                            const dvx = p1.vx - p2.vx;
+                            const dvy = p1.vy - p2.vy;
 
-                        // Calculate velocity along the normal
-                        // Dot product of velocity difference and normal direction
-                        const velocityAlongNormal = dvx * nx + dvy * ny;
+                            // Calculate velocity along the normal
+                            // Dot product of velocity difference and normal direction
+                            const velocityAlongNormal = dvx * nx + dvy * ny;
 
-                        // Only bounce if they are moving towards each other
-                        if (velocityAlongNormal > 0) {
-                            const m1 = p1.size; // Use size as mass proxy
-                            const m2 = p2.size;
-                            const restitution = 0.85; // Bounciness (1 is perfectly elastic)
+                            // Only bounce if they are moving towards each other
+                            if (velocityAlongNormal > 0) {
+                                const m1 = p1.size; // Use size as mass proxy
+                                const m2 = p2.size;
+                                const restitution = 0.85; // Bounciness (1 is perfectly elastic)
 
-                            // Impulse scalar
-                            const impulseMagnitude = (-(1 + restitution) * velocityAlongNormal) / (1 / m1 + 1 / m2);
+                                // Impulse scalar
+                                const impulseMagnitude = (-(1 + restitution) * velocityAlongNormal) / (1 / m1 + 1 / m2);
 
-                            // Apply impulse
-                            const impulseX = impulseMagnitude * nx;
-                            const impulseY = impulseMagnitude * ny;
+                                // Apply impulse
+                                const impulseX = impulseMagnitude * nx;
+                                const impulseY = impulseMagnitude * ny;
 
-                            p1.vx += impulseX / m1;
-                            p1.vy += impulseY / m1;
-                            p2.vx -= impulseX / m2;
-                            p2.vy -= impulseY / m2;
+                                p1.vx += impulseX / m1;
+                                p1.vy += impulseY / m1;
+                                p2.vx -= impulseX / m2;
+                                p2.vy -= impulseY / m2;
+                            }
                         }
                     }
                 }
             }
-        }
         }
 
         // Phase 3: Integration & Drawing

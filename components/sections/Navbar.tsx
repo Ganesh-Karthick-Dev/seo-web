@@ -22,7 +22,8 @@ import {
     Utensils,
     FileText,
     BookOpen,
-    ArrowRight
+    ArrowRight,
+    Calculator
 } from "lucide-react";
 
 // Service items data
@@ -335,14 +336,39 @@ export function Navbar() {
                             >
                                 About Us
                             </Link>
+
+                            {/* Estimator Link */}
+                            <Link
+                                href="/estimator"
+                                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all duration-300"
+                            >
+                                <Calculator className="w-4 h-4" />
+                                Estimator
+                            </Link>
                         </div>
 
                         {/* CTA & Mobile Menu */}
                         <div className="flex items-center gap-3">
+                            {/* Estimate My Project CTA - Blue */}
+                            <Link
+                                href="/estimator"
+                                className="group relative hidden sm:flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+                            >
+                                {/* Blue gradient background */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 transition-all duration-300" />
+
+                                {/* Animated shine effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+
+                                {/* Button content */}
+                                <span className="relative z-10">Estimate My Project</span>
+                                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                            </Link>
+
                             {/* Let's Talk CTA - Orange Gradient */}
                             <Link
                                 href="/contact"
-                                className="group relative hidden sm:flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25"
+                                className="group relative hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25"
                             >
                                 {/* Orange gradient background */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 transition-all duration-300" />
@@ -497,10 +523,27 @@ export function Navbar() {
                                     >
                                         About Us
                                     </Link>
+
+                                    <Link
+                                        href="/estimator"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="flex items-center gap-2 p-3 rounded-xl font-medium text-blue-400 hover:bg-blue-500/10 transition-colors"
+                                    >
+                                        <Calculator className="w-5 h-5" />
+                                        Estimator
+                                    </Link>
                                 </div>
 
-                                {/* Footer CTA - Orange themed */}
-                                <div className="p-4 border-t border-white/10">
+                                {/* Footer CTAs */}
+                                <div className="p-4 border-t border-white/10 space-y-3">
+                                    <Link
+                                        href="/estimator"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 hover:opacity-90 transition-opacity"
+                                    >
+                                        Estimate My Project
+                                        <ArrowRight className="w-4 h-4" />
+                                    </Link>
                                     <Link
                                         href="/contact"
                                         onClick={() => setMobileMenuOpen(false)}

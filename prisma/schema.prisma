@@ -49,3 +49,18 @@ model BlogPost {
 
   @@map("blog_posts")
 }
+
+model EstimatorLead {
+  id          String   @id @default(cuid())
+  email       String
+  platform    String
+  aiFeatures  String
+  payments    String
+  designReady String
+  totalDays   Int
+  totalCost   Int
+  resultState String // "sprint_ready" or "enterprise"
+  createdAt   DateTime @default(now())
+
+  @@map("estimator_leads")
+}
