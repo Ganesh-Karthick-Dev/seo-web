@@ -158,10 +158,10 @@ function EstimatorToolSection() {
                                 <button
                                     onClick={() => setCurrentStep(index)}
                                     className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${getSelectedOption(q.id) >= 0
-                                            ? "bg-cyan-500 text-white"
-                                            : currentStep === index
-                                                ? "bg-blue-600 text-white"
-                                                : "bg-neutral-800 text-neutral-400"
+                                        ? "bg-cyan-500 text-white"
+                                        : currentStep === index
+                                            ? "bg-blue-600 text-white"
+                                            : "bg-neutral-800 text-neutral-400"
                                         }`}
                                 >
                                     {getSelectedOption(q.id) >= 0 ? <Check className="w-5 h-5" /> : index + 1}
@@ -200,8 +200,8 @@ function EstimatorToolSection() {
                                             whileTap={{ scale: 0.98 }}
                                             onClick={() => handleOptionSelect(questions[currentStep].id, optIndex, option)}
                                             className={`p-6 rounded-xl border-2 text-left transition-all ${isSelected
-                                                    ? "border-cyan-500 bg-cyan-500/10"
-                                                    : "border-neutral-700 bg-neutral-800/50 hover:border-neutral-600"
+                                                ? "border-cyan-500 bg-cyan-500/10"
+                                                : "border-neutral-700 bg-neutral-800/50 hover:border-neutral-600"
                                                 }`}
                                         >
                                             <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-3 ${isSelected ? "bg-cyan-500/20" : "bg-neutral-700/50"
@@ -272,8 +272,8 @@ function EstimatorToolSection() {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     className={`mt-6 p-4 rounded-xl ${isSprintReady
-                                            ? "bg-cyan-500/10 border border-cyan-500/20"
-                                            : "bg-amber-500/10 border border-amber-500/20"
+                                        ? "bg-cyan-500/10 border border-cyan-500/20"
+                                        : "bg-amber-500/10 border border-amber-500/20"
                                         }`}
                                 >
                                     <div className="flex items-center gap-3">
@@ -353,24 +353,39 @@ function EstimatorToolSection() {
 
 function Section1() {
     return (
-        <section className="py-24">
-            {/* Section 1 content will go here */}
+        <section className="py-24 min-h-[60vh] flex items-center justify-center">
+            <div className="text-center">
+                <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-700 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-neutral-600">1</span>
+                </div>
+                <p className="text-neutral-600 text-sm">Section 1 - Awaiting Content</p>
+            </div>
         </section>
     );
 }
 
 function Section2() {
     return (
-        <section className="py-24">
-            {/* Section 2 content will go here */}
+        <section className="py-24 min-h-[60vh] flex items-center justify-center">
+            <div className="text-center">
+                <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-700 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-neutral-600">2</span>
+                </div>
+                <p className="text-neutral-600 text-sm">Section 2 - Awaiting Content</p>
+            </div>
         </section>
     );
 }
 
 function Section3() {
     return (
-        <section className="py-24">
-            {/* Section 3 content will go here */}
+        <section className="py-24 min-h-[60vh] flex items-center justify-center">
+            <div className="text-center">
+                <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-700 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-neutral-600">3</span>
+                </div>
+                <p className="text-neutral-600 text-sm">Section 3 - Awaiting Content</p>
+            </div>
         </section>
     );
 }
