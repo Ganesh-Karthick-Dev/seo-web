@@ -20,6 +20,9 @@ import {
     AlertTriangle
 } from "lucide-react";
 import { Hero } from "@/components/ui/hero-1";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { Rocket, Cpu, Cloud, Code2, LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // ESTIMATOR TOOL SECTION (Section 4)
@@ -364,15 +367,105 @@ function Section1() {
     );
 }
 
+// ============================================
+// SECTION 2 - THE 4 CORE CAPABILITIES
+// ============================================
+
+const capabilities = [
+    {
+        icon: Rocket,
+        title: "Rapid SaaS Development",
+        tagline: "From 'Idea' to 'Invoice' in 2 Weeks.",
+        description: "We don't just build MVPs; we build scalable V1s. Using our proprietary 'Zylex Core' architecture, we skip the boilerplate setup and focus 100% on your unique business logic.",
+    },
+    {
+        icon: Cpu,
+        title: "Enterprise AI Agents",
+        tagline: "Software that Thinks, Not Just Clicks.",
+        description: "Move beyond simple chatbots. We engineer autonomous AI agents that can read databases, execute workflows, and handle customer support or internal ops without human intervention.",
+    },
+    {
+        icon: Cloud,
+        title: "Cloud & DevOps",
+        tagline: "Infrastructure That Scales With You.",
+        description: "We design cloud architectures that handle your growth without breaking the bank. CI/CD pipelines, auto-scaling, and monitoring built from day one.",
+    },
+    {
+        icon: Code2,
+        title: "Custom Software",
+        tagline: "Built Exactly For Your Business.",
+        description: "Off-the-shelf tools don't cut it? We build software tailored to your unique workflows, integrations, and business logic.",
+    },
+];
+
+interface CapabilityCardProps {
+    area?: string;
+    icon: LucideIcon;
+    title: string;
+    tagline: string;
+    description: string;
+}
+
+function CapabilityCard({ area, icon: Icon, title, tagline, description }: CapabilityCardProps) {
+    return (
+        <li className={cn("min-h-[14rem] list-none", area)}>
+            <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-neutral-800 p-2 md:rounded-[1.5rem] md:p-3">
+                <GlowingEffect
+                    spread={40}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                    borderWidth={3}
+                />
+                <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] border-neutral-800 bg-neutral-950 p-6 shadow-sm md:p-6">
+                    <div className="relative flex flex-1 flex-col justify-between gap-3">
+                        <div className="w-fit rounded-lg border-[0.75px] border-neutral-800 bg-neutral-900 p-2">
+                            <Icon className="h-5 w-5 text-blue-400" />
+                        </div>
+                        <div className="space-y-3">
+                            <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-white">
+                                {title}
+                            </h3>
+                            <p className="text-sm font-medium text-blue-400">
+                                {tagline}
+                            </p>
+                            <p className="text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-neutral-400">
+                                {description}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    );
+}
+
 function Section2() {
     return (
-        <section className="py-24 min-h-[60vh] flex items-center justify-center">
-            <div className="text-center">
-                <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-700 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-neutral-600">2</span>
-                </div>
-                <p className="text-neutral-600 text-sm">Section 2 - Awaiting Content</p>
+        <section className="py-24">
+            {/* Section Header */}
+            <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-6xl font-bold text-neutral-900 dark:text-white mb-6">
+                    What We Build. How We Deliver.
+                </h2>
+                <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                    Focus on the outcome, not the tech stack. We deliver results that transform your business.
+                </p>
             </div>
+
+            {/* Capabilities Grid */}
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 max-w-6xl mx-auto">
+                {capabilities.map((cap, index) => (
+                    <CapabilityCard
+                        key={index}
+                        icon={cap.icon}
+                        title={cap.title}
+                        tagline={cap.tagline}
+                        description={cap.description}
+                    />
+                ))}
+            </ul>
         </section>
     );
 }
