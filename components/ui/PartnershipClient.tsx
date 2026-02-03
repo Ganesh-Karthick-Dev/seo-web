@@ -447,7 +447,7 @@ function EstimatorToolSection() {
                     className="text-4xl md:text-6xl font-bold text-white mb-6"
                 >
                     Build Your{" "}
-                    <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+                    <span className="text-blue-400">
                         MVP Estimate
                     </span>
                 </motion.h2>
@@ -677,8 +677,6 @@ function EstimatorToolSection() {
                     <div className="sticky top-32 space-y-6">
                         {/* Live Comparison Card */}
                         <div className="relative bg-gradient-to-br from-neutral-900/90 to-neutral-950/90 backdrop-blur-xl rounded-3xl border border-neutral-800/80 p-6 overflow-hidden">
-                            {/* Background accent */}
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500" />
 
                             <div className="flex items-center gap-2 mb-6">
                                 <TrendingUp className="w-5 h-5 text-blue-400" />
