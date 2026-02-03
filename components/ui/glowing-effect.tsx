@@ -15,6 +15,7 @@ interface GlowingEffectProps {
     disabled?: boolean;
     movementDuration?: number;
     borderWidth?: number;
+    defaultAngle?: number; // Angle for glow position when inactive (0=top, 90=right, 180=bottom, 270=left)
 }
 const GlowingEffect = memo(
     ({
@@ -28,6 +29,7 @@ const GlowingEffect = memo(
         movementDuration = 2,
         borderWidth = 1,
         disabled = true,
+        defaultAngle = 0,
     }: GlowingEffectProps) => {
         const containerRef = useRef<HTMLDivElement>(null);
         const lastPosition = useRef({ x: 0, y: 0 });
@@ -54,16 +56,6 @@ const GlowingEffect = memo(
                     }
 
                     const center = [left + width * 0.5, top + height * 0.5];
-                    const distanceFromCenter = Math.hypot(
-                        mouseX - center[0],
-                        mouseY - center[1]
-                    );
-                    const inactiveRadius = 0.5 * Math.min(width, height) * inactiveZone;
-
-                    if (distanceFromCenter < inactiveRadius) {
-                        element.style.setProperty("--active", "0");
-                        return;
-                    }
 
                     const isActive =
                         mouseX > left - proximity &&
@@ -71,9 +63,14 @@ const GlowingEffect = memo(
                         mouseY > top - proximity &&
                         mouseY < top + height + proximity;
 
-                    element.style.setProperty("--active", isActive ? "1" : "0");
+                    // When inactive, show glow at default angle position with reduced opacity
+                    element.style.setProperty("--active", isActive ? "1" : "0.4");
 
-                    if (!isActive) return;
+                    if (!isActive) {
+                        // Set to default angle position when inactive
+                        element.style.setProperty("--start", String(defaultAngle));
+                        return;
+                    }
 
                     const currentAngle =
                         parseFloat(element.style.getPropertyValue("--start")) || 0;
@@ -133,8 +130,8 @@ const GlowingEffect = memo(
                         {
                             "--blur": `${blur}px`,
                             "--spread": spread,
-                            "--start": "0",
-                            "--active": "0",
+                            "--start": String(defaultAngle),
+                            "--active": "0.4",
                             "--glowingeffect-border-width": `${borderWidth}px`,
                             "--repeating-conic-gradient-times": "5",
                             "--gradient":

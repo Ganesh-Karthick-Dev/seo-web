@@ -377,24 +377,28 @@ const capabilities = [
         title: "Rapid SaaS Development",
         tagline: "From 'Idea' to 'Invoice' in 2 Weeks.",
         description: "We don't just build MVPs; we build scalable V1s. Using our proprietary 'Zylex Core' architecture, we skip the boilerplate setup and focus 100% on your unique business logic.",
+        defaultAngle: 135, // bottom-right
     },
     {
         icon: Cpu,
         title: "Enterprise AI Agents",
         tagline: "Software that Thinks, Not Just Clicks.",
         description: "Move beyond simple chatbots. We engineer autonomous AI agents that can read databases, execute workflows, and handle customer support or internal ops without human intervention.",
+        defaultAngle: 225, // bottom-left
     },
     {
         icon: Cloud,
         title: "Cloud & DevOps",
         tagline: "Infrastructure That Scales With You.",
         description: "We design cloud architectures that handle your growth without breaking the bank. CI/CD pipelines, auto-scaling, and monitoring built from day one.",
+        defaultAngle: 45, // top-right
     },
     {
         icon: Code2,
         title: "Custom Software",
         tagline: "Built Exactly For Your Business.",
         description: "Off-the-shelf tools don't cut it? We build software tailored to your unique workflows, integrations, and business logic.",
+        defaultAngle: 315, // top-left
     },
 ];
 
@@ -404,9 +408,10 @@ interface CapabilityCardProps {
     title: string;
     tagline: string;
     description: string;
+    defaultAngle?: number;
 }
 
-function CapabilityCard({ area, icon: Icon, title, tagline, description }: CapabilityCardProps) {
+function CapabilityCard({ area, icon: Icon, title, tagline, description, defaultAngle = 0 }: CapabilityCardProps) {
     return (
         <li className={cn("min-h-[14rem] list-none", area)}>
             <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-neutral-800 p-2 md:rounded-[1.5rem] md:p-3">
@@ -417,8 +422,9 @@ function CapabilityCard({ area, icon: Icon, title, tagline, description }: Capab
                     proximity={64}
                     inactiveZone={0.01}
                     borderWidth={3}
+                    defaultAngle={defaultAngle}
                 />
-                <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] border-neutral-800 bg-neutral-950 p-6 shadow-sm md:p-6">
+                <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] border-neutral-800 bg-transparent p-6 shadow-sm md:p-6">
                     <div className="relative flex flex-1 flex-col justify-between gap-3">
                         <div className="w-fit rounded-lg border-[0.75px] border-neutral-800 bg-neutral-900 p-2">
                             <Icon className="h-5 w-5 text-blue-400" />
@@ -463,6 +469,7 @@ function Section2() {
                         title={cap.title}
                         tagline={cap.tagline}
                         description={cap.description}
+                        defaultAngle={cap.defaultAngle}
                     />
                 ))}
             </ul>
