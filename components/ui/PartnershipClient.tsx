@@ -355,10 +355,10 @@ function EstimatorToolSection() {
 function Section1() {
     return (
         <Hero
-            title="Build smarter tools for modern teams"
-            subtitle="Streamline your workflow and boost productivity with intuitive solutions. Security, speed, and simplicity—all in one platform."
-            eyebrow="Next-Gen Productivity"
-            ctaLabel="Get Started"
+            title="Engineering. Shipped in 15 Days."
+            subtitle='Zylex allows founders and agencies to bypass the "development hell" of traditional hiring. We build production-grade SaaS, AI, and Cloud infrastructure at the speed of a hackathon.'
+            eyebrow="15-Day High-Velocity Sprint"
+            ctaLabel="Estimate My Project"
             ctaHref="#estimator"
         />
     );
