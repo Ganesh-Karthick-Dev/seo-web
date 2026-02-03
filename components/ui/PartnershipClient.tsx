@@ -13,12 +13,14 @@ import {
     Phone,
     Globe,
     Briefcase,
-    Send
+    Send,
+    Scale,
+    Layers
 } from "lucide-react";
 
 const benefits = [
     {
-        icon: Zap,
+        icon: Layers,
         title: "White-Label Development",
         description: "Your brand, our engineering. Clients never know we exist."
     },
@@ -28,12 +30,12 @@ const benefits = [
         description: "Get priority access to senior engineers for your projects."
     },
     {
-        icon: Building2,
+        icon: Scale,
         title: "Scale Without Hiring",
         description: "Take on more clients without the overhead of full-time devs."
     },
     {
-        icon: Briefcase,
+        icon: Zap,
         title: "Revenue Share Model",
         description: "Flexible pricing that grows with your agency."
     }
@@ -72,10 +74,10 @@ export default function PartnershipClient() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950 pt-32 pb-20">
-            {/* Background decoration */}
+        <div className="min-h-screen bg-black pt-32 pb-20">
+            {/* Background decoration - cyan/blue theme */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+                <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
                 <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
             </div>
 
@@ -86,16 +88,16 @@ export default function PartnershipClient() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-16"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
-                        <Handshake className="w-4 h-4 text-purple-400" />
-                        <span className="text-purple-400 text-sm font-medium">Agency Partnership</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6">
+                        <Handshake className="w-4 h-4 text-cyan-400" />
+                        <span className="text-cyan-400 text-sm font-medium">Agency Partnership</span>
                     </div>
 
                     <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                        Your Clients. <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Our Execution.</span>
+                        Your Clients. <span className="text-cyan-400">Our Execution.</span>
                     </h1>
 
-                    <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg md:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed">
                         You have the clients who need development work. We have the engineering firepower.
                         Let&apos;s build something powerful together as white-label partners.
                     </p>
@@ -117,14 +119,14 @@ export default function PartnershipClient() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.3 + index * 0.1 }}
-                                    className="flex items-start gap-4 p-4 rounded-xl bg-slate-900/50 border border-slate-800"
+                                    className="flex items-start gap-4 p-4 rounded-xl bg-neutral-900/50 border border-neutral-800"
                                 >
-                                    <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0">
-                                        <benefit.icon className="w-6 h-6 text-purple-400" />
+                                    <div className="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
+                                        <benefit.icon className="w-6 h-6 text-cyan-400" />
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-white mb-1">{benefit.title}</h3>
-                                        <p className="text-sm text-slate-400">{benefit.description}</p>
+                                        <p className="text-sm text-neutral-400">{benefit.description}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -132,17 +134,17 @@ export default function PartnershipClient() {
 
                         {/* Stats */}
                         <div className="grid grid-cols-3 gap-4 mt-8">
-                            <div className="text-center p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-                                <div className="text-2xl font-bold text-purple-400">40+</div>
-                                <div className="text-xs text-slate-500">Agency Partners</div>
+                            <div className="text-center p-4 rounded-xl bg-neutral-900/50 border border-neutral-800">
+                                <div className="text-2xl font-bold text-cyan-400">40+</div>
+                                <div className="text-xs text-neutral-500">Agency Partners</div>
                             </div>
-                            <div className="text-center p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-                                <div className="text-2xl font-bold text-purple-400">200+</div>
-                                <div className="text-xs text-slate-500">Projects Delivered</div>
+                            <div className="text-center p-4 rounded-xl bg-neutral-900/50 border border-neutral-800">
+                                <div className="text-2xl font-bold text-cyan-400">200+</div>
+                                <div className="text-xs text-neutral-500">Projects Delivered</div>
                             </div>
-                            <div className="text-center p-4 rounded-xl bg-slate-900/50 border border-slate-800">
-                                <div className="text-2xl font-bold text-purple-400">98%</div>
-                                <div className="text-xs text-slate-500">Client Retention</div>
+                            <div className="text-center p-4 rounded-xl bg-neutral-900/50 border border-neutral-800">
+                                <div className="text-2xl font-bold text-cyan-400">98%</div>
+                                <div className="text-xs text-neutral-500">Client Retention</div>
                             </div>
                         </div>
                     </motion.div>
@@ -152,46 +154,46 @@ export default function PartnershipClient() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-slate-800 p-8"
+                        className="bg-neutral-900/80 backdrop-blur-xl rounded-2xl border border-neutral-800 p-8"
                     >
                         {!isSubmitted ? (
                             <>
                                 <h2 className="text-2xl font-bold text-white mb-2">Get the Partnership Kit</h2>
-                                <p className="text-slate-400 mb-8">Fill out the form and we&apos;ll send you our partner program details.</p>
+                                <p className="text-neutral-400 mb-8">Fill out the form and we&apos;ll send you our partner program details.</p>
 
                                 <form onSubmit={handleSubmit} className="space-y-5">
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-slate-400 mb-2">
+                                            <label className="block text-sm font-medium text-neutral-400 mb-2">
                                                 Agency Name *
                                             </label>
                                             <div className="relative">
-                                                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
                                                 <input
                                                     type="text"
                                                     name="agencyName"
                                                     value={formData.agencyName}
                                                     onChange={handleChange}
                                                     required
-                                                    className="w-full pl-11 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all"
+                                                    className="w-full pl-11 pr-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500 transition-all"
                                                     placeholder="Your Agency"
                                                 />
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-medium text-slate-400 mb-2">
+                                            <label className="block text-sm font-medium text-neutral-400 mb-2">
                                                 Your Name *
                                             </label>
                                             <div className="relative">
-                                                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
                                                 <input
                                                     type="text"
                                                     name="contactName"
                                                     value={formData.contactName}
                                                     onChange={handleChange}
                                                     required
-                                                    className="w-full pl-11 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all"
+                                                    className="w-full pl-11 pr-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500 transition-all"
                                                     placeholder="John Smith"
                                                 />
                                             </div>
@@ -200,35 +202,35 @@ export default function PartnershipClient() {
 
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-slate-400 mb-2">
+                                            <label className="block text-sm font-medium text-neutral-400 mb-2">
                                                 Email *
                                             </label>
                                             <div className="relative">
-                                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
                                                 <input
                                                     type="email"
                                                     name="email"
                                                     value={formData.email}
                                                     onChange={handleChange}
                                                     required
-                                                    className="w-full pl-11 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all"
+                                                    className="w-full pl-11 pr-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500 transition-all"
                                                     placeholder="you@agency.com"
                                                 />
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-medium text-slate-400 mb-2">
+                                            <label className="block text-sm font-medium text-neutral-400 mb-2">
                                                 Phone
                                             </label>
                                             <div className="relative">
-                                                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
                                                 <input
                                                     type="tel"
                                                     name="phone"
                                                     value={formData.phone}
                                                     onChange={handleChange}
-                                                    className="w-full pl-11 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all"
+                                                    className="w-full pl-11 pr-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500 transition-all"
                                                     placeholder="+1 (555) 123-4567"
                                                 />
                                             </div>
@@ -236,17 +238,17 @@ export default function PartnershipClient() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-slate-400 mb-2">
+                                        <label className="block text-sm font-medium text-neutral-400 mb-2">
                                             Website
                                         </label>
                                         <div className="relative">
-                                            <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                            <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
                                             <input
                                                 type="url"
                                                 name="website"
                                                 value={formData.website}
                                                 onChange={handleChange}
-                                                className="w-full pl-11 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all"
+                                                className="w-full pl-11 pr-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500 transition-all"
                                                 placeholder="https://youragency.com"
                                             />
                                         </div>
@@ -254,14 +256,14 @@ export default function PartnershipClient() {
 
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-slate-400 mb-2">
+                                            <label className="block text-sm font-medium text-neutral-400 mb-2">
                                                 Team Size
                                             </label>
                                             <select
                                                 name="teamSize"
                                                 value={formData.teamSize}
                                                 onChange={handleChange}
-                                                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-purple-500 transition-all"
+                                                className="w-full px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 transition-all"
                                             >
                                                 <option value="">Select size</option>
                                                 <option value="1-5">1-5 people</option>
@@ -272,14 +274,14 @@ export default function PartnershipClient() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-medium text-slate-400 mb-2">
+                                            <label className="block text-sm font-medium text-neutral-400 mb-2">
                                                 Monthly Dev Projects
                                             </label>
                                             <select
                                                 name="monthlyProjects"
                                                 value={formData.monthlyProjects}
                                                 onChange={handleChange}
-                                                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-purple-500 transition-all"
+                                                className="w-full px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 transition-all"
                                             >
                                                 <option value="">Select volume</option>
                                                 <option value="1-2">1-2 projects</option>
@@ -291,7 +293,7 @@ export default function PartnershipClient() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-slate-400 mb-2">
+                                        <label className="block text-sm font-medium text-neutral-400 mb-2">
                                             Tell us about your needs
                                         </label>
                                         <textarea
@@ -299,7 +301,7 @@ export default function PartnershipClient() {
                                             value={formData.message}
                                             onChange={handleChange}
                                             rows={4}
-                                            className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-all resize-none"
+                                            className="w-full px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500 transition-all resize-none"
                                             placeholder="What types of projects do you typically work on? What would an ideal partnership look like?"
                                         />
                                     </div>
@@ -307,7 +309,7 @@ export default function PartnershipClient() {
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold rounded-lg disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+                                        className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg disabled:opacity-50 transition-all flex items-center justify-center gap-2"
                                     >
                                         {isSubmitting ? (
                                             "Sending..."
@@ -323,17 +325,17 @@ export default function PartnershipClient() {
                             </>
                         ) : (
                             <div className="text-center py-12">
-                                <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <Check className="w-10 h-10 text-green-400" />
+                                <div className="w-20 h-20 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <Check className="w-10 h-10 text-cyan-400" />
                                 </div>
                                 <h2 className="text-2xl font-bold text-white mb-4">
                                     Welcome to the Partnership!
                                 </h2>
-                                <p className="text-slate-400 mb-6">
+                                <p className="text-neutral-400 mb-6">
                                     Your Partnership Kit is on its way. Our team will reach out within 24 hours to discuss next steps.
                                 </p>
-                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20">
-                                    <span className="text-purple-400 text-sm">Check your inbox for the welcome email</span>
+                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20">
+                                    <span className="text-cyan-400 text-sm">Check your inbox for the welcome email</span>
                                 </div>
                             </div>
                         )}
