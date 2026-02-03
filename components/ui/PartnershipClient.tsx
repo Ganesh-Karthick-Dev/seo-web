@@ -19,6 +19,7 @@ import {
     FileCheck,
     AlertTriangle
 } from "lucide-react";
+import { Hero } from "@/components/ui/hero-1";
 
 // ============================================
 // ESTIMATOR TOOL SECTION (Section 4)
@@ -348,19 +349,18 @@ function EstimatorToolSection() {
 }
 
 // ============================================
-// PLACEHOLDER SECTIONS (To be filled)
+// SECTION 1 - HERO
 // ============================================
 
 function Section1() {
     return (
-        <section className="py-24 min-h-[60vh] flex items-center justify-center">
-            <div className="text-center">
-                <div className="w-20 h-20 rounded-full border-2 border-dashed border-neutral-700 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-neutral-600">1</span>
-                </div>
-                <p className="text-neutral-600 text-sm">Section 1 - Awaiting Content</p>
-            </div>
-        </section>
+        <Hero
+            title="Build smarter tools for modern teams"
+            subtitle="Streamline your workflow and boost productivity with intuitive solutions. Security, speed, and simplicity—all in one platform."
+            eyebrow="Next-Gen Productivity"
+            ctaLabel="Get Started"
+            ctaHref="#estimator"
+        />
     );
 }
 
@@ -396,17 +396,17 @@ function Section3() {
 
 export default function PartnershipClient() {
     return (
-        <div className="min-h-screen bg-black pt-32 pb-20">
+        <div className="min-h-screen bg-black">
+            {/* Section 1 - Hero (Full Width) */}
+            <Section1 />
+
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
                 <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
             </div>
 
-            <div className="container mx-auto px-4 relative z-10">
-                {/* Section 1 - To be added */}
-                <Section1 />
-
+            <div className="container mx-auto px-4 relative z-10 pb-20">
                 {/* Section 2 - To be added */}
                 <Section2 />
 
