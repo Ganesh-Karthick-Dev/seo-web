@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     Check,
@@ -226,6 +226,8 @@ function EstimatorToolSection() {
     const [email, setEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [emailHighlight, setEmailHighlight] = useState(false);
+    const emailInputRef = useRef<HTMLInputElement>(null);
 
     // Calculate totals
     const totals = useMemo(() => {
@@ -263,6 +265,16 @@ function EstimatorToolSection() {
     const completedPhases = Object.keys(selections).length;
     const showEmailGate = completedPhases >= 5;
     const allPhasesComplete = completedPhases === estimatorPhases.length;
+
+    // Auto-scroll to email input when all phases are complete
+    useEffect(() => {
+        if (allPhasesComplete && emailInputRef.current) {
+            setTimeout(() => {
+                emailInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+                emailInputRef.current?.focus();
+            }, 300);
+        }
+    }, [allPhasesComplete]);
 
     const handleOptionToggle = (phaseId: string, optionId: string, option: { ourCost: number; competitorCost: number; days: number }) => {
         const phase = estimatorPhases.find((p) => p.id === phaseId);
@@ -336,6 +348,14 @@ function EstimatorToolSection() {
     const handleNext = () => {
         if (currentPhase < estimatorPhases.length - 1) {
             setCurrentPhase(currentPhase + 1);
+        } else {
+            // On last phase, focus email input with highlight
+            if (emailInputRef.current) {
+                emailInputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+                emailInputRef.current.focus();
+                setEmailHighlight(true);
+                setTimeout(() => setEmailHighlight(false), 2000);
+            }
         }
     };
 
@@ -606,10 +626,20 @@ function EstimatorToolSection() {
                                 </button>
                                 <button
                                     onClick={handleNext}
-                                    disabled={currentPhase === estimatorPhases.length - 1}
-                                    className="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+                                    className={`px-6 py-2 text-white rounded-lg transition-all flex items-center gap-2 ${currentPhase === estimatorPhases.length - 1
+                                        ? "bg-green-600 hover:bg-green-500"
+                                        : "bg-blue-600 hover:bg-blue-500"
+                                        }`}
                                 >
-                                    Next <ArrowRight className="w-4 h-4" />
+                                    {currentPhase === estimatorPhases.length - 1 ? (
+                                        <>
+                                            Get Roadmap <Send className="w-4 h-4" />
+                                        </>
+                                    ) : (
+                                        <>
+                                            Next <ArrowRight className="w-4 h-4" />
+                                        </>
+                                    )}
                                 </button>
                             </div>
                         </motion.div>
@@ -778,11 +808,15 @@ function EstimatorToolSection() {
                                         <div className="space-y-4">
                                             <div className="relative">
                                                 <input
+                                                    ref={emailInputRef}
                                                     type="email"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
                                                     placeholder="work-email@company.com"
-                                                    className="w-full px-4 py-3.5 bg-neutral-800/80 border border-neutral-700 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                                    className={`w-full px-4 py-3.5 bg-neutral-800/80 border rounded-xl text-white placeholder-neutral-500 focus:outline-none transition-all ${emailHighlight
+                                                            ? "border-blue-500 ring-4 ring-blue-500/30 animate-pulse"
+                                                            : "border-neutral-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                                                        }`}
                                                 />
                                                 {isValidEmail(email) && (
                                                     <motion.div

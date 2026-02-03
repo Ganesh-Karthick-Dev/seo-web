@@ -24,7 +24,7 @@
     "lucide-react": "^0.556.0",
     "motion": "^12.23.25",
     "next": "16.1.1",
-    "nodemailer": "^7.0.12",
+    "nodemailer": "^7.0.13",
     "prisma": "^5.22.0",
     "react": "19.2.1",
     "react-calendly": "^4.4.0",
