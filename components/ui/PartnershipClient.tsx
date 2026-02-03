@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
 import {
     Check,
     Zap,
@@ -381,7 +382,32 @@ function EstimatorToolSection() {
                     completedPhases,
                 }),
             });
-            if (response.ok) setIsSubmitted(true);
+            if (response.ok) {
+                setIsSubmitted(true);
+                // Trigger confetti celebration!
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                });
+                // Fire more confetti for extra celebration
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 50,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                    });
+                }, 200);
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 50,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                    });
+                }, 400);
+            }
         } catch (error) {
             console.error("Submission error:", error);
         } finally {
@@ -814,8 +840,8 @@ function EstimatorToolSection() {
                                                     onChange={(e) => setEmail(e.target.value)}
                                                     placeholder="work-email@company.com"
                                                     className={`w-full px-4 py-3.5 bg-neutral-800/80 border rounded-xl text-white placeholder-neutral-500 focus:outline-none transition-all ${emailHighlight
-                                                            ? "border-blue-500 ring-4 ring-blue-500/30 animate-pulse"
-                                                            : "border-neutral-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                                                        ? "border-blue-500 ring-4 ring-blue-500/30 animate-pulse"
+                                                        : "border-neutral-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                                                         }`}
                                                 />
                                                 {isValidEmail(email) && (
