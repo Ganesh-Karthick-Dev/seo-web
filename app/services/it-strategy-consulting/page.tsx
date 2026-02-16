@@ -121,6 +121,9 @@ const whyPartnerBenefits = [
 export const metadata = {
     title: "IT consulting services | Strategy into Execution | Zylex",
     description: "Stop drowning in plans. Zylex delivers IT consulting services engineered for scale—IT strategy and consulting and tech consulting. Execution focused.",
+    alternates: {
+        canonical: "/services/it-strategy-consulting",
+    },
 };
 
 export default function ITConsultingPage() {

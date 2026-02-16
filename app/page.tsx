@@ -2,9 +2,12 @@ import { getAllBlogPosts } from "@/lib/blog-data";
 import HomeClient from "./home-client";
 
 export const metadata = {
-  title: "Zylex | Strategic AI & SaaS Development Agency for US Startups",
+  title: "Zylex360: One Platform. Every Business Function.",
   description:
-    "Ship production-ready SaaS platforms in 15 days. We provide elite engineering for AI automation, custom software, and cloud infrastructure.",
+    "E-commerce, CRM, ERP, and Inventory—unified in real-time. Eliminate data silos and inventory errors. One platform. Complete operational visibility.",
+  alternates: {
+    canonical: "https://zylex.io",
+  },
 };
 
 export const revalidate = 60; // Revalidate every 60s so Insights & Resources gets fresh posts

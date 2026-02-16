@@ -13,6 +13,9 @@ import { BlogSection } from "@/components/sections/BlogSection";
 export const metadata = {
     title: "Website and App Development Services That Users Love | Zylex",
     description: "Stop shipping fragile code. Zylex delivers website and app development and cross-platform mobile app development services. Absolute execution.",
+    alternates: {
+        canonical: "/services/web-mobile-development",
+    },
 };
 
 export default function WebMobileApplicationDevelopmentPage() {

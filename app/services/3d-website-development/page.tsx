@@ -138,6 +138,9 @@ const whyChooseBenefits = [
 export const metadata = {
     title: "3D website development | Immersive Engineering | Zylex",
     description: "Stop building flat pages. Zylex 3D website development transforms brands through interactive 3D website development and 3D web design services.",
+    alternates: {
+        canonical: "/services/3d-website-development",
+    },
 };
 
 export default function ThreeDWebsiteDevelopmentPage() {

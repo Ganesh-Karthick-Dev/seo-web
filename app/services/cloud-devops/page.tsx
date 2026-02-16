@@ -191,6 +191,14 @@ const whyChooseBenefits = [
     },
 ];
 
+export const metadata = {
+    title: "Cloud & DevOps Services | Automate & Scale | Zylex",
+    description: "Stop manual patchwork. Zylex Cloud & DevOps engineering services destroy operational friction and rebuild your delivery pipelines into unshakeable engines.",
+    alternates: {
+        canonical: "/services/cloud-devops",
+    },
+};
+
 export default function CloudDevOpsPage() {
     return (
         <main className="bg-black min-h-screen">

@@ -1,4 +1,13 @@
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Privacy Policy | Zylex",
+    description: "Learn how Zylex collects, uses, and protects your personal data. We are committed to safeguarding your privacy and ensuring transparency.",
+    alternates: {
+        canonical: "/privacy",
+    },
+};
 
 export default function PrivacyPage() {
     return (

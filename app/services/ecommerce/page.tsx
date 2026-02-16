@@ -156,6 +156,14 @@ const whyChooseBenefits = [
     },
 ];
 
+export const metadata = {
+    title: "Ecommerce Development Services | Custom & Scalable | Zylex",
+    description: "Build high-performance online stores that drive sales. Zylex ecommerce development solutions are engineered for conversion and absolute execution.",
+    alternates: {
+        canonical: "/services/ecommerce",
+    },
+};
+
 export default function EcommercePage() {
     return (
         <main className="bg-black min-h-screen">

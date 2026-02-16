@@ -29,6 +29,7 @@ const cormorant = Cormorant_Garamond({
 
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://zylex.io"),
   title: "Zylex | Strategic AI & SaaS Development Agency for US Startups",
   description: "Ship production-ready SaaS platforms in 15 days. We provide elite engineering for AI automation, custom software, and cloud infrastructure.",
   icons: {

@@ -8,6 +8,9 @@ import { AboutCTASection } from "@/components/sections/AboutCTASection";
 export const metadata: Metadata = {
     title: "technology solutions company | Built for Execution | Zylex",
     description: "Meet Zylex, a technology solutions company engineered for impact. As your technology partner, we deliver SaaS product development for results.",
+    alternates: {
+        canonical: "/about-us"
+    }
 };
 
 export default function About() {

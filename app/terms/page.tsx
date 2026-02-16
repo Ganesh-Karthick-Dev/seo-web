@@ -1,4 +1,13 @@
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Terms & Conditions | Zylex",
+    description: "Read our terms and conditions for using Zylex services. We provide clear guidelines on intellectual property, liability, and user responsibilities.",
+    alternates: {
+        canonical: "/terms",
+    },
+};
 
 export default function TermsPage() {
     return (

@@ -9,6 +9,9 @@ import { IndustriesCTASection } from "@/components/sections/IndustriesCTASection
 export const metadata: Metadata = {
     title: "industry specific software solutions | Built for Scale | Zylex",
     description: "Zylex delivers industry specific software solutions and software development for industries, engineering custom software for businesses to lead.",
+    alternates: {
+        canonical: "/industries"
+    }
 };
 
 export default function Industries() {

@@ -138,6 +138,9 @@ const whyChooseBenefits = [
 export const metadata = {
     title: "AI development services | Engineered for Results | Zylex",
     description: "Stop experimenting. Zylex AI development services are engineered for scale—custom AI development solutions and AI integration services. Absolute execution.",
+    alternates: {
+        canonical: "/services/ai-automation",
+    },
 };
 
 export default function AIAutomationPage() {

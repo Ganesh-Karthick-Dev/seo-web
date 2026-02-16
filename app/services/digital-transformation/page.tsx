@@ -12,6 +12,9 @@ import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 export const metadata = {
     title: "digital transformation services | Eliminate Legacy Constraints | Zylex",
     description: "Zylex digital transformation services destroy legacy anchors—from app modernization to legacy modernization and transformation. Absolute execution.",
+    alternates: {
+        canonical: "/services/digital-transformation",
+    },
 };
 
 // Features - The Technical Ceilings
