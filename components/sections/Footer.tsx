@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -46,8 +46,10 @@ const resources = [
 ];
 
 const socials = [
-    { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
-    { name: "Mail", icon: Mail, href: "mailto:contact@zylex.ai" },
+    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/zylex-io", color: "hover:bg-[#0077b5]" },
+    { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/zylex_technologies/", color: "hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7]" },
+    { name: "X", icon: Twitter, href: "https://x.com/Zylex_Official", color: "hover:bg-black" },
+    { name: "Mail", icon: Mail, href: "mailto:connect@zylex.io", color: "hover:bg-[#EA4335]" },
 ];
 
 export function Footer() {
@@ -123,7 +125,15 @@ export function Footer() {
                         {/* Logo & Description */}
                         <div className="lg:col-span-2 space-y-6">
                             <Link href="/" className="inline-block">
-                                <span className="text-3xl font-bold text-neutral-900 tracking-tight">ZYLEX</span>
+                                <div className="relative w-32 h-10 overflow-hidden">
+                                    <Image
+                                        src="/logo/zylex-dark-caption.svg"
+                                        alt="Zylex Logo"
+                                        fill
+                                        className="object-contain"
+                                        sizes="(max-width: 768px) 128px, 128px"
+                                    />
+                                </div>
                             </Link>
                             <p className="text-neutral-600 max-w-sm">
                                 Engineering-driven software development for scalable, reliable digital products.
@@ -137,7 +147,7 @@ export function Footer() {
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-10 h-10 rounded-full bg-neutral-200 hover:bg-blue-500 flex items-center justify-center text-neutral-600 hover:text-white transition-all duration-300"
+                                        className={`w-10 h-10 rounded-full bg-neutral-200 ${social.color} flex items-center justify-center text-neutral-600 hover:text-white transition-all duration-300`}
                                         aria-label={social.name}
                                     >
                                         <social.icon className="w-5 h-5" />
