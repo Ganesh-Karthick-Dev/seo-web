@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Linkedin, Mail, Instagram, Twitter } from "lucide-react";
+import { Linkedin, Mail, Instagram, Twitter, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -57,6 +58,15 @@ export function Footer() {
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const bgTextRef = useRef<HTMLSpanElement>(null);
+    const [openSection, setOpenSection] = useState<string | null>(null);
+
+    const footerSections = [
+        { label: "All Services", items: services },
+        { label: "Products", items: products },
+        { label: "Industries", items: industries },
+        { label: "About Company", items: company },
+        { label: "Resources", items: resources },
+    ];
 
     useEffect(() => {
         const container = containerRef.current;
@@ -158,100 +168,69 @@ export function Footer() {
                             </div>
                         </div>
 
-                        {/* All Services */}
-                        <div className="lg:col-span-1">
-                            <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider mb-6">
-                                All Services
-                            </h4>
-                            <ul className="space-y-3">
-                                {services.map((item) => (
-                                    <li key={item.name}>
-                                        <Link
-                                            href={item.href}
-                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        {/* Link Sections */}
+                        {footerSections.map((section) => (
+                            <div key={section.label} className="lg:col-span-1 border-b border-neutral-200 lg:border-none">
+                                {/* Desktop Title */}
+                                <h4 className="hidden lg:block text-xs font-semibold text-neutral-900 uppercase tracking-wider mb-6">
+                                    {section.label}
+                                </h4>
 
-                        {/* Products */}
-                        <div>
-                            <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider mb-6">
-                                Products
-                            </h4>
-                            <ul className="space-y-3">
-                                {products.map((item) => (
-                                    <li key={item.name}>
-                                        <Link
-                                            href={item.href}
-                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                {/* Mobile Title (Accordion Trigger) */}
+                                <button
+                                    onClick={() => setOpenSection(openSection === section.label ? null : section.label)}
+                                    className="flex lg:hidden w-full items-center justify-between py-4 group"
+                                >
+                                    <span className="text-xs font-semibold text-neutral-900 uppercase tracking-wider">
+                                        {section.label}
+                                    </span>
+                                    <ChevronDown
+                                        className={`w-4 h-4 text-neutral-400 transition-transform duration-300 ${openSection === section.label ? "rotate-180" : ""
+                                            }`}
+                                    />
+                                </button>
 
-                        {/* Industries */}
-                        <div>
-                            <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider mb-6">
-                                Industries
-                            </h4>
-                            <ul className="space-y-3">
-                                {industries.map((item) => (
-                                    <li key={item.name}>
-                                        <Link
-                                            href={item.href}
-                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                {/* Desktop List */}
+                                <ul className="hidden lg:block space-y-3">
+                                    {section.items.map((item) => (
+                                        <li key={item.name}>
+                                            <Link
+                                                href={item.href}
+                                                className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
+                                            >
+                                                {item.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
 
-                        {/* About Company */}
-                        <div>
-                            <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider mb-6">
-                                About Company
-                            </h4>
-                            <ul className="space-y-3">
-                                {company.map((item) => (
-                                    <li key={item.name}>
-                                        <Link
-                                            href={item.href}
-                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
+                                {/* Mobile List (Accordion Content) */}
+                                <AnimatePresence>
+                                    {openSection === section.label && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                                            className="overflow-hidden lg:hidden"
                                         >
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Resources */}
-                        <div>
-                            <h4 className="text-xs font-semibold text-neutral-900 uppercase tracking-wider mb-6">
-                                Resources
-                            </h4>
-                            <ul className="space-y-3">
-                                {resources.map((item) => (
-                                    <li key={item.name}>
-                                        <Link
-                                            href={item.href}
-                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                            <ul className="pb-6 space-y-3">
+                                                {section.items.map((item) => (
+                                                    <li key={item.name}>
+                                                        <Link
+                                                            href={item.href}
+                                                            className="text-neutral-600 hover:text-blue-500 transition-colors text-sm"
+                                                        >
+                                                            {item.name}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
