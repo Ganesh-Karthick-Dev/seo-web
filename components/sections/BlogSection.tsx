@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar, Clock, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import type { BlogPost } from "@/lib/blog-data";
@@ -64,7 +64,7 @@ export function BlogSection({ initialBlogPosts = [] }: BlogSectionProps) {
     }, []);
 
     return (
-        <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
+        <section ref={containerRef} className="relative w-full py-32 overflow-hidden bg-black">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent" />
 
@@ -80,55 +80,82 @@ export function BlogSection({ initialBlogPosts = [] }: BlogSectionProps) {
                     </p>
                 </div>
 
-                {/* Blog Cards Grid - first 3 from Resources */}
+                {/* Blog Cards Grid */}
                 <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                    {initialBlogPosts.map((post) => (
-                        <Link
-                            key={post.id}
-                            href={`/resources/blog/${post.slug}`}
-                            className="group block"
-                        >
-                            <div className="relative rounded-3xl border border-white/10 bg-zinc-900/50 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-blue-500/30 hover:shadow-[0_0_50px_-12px_rgba(59,130,246,0.25)]">
-                                {/* Blog Image */}
-                                <div className="h-48 w-full relative overflow-hidden">
+                    {initialBlogPosts.length > 0 ? (
+                        initialBlogPosts.map((post) => (
+                            <Link
+                                key={post.id}
+                                href={`/resources/blog/${post.slug}`}
+                                className="group relative bg-neutral-900 rounded-3xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-300 hover:scale-[1.02] flex flex-col h-full"
+                            >
+                                {/* Image */}
+                                <div className="relative h-56 overflow-hidden">
                                     <Image
                                         src={post.image}
                                         alt={post.title}
                                         fill
-                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                        className="object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
-                                    {/* Animated Overlay */}
-                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
+
+                                    {/* Category Badge */}
+                                    <div className="absolute top-4 left-4">
+                                        <span className="px-3 py-1 bg-blue-600 text-white text-xs font-bold uppercase tracking-wide rounded-full">
+                                            {post.category}
+                                        </span>
+                                    </div>
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-6 md:p-8">
-                                    {/* Title */}
-                                    <h3 className="text-lg md:text-xl font-bold text-white tracking-tight leading-snug mb-4 line-clamp-2">
+                                <div className="p-6 md:p-8 space-y-4 flex flex-col flex-1">
+                                    <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2">
                                         {post.title}
                                     </h3>
 
-                                    {/* Description */}
-                                    <p className="text-neutral-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                                    <p className="text-neutral-400 text-sm line-clamp-3 leading-relaxed">
                                         {post.excerpt}
                                     </p>
 
-                                    {/* Read Article Link */}
-                                    <div className="flex items-center gap-2 text-blue-500 font-medium text-sm group-hover:text-blue-400 transition-colors">
-                                        Read more
-                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    {/* Meta */}
+                                    <div className="flex items-center gap-4 text-xs text-neutral-500 pt-4 border-t border-white/10 mt-auto">
+                                        <div className="flex items-center gap-1">
+                                            <Calendar className="w-3 h-3" />
+                                            {post.date}
+                                        </div>
+                                        <div className="flex items-center gap-1">
+                                            <Clock className="w-3 h-3" />
+                                            {post.readTime}
+                                        </div>
+                                    </div>
+
+                                    {/* Read More Link */}
+                                    <div className="flex items-center gap-2 text-blue-500 font-medium text-sm group-hover:gap-3 transition-all pt-2">
+                                        Read Article
+                                        <ArrowUpRight className="w-4 h-4" />
                                     </div>
                                 </div>
+                            </Link>
+                        ))
+                    ) : (
+                        /* Fallback state if no posts */
+                        [1, 2, 3].map((i) => (
+                            <div key={i} className="relative rounded-3xl border border-white/10 bg-neutral-900/50 p-8 h-[450px] flex flex-col justify-center items-center text-center">
+                                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6">
+                                    <Clock className="w-6 h-6 text-neutral-600" />
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-2">New Insights Incoming</h3>
+                                <p className="text-neutral-500 text-sm">Our engineering team is currently documenting our latest breakthroughs.</p>
                             </div>
-                        </Link>
-                    ))}
+                        ))
+                    )}
                 </div>
 
                 {/* View All CTA - links to Resources page */}
                 <div className="flex justify-center mt-16">
                     <Link
                         href="/resources"
-                        className="group flex items-center gap-2 text-lg text-neutral-400 hover:text-white transition-colors font-medium"
+                        className="group flex items-center gap-2 text-lg text-neutral-400 hover:text-white transition-colors font-medium border-b border-white/10 pb-1"
                     >
                         view all blogs
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
