@@ -69,9 +69,9 @@ export default function HomeClient({ initialBlogPosts }: HomeClientProps) {
       />
 
       <ParticleEffectHero
-        subtitle="High-Performance Engineering. Unstoppable Business Velocity."
-        title="Accelerate Beyond Manual Workflows"
-        description="Your vision is too ambitious to be slowed by manual work. We engineer AI-driven systems that give your growth unshakeable stability. By automating the noise, we empower you to lead with absolute certainty while your team focuses on the only metric that matters: customer mastery."
+        subtitle="Your Vision + Our Craft"
+        title="Software Development That Empowers Your Vision"
+        description="Great ideas deserve a solid foundation. We act as your technical compass, navigating the challenges of product development to deliver a solution that aligns with the ambition of your goals."
       />
 
       <ChallengesSection />

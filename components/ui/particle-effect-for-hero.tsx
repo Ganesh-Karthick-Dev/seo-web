@@ -435,7 +435,7 @@ export default function ParticleEffectHero({
     buttonHref = "/contact"
 }: ParticleEffectHeroProps) {
     return (
-        <div className="relative w-full h-screen bg-black overflow-hidden selection:bg-blue-500 selection:text-white">
+        <div className="relative w-full lg:mt-20 h-screen bg-black overflow-hidden selection:bg-blue-500 selection:text-white">
             <AntiGravityCanvas />
             <HeroContent
                 subtitle={subtitle}
