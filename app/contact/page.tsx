@@ -147,7 +147,7 @@ export default function Contact() {
     ];
 
     return (
-        <div className="relative min-h-screen w-full bg-black/[0.96] antialiased overflow-hidden">
+        <div className="relative min-h-screen w-full bg-black/[0.96] antialiased">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0">
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -188,55 +188,57 @@ export default function Contact() {
                     {/* Main Content Grid */}
                     <div className="grid lg:grid-cols-3 gap-8">
                         {/* Left Column - Contact Info */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="space-y-6"
-                        >
-                            <div className="p-6 rounded-2xl bg-neutral-900/50 border border-white/10 backdrop-blur-xl">
-                                <h3 className="text-xl font-semibold text-white mb-6">Contact Information</h3>
+                        <div className="lg:sticky lg:top-36 lg:h-fit">
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="space-y-6"
+                            >
+                                <div className="p-6 rounded-2xl bg-neutral-900/50 border border-white/10 backdrop-blur-xl">
+                                    <h3 className="text-xl font-semibold text-white mb-6">Contact Information</h3>
 
-                                <div className="space-y-4">
-                                    {contactInfo.map((item, idx) => (
-                                        <a
-                                            key={idx}
-                                            href={item.link}
-                                            target={item.external ? "_blank" : undefined}
-                                            rel={item.external ? "noopener noreferrer" : undefined}
-                                            className="group flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer"
-                                        >
-                                            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-sky-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                                <item.icon className="w-5 h-5 text-white" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-neutral-400">{item.title}</p>
-                                                <p className="text-white font-medium">{item.value}</p>
-                                            </div>
-                                        </a>
-                                    ))}
+                                    <div className="space-y-4">
+                                        {contactInfo.map((item, idx) => (
+                                            <a
+                                                key={idx}
+                                                href={item.link}
+                                                target={item.external ? "_blank" : undefined}
+                                                rel={item.external ? "noopener noreferrer" : undefined}
+                                                className="group flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer"
+                                            >
+                                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-sky-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                                    <item.icon className="w-5 h-5 text-white" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-neutral-400">{item.title}</p>
+                                                    <p className="text-white font-medium">{item.value}</p>
+                                                </div>
+                                            </a>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Why Choose Us Card */}
-                            <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-sky-500/10 border border-white/10">
-                                <h3 className="text-lg font-semibold text-white mb-4">Why Choose Us</h3>
-                                <ul className="space-y-3">
-                                    {[
-                                        "15-day rapid sprint",
-                                        "Transparent process & delivery",
-                                        "Proven track record",
-                                        "Customised strategies and solutions",
-                                        "Built to scale, built to last",
-                                    ].map((item, idx) => (
-                                        <li key={idx} className="flex items-center gap-3 text-neutral-300">
-                                            <CheckCircle className="w-5 h-5 text-cyan-400 flex-shrink-0" />
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </motion.div>
+                                {/* Why Choose Us Card */}
+                                <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-sky-500/10 border border-white/10">
+                                    <h3 className="text-lg font-semibold text-white mb-4">Why Choose Us</h3>
+                                    <ul className="space-y-3">
+                                        {[
+                                            "15-day rapid sprint",
+                                            "Transparent process & delivery",
+                                            "Proven track record",
+                                            "Customised strategies and solutions",
+                                            "Built to scale, built to last",
+                                        ].map((item, idx) => (
+                                            <li key={idx} className="flex items-center gap-3 text-neutral-300">
+                                                <CheckCircle className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </motion.div>
+                        </div>
 
                         {/* Right Column - Form/Calendar */}
                         <motion.div
@@ -273,7 +275,7 @@ export default function Contact() {
                                 {/* Tab Content */}
                                 <div className="p-6">
                                     {activeTab === "calendar" ? (
-                                        <div className="min-h-[600px]">
+                                        <div className="min-h-[900px]">
                                             <div className="mb-6">
                                                 <h3 className="text-xl font-semibold text-white mb-2">
                                                     Book Your Free Consultation
@@ -289,7 +291,7 @@ export default function Contact() {
                                                 <InlineWidget
                                                     url="https://calendly.com/ganeshkarthik18697/30min"
                                                     styles={{
-                                                        height: "600px",
+                                                        height: "900px",
                                                         width: "100%",
                                                     }}
                                                     pageSettings={{
@@ -451,7 +453,7 @@ export default function Contact() {
                         </motion.div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
