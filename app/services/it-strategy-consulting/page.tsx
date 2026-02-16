@@ -118,6 +118,8 @@ const whyPartnerBenefits = [
     },
 ];
 
+import { getAllBlogPosts } from "@/lib/blog-data";
+
 export const metadata = {
     title: "IT consulting services | Strategy into Execution | Zylex",
     description: "Stop drowning in plans. Zylex delivers IT consulting services engineered for scale—IT strategy and consulting and tech consulting. Execution focused.",
@@ -126,7 +128,17 @@ export const metadata = {
     },
 };
 
-export default function ITConsultingPage() {
+export const revalidate = 60; // Enable ISR for fresh blog content
+
+export default async function ITConsultingPage() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('IT Consulting Page: Blog data not available');
+    }
+
     return (
         <main className="bg-black min-h-screen">
             {/* Hero Section */}
@@ -281,7 +293,7 @@ export default function ITConsultingPage() {
             />
 
             {/* Blog Section - Resources */}
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             {/* Final CTA */}
             <ServiceCTASection

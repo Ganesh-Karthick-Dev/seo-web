@@ -9,6 +9,8 @@ import { IntegrationsSection } from "@/components/sections/IntegrationsSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 
+import { getAllBlogPosts } from "@/lib/blog-data";
+
 export const metadata = {
     title: "digital transformation services | Eliminate Legacy Constraints | Zylex",
     description: "Zylex digital transformation services destroy legacy anchors—from app modernization to legacy modernization and transformation. Absolute execution.",
@@ -16,6 +18,8 @@ export const metadata = {
         canonical: "/services/digital-transformation",
     },
 };
+
+export const revalidate = 60; // Enable ISR for fresh blog content
 
 // Features - The Technical Ceilings
 const features = [
@@ -192,7 +196,15 @@ const techRight = [
     { label: "Datadog", icon: "datadog", color: "#632CA6" },
 ];
 
-export default function DigitalTransformationPage() {
+export default async function DigitalTransformationPage() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('Digital Transformation Page: Blog data not available');
+    }
+
     return (
         <main className="bg-black min-h-screen">
             {/* Hero Section */}
@@ -273,7 +285,7 @@ export default function DigitalTransformationPage() {
             />
 
             {/* Blog Section */}
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             {/* Final CTA */}
             <ServiceCTASection

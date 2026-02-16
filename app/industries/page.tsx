@@ -5,6 +5,7 @@ import { IndustriesShowcaseSection } from "@/components/sections/IndustriesShowc
 import { CrossIndustryExpertiseSection } from "@/components/sections/CrossIndustryExpertiseSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { IndustriesCTASection } from "@/components/sections/IndustriesCTASection";
+import { getAllBlogPosts } from "@/lib/blog-data";
 
 export const metadata: Metadata = {
     title: "industry specific software solutions | Built for Scale | Zylex",
@@ -14,7 +15,17 @@ export const metadata: Metadata = {
     }
 };
 
-export default function Industries() {
+export const revalidate = 60; // Enable ISR for fresh blog content
+
+export default async function Industries() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('Industries Page: Blog data not available');
+    }
+
     return (
         <div className="relative w-full bg-black antialiased">
             {/* Hero Section with Neon Orbs (Moved from Homepage) */}
@@ -33,7 +44,7 @@ export default function Industries() {
             <CrossIndustryExpertiseSection />
 
             {/* Blog Section */}
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             {/* CTA Section */}
             <IndustriesCTASection />

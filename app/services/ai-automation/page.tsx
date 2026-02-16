@@ -135,6 +135,8 @@ const whyChooseBenefits = [
     },
 ];
 
+import { getAllBlogPosts } from "@/lib/blog-data";
+
 export const metadata = {
     title: "AI development services | Engineered for Results | Zylex",
     description: "Stop experimenting. Zylex AI development services are engineered for scale—custom AI development solutions and AI integration services. Absolute execution.",
@@ -143,7 +145,17 @@ export const metadata = {
     },
 };
 
-export default function AIAutomationPage() {
+export const revalidate = 60; // Enable ISR for fresh blog content
+
+export default async function AIAutomationPage() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('AI Automation Page: Blog data not available');
+    }
+
     return (
         <main className="bg-black min-h-screen">
             {/* Hero Section */}
@@ -303,7 +315,7 @@ export default function AIAutomationPage() {
             </section>
 
             {/* Blog Section - Resources */}
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             {/* Final CTA */}
             <ServiceCTASection

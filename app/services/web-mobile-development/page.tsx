@@ -10,6 +10,8 @@ import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 
 
+import { getAllBlogPosts } from "@/lib/blog-data";
+
 export const metadata = {
     title: "Website and App Development Services That Users Love | Zylex",
     description: "Stop shipping fragile code. Zylex delivers website and app development and cross-platform mobile app development services. Absolute execution.",
@@ -18,7 +20,17 @@ export const metadata = {
     },
 };
 
-export default function WebMobileApplicationDevelopmentPage() {
+export const revalidate = 60; // Enable ISR for fresh blog content
+
+export default async function WebMobileApplicationDevelopmentPage() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('Web & Mobile Page: Blog data not available');
+    }
+
     return (
         <main className="bg-black min-h-screen">
             <ServiceHeroSection
@@ -200,7 +212,7 @@ export default function WebMobileApplicationDevelopmentPage() {
                 ]}
             />
 
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             <ServiceCTASection
                 title="Ready to Build the Digital Pillar of Your Industry?"

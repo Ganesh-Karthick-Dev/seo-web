@@ -12,6 +12,8 @@ import { BlogSection } from "@/components/sections/BlogSection";
 
 import { Layers, Rocket, RefreshCw, Cog, AppWindow, Box, Zap, Building2, Link2, Award, Target, MessageSquare, Settings, Shield, Handshake } from "lucide-react";
 
+import { getAllBlogPosts } from "@/lib/blog-data";
+
 export const metadata = {
     title: "Custom Software Development Services: 15-Day Rapid Delivery | Zylex",
     description:
@@ -21,7 +23,17 @@ export const metadata = {
     },
 };
 
-export default function CustomSoftwareDevelopmentPage() {
+export const revalidate = 60; // Enable ISR for fresh blog content
+
+export default async function CustomSoftwareDevelopmentPage() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('Custom Software Page: Blog data not available');
+    }
+
     return (
         <main className="bg-black min-h-screen">
             <ServiceHeroSection
@@ -220,7 +232,7 @@ export default function CustomSoftwareDevelopmentPage() {
                 ]}
             />
 
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             <ServiceCTASection
                 title="Ready to Build Software That Actually Scales?"

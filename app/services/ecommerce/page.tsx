@@ -156,6 +156,8 @@ const whyChooseBenefits = [
     },
 ];
 
+import { getAllBlogPosts } from "@/lib/blog-data";
+
 export const metadata = {
     title: "Ecommerce Development Services | Custom & Scalable | Zylex",
     description: "Build high-performance online stores that drive sales. Zylex ecommerce development solutions are engineered for conversion and absolute execution.",
@@ -164,7 +166,17 @@ export const metadata = {
     },
 };
 
-export default function EcommercePage() {
+export const revalidate = 60; // Enable ISR for fresh blog content
+
+export default async function EcommercePage() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('Ecommerce Page: Blog data not available');
+    }
+
     return (
         <main className="bg-black min-h-screen">
             {/* Hero Section */}
@@ -242,7 +254,7 @@ export default function EcommercePage() {
             </section>
 
             {/* Blog Section - Resources */}
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             {/* Final CTA */}
             <ServiceCTASection

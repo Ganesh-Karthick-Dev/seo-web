@@ -191,6 +191,8 @@ const whyChooseBenefits = [
     },
 ];
 
+import { getAllBlogPosts } from "@/lib/blog-data";
+
 export const metadata = {
     title: "Cloud & DevOps Services | Automate & Scale | Zylex",
     description: "Stop manual patchwork. Zylex Cloud & DevOps engineering services destroy operational friction and rebuild your delivery pipelines into unshakeable engines.",
@@ -199,7 +201,17 @@ export const metadata = {
     },
 };
 
-export default function CloudDevOpsPage() {
+export const revalidate = 60; // Enable ISR for fresh blog content
+
+export default async function CloudDevOpsPage() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('Cloud & DevOps Page: Blog data not available');
+    }
+
     return (
         <main className="bg-black min-h-screen">
             {/* Hero Section */}
@@ -348,7 +360,7 @@ export default function CloudDevOpsPage() {
             </section>
 
             {/* Blog Section - Resources */}
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             {/* Final CTA */}
             <ServiceCTASection

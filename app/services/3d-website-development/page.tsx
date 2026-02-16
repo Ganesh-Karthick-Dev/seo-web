@@ -135,6 +135,8 @@ const whyChooseBenefits = [
     },
 ];
 
+import { getAllBlogPosts } from "@/lib/blog-data";
+
 export const metadata = {
     title: "3D website development | Immersive Engineering | Zylex",
     description: "Stop building flat pages. Zylex 3D website development transforms brands through interactive 3D website development and 3D web design services.",
@@ -143,7 +145,17 @@ export const metadata = {
     },
 };
 
-export default function ThreeDWebsiteDevelopmentPage() {
+export const revalidate = 60; // Enable ISR for fresh blog content
+
+export default async function ThreeDWebsiteDevelopmentPage() {
+    let blogPosts: any[] = [];
+    try {
+        const posts = await getAllBlogPosts();
+        blogPosts = posts.slice(0, 3);
+    } catch (error) {
+        console.warn('3D Website Page: Blog data not available');
+    }
+
     return (
         <main className="bg-black min-h-screen">
             {/* Hero Section */}
@@ -277,7 +289,7 @@ export default function ThreeDWebsiteDevelopmentPage() {
             </section>
 
             {/* Blog Section - Resources */}
-            <BlogSection />
+            <BlogSection initialBlogPosts={blogPosts} />
 
             {/* Final CTA */}
             <ServiceCTASection
