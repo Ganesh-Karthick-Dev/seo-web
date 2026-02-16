@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Contact Zylex | Let's Build Your Digital Future",
-    description: "Ready to transform your digital presence? Schedule a free consultation or send us a message. We're here to help you scale your business.",
+    title: "Contact Zylex: Build Unstoppable Software.",
+    description: "Ready to scale? Contact Zylex. We engineer high-performance SaaS and custom software solutions. Stop stalling. Start building your digital empire today.",
     alternates: {
         canonical: "/contact",
     },

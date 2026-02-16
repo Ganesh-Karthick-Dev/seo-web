@@ -2,9 +2,7 @@ import { getAllBlogPosts } from "@/lib/blog-data";
 import HomeClient from "./home-client";
 
 export const metadata = {
-  title: "Zylex360: One Platform. Every Business Function.",
-  description:
-    "E-commerce, CRM, ERP, and Inventory—unified in real-time. Eliminate data silos and inventory errors. One platform. Complete operational visibility.",
+  title: "Zylex | Strategic AI & SaaS Development Company for US Startups",
   alternates: {
     canonical: "https://zylex.io",
   },
