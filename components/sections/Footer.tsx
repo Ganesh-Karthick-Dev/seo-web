@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Linkedin, Mail, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -127,11 +128,12 @@ export function Footer() {
                             <Link href="/" className="inline-block">
                                 <div className="relative w-32 h-10 overflow-hidden">
                                     <Image
-                                        src="/logo/zylex-dark-caption.svg"
+                                        src="/logo/crop_logo.webp"
                                         alt="Zylex Logo"
                                         fill
                                         className="object-contain"
                                         sizes="(max-width: 768px) 128px, 128px"
+                                        priority
                                     />
                                 </div>
                             </Link>
