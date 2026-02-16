@@ -217,7 +217,7 @@ export function FloatingHeader() {
                     <div className="relative w-32 h-10 overflow-hidden">
                         <Image
                             src="/logo/zylex-dark-caption.svg"
-                            alt="Zylex Logo"
+                            alt="Zylex Software Development & SaaS Engineering Company Logo"
                             fill
                             className="object-contain"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -465,7 +465,7 @@ export function FloatingHeader() {
                         const isResourcesActive = pathname.startsWith('/resources');
                         const isResourcesHovered = hoveredIndex === -1;
                         const showResourcesLabel = isResourcesActive || isResourcesHovered;
-                        
+
                         return (
                             <Link
                                 href="/resources"

@@ -39,8 +39,8 @@ export function Zylex360HeroSection() {
         <section ref={containerRef} className="relative min-h-screen w-full bg-[#030308] flex items-center overflow-hidden">
             <div className="absolute inset-0">
                 <Image
-                    src="/C:/Users/ganes/.gemini/antigravity/brain/fd744e3d-a059-415c-9bad-d68743456be7/zylex360_hero_bg_1769654570418.png"
-                    alt="Zylex360 Background"
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000"
+                    alt="Zylex 360 unified business platform dashboard"
                     fill
                     className="object-cover opacity-60"
                     priority

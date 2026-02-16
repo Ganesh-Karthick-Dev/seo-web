@@ -17,6 +17,7 @@ const services = [
         cta: "Build Something Real",
         href: "/services/custom-software-development",
         image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=800&fit=crop",
+        alt: "custom software development for scalable business growth",
         gradient: "from-blue-500/20 to-cyan-500/5"
     },
     {
@@ -25,6 +26,7 @@ const services = [
         cta: "Start Your App Journey",
         href: "/services/web-mobile-development",
         image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=800&fit=crop",
+        alt: "mobile app development for iOS and Android",
         gradient: "from-blue-500/20 to-cyan-500/5"
     },
     {
@@ -33,6 +35,7 @@ const services = [
         cta: "Enter the 3D Dimension",
         href: "/services/3d-website-development",
         image: "https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=600&h=800&fit=crop",
+        alt: "Interactive 3D web development",
         gradient: "from-purple-500/20 to-pink-500/5"
     },
     {
@@ -41,6 +44,7 @@ const services = [
         cta: "Turn Legacy Chaos Into Structure",
         href: "/services/digital-transformation",
         image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=800&fit=crop",
+        alt: "Digital transformation and App modernisation service",
         gradient: "from-green-500/20 to-emerald-500/5"
     },
     {
@@ -49,6 +53,7 @@ const services = [
         cta: "Grow Your Commerce Business",
         href: "/services/ecommerce",
         image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=800&fit=crop",
+        alt: "Custom Ecommerce solutions",
         gradient: "from-red-500/20 to-blue-500/5"
     },
     {
@@ -57,6 +62,7 @@ const services = [
         cta: "Get Smarter",
         href: "/services/ai-automation",
         image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=800&fit=crop",
+        alt: "AI and automation solutions for business process optimization",
         gradient: "from-indigo-500/20 to-violet-500/5"
     },
     {
@@ -65,6 +71,7 @@ const services = [
         cta: "Make Release Day Boring Again",
         href: "/services/cloud-devops",
         image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&h=800&fit=crop",
+        alt: "DevOps automation and cloud infrastructure for continuous deployment",
         gradient: "from-sky-500/20 to-blue-500/5"
     },
     {
@@ -73,6 +80,7 @@ const services = [
         cta: "Get Expert Opinion",
         href: "/services/it-strategy-consulting",
         image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=800&fit=crop",
+        alt: "Technology consulting and strategic planning for business optimization",
         gradient: "from-yellow-500/20 to-cyan-500/5"
     }
 ];
@@ -156,10 +164,10 @@ export function ServicesStackSection() {
                                 data-card-inner
                                 style={{ transformOrigin: "center top" }}
                                 className={cn(
-                                "relative overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-blue-400/50 hover:shadow-xl",
-                                "h-[560px] flex flex-col",
-                                index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                            )}>
+                                    "relative overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-blue-400/50 hover:shadow-xl",
+                                    "h-[560px] flex flex-col",
+                                    index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+                                )}>
 
                                 {/* Gradient Background */}
                                 <div className={cn(
@@ -193,7 +201,7 @@ export function ServicesStackSection() {
                                     {/* Image */}
                                     <Image
                                         src={service.image}
-                                        alt={service.title}
+                                        alt={service.alt}
                                         fill
                                         sizes="(max-width: 768px) 100vw, 33vw"
                                         loading="lazy"

@@ -139,7 +139,7 @@ export function Footer() {
                                 <div className="relative w-32 h-10 overflow-hidden">
                                     <Image
                                         src="/logo/crop_logo.webp"
-                                        alt="Zylex Logo"
+                                        alt="Zylex Software Development & SaaS Engineering Company Logo"
                                         fill
                                         className="object-contain"
                                         sizes="(max-width: 768px) 128px, 128px"
