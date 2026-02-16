@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Bebas_Neue } from "next/font/google";
+import { Outfit, Bebas_Neue, Cormorant_Garamond } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { FloatingHeader } from "@/components/ui/floating-header";
@@ -17,6 +17,13 @@ const bebasNeue = Bebas_Neue({
   variable: "--font-bebas",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -53,7 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
       <body
-        className={`${outfit.variable} ${bebasNeue.variable} font-sans antialiased`}
+        className={`${outfit.variable} ${bebasNeue.variable} ${cormorant.variable} font-sans antialiased`}
       >
         {/* Google Tag Manager (noscript) */}
         <noscript>

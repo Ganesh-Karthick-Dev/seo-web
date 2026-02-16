@@ -173,13 +173,10 @@ export default function Contact() {
                         transition={{ duration: 0.6 }}
                         className="text-center mb-16"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6">
-                            <Sparkles className="w-4 h-4 text-cyan-400" />
-                            <span className="text-sm font-medium text-cyan-400">Get in Touch</span>
-                        </div>
-
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent mb-6">
-                            Let&apos;s Talk
+                        <h1 className="text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter">
+                            <span className="font-sans font-medium text-white">Let&apos;s</span>
+                            {" "}
+                            <span className="font-[family-name:var(--font-cormorant)] italic font-light text-white">Connect</span>
                         </h1>
 
                         <p className="max-w-2xl mx-auto text-lg text-neutral-400">
