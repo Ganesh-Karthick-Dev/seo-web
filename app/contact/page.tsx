@@ -11,7 +11,10 @@ import {
     Sparkles,
     CheckCircle,
     AlertCircle,
-    Linkedin
+    Linkedin,
+    Instagram,
+    Twitter,
+    Facebook
 } from "lucide-react";
 import Beams from "@/components/Beams";
 
@@ -146,6 +149,13 @@ export default function Contact() {
         },
     ];
 
+    const socialStrip = [
+        { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/zylex_technologies/" },
+        { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/share/15Cq5U59hP/?mibextid=wwXIfr" },
+        { name: "Twitter", icon: Twitter, href: "https://x.com/Zylex_Official" },
+        { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/zylex-io" },
+    ];
+
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -183,7 +193,7 @@ export default function Contact() {
                             opacity: headerOpacity,
                             scale: headerScale,
                         }}
-                        className="text-center"
+                        className="text-center lg:mt-10"
                     >
                         <h1 className="text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter">
                             <span className="font-sans font-medium text-white">Let&apos;s</span>
@@ -199,8 +209,8 @@ export default function Contact() {
                 </div>
 
                 {/* Content Section that scrolls OVER the header */}
-                <div className="relative z-20 pb-20 px-4 sm:px-6 lg:px-8 -mt-[5vh]">
-                    <div className="max-w-7xl mx-auto">
+                <div className="relative z-20 -mt-[5vh]">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
 
                         {/* Main Content Grid */}
                         <div className="grid lg:grid-cols-3 gap-8">
@@ -468,6 +478,37 @@ export default function Contact() {
                                     </div>
                                 </div>
                             </motion.div>
+                        </div>
+                    </div>
+
+                    {/* Social Strip */}
+                    <div className="border-y border-white/10 bg-neutral-900/10 backdrop-blur-sm">
+                        <div className="max-w-full mx-auto">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                                {socialStrip.map((social, idx) => (
+                                    <a
+                                        key={idx}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`group flex items-center justify-between p-10 
+                                            border-white/10 hover:bg-white/5 transition-all duration-300
+                                            border-b md:border-b-0
+                                            ${idx % 2 === 0 ? 'md:border-r' : ''}
+                                            ${idx % 4 !== 3 ? 'lg:border-r' : 'lg:border-r-0'}
+                                            ${idx === socialStrip.length - 1 ? 'border-b-0' : ''}
+                                        `}
+                                    >
+                                        <div className="flex items-center gap-4">
+                                            <social.icon className="w-6 h-6 text-neutral-500 group-hover:text-white transition-colors" />
+                                            <span className="text-neutral-400 group-hover:text-white text-lg font-medium transition-colors">
+                                                {social.name}
+                                            </span>
+                                        </div>
+                                        <ArrowRight className="w-5 h-5 text-neutral-700 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                                    </a>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
