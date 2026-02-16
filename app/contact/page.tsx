@@ -13,7 +13,7 @@ import {
     AlertCircle,
     Linkedin
 } from "lucide-react";
-import ColorBends from "@/components/ColorBends";
+import Beams from "@/components/Beams";
 
 export default function Contact() {
     const [activeTab, setActiveTab] = useState<"form" | "calendar">("calendar");
@@ -150,20 +150,18 @@ export default function Contact() {
         <div className="relative min-h-screen w-full bg-black/[0.96] antialiased overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0">
-                <ColorBends
-                    colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
-                    rotation={0}
-                    speed={0}
-                    scale={1}
-                    frequency={1}
-                    warpStrength={1}
-                    mouseInfluence={1}
-                    parallax={0.5}
-                    noise={0.1}
-                    transparent
-                    autoRotate={0}
-                    color=""
-                />
+                <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                    <Beams
+                        beamWidth={3}
+                        beamHeight={30}
+                        beamNumber={20}
+                        lightColor="#ffffff"
+                        speed={2}
+                        noiseIntensity={1.75}
+                        scale={0.2}
+                        rotation={30}
+                    />
+                </div>
             </div>
 
             <div className="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
