@@ -145,6 +145,93 @@ export function ChallengesSection() {
                 tl.to({}, { duration: 0.4 });
             });
 
+            // MOBILE: Same pinned scroll, with icon
+            mm.add("(max-width: 1023px)", () => {
+                const slides = gsap.utils.toArray<HTMLElement>(".challenge-slide");
+                const totalSlides = slides.length;
+
+                slides.forEach((slide, i) => {
+                    const textEls = slide.querySelectorAll(".challenge-label, .challenge-title, .challenge-desc");
+                    const iconEl = slide.querySelector(".challenge-icon");
+
+                    if (i === 0) {
+                        gsap.set(slide, { opacity: 1 });
+                        gsap.set(textEls, { opacity: 1, y: 0 });
+                        gsap.set(iconEl, { opacity: 1, scale: 1 });
+                    } else {
+                        gsap.set(slide, { opacity: 1 });
+                        gsap.set(textEls, { opacity: 0, y: 40 });
+                        gsap.set(iconEl, { opacity: 0, scale: 0.8 });
+                    }
+                });
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top top",
+                        end: `+=${totalSlides * 800}`,
+                        pin: true,
+                        scrub: 1.5,
+                        anticipatePin: 1,
+                    },
+                });
+
+                for (let i = 0; i < totalSlides - 1; i++) {
+                    const currentTextEls = slides[i].querySelectorAll(".challenge-label, .challenge-title, .challenge-desc");
+                    const currentIcon = slides[i].querySelector(".challenge-icon");
+                    const nextTextEls = slides[i + 1].querySelectorAll(".challenge-label, .challenge-title, .challenge-desc");
+                    const nextIcon = slides[i + 1].querySelector(".challenge-icon");
+
+                    // Brief hold
+                    tl.to({}, { duration: 0.3 });
+
+                    const exitLabel = `mExit${i}`;
+
+                    // Exit current text + icon
+                    tl.to(currentTextEls, {
+                        opacity: 0,
+                        y: -30,
+                        duration: 0.35,
+                        stagger: 0.05,
+                        ease: "power2.in",
+                    }, exitLabel);
+                    tl.to(currentIcon, {
+                        opacity: 0,
+                        scale: 0.8,
+                        duration: 0.3,
+                        ease: "power2.in",
+                    }, exitLabel);
+
+                    // Enter next text + icon
+                    tl.fromTo(
+                        nextTextEls,
+                        { opacity: 0, y: 40 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.4,
+                            stagger: 0.06,
+                            ease: "power3.out",
+                        },
+                        `${exitLabel}+=0.15`
+                    );
+                    tl.fromTo(
+                        nextIcon,
+                        { opacity: 0, scale: 0.8 },
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.4,
+                            ease: "power3.out",
+                        },
+                        `${exitLabel}+=0.15`
+                    );
+                }
+
+                // Hold last slide
+                tl.to({}, { duration: 0.4 });
+            });
+
             // Title Animation
             gsap.fromTo(
                 titleRef.current,
@@ -177,19 +264,19 @@ export function ChallengesSection() {
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
             </div>
 
-            <div className="relative z-10 h-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+            <div className="relative z-10 h-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center pt-20 lg:pt-0">
                 {/* Title - Always Visible */}
-                <div className="mb-16">
+                <div className="mb-8 lg:mb-16">
                     <h2
                         ref={titleRef}
-                        className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]"
+                        className="text-3xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]"
                     >
                         The Growth Blockers <br />
                         <span className="text-neutral-500">
                             What&apos;s Really Stopping You?
                         </span>
                     </h2>
-                    <p className="mt-6 text-xl text-neutral-400 max-w-2xl">
+                    <p className="mt-4 lg:mt-6 text-base lg:text-xl text-neutral-400 max-w-2xl">
                         You&apos;ve already proven people want your product. Now
                         let&apos;s eliminate the technical bottlenecks slowing you
                         down.
@@ -197,24 +284,24 @@ export function ChallengesSection() {
                 </div>
 
                 {/* Slides Container - Relative so slides stack */}
-                <div className="relative w-full flex-1 max-h-[400px]">
+                <div className="relative w-full flex-1 min-h-[200px]">
                     {challenges.map((challenge, i) => (
                         <div
                             key={i}
-                            className="challenge-slide absolute inset-0 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
+                            className="challenge-slide absolute inset-0 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center"
                         >
                             {/* Left: Text Content */}
-                            <div className="flex flex-col justify-center">
+                            <div className="flex flex-col justify-center order-last lg:order-first">
                                 <span
-                                    className="challenge-label text-xs font-bold tracking-[0.2em] uppercase mb-4 block"
+                                    className="challenge-label text-xs font-bold tracking-[0.2em] uppercase mb-3 lg:mb-4 block"
                                     style={{ color: challenge.color }}
                                 >
                                     {challenge.label}
                                 </span>
-                                <h3 className="challenge-title text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                                <h3 className="challenge-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 lg:mb-6 leading-tight">
                                     {challenge.title}
                                 </h3>
-                                <p className="challenge-desc text-neutral-400 text-base md:text-lg leading-relaxed max-w-lg">
+                                <p className="challenge-desc text-neutral-400 text-sm sm:text-base md:text-lg leading-relaxed max-w-lg">
                                     {challenge.description}
                                 </p>
 
@@ -222,23 +309,23 @@ export function ChallengesSection() {
                             </div>
 
                             {/* Right: Big Icon */}
-                            <div className="challenge-icon hidden lg:flex items-center justify-center">
+                            <div className="challenge-icon flex items-center justify-center order-first lg:order-last mb-4 lg:mb-0 lg:mt-0">
                                 <div
-                                    className="relative w-[280px] h-[280px] flex items-center justify-center rounded-3xl"
+                                    className="relative w-[120px] h-[120px] lg:w-[280px] lg:h-[280px] flex items-center justify-center rounded-2xl lg:rounded-3xl"
                                     style={{
                                         background: `radial-gradient(circle at 50% 50%, ${challenge.color}15, transparent 70%)`,
                                     }}
                                 >
                                     {/* Glow ring */}
                                     <div
-                                        className="absolute inset-0 rounded-3xl border opacity-30"
+                                        className="absolute inset-0 rounded-2xl lg:rounded-3xl border opacity-30"
                                         style={{
                                             borderColor: challenge.color,
                                             boxShadow: `0 0 60px ${challenge.color}20, inset 0 0 60px ${challenge.color}10`,
                                         }}
                                     />
                                     <challenge.icon
-                                        className="w-32 h-32"
+                                        className="w-14 h-14 lg:w-32 lg:h-32"
                                         style={{ color: challenge.color }}
                                         strokeWidth={1}
                                     />
