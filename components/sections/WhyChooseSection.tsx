@@ -67,7 +67,7 @@ export function WhyChooseSection() {
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top top",
-                    end: "+=2000",
+                    end: "+=3000",
                     pin: true,
                     scrub: 1,
                     anticipatePin: 1,
@@ -75,9 +75,9 @@ export function WhyChooseSection() {
             });
 
             // Initial State: Cards hidden below screen
-            gsap.set(".feature-card", { y: 1000, opacity: 0 });
+            gsap.set(".feature-card", { y: window.innerHeight, opacity: 0 });
 
-            // Reveal Animation: Cards float up from bottom to their fixed positions
+            // 1. Reveal Animation: Cards float up from bottom to their fixed positions
             tl.to(".feature-card", {
                 y: 0,
                 opacity: 1,
@@ -89,8 +89,20 @@ export function WhyChooseSection() {
                 ease: "power3.out"
             });
 
-            // Hold for a moment
+            // 2. Hold phase
             tl.to({}, { duration: 0.5 });
+
+            // 3. Exit Animation: Cards continue moving up (off the top)
+            tl.to(".feature-card", {
+                y: -window.innerHeight,
+                opacity: 0,
+                duration: 1,
+                stagger: {
+                    amount: 0.5,
+                    from: "random"
+                },
+                ease: "power2.in"
+            });
 
         }, sectionRef);
 
