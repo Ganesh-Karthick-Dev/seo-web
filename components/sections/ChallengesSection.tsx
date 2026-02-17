@@ -1,96 +1,108 @@
+"use strict";
 "use client";
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cn } from "@/lib/utils";
+import { Clock, TrendingUp, Code, Anchor } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Custom Graphics (Replicating Bequant Style) ---
-
-const GridVisual = () => (
-    <div className="absolute left-8 top-1/2 -translate-y-1/2 w-48 h-48 opacity-80">
-        <div className="grid grid-cols-3 gap-3 transform -rotate-12">
-            {[...Array(9)].map((_, i) => (
-                <div
-                    key={i}
-                    className={cn(
-                        "w-12 h-16 rounded-lg border border-white/10",
-                        [1, 4, 7].includes(i) ? "border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)] bg-blue-500/10" : "bg-transparent"
-                    )}
-                />
-            ))}
-        </div>
-    </div>
-);
-
-const WaveVisual = () => (
-    <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -right-10 -top-20 w-[150%] h-[150%] bg-gradient-to-br from-blue-500/25 via-transparent to-transparent" />
-        <svg className="absolute top-0 right-0 w-full h-full opacity-50" viewBox="0 0 400 200" preserveAspectRatio="none">
-            <path d="M0,100 C100,150 200,50 400,100" fill="none" stroke="url(#challengesBlueGrad)" strokeWidth="30" strokeLinecap="round" />
-            <defs>
-                <linearGradient id="challengesBlueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="100%" stopColor="#22d3ee" />
-                </linearGradient>
-            </defs>
-        </svg>
-    </div>
-);
-
-const ChartVisual = () => (
-    <div className="absolute inset-0 flex items-center justify-center p-8">
-        <div className="relative w-full h-32 border-t border-b border-white/10 flex items-end justify-between px-2">
-            {[30, 50, 45, 70, 60, 85, 80, 95, 60, 40].map((h, i) => (
-                <div key={i} className="relative">
-                    <div
-                        className="w-2 bg-blue-500/20 rounded-t-sm"
-                        style={{ height: `${h}%` }}
-                    />
-                    <div
-                        className="absolute bottom-0 w-2 bg-blue-500/80 rounded-t-sm"
-                        style={{ height: `${h * 0.3}%` }}
-                    />
-                </div>
-            ))}
-            {/* Connecting Line */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                <path d="M0,70 Q40,50 80,55 T160,30 T240,40 T320,10" fill="none" stroke="#3b82f6" strokeWidth="2" strokeOpacity="0.5" />
-            </svg>
-        </div>
-    </div>
-);
-
-const NetworkVisual = () => (
-    <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative w-full h-full">
-            <div className="absolute top-1/2 left-1/2 w-6 h-6 border-2 border-white/60 rounded-full -translate-x-1/2 -translate-y-1/2 z-10" />
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
-                <div
-                    key={deg}
-                    className="absolute top-1/2 left-1/2 w-32 h-[1px] bg-gradient-to-r from-white/20 to-transparent origin-left"
-                    style={{ transform: `rotate(${deg}deg) translateY(-50%)` }}
-                >
-                    <div className="absolute right-0 w-1 h-1 bg-white/50 rounded-full" />
-                </div>
-            ))}
-        </div>
-    </div>
-);
-
-// --- Main Component ---
+const challenges = [
+    {
+        label: "TIMELINE TRAP",
+        title: 'The "Where Is It?" Trap',
+        description:
+            "Deadlines shouldn't be suggestions. You need a partner who focuses on shipping, not excuses. We trade uncertainty for predictable sprints, so you always know when \"done\" is actually done.",
+        icon: Clock,
+        color: "#3b82f6", // blue
+    },
+    {
+        label: "SCALABILITY",
+        title: "The Crash Ceiling",
+        description:
+            "Success shouldn't break your site. You need infrastructure that handles 10x growth as easily as it handles today. We build tech that scales up, not falls down.",
+        icon: TrendingUp,
+        color: "#22d3ee", // cyan
+    },
+    {
+        label: "CODE QUALITY",
+        title: "The Messy Code Problem",
+        description:
+            "Bad code isn't just annoying—it's a business risk. You deserve a clean, organized system that speeds up new features instead of making every update a struggle.",
+        icon: Code,
+        color: "#a78bfa", // violet
+    },
+    {
+        label: "LEGACY SYSTEMS",
+        title: 'The "Old Tech" Anchor',
+        description:
+            "Don't let outdated systems hold you back. We modernize your stack so your legacy tech becomes a strength, not something you have to work around.",
+        icon: Anchor,
+        color: "#f59e0b", // amber
+    },
+];
 
 export function ChallengesSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
-    const gridRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            const mm = gsap.matchMedia();
+
+            // DESKTOP: Pinned scroll with crossfade
+            mm.add("(min-width: 1024px)", () => {
+                const slides = gsap.utils.toArray<HTMLElement>(".challenge-slide");
+                const totalSlides = slides.length;
+
+                // Hide all slides except the first
+                gsap.set(slides, { opacity: 0, y: 40 });
+                gsap.set(slides[0], { opacity: 1, y: 0 });
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top top",
+                        end: `+=${totalSlides * 1000}`,
+                        pin: true,
+                        scrub: 1,
+                        anticipatePin: 1,
+                    },
+                });
+
+                // For each slide transition: fade out current, fade in next
+                for (let i = 0; i < totalSlides - 1; i++) {
+                    // Hold current slide
+                    tl.to({}, { duration: 0.5 });
+
+                    // Crossfade: current out, next in
+                    tl.to(slides[i], {
+                        opacity: 0,
+                        y: -30,
+                        duration: 0.5,
+                        ease: "power2.in",
+                    });
+                    tl.fromTo(
+                        slides[i + 1],
+                        { opacity: 0, y: 40 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.5,
+                            ease: "power2.out",
+                        },
+                        "-=0.3" // Overlap for smooth crossfade
+                    );
+                }
+
+                // Hold last slide
+                tl.to({}, { duration: 0.5 });
+            });
+
             // Title Animation
-            gsap.fromTo(titleRef.current,
+            gsap.fromTo(
+                titleRef.current,
                 { x: -50, opacity: 0 },
                 {
                     x: 0,
@@ -102,161 +114,93 @@ export function ChallengesSection() {
                         trigger: titleRef.current,
                         start: "top 85%",
                         toggleActions: "play none none none",
-                        scroller: document.documentElement,
-                    }
+                    },
                 }
             );
-
-            // Grid Items Animation (Directions: Top, Right, Bottom, Left)
-            const items = gridRef.current?.children;
-            if (items && items.length >= 4) {
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: gridRef.current,
-                        start: "top 75%",
-                        toggleActions: "play none none none",
-                        scroller: document.documentElement,
-                    }
-                });
-
-                // Card 1: From Top
-                tl.fromTo(items[0],
-                    { y: -100, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-                    0
-                );
-                // Card 2: From Right
-                tl.fromTo(items[1],
-                    { x: 100, opacity: 0 },
-                    { x: 0, opacity: 1, duration: 1, ease: "power3.out" },
-                    0.1
-                );
-                // Card 3: From Bottom
-                tl.fromTo(items[2],
-                    { y: 100, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-                    0.2
-                );
-                // Card 4: From Left
-                tl.fromTo(items[3],
-                    { x: -100, opacity: 0 },
-                    { x: 0, opacity: 1, duration: 1, ease: "power3.out" },
-                    0.3
-                );
-            }
         }, containerRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
-            <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <section
+            ref={containerRef}
+            className="relative w-full h-screen overflow-hidden bg-zinc-950"
+        >
+            {/* Background Grid Pattern */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
+            </div>
 
-                {/* Left Aligned Title */}
-                <div className="mb-20 max-w-4xl">
-                    <h2 ref={titleRef} className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
+            <div className="relative z-10 h-full max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+                {/* Title - Always Visible */}
+                <div className="mb-16">
+                    <h2
+                        ref={titleRef}
+                        className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]"
+                    >
                         The Growth Blockers <br />
-                        <span className="text-neutral-500">What&apos;s Really Stopping You?</span>
+                        <span className="text-neutral-500">
+                            What&apos;s Really Stopping You?
+                        </span>
                     </h2>
                     <p className="mt-6 text-xl text-neutral-400 max-w-2xl">
-                        You&apos;ve already proven people want your product. Now let&apos;s eliminate the technical bottlenecks slowing you down.
+                        You&apos;ve already proven people want your product. Now
+                        let&apos;s eliminate the technical bottlenecks slowing you
+                        down.
                     </p>
                 </div>
 
-                {/* Bento Grid */}
-                <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[350px]">
-
-                    {/* Card 1: Projects (Large Left) - Span 7 */}
-                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/95 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-300">
-                        {/* Glossy Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
-
-                        <GridVisual />
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent z-10" />
-
-                        <div className="relative z-20 h-full flex flex-col justify-center items-end p-12 text-right w-full">
-                            <div className="max-w-md">
-                                <span className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-2 block">
-                                    TIMELINE TRAP
+                {/* Slides Container - Relative so slides stack */}
+                <div className="relative w-full flex-1 max-h-[400px]">
+                    {challenges.map((challenge, i) => (
+                        <div
+                            key={i}
+                            className="challenge-slide absolute inset-0 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
+                        >
+                            {/* Left: Text Content */}
+                            <div className="flex flex-col justify-center">
+                                <span
+                                    className="text-xs font-bold tracking-[0.2em] uppercase mb-4 block"
+                                    style={{ color: challenge.color }}
+                                >
+                                    {challenge.label}
                                 </span>
-                                <h3 className="text-3xl font-medium text-white mb-4 leading-tight">
-                                    The &quot;Where Is It?&quot; Trap
+                                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                                    {challenge.title}
                                 </h3>
-                                <p className="text-neutral-400 text-sm leading-relaxed">
-                                    Deadlines shouldn&apos;t be suggestions. You need a partner who focuses on shipping, not excuses. We trade uncertainty for predictable sprints, so you always know when &quot;done&quot; is actually done.
+                                <p className="text-neutral-400 text-base md:text-lg leading-relaxed max-w-lg">
+                                    {challenge.description}
                                 </p>
+
+
+                            </div>
+
+                            {/* Right: Big Icon */}
+                            <div className="hidden lg:flex items-center justify-center">
+                                <div
+                                    className="relative w-[280px] h-[280px] flex items-center justify-center rounded-3xl"
+                                    style={{
+                                        background: `radial-gradient(circle at 50% 50%, ${challenge.color}15, transparent 70%)`,
+                                    }}
+                                >
+                                    {/* Glow ring */}
+                                    <div
+                                        className="absolute inset-0 rounded-3xl border opacity-30"
+                                        style={{
+                                            borderColor: challenge.color,
+                                            boxShadow: `0 0 60px ${challenge.color}20, inset 0 0 60px ${challenge.color}10`,
+                                        }}
+                                    />
+                                    <challenge.icon
+                                        className="w-32 h-32"
+                                        style={{ color: challenge.color }}
+                                        strokeWidth={1}
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Card 2: Integration (Medium Right) - Span 5 */}
-                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/95 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-300">
-                        {/* Glossy Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
-
-                        <WaveVisual />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
-
-                        <div className="relative z-20 h-full flex flex-col justify-end p-10">
-                            <span className="text-xs font-bold text-neutral-500 tracking-widest uppercase mb-2 block">
-                                SCALABILITY
-                            </span>
-                            <h3 className="text-2xl font-medium text-white mb-3">
-                                The Crash Ceiling
-                            </h3>
-                            <p className="text-neutral-400 text-sm">
-                                Success shouldn&apos;t break your site. You need infrastructure that handles 10x growth as easily as it handles today. We build tech that scales up, not falls down.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Card 3: Scalability (Medium Left) - Span 5 */}
-                    <div className="group relative md:col-span-5 rounded-3xl bg-zinc-900/95 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-300">
-                        {/* Glossy Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
-
-                        <ChartVisual />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
-
-                        <div className="relative z-20 h-full flex flex-col justify-end p-10">
-                            <span className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-2 block">
-                                CODE QUALITY
-                            </span>
-                            <h3 className="text-2xl font-medium text-white mb-3">
-                                The Messy Code Problem
-                            </h3>
-                            <p className="text-neutral-400 text-sm">
-                                Bad code isn&apos;t just annoying—it&apos;s a business risk. You deserve a clean, organized system that speeds up new features instead of making every update a struggle.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Card 4: Standards (Large Right) - Span 7 */}
-                    <div className="group relative md:col-span-7 rounded-3xl bg-zinc-900/95 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors duration-300">
-                        {/* Glossy Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
-
-                        <div className="absolute right-0 top-0 w-1/2 h-full">
-                            <NetworkVisual />
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-10" />
-
-                        <div className="relative z-20 h-full flex flex-col justify-center p-12">
-                            <div className="max-w-md">
-                                <span className="text-xs font-bold text-neutral-500 tracking-widest uppercase mb-2 block">
-                                    LEGACY SYSTEMS
-                                </span>
-                                <h3 className="text-3xl font-medium text-white mb-4 leading-tight">
-                                    The &quot;Old Tech&quot; Anchor
-                                </h3>
-                                <p className="text-neutral-400 text-sm leading-relaxed">
-                                    Don&apos;t let outdated systems hold you back. We modernize your stack so your legacy tech becomes a strength, not something you have to work around.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
+                    ))}
                 </div>
             </div>
         </section>
