@@ -61,10 +61,46 @@ export function WhyChooseSection() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
 
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "+=2000",
+                    pin: true,
+                    scrub: 1,
+                    anticipatePin: 1,
+                },
+            });
+
+            // Initial State: Cards hidden below screen
+            gsap.set(".feature-card", { y: 1000, opacity: 0 });
+
+            // Reveal Animation: Cards float up from bottom to their fixed positions
+            tl.to(".feature-card", {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: {
+                    amount: 0.5,
+                    from: "random"
+                },
+                ease: "power3.out"
+            });
+
+            // Hold for a moment
+            tl.to({}, { duration: 0.5 });
+
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
         <section
             ref={sectionRef}
-            className="relative w-full bg-zinc-950 overflow-hidden h-screen"
+            className="relative w-full bg-zinc-950 overflow-hidden h-screen flex flex-col items-center justify-center"
         >
             {/* Background Grid Pattern */}
             <div className="absolute inset-0 pointer-events-none">
@@ -87,7 +123,7 @@ export function WhyChooseSection() {
                     <div
                         key={i}
                         className={cn(
-                            "absolute w-[240px] md:w-[280px] h-[200px] bg-white p-6 flex flex-col justify-center shadow-2xl pointer-events-auto z-10",
+                            "feature-card absolute w-[240px] md:w-[280px] h-[200px] bg-white p-6 flex flex-col justify-center shadow-2xl pointer-events-auto z-10",
                             feature.position
                         )}
                     >
@@ -103,3 +139,4 @@ export function WhyChooseSection() {
         </section>
     );
 }
+
