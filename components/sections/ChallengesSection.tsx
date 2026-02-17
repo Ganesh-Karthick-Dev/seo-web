@@ -56,9 +56,22 @@ export function ChallengesSection() {
                 const slides = gsap.utils.toArray<HTMLElement>(".challenge-slide");
                 const totalSlides = slides.length;
 
-                // Hide all slides except the first
-                gsap.set(slides, { opacity: 0, y: 40 });
-                gsap.set(slides[0], { opacity: 1, y: 0 });
+                // Hide all slides and their text elements
+                slides.forEach((slide, i) => {
+                    const textEls = slide.querySelectorAll(".challenge-label, .challenge-title, .challenge-desc");
+                    const iconEl = slide.querySelector(".challenge-icon");
+
+                    if (i === 0) {
+                        // First slide: reveal text elements with stagger
+                        gsap.set(slide, { opacity: 1 });
+                        gsap.set(textEls, { opacity: 1, y: 0 });
+                        gsap.set(iconEl, { opacity: 1, scale: 1 });
+                    } else {
+                        gsap.set(slide, { opacity: 1 });
+                        gsap.set(textEls, { opacity: 0, y: 60 });
+                        gsap.set(iconEl, { opacity: 0, scale: 0.8 });
+                    }
+                });
 
                 const tl = gsap.timeline({
                     scrollTrigger: {
@@ -66,38 +79,70 @@ export function ChallengesSection() {
                         start: "top top",
                         end: `+=${totalSlides * 1000}`,
                         pin: true,
-                        scrub: 1,
+                        scrub: 1.5,
                         anticipatePin: 1,
                     },
                 });
 
-                // For each slide transition: fade out current, fade in next
                 for (let i = 0; i < totalSlides - 1; i++) {
-                    // Hold current slide
-                    tl.to({}, { duration: 0.5 });
+                    const currentTextEls = slides[i].querySelectorAll(".challenge-label, .challenge-title, .challenge-desc");
+                    const currentIcon = slides[i].querySelector(".challenge-icon");
+                    const nextTextEls = slides[i + 1].querySelectorAll(".challenge-label, .challenge-title, .challenge-desc");
+                    const nextIcon = slides[i + 1].querySelector(".challenge-icon");
 
-                    // Crossfade: current out, next in
-                    tl.to(slides[i], {
+                    // Brief hold on current slide
+                    tl.to({}, { duration: 0.3 });
+
+                    // Exit + Enter happen together (overlapping)
+                    const exitLabel = `exit${i}`;
+
+                    // Exit current text (slides up, fades out)
+                    tl.to(currentTextEls, {
                         opacity: 0,
-                        y: -30,
-                        duration: 0.5,
+                        y: -40,
+                        duration: 0.35,
+                        stagger: 0.05,
                         ease: "power2.in",
-                    });
+                    }, exitLabel);
+
+                    // Exit current icon
+                    tl.to(currentIcon, {
+                        opacity: 0,
+                        scale: 0.85,
+                        duration: 0.3,
+                        ease: "power2.in",
+                    }, exitLabel);
+
+                    // Enter next text (starts while exit is still happening)
                     tl.fromTo(
-                        slides[i + 1],
-                        { opacity: 0, y: 40 },
+                        nextTextEls,
+                        { opacity: 0, y: 50 },
                         {
                             opacity: 1,
                             y: 0,
-                            duration: 0.5,
-                            ease: "power2.out",
+                            duration: 0.4,
+                            stagger: 0.06,
+                            ease: "power3.out",
                         },
-                        "-=0.3" // Overlap for smooth crossfade
+                        `${exitLabel}+=0.15`
+                    );
+
+                    // Enter next icon
+                    tl.fromTo(
+                        nextIcon,
+                        { opacity: 0, scale: 0.85 },
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.4,
+                            ease: "power3.out",
+                        },
+                        `${exitLabel}+=0.15`
                     );
                 }
 
                 // Hold last slide
-                tl.to({}, { duration: 0.5 });
+                tl.to({}, { duration: 0.4 });
             });
 
             // Title Animation
@@ -161,15 +206,15 @@ export function ChallengesSection() {
                             {/* Left: Text Content */}
                             <div className="flex flex-col justify-center">
                                 <span
-                                    className="text-xs font-bold tracking-[0.2em] uppercase mb-4 block"
+                                    className="challenge-label text-xs font-bold tracking-[0.2em] uppercase mb-4 block"
                                     style={{ color: challenge.color }}
                                 >
                                     {challenge.label}
                                 </span>
-                                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                                <h3 className="challenge-title text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
                                     {challenge.title}
                                 </h3>
-                                <p className="text-neutral-400 text-base md:text-lg leading-relaxed max-w-lg">
+                                <p className="challenge-desc text-neutral-400 text-base md:text-lg leading-relaxed max-w-lg">
                                     {challenge.description}
                                 </p>
 
@@ -177,7 +222,7 @@ export function ChallengesSection() {
                             </div>
 
                             {/* Right: Big Icon */}
-                            <div className="hidden lg:flex items-center justify-center">
+                            <div className="challenge-icon hidden lg:flex items-center justify-center">
                                 <div
                                     className="relative w-[280px] h-[280px] flex items-center justify-center rounded-3xl"
                                     style={{
