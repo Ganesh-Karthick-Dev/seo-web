@@ -107,7 +107,7 @@ export default function AdminHtmlBlogPage() {
     };
 
     return (
-        <div className="min-h-screen bg-background p-8">
+        <div className="min-h-screen bg-background pt-32 pb-20 px-8">
             <div className="max-w-7xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                     <div>
