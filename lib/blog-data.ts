@@ -137,10 +137,20 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPostsForSitemap(): Promise<{ slug: string; updatedAt: Date }[]> {
-    const [posts, htmlPosts] = await Promise.all([
-        prisma.blogPost.findMany({ select: { slug: true, updatedAt: true } }),
-        prisma.htmlBlogPost.findMany({ select: { slug: true, updatedAt: true } })
-    ]);
+    let posts: { slug: string; updatedAt: Date }[] = [];
+    let htmlPosts: { slug: string; updatedAt: Date }[] = [];
+
+    try {
+        posts = await prisma.blogPost.findMany({ select: { slug: true, updatedAt: true } });
+    } catch (e) {
+        console.warn("getBlogPostsForSitemap: structured posts fetch failed", e);
+    }
+
+    try {
+        htmlPosts = await prisma.htmlBlogPost.findMany({ select: { slug: true, updatedAt: true } });
+    } catch (e) {
+        console.warn("getBlogPostsForSitemap: html posts fetch failed", e);
+    }
 
     return [...posts, ...htmlPosts].sort((a, b) =>
         b.updatedAt.getTime() - a.updatedAt.getTime()
