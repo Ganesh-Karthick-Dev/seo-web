@@ -64,3 +64,27 @@ model EstimatorLead {
 
   @@map("estimator_leads")
 }
+
+model HtmlBlogPost {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  excerpt   String
+  date      String
+  readTime  String
+  category  String
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Author
+  authorName   String
+  authorRole   String
+  authorAvatar String
+
+  // SEO Team Custom Code
+  htmlContent String @db.Text
+  cssContent  String @db.Text
+
+  @@map("html_blog_posts")
+}

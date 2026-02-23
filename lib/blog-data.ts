@@ -1,7 +1,6 @@
 import { prisma } from './prisma';
-import type { BlogPost as PrismaBlogPost } from '@prisma/client';
 
-export interface BlogPost {
+export type PostBase = {
     id: string;
     title: string;
     slug: string;
@@ -15,6 +14,11 @@ export interface BlogPost {
         role: string;
         avatar: string;
     };
+    createdAt?: Date;
+}
+
+export type StructuredBlogPost = PostBase & {
+    type: 'structured';
     painPoint: {
         title: string;
         description: string;
@@ -48,12 +52,23 @@ export interface BlogPost {
     };
 }
 
-export async function getAllBlogPosts(): Promise<BlogPost[]> {
-    const posts = await prisma.blogPost.findMany({
-        orderBy: { createdAt: 'desc' },
-    });
+export type HtmlBlogPost = PostBase & {
+    type: 'html';
+    htmlContent: string;
+    cssContent: string;
+}
 
-    return posts.map((post: PrismaBlogPost) => ({
+export type BlogPost = StructuredBlogPost | HtmlBlogPost;
+
+
+export async function getAllBlogPosts(): Promise<BlogPost[]> {
+    const [posts, htmlPosts] = await Promise.all([
+        prisma.blogPost.findMany({ orderBy: { createdAt: 'desc' } }),
+        prisma.htmlBlogPost.findMany({ orderBy: { createdAt: 'desc' } })
+    ]);
+
+    const mappedPosts = posts.map((post) => ({
+        type: 'structured' as const,
         id: post.id,
         title: post.title,
         slug: post.slug,
@@ -91,14 +106,45 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
             title: post.businessValueTitle,
             points: post.businessValuePoints as any,
         },
+        createdAt: post.createdAt,
     }));
+
+    const mappedHtmlPosts = htmlPosts.map((post) => ({
+        type: 'html' as const,
+        id: post.id,
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt,
+        date: post.date,
+        readTime: post.readTime,
+        category: post.category,
+        image: post.image,
+        author: {
+            name: post.authorName,
+            role: post.authorRole,
+            avatar: post.authorAvatar,
+        },
+        htmlContent: post.htmlContent,
+        cssContent: post.cssContent,
+        createdAt: post.createdAt,
+    }));
+
+    const allPosts = [...mappedPosts, ...mappedHtmlPosts].sort((a, b) =>
+        (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0)
+    );
+
+    return allPosts as BlogPost[];
 }
 
 export async function getBlogPostsForSitemap(): Promise<{ slug: string; updatedAt: Date }[]> {
-    return prisma.blogPost.findMany({
-        select: { slug: true, updatedAt: true },
-        orderBy: { updatedAt: "desc" },
-    });
+    const [posts, htmlPosts] = await Promise.all([
+        prisma.blogPost.findMany({ select: { slug: true, updatedAt: true } }),
+        prisma.htmlBlogPost.findMany({ select: { slug: true, updatedAt: true } })
+    ]);
+
+    return [...posts, ...htmlPosts].sort((a, b) =>
+        b.updatedAt.getTime() - a.updatedAt.getTime()
+    );
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
@@ -106,45 +152,75 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         where: { slug },
     });
 
-    if (!post) return null;
+    if (post) {
+        return {
+            type: 'structured',
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            date: post.date,
+            readTime: post.readTime,
+            category: post.category,
+            image: post.image,
+            author: {
+                name: post.authorName,
+                role: post.authorRole,
+                avatar: post.authorAvatar,
+            },
+            painPoint: {
+                title: post.painPointTitle,
+                description: post.painPointDescription,
+                points: post.painPointPoints,
+            },
+            solution: {
+                title: post.solutionTitle,
+                description: post.solutionDescription,
+                features: post.solutionFeatures as any,
+            },
+            beforeAfter: {
+                before: {
+                    title: post.beforeTitle,
+                    points: post.beforePoints,
+                },
+                after: {
+                    title: post.afterTitle,
+                    points: post.afterPoints,
+                },
+            },
+            businessValue: {
+                title: post.businessValueTitle,
+                points: post.businessValuePoints as any,
+            },
+            createdAt: post.createdAt,
+        };
+    }
 
-    return {
-        id: post.id,
-        title: post.title,
-        slug: post.slug,
-        excerpt: post.excerpt,
-        date: post.date,
-        readTime: post.readTime,
-        category: post.category,
-        image: post.image,
-        author: {
-            name: post.authorName,
-            role: post.authorRole,
-            avatar: post.authorAvatar,
-        },
-        painPoint: {
-            title: post.painPointTitle,
-            description: post.painPointDescription,
-            points: post.painPointPoints,
-        },
-        solution: {
-            title: post.solutionTitle,
-            description: post.solutionDescription,
-            features: post.solutionFeatures as any,
-        },
-        beforeAfter: {
-            before: {
-                title: post.beforeTitle,
-                points: post.beforePoints,
+    const htmlPost = await prisma.htmlBlogPost.findUnique({
+        where: { slug },
+    });
+
+    if (htmlPost) {
+        return {
+            type: 'html',
+            id: htmlPost.id,
+            title: htmlPost.title,
+            slug: htmlPost.slug,
+            excerpt: htmlPost.excerpt,
+            date: htmlPost.date,
+            readTime: htmlPost.readTime,
+            category: htmlPost.category,
+            image: htmlPost.image,
+            author: {
+                name: htmlPost.authorName,
+                role: htmlPost.authorRole,
+                avatar: htmlPost.authorAvatar,
             },
-            after: {
-                title: post.afterTitle,
-                points: post.afterPoints,
-            },
-        },
-        businessValue: {
-            title: post.businessValueTitle,
-            points: post.businessValuePoints as any,
-        },
-    };
+            htmlContent: htmlPost.htmlContent,
+            cssContent: htmlPost.cssContent,
+            createdAt: htmlPost.createdAt,
+        };
+    }
+
+    return null;
 }

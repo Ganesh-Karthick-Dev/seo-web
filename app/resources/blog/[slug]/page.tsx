@@ -38,6 +38,72 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         notFound();
     }
 
+    // Handle Raw HTML Layout
+    if (post.type === 'html') {
+        return (
+            <div className="min-h-screen bg-background pb-20">
+                {/* 1. HERO SECTION */}
+                <div className="relative w-full min-h-[65vh] flex items-center pt-32 pb-20">
+                    <div className="absolute inset-0 z-0">
+                        <Image
+                            src={post.image}
+                            alt={post.title}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+                        <div className="absolute inset-0 bg-black/30" />
+                    </div>
+
+                    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div className="flex justify-end mb-8">
+                            <Link href="/resources">
+                                <Button variant="outline" size="sm" className="bg-black/50 backdrop-blur-md border-white/10 text-white hover:bg-white/10 rounded-full px-6">
+                                    <ChevronLeft className="w-4 h-4 mr-2" />
+                                    Back to Resources
+                                </Button>
+                            </Link>
+                        </div>
+
+                        <div className="text-center max-w-4xl mx-auto space-y-6">
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-sm font-bold tracking-wide uppercase">
+                                {post.category}
+                            </div>
+
+                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
+                                {post.title}
+                            </h1>
+
+                            <div className="flex items-center justify-center gap-6 text-white/70">
+                                <div className="flex items-center gap-2">
+                                    <Calendar className="w-4 h-4" />
+                                    <span>{post.date}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Clock className="w-4 h-4" />
+                                    <span>{post.readTime}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* INJECTED CSS */}
+                {post.cssContent && (
+                    <style dangerouslySetInnerHTML={{ __html: post.cssContent }} />
+                )}
+
+                {/* INJECTED HTML BODY */}
+                <div
+                    className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 html-blog-content"
+                    dangerouslySetInnerHTML={{ __html: post.htmlContent }}
+                />
+            </div>
+        );
+    }
+
+    // For Structured Posts, Ensure Data Exists
     if (!post.painPoint || !post.solution || !post.beforeAfter) {
         return (
             <div className="min-h-screen flex items-center justify-center text-white">
@@ -46,6 +112,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         );
     }
 
+    // Handle Structured Data Layout
     return (
         <div className="min-h-screen bg-background pb-20">
             {/* 1. HERO SECTION */}
