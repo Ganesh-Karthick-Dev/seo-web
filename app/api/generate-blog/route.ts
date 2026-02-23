@@ -4,6 +4,18 @@ export async function POST(request: Request) {
     try {
         const { title } = await request.json();
 
+        // Debugging environment variables in production
+        console.log("--- AI GENERATE DEBUG ---");
+        console.log("Is GROK_KEY undefined?", process.env.GROK_KEY === undefined);
+        console.log("Is GROK_KEY empty string?", process.env.GROK_KEY === '');
+        console.log("Length of GROK_KEY:", process.env.GROK_KEY ? process.env.GROK_KEY.length : 'N/A');
+        console.log("First 4 chars of GROK_KEY:", process.env.GROK_KEY ? process.env.GROK_KEY.substring(0, 4) : 'N/A');
+
+        // Ensure the fetch call fails securely if the key is missing rather than sending "Bearer undefined"
+        if (!process.env.GROK_KEY) {
+            console.error("CRITICAL: process.env.GROK_KEY is not set in this environment!");
+        }
+
         const response = await fetch('https://api.x.ai/v1/chat/completions', {
             method: 'POST',
             headers: {
