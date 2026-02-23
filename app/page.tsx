@@ -19,5 +19,38 @@ export default async function Home() {
     // Database not available; HomeClient will show empty or fallback
   }
 
-  return <HomeClient initialBlogPosts={firstThree} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Zylex",
+  "url": "https://zylex.io/",
+  "logo": "https://zylex.io/logo/zylex-dark-caption.svg",
+  "description": "Zylex is a B2B SaaS platform providing software solutions for businesses.",
+  "sameAs": [
+    "https://www.linkedin.com/company/zylex-io",
+    "https://x.com/Zylex_Official",
+    "https://www.instagram.com/zylex_technologies/"
+  ]
+}`
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Zylex",
+  "url": "https://zylex.io/"
+}`
+        }}
+      />
+      <HomeClient initialBlogPosts={firstThree} />
+    </>
+  );
 }

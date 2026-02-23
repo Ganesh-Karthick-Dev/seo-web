@@ -178,91 +178,143 @@ export default async function EcommercePage() {
     }
 
     return (
-        <main className="bg-black min-h-screen">
-            {/* Hero Section */}
-            <ServiceHeroSection
-                title="Transform your vision into powerful Ecommerce"
-                subtitle="Ecommerce Solutions"
-                description="As a leading ecommerce development company, we specialize in creating high-performance online stores that drive sales and deliver exceptional customer experiences. Our custom ecommerce development solutions are designed to meet your unique business requirements, whether you're launching your first online store or scaling an enterprise platform."
-                ctaText="Let's Talk"
-                ctaHref="/contact"
-                icon={<ShoppingCart className="w-4 h-4 text-cyan-400" />}
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: `{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://zylex.io/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "Ecommerce",
+    "item": "https://zylex.io/services/ecommerce"  
+  }]
+}`
+                }}
             />
-
-            {/* Features Section - Services we offer */}
-            <ServiceFeaturesSection
-                title="Intangible Ecommerce Development services we offer"
-                titleHighlight=""
-                features={features}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: `{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "eCommerce Development",
+  "description": "Zylex provides eCommerce development services that enable businesses to design, build, and optimize online stores, transactional platforms, and digital commerce experiences tailored to their operational, payment, and customer engagement requirements using milestone-driven 15-day engineering sprints.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Zylex",
+    "url": "https://zylex.io/"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Worldwide"
+  },
+  "serviceType": "eCommerce Development",
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Startups, DTC Brands, SMEs, Retail Businesses, Enterprise Teams"
+  },
+  "url": "https://zylex.io/services/ecommerce",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://zylex.io/contact"
+  }
+}`
+                }}
             />
+            <main className="bg-black min-h-screen">
+                {/* Hero Section */}
+                <ServiceHeroSection
+                    title="Transform your vision into powerful Ecommerce"
+                    subtitle="Ecommerce Solutions"
+                    description="As a leading ecommerce development company, we specialize in creating high-performance online stores that drive sales and deliver exceptional customer experiences. Our custom ecommerce development solutions are designed to meet your unique business requirements, whether you're launching your first online store or scaling an enterprise platform."
+                    ctaText="Let's Talk"
+                    ctaHref="/contact"
+                    icon={<ShoppingCart className="w-4 h-4 text-cyan-400" />}
+                />
 
-            {/* Process Section - Development Process */}
-            <ServiceProcessSection
-                title="Our Ecommerce Development Process"
-                titleHighlight="A structured, outcome-driven ecommerce development process that ensures clarity, predictable delivery, and high-performance results."
-                processData={processData}
-            />
+                {/* Features Section - Services we offer */}
+                <ServiceFeaturesSection
+                    title="Intangible Ecommerce Development services we offer"
+                    titleHighlight=""
+                    features={features}
+                />
 
-            {/* Tech Stack Section - Using IntegrationsSection with custom data */}
-            <IntegrationsSection
-                title="Technologies we use for Ecommerce"
-                titleHighlight=""
-                leftTechItems={ecommerceTechLeft}
-                rightTechItems={ecommerceTechRight}
-            />
+                {/* Process Section - Development Process */}
+                <ServiceProcessSection
+                    title="Our Ecommerce Development Process"
+                    titleHighlight="A structured, outcome-driven ecommerce development process that ensures clarity, predictable delivery, and high-performance results."
+                    processData={processData}
+                />
 
-            {/* Why Choose Section - Custom inline */}
-            <section className="w-full py-24 lg:py-32 bg-black relative overflow-hidden">
-                <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
-                </div>
+                {/* Tech Stack Section - Using IntegrationsSection with custom data */}
+                <IntegrationsSection
+                    title="Technologies we use for Ecommerce"
+                    titleHighlight=""
+                    leftTechItems={ecommerceTechLeft}
+                    rightTechItems={ecommerceTechRight}
+                />
 
-                <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">
-                    {/* Section Header */}
-                    <div className="mb-16 max-w-4xl">
-                        <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
-                            Why Choose Our E-Commerce Development Services?
-                        </h2>
+                {/* Why Choose Section - Custom inline */}
+                <section className="w-full py-24 lg:py-32 bg-black relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-30">
+                        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
+                        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
                     </div>
 
-                    {/* Benefits Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {whyChooseBenefits.map((benefit, index) => (
-                            <div
-                                key={index}
-                                className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500"
-                            >
-                                {/* Icon */}
-                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white mb-6">
-                                    {benefit.icon}
+                    <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">
+                        {/* Section Header */}
+                        <div className="mb-16 max-w-4xl">
+                            <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
+                                Why Choose Our E-Commerce Development Services?
+                            </h2>
+                        </div>
+
+                        {/* Benefits Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {whyChooseBenefits.map((benefit, index) => (
+                                <div
+                                    key={index}
+                                    className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500"
+                                >
+                                    {/* Icon */}
+                                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white mb-6">
+                                        {benefit.icon}
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
+                                        {benefit.title}
+                                    </h3>
+
+                                    {/* Description */}
+                                    <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                        {benefit.description}
+                                    </p>
                                 </div>
-
-                                {/* Title */}
-                                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
-                                    {benefit.title}
-                                </h3>
-
-                                {/* Description */}
-                                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                    {benefit.description}
-                                </p>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Blog Section - Resources */}
-            <BlogSection initialBlogPosts={blogPosts} />
+                {/* Blog Section - Resources */}
+                <BlogSection initialBlogPosts={blogPosts} />
 
-            {/* Final CTA */}
-            <ServiceCTASection
-                title="Let's Build an Ecommerce Platform That Drives Real Business Growth"
-                description="We build ecommerce platforms that perform better, convert higher, and scale with your business — empowering you with faster storefronts, stronger reliability, and measurable revenue impact."
-                primaryButtonText="Let's Talk"
-                primaryButtonHref="/contact"
-            />
-        </main>
+                {/* Final CTA */}
+                <ServiceCTASection
+                    title="Let's Build an Ecommerce Platform That Drives Real Business Growth"
+                    description="We build ecommerce platforms that perform better, convert higher, and scale with your business — empowering you with faster storefronts, stronger reliability, and measurable revenue impact."
+                    primaryButtonText="Let's Talk"
+                    primaryButtonHref="/contact"
+                />
+            </main>
+        </>
     );
 }

@@ -213,162 +213,214 @@ export default async function CloudDevOpsPage() {
     }
 
     return (
-        <main className="bg-black min-h-screen">
-            {/* Hero Section */}
-            <ServiceHeroSection
-                title="Cloud & DevOps Engineering: Manual is a Liability. Automation is the Catalyst."
-                subtitle="Scale Without Friction. Deploy Without Fear."
-                description={'Infrastructure shouldn\'t be a bottleneck, and deployments shouldn\'t require a prayer. We engineer high-performance Cloud and DevOps engineering services that destroy operational friction and rebuild your delivery pipelines into unshakeable engines of momentum. No manual patchwork, no "it worked on my machine" excuses—just absolute reliability and terminal velocity.'}
-                ctaText="Let's Talk"
-                ctaHref="/contact"
-                icon={<Cloud className="w-4 h-4 text-cyan-400" />}
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: `{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://zylex.io/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "Cloud & Devops",
+    "item": "https://zylex.io/services/cloud-devops"  
+  }]
+}`
+                }}
             />
-
-            {/* Features Section - The Technical Ceilings */}
-            <ServiceFeaturesSection
-                title="The Technical Ceilings: Where Infrastructure Kills Innovation"
-                titleHighlight="We focus on the high-stakes execution failures that generic 'cloud support' ignores."
-                features={features}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: `{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Cloud & DevOps Services",
+  "description": "Zylex provides cloud and DevOps services that help businesses design, deploy, and manage scalable cloud infrastructure, optimize CI/CD workflows, and automate operational processes to improve performance and reliability.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Zylex",
+    "url": "https://zylex.io/"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Worldwide"
+  },
+  "serviceType": "Cloud & DevOps Services",
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Startups, SMEs, Enterprise Teams, CTOs, Engineering Leaders"
+  },
+  "url": "https://zylex.io/services/cloud-devops",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://zylex.io/contact"
+  }
+}`
+                }}
             />
+            <main className="bg-black min-h-screen">
+                {/* Hero Section */}
+                <ServiceHeroSection
+                    title="Cloud & DevOps Engineering: Manual is a Liability. Automation is the Catalyst."
+                    subtitle="Scale Without Friction. Deploy Without Fear."
+                    description={'Infrastructure shouldn\'t be a bottleneck, and deployments shouldn\'t require a prayer. We engineer high-performance Cloud and DevOps engineering services that destroy operational friction and rebuild your delivery pipelines into unshakeable engines of momentum. No manual patchwork, no "it worked on my machine" excuses—just absolute reliability and terminal velocity.'}
+                    ctaText="Let's Talk"
+                    ctaHref="/contact"
+                    icon={<Cloud className="w-4 h-4 text-cyan-400" />}
+                />
 
-            {/* Services Section - Cloud & DevOps Engineering Services */}
-            <section className="relative py-24 md:py-32 px-4 md:px-6 lg:px-8 bg-black overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
+                {/* Features Section - The Technical Ceilings */}
+                <ServiceFeaturesSection
+                    title="The Technical Ceilings: Where Infrastructure Kills Innovation"
+                    titleHighlight="We focus on the high-stakes execution failures that generic 'cloud support' ignores."
+                    features={features}
+                />
 
-                <div className="max-w-[90rem] mx-auto relative z-10">
-                    <div className="mb-16 md:mb-20 max-w-5xl">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
-                            Cloud & DevOps Engineering Services
-                        </h2>
-                        <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl">
-                            We don't just "manage clouds"—we engineer performance-optimized digital foundations.
-                        </p>
-                    </div>
+                {/* Services Section - Cloud & DevOps Engineering Services */}
+                <section className="relative py-24 md:py-32 px-4 md:px-6 lg:px-8 bg-black overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Service 1 - Infrastructure Hardening & Optimization */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6">
-                                <Server className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-sky-100 transition-colors">
-                                Infrastructure Hardening & Optimization
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                <strong className="text-white block mb-2">Engineering Unshakeable Reliability</strong>
-                                We design and optimize cloud environments to improve performance while destroying cost inefficiencies. From architecture hardening and environment standardization to high-availability enablement, we ensure your infrastructure remains secure, stable, and ready for massive business expansion.
+                    <div className="max-w-[90rem] mx-auto relative z-10">
+                        <div className="mb-16 md:mb-20 max-w-5xl">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+                                Cloud & DevOps Engineering Services
+                            </h2>
+                            <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl">
+                                We don't just "manage clouds"—we engineer performance-optimized digital foundations.
                             </p>
                         </div>
 
-                        {/* Service 2 - Zero-Disruption Migration & Modernization */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6">
-                                <RefreshCw className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-cyan-100 transition-colors">
-                                Zero-Disruption Migration & Modernization
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                <strong className="text-white block mb-2">Modernize Without the Drama</strong>
-                                We transition legacy systems to modern cloud platforms through controlled, low-risk programs. Whether it's re-platforming, refactoring, or containerization, we enable modernization without the operational disruption that kills momentum.
-                            </p>
-                        </div>
-
-                        {/* Service 3 - Resilient Cloud-Native Engineering */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
-                                <Layers className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-blue-100 transition-colors">
-                                Resilient Cloud-Native Engineering
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                <strong className="text-white block mb-2">Built for Elasticity and Heroic Scale</strong>
-                                We design platforms using modern cloud-native principles. Our approach—including microservices, API-first design, and deep observability—helps you accelerate delivery cycles and strengthen platform reliability across any environment.
-                            </p>
-                        </div>
-
-                        {/* Service 4 - CI/CD & Delivery Governance */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-violet-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 mb-6">
-                                <Rocket className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-violet-100 transition-colors">
-                                CI/CD & Delivery Governance
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                <strong className="text-white block mb-2">Deploy Faster. Fail Less</strong>
-                                We implement Cloud DevOps services that accelerate speed while reducing operational noise. From infrastructure-as-code (IaC) to release governance and reliability controls, we deliver predictable rollouts and measurable improvements in platform stability.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Process Section - The Engineering Blueprint */}
-            <ServiceProcessSection
-                title="The Engineering Blueprint: Structured for Precision"
-                titleHighlight={'We skip the "wait and see" approach. Every milestone is a hard step toward market dominance.'}
-                processData={processData}
-            />
-
-            {/* Tech Stack Section - The Engineering Stack */}
-            <IntegrationsSection
-                title="The Engineering Stack: Built for Scale"
-                titleHighlight=""
-                leftTechItems={cloudTechLeft}
-                rightTechItems={cloudTechRight}
-                description="We carefully select technologies based on business fit, stability, maintainability, and long-term scalability — not trends or tool bias."
-            />
-
-            {/* Why Choose Section */}
-            <section className="w-full py-24 lg:py-32 bg-black relative overflow-hidden">
-                <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
-                </div>
-
-                <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">
-                    <div className="mb-16 max-w-4xl">
-                        <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
-                            Why Organizations Choose Zylex for Cloud & DevOps
-                        </h2>
-                        <p className="mt-6 text-xl text-neutral-400 max-w-2xl">
-                            Because your roadmap shouldn't be limited by fragile infrastructure.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {whyChooseBenefits.map((benefit, index) => (
-                            <div
-                                key={index}
-                                className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500"
-                            >
-                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white mb-6">
-                                    {benefit.icon}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Service 1 - Infrastructure Hardening & Optimization */}
+                            <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500">
+                                <div className="w-14 h-14 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6">
+                                    <Server className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
-                                    {benefit.title}
+                                <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-sky-100 transition-colors">
+                                    Infrastructure Hardening & Optimization
                                 </h3>
                                 <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                    {benefit.description}
+                                    <strong className="text-white block mb-2">Engineering Unshakeable Reliability</strong>
+                                    We design and optimize cloud environments to improve performance while destroying cost inefficiencies. From architecture hardening and environment standardization to high-availability enablement, we ensure your infrastructure remains secure, stable, and ready for massive business expansion.
                                 </p>
                             </div>
-                        ))}
+
+                            {/* Service 2 - Zero-Disruption Migration & Modernization */}
+                            <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-500">
+                                <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6">
+                                    <RefreshCw className="w-7 h-7" />
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-cyan-100 transition-colors">
+                                    Zero-Disruption Migration & Modernization
+                                </h3>
+                                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                    <strong className="text-white block mb-2">Modernize Without the Drama</strong>
+                                    We transition legacy systems to modern cloud platforms through controlled, low-risk programs. Whether it's re-platforming, refactoring, or containerization, we enable modernization without the operational disruption that kills momentum.
+                                </p>
+                            </div>
+
+                            {/* Service 3 - Resilient Cloud-Native Engineering */}
+                            <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500">
+                                <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                                    <Layers className="w-7 h-7" />
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-blue-100 transition-colors">
+                                    Resilient Cloud-Native Engineering
+                                </h3>
+                                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                    <strong className="text-white block mb-2">Built for Elasticity and Heroic Scale</strong>
+                                    We design platforms using modern cloud-native principles. Our approach—including microservices, API-first design, and deep observability—helps you accelerate delivery cycles and strengthen platform reliability across any environment.
+                                </p>
+                            </div>
+
+                            {/* Service 4 - CI/CD & Delivery Governance */}
+                            <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-violet-500/30 transition-all duration-500">
+                                <div className="w-14 h-14 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 mb-6">
+                                    <Rocket className="w-7 h-7" />
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-violet-100 transition-colors">
+                                    CI/CD & Delivery Governance
+                                </h3>
+                                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                    <strong className="text-white block mb-2">Deploy Faster. Fail Less</strong>
+                                    We implement Cloud DevOps services that accelerate speed while reducing operational noise. From infrastructure-as-code (IaC) to release governance and reliability controls, we deliver predictable rollouts and measurable improvements in platform stability.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Blog Section - Resources */}
-            <BlogSection initialBlogPosts={blogPosts} />
+                {/* Process Section - The Engineering Blueprint */}
+                <ServiceProcessSection
+                    title="The Engineering Blueprint: Structured for Precision"
+                    titleHighlight={'We skip the "wait and see" approach. Every milestone is a hard step toward market dominance.'}
+                    processData={processData}
+                />
 
-            {/* Final CTA */}
-            <ServiceCTASection
-                title="Ready to Engineer Your Next Breakthrough?"
-                description="Your vision is too important for manual patchwork. Partner with the specialists in high-performance Cloud and DevOps engineering to build the unshakeable foundations your future demands."
-                primaryButtonText="Let's Talk"
-                primaryButtonHref="/contact"
-            />
-        </main>
+                {/* Tech Stack Section - The Engineering Stack */}
+                <IntegrationsSection
+                    title="The Engineering Stack: Built for Scale"
+                    titleHighlight=""
+                    leftTechItems={cloudTechLeft}
+                    rightTechItems={cloudTechRight}
+                    description="We carefully select technologies based on business fit, stability, maintainability, and long-term scalability — not trends or tool bias."
+                />
+
+                {/* Why Choose Section */}
+                <section className="w-full py-24 lg:py-32 bg-black relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-30">
+                        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
+                        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
+                    </div>
+
+                    <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">
+                        <div className="mb-16 max-w-4xl">
+                            <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
+                                Why Organizations Choose Zylex for Cloud & DevOps
+                            </h2>
+                            <p className="mt-6 text-xl text-neutral-400 max-w-2xl">
+                                Because your roadmap shouldn't be limited by fragile infrastructure.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {whyChooseBenefits.map((benefit, index) => (
+                                <div
+                                    key={index}
+                                    className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500"
+                                >
+                                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white mb-6">
+                                        {benefit.icon}
+                                    </div>
+                                    <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
+                                        {benefit.title}
+                                    </h3>
+                                    <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                        {benefit.description}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Blog Section - Resources */}
+                <BlogSection initialBlogPosts={blogPosts} />
+
+                {/* Final CTA */}
+                <ServiceCTASection
+                    title="Ready to Engineer Your Next Breakthrough?"
+                    description="Your vision is too important for manual patchwork. Partner with the specialists in high-performance Cloud and DevOps engineering to build the unshakeable foundations your future demands."
+                    primaryButtonText="Let's Talk"
+                    primaryButtonHref="/contact"
+                />
+            </main>
+        </>
     );
 }

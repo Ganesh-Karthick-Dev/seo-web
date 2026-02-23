@@ -206,94 +206,146 @@ export default async function DigitalTransformationPage() {
     }
 
     return (
-        <main className="bg-black min-h-screen">
-            {/* Hero Section */}
-            <ServiceHeroSection
-                title="App Modernization: Turn Your Legacy Constraints into Unshakeable Engineering Advantages"
-                subtitle="App Modernization & Digital Transformation"
-                description="Outdated software doesn't just slow you down—it anchors your growth and leaks revenue. We specialize in hard-hitting application modernization that destroys technical friction and rebuilds your systems into high-performance digital foundations. Our digital transformation services deliver absolute engineering execution—no excuses, no downtime, no 'weekend emergency calls' as your standard operating procedure."
-                ctaText="Let's Talk"
-                ctaHref="/contact"
-                icon={<Sparkles className="w-4 h-4 text-cyan-400" />}
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: `{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://zylex.io/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "Digital Transformation",
+    "item": "https://zylex.io/services/digital-transformation"  
+  }]
+}`
+                }}
             />
-
-            {/* Features Section - The Technical Ceilings */}
-            <ServiceFeaturesSection
-                title="The Technical Ceilings: What's Blocking Your Dominance?"
-                titleHighlight="If your current technology dictates your speed, you've already lost. We solve the execution failures that brittle systems create."
-                features={features}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: `{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Digital Transformation",
+  "description": "Zylex provides digital transformation services that help organizations modernize systems, optimize workflows, and implement scalable digital solutions by integrating software platforms, automation capabilities, and data-driven processes aligned with evolving business and operational needs.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Zylex",
+    "url": "https://zylex.io/"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Worldwide"
+  },
+  "serviceType": "Digital Transformation",
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Startups, SMEs, Enterprises, Product Teams, Operational Teams"
+  },
+  "url": "https://zylex.io/services/digital-transformation",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://zylex.io/contact"
+  }
+}`
+                }}
             />
+            <main className="bg-black min-h-screen">
+                {/* Hero Section */}
+                <ServiceHeroSection
+                    title="App Modernization: Turn Your Legacy Constraints into Unshakeable Engineering Advantages"
+                    subtitle="App Modernization & Digital Transformation"
+                    description="Outdated software doesn't just slow you down—it anchors your growth and leaks revenue. We specialize in hard-hitting application modernization that destroys technical friction and rebuilds your systems into high-performance digital foundations. Our digital transformation services deliver absolute engineering execution—no excuses, no downtime, no 'weekend emergency calls' as your standard operating procedure."
+                    ctaText="Let's Talk"
+                    ctaHref="/contact"
+                    icon={<Sparkles className="w-4 h-4 text-cyan-400" />}
+                />
 
-            {/* Solutions Section - App Modernization */}
-            <ServiceProcessSection
-                title="App Modernization: From Legacy Constraints to High-Performance Pillars"
-                titleHighlight="Build the technical momentum your vision deserves."
-                processData={capabilitiesData}
-            />
+                {/* Features Section - The Technical Ceilings */}
+                <ServiceFeaturesSection
+                    title="The Technical Ceilings: What's Blocking Your Dominance?"
+                    titleHighlight="If your current technology dictates your speed, you've already lost. We solve the execution failures that brittle systems create."
+                    features={features}
+                />
 
-            {/* Delivery Framework */}
-            <ServiceProcessSection
-                title="Our Delivery Framework: Structured for Certainty"
-                titleHighlight="We skip the process-for-the-sake-of-process bloat. Every milestone is a hard step toward market dominance."
-                processData={deliveryData}
-            />
+                {/* Solutions Section - App Modernization */}
+                <ServiceProcessSection
+                    title="App Modernization: From Legacy Constraints to High-Performance Pillars"
+                    titleHighlight="Build the technical momentum your vision deserves."
+                    processData={capabilitiesData}
+                />
 
-            {/* Tech Stack Section */}
-            <IntegrationsSection
-                title="The Tech Stack"
-                titleHighlight="We select technologies based on your specific requirements for scale, security, and long-term sustainability."
-                leftTechItems={techLeft}
-                rightTechItems={techRight}
-            />
+                {/* Delivery Framework */}
+                <ServiceProcessSection
+                    title="Our Delivery Framework: Structured for Certainty"
+                    titleHighlight="We skip the process-for-the-sake-of-process bloat. Every milestone is a hard step toward market dominance."
+                    processData={deliveryData}
+                />
 
-            {/* Why Choose Section */}
-            <WhyChooseUsSection
-                title="Why Choose Zylex for App Modernization?"
-                titleHighlight="Because your systems should be a high-performance engine, not an anchor."
-                benefits={[
-                    {
-                        icon: <Award className="w-7 h-7" />,
-                        title: "Real-World Experience",
-                        description: "We've overhauled crumbling legacy systems for industry leaders who can't afford to be \"down.\" We know exactly what fails and how to engineer past it.",
-                        accent: "from-cyan-400 to-blue-600",
-                    },
-                    {
-                        icon: <Target className="w-7 h-7" />,
-                        title: "Outcome-Led, Zero-Fluff",
-                        description: "We don't implement tech for the sake of checking a box. We plan every effort around your productivity, scale, and long-term business value. Our digital transformation services focus on measurable outcomes, not vanity metrics.",
-                        accent: "from-cyan-400 to-sky-500",
-                    },
-                    {
-                        icon: <Shield className="w-7 h-7" />,
-                        title: "Zero-Disruption Reality",
-                        description: "We specialize in migrating systems without the disruption that kills momentum. Low risk, high impact, no \"Monday morning surprises.\"",
-                        accent: "from-blue-400 to-indigo-600",
-                    },
-                    {
-                        icon: <Eye className="w-7 h-7" />,
-                        title: "Radical Transparency",
-                        description: "You see the progress in every cycle. Our roadmap ensures you have a clear view of reality—not a corporate \"re-interpretation\" of status.",
-                        accent: "from-cyan-400 to-blue-500",
-                    },
-                    {
-                        icon: <Handshake className="w-7 h-7" />,
-                        title: "Relentless Support",
-                        description: "We stay engaged post-deployment, providing the continuous tuning and enhancements needed to keep you at the front of the pack.",
-                        accent: "from-sky-400 to-blue-600",
-                    },
-                ]}
-            />
+                {/* Tech Stack Section */}
+                <IntegrationsSection
+                    title="The Tech Stack"
+                    titleHighlight="We select technologies based on your specific requirements for scale, security, and long-term sustainability."
+                    leftTechItems={techLeft}
+                    rightTechItems={techRight}
+                />
 
-            {/* Blog Section */}
-            <BlogSection initialBlogPosts={blogPosts} />
+                {/* Why Choose Section */}
+                <WhyChooseUsSection
+                    title="Why Choose Zylex for App Modernization?"
+                    titleHighlight="Because your systems should be a high-performance engine, not an anchor."
+                    benefits={[
+                        {
+                            icon: <Award className="w-7 h-7" />,
+                            title: "Real-World Experience",
+                            description: "We've overhauled crumbling legacy systems for industry leaders who can't afford to be \"down.\" We know exactly what fails and how to engineer past it.",
+                            accent: "from-cyan-400 to-blue-600",
+                        },
+                        {
+                            icon: <Target className="w-7 h-7" />,
+                            title: "Outcome-Led, Zero-Fluff",
+                            description: "We don't implement tech for the sake of checking a box. We plan every effort around your productivity, scale, and long-term business value. Our digital transformation services focus on measurable outcomes, not vanity metrics.",
+                            accent: "from-cyan-400 to-sky-500",
+                        },
+                        {
+                            icon: <Shield className="w-7 h-7" />,
+                            title: "Zero-Disruption Reality",
+                            description: "We specialize in migrating systems without the disruption that kills momentum. Low risk, high impact, no \"Monday morning surprises.\"",
+                            accent: "from-blue-400 to-indigo-600",
+                        },
+                        {
+                            icon: <Eye className="w-7 h-7" />,
+                            title: "Radical Transparency",
+                            description: "You see the progress in every cycle. Our roadmap ensures you have a clear view of reality—not a corporate \"re-interpretation\" of status.",
+                            accent: "from-cyan-400 to-blue-500",
+                        },
+                        {
+                            icon: <Handshake className="w-7 h-7" />,
+                            title: "Relentless Support",
+                            description: "We stay engaged post-deployment, providing the continuous tuning and enhancements needed to keep you at the front of the pack.",
+                            accent: "from-sky-400 to-blue-600",
+                        },
+                    ]}
+                />
 
-            {/* Final CTA */}
-            <ServiceCTASection
-                title="Stop Managing Debt. Start Shipping Mastery."
-                description="Your vision is too ambitious for brittle architecture. Rebuild your foundation into a high-performance engine that scales without the excuses. No legacy anchors. Just absolute execution."
-                primaryButtonText="Let's Talk"
-                primaryButtonHref="/contact"
-            />
-        </main>
+                {/* Blog Section */}
+                <BlogSection initialBlogPosts={blogPosts} />
+
+                {/* Final CTA */}
+                <ServiceCTASection
+                    title="Stop Managing Debt. Start Shipping Mastery."
+                    description="Your vision is too ambitious for brittle architecture. Rebuild your foundation into a high-performance engine that scales without the excuses. No legacy anchors. Just absolute execution."
+                    primaryButtonText="Let's Talk"
+                    primaryButtonHref="/contact"
+                />
+            </main>
+        </>
     );
 }

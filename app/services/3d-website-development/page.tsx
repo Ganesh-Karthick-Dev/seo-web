@@ -157,147 +157,199 @@ export default async function ThreeDWebsiteDevelopmentPage() {
     }
 
     return (
-        <main className="bg-black min-h-screen">
-            {/* Hero Section */}
-            <ServiceHeroSection
-                title="3D Website Development: Stop Building Pages. Start Engineering Immersive Environments."
-                subtitle="Static Design is an Anchor. 3D Engineering is the Catalyst."
-                description="Traditional layouts are a limitation your vision can no longer afford. We specialize in high-performance 3D website development that transforms passive observers into active participants. No lag, no bloat, and zero 'GPU-exhaustion' excuses—just unshakeable digital environments built for scale, speed, and absolute market differentiation."
-                ctaText="Let's Talk"
-                ctaHref="/contact"
-                icon={<Box className="w-4 h-4 text-cyan-400" />}
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: `{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://zylex.io/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "3D Website Development",
+    "item": "https://zylex.io/services/3d-website-development"  
+  }]
+}`
+                }}
             />
-
-            {/* Features Section - The Impact Space */}
-            <ServiceFeaturesSection
-                title="The Impact Space: Where 3D Refuses to Be Ignored"
-                titleHighlight="3D isn't a gimmick; it's a technical differentiator for brands that have moved beyond 'good enough.'"
-                features={features}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: `{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "3D Website Development",
+  "description": "Zylex provides 3D website development services that help businesses design and build immersive, interactive web experiences using modern 3D technologies and web standards, tailored to their branding, user engagement, and performance requirements.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Zylex",
+    "url": "https://zylex.io/"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Worldwide"
+  },
+  "serviceType": "3D Website Development",
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Startups, Brands, Creative Teams, SMEs, Enterprise Teams"
+  },
+  "url": "https://zylex.io/services/3d-website-development",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://zylex.io/contact"
+  }
+}`
+                }}
             />
+            <main className="bg-black min-h-screen">
+                {/* Hero Section */}
+                <ServiceHeroSection
+                    title="3D Website Development: Stop Building Pages. Start Engineering Immersive Environments."
+                    subtitle="Static Design is an Anchor. 3D Engineering is the Catalyst."
+                    description="Traditional layouts are a limitation your vision can no longer afford. We specialize in high-performance 3D website development that transforms passive observers into active participants. No lag, no bloat, and zero 'GPU-exhaustion' excuses—just unshakeable digital environments built for scale, speed, and absolute market differentiation."
+                    ctaText="Let's Talk"
+                    ctaHref="/contact"
+                    icon={<Box className="w-4 h-4 text-cyan-400" />}
+                />
 
-            {/* Services Section - End-to-End 3D Engineering Services */}
-            <section className="relative py-24 md:py-32 px-4 md:px-6 lg:px-8 bg-black overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
+                {/* Features Section - The Impact Space */}
+                <ServiceFeaturesSection
+                    title="The Impact Space: Where 3D Refuses to Be Ignored"
+                    titleHighlight="3D isn't a gimmick; it's a technical differentiator for brands that have moved beyond 'good enough.'"
+                    features={features}
+                />
 
-                <div className="max-w-[90rem] mx-auto relative z-10">
-                    <div className="mb-16 md:mb-20 max-w-5xl">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
-                            End-to-End 3D Engineering Services
-                        </h2>
-                        <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl">
-                            We don't just "build sites"; we engineer performance-optimized digital worlds.
-                        </p>
-                    </div>
+                {/* Services Section - End-to-End 3D Engineering Services */}
+                <section className="relative py-24 md:py-32 px-4 md:px-6 lg:px-8 bg-black overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.08),transparent_50%)] pointer-events-none" />
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        {/* Service 1 - Cinematic Interface & UX Design */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6">
-                                <Paintbrush className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-sky-100 transition-colors">
-                                Cinematic Interface & UX Design
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                <strong className="text-white block mb-2">Engineering Cinematic Depth.</strong> We design visually engaging 3D website design experiences that elevate brand storytelling. From interactive 3D journeys to motion-led navigation, we create interfaces that feel intuitive and meaningful—delivering impact that is seamlessly woven into your digital presence.
+                    <div className="max-w-[90rem] mx-auto relative z-10">
+                        <div className="mb-16 md:mb-20 max-w-5xl">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+                                End-to-End 3D Engineering Services
+                            </h2>
+                            <p className="text-neutral-400 text-lg md:text-xl leading-relaxed max-w-3xl">
+                                We don't just "build sites"; we engineer performance-optimized digital worlds.
                             </p>
                         </div>
 
-                        {/* Service 2 - High-Performance WebGL Frameworks */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6">
-                                <Globe className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-cyan-100 transition-colors">
-                                High-Performance WebGL Frameworks
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                <strong className="text-white block mb-2">Custom Development for Real-World Scale.</strong> We build immersive, high-performance environments tailored to your audience. Our interactive 3D website development services include product visualization platforms, WebGL environments, and custom landing pages built with clean architecture and the stability to evolve as your business grows.
-                            </p>
-                        </div>
-
-                        {/* Service 3 - Specialist 3D Team Extension */}
-                        <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500">
-                            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
-                                <Users className="w-7 h-7" />
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-blue-100 transition-colors">
-                                Specialist 3D Team Extension
-                            </h3>
-                            <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                <strong className="text-white block mb-2">Hire Mastery, Not Just Capacity.</strong> Need to hire 3D website developer talent who understand GPU optimization? Extend your team with expert specialists who deliver clean, scalable Three.js and Babylon.js development within a collaborative model. We support product launches and campaign experiences that demand technical excellence.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Delivery Framework - ServiceScrollSection with custom phases */}
-            <ServiceScrollSection
-                hue={200}
-                title="Our Delivery Framework: Structured for Precision"
-                titleHighlight="We skip the 'works on my machine' excuses. Every milestone is a hard step toward an unshakeable deployment."
-                description=""
-                cards={deliveryPhases}
-            />
-
-            {/* Tech Stack Section */}
-            <IntegrationsSection
-                title="The Engineering Stack: Built for Render, Not for Bloat"
-                titleHighlight="We pick the tech that handles the heavy lifting without sacrificing the user experience."
-                leftTechItems={threeDTechLeft}
-                rightTechItems={threeDTechRight}
-                description="Our tech choices ensure visual richness without the usability drama."
-            />
-
-            {/* Why Choose Section */}
-            <section className="w-full py-24 lg:py-32 bg-black relative overflow-hidden">
-                <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
-                    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
-                </div>
-
-                <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">
-                    <div className="mb-16 max-w-4xl">
-                        <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
-                            Why Brands Choose Zylex for 3D Development
-                        </h2>
-                        <p className="text-neutral-400 text-lg mt-4">
-                            Because your roadmap shouldn't be limited by legacy rendering.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {whyChooseBenefits.map((benefit, index) => (
-                            <div
-                                key={index}
-                                className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500"
-                            >
-                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white mb-6">
-                                    {benefit.icon}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            {/* Service 1 - Cinematic Interface & UX Design */}
+                            <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500">
+                                <div className="w-14 h-14 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-6">
+                                    <Paintbrush className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
-                                    {benefit.title}
+                                <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-sky-100 transition-colors">
+                                    Cinematic Interface & UX Design
                                 </h3>
                                 <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
-                                    {benefit.description}
+                                    <strong className="text-white block mb-2">Engineering Cinematic Depth.</strong> We design visually engaging 3D website design experiences that elevate brand storytelling. From interactive 3D journeys to motion-led navigation, we create interfaces that feel intuitive and meaningful—delivering impact that is seamlessly woven into your digital presence.
                                 </p>
                             </div>
-                        ))}
+
+                            {/* Service 2 - High-Performance WebGL Frameworks */}
+                            <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-cyan-500/30 transition-all duration-500">
+                                <div className="w-14 h-14 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6">
+                                    <Globe className="w-7 h-7" />
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-cyan-100 transition-colors">
+                                    High-Performance WebGL Frameworks
+                                </h3>
+                                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                    <strong className="text-white block mb-2">Custom Development for Real-World Scale.</strong> We build immersive, high-performance environments tailored to your audience. Our interactive 3D website development services include product visualization platforms, WebGL environments, and custom landing pages built with clean architecture and the stability to evolve as your business grows.
+                                </p>
+                            </div>
+
+                            {/* Service 3 - Specialist 3D Team Extension */}
+                            <div className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500">
+                                <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                                    <Users className="w-7 h-7" />
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-blue-100 transition-colors">
+                                    Specialist 3D Team Extension
+                                </h3>
+                                <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                    <strong className="text-white block mb-2">Hire Mastery, Not Just Capacity.</strong> Need to hire 3D website developer talent who understand GPU optimization? Extend your team with expert specialists who deliver clean, scalable Three.js and Babylon.js development within a collaborative model. We support product launches and campaign experiences that demand technical excellence.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Blog Section - Resources */}
-            <BlogSection initialBlogPosts={blogPosts} />
+                {/* Delivery Framework - ServiceScrollSection with custom phases */}
+                <ServiceScrollSection
+                    hue={200}
+                    title="Our Delivery Framework: Structured for Precision"
+                    titleHighlight="We skip the 'works on my machine' excuses. Every milestone is a hard step toward an unshakeable deployment."
+                    description=""
+                    cards={deliveryPhases}
+                />
 
-            {/* Final CTA */}
-            <ServiceCTASection
-                title="Ready to Build an Experience Your Users Can't Ignore?"
-                description="Stop settling for static layouts that get lost in the noise. Partner with the specialists in high-performance 3D engineering to build the immersive digital environments your vision demands."
-                primaryButtonText="Let's Talk"
-                primaryButtonHref="/contact"
-            />
-        </main>
+                {/* Tech Stack Section */}
+                <IntegrationsSection
+                    title="The Engineering Stack: Built for Render, Not for Bloat"
+                    titleHighlight="We pick the tech that handles the heavy lifting without sacrificing the user experience."
+                    leftTechItems={threeDTechLeft}
+                    rightTechItems={threeDTechRight}
+                    description="Our tech choices ensure visual richness without the usability drama."
+                />
+
+                {/* Why Choose Section */}
+                <section className="w-full py-24 lg:py-32 bg-black relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-30">
+                        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-600/10 rounded-full blur-[120px]" />
+                        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
+                    </div>
+
+                    <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 relative">
+                        <div className="mb-16 max-w-4xl">
+                            <h2 className="font-bold text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
+                                Why Brands Choose Zylex for 3D Development
+                            </h2>
+                            <p className="text-neutral-400 text-lg mt-4">
+                                Because your roadmap shouldn't be limited by legacy rendering.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {whyChooseBenefits.map((benefit, index) => (
+                                <div
+                                    key={index}
+                                    className="group relative p-8 rounded-2xl bg-zinc-900/60 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500"
+                                >
+                                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white mb-6">
+                                        {benefit.icon}
+                                    </div>
+                                    <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-100 transition-colors">
+                                        {benefit.title}
+                                    </h3>
+                                    <p className="text-neutral-400 leading-relaxed group-hover:text-neutral-300 transition-colors">
+                                        {benefit.description}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Blog Section - Resources */}
+                <BlogSection initialBlogPosts={blogPosts} />
+
+                {/* Final CTA */}
+                <ServiceCTASection
+                    title="Ready to Build an Experience Your Users Can't Ignore?"
+                    description="Stop settling for static layouts that get lost in the noise. Partner with the specialists in high-performance 3D engineering to build the immersive digital environments your vision demands."
+                    primaryButtonText="Let's Talk"
+                    primaryButtonHref="/contact"
+                />
+            </main>
+        </>
     );
 }
