@@ -16,11 +16,14 @@ export async function POST(request: Request) {
             console.error("CRITICAL: process.env.GROK_KEY is not set in this environment!");
         }
 
+        // Sanitize the key to remove invisible characters like \r or \n from EasyPanel
+        const apiKey = process.env.GROK_KEY ? process.env.GROK_KEY.trim() : '';
+
         const response = await fetch('https://api.x.ai/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.GROK_KEY}`,
+                'Authorization': `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
                 messages: [
