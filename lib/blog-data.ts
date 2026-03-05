@@ -109,25 +109,32 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         createdAt: post.createdAt,
     }));
 
-    const mappedHtmlPosts = htmlPosts.map((post) => ({
-        type: 'html' as const,
-        id: post.id,
-        title: post.title,
-        slug: post.slug,
-        excerpt: post.excerpt,
-        date: post.date,
-        readTime: post.readTime,
-        category: post.category,
-        image: post.image,
-        author: {
-            name: post.authorName,
-            role: post.authorRole,
-            avatar: post.authorAvatar,
-        },
-        htmlContent: post.htmlContent,
-        cssContent: post.cssContent,
-        createdAt: post.createdAt,
-    }));
+    const mappedHtmlPosts = htmlPosts.map((post) => {
+        // Merge any legacy cssContent into htmlContent for Shadow DOM rendering
+        const mergedHtml = post.cssContent
+            ? `<style>${post.cssContent}</style>\n${post.htmlContent}`
+            : post.htmlContent;
+
+        return {
+            type: 'html' as const,
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            date: post.date,
+            readTime: post.readTime,
+            category: post.category,
+            image: post.image,
+            author: {
+                name: post.authorName,
+                role: post.authorRole,
+                avatar: post.authorAvatar,
+            },
+            htmlContent: mergedHtml,
+            cssContent: post.cssContent,
+            createdAt: post.createdAt,
+        };
+    });
 
     const allPosts = [...mappedPosts, ...mappedHtmlPosts].sort((a, b) =>
         (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0)
@@ -211,6 +218,11 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     });
 
     if (htmlPost) {
+        // Merge any legacy cssContent into htmlContent for Shadow DOM rendering
+        const mergedHtml = htmlPost.cssContent
+            ? `<style>${htmlPost.cssContent}</style>\n${htmlPost.htmlContent}`
+            : htmlPost.htmlContent;
+
         return {
             type: 'html',
             id: htmlPost.id,
@@ -226,7 +238,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
                 role: htmlPost.authorRole,
                 avatar: htmlPost.authorAvatar,
             },
-            htmlContent: htmlPost.htmlContent,
+            htmlContent: mergedHtml,
             cssContent: htmlPost.cssContent,
             createdAt: htmlPost.createdAt,
         };

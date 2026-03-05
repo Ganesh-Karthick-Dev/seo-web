@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import ShadowContainer from "@/components/ui/shadow-container";
 import { Plus, Trash2, Edit2, Save, X, Code2, Play } from "lucide-react";
 
 interface HtmlBlogPost {
@@ -19,7 +20,6 @@ interface HtmlBlogPost {
     authorRole: string;
     authorAvatar: string;
     htmlContent: string;
-    cssContent: string;
 }
 
 const emptyPost: Omit<HtmlBlogPost, "id" | "createdAt" | "updatedAt"> = {
@@ -33,8 +33,7 @@ const emptyPost: Omit<HtmlBlogPost, "id" | "createdAt" | "updatedAt"> = {
     authorName: "SEO Team",
     authorRole: "Technical Writer",
     authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150",
-    htmlContent: "<!-- Paste your custom HTML here -->\n<div class=\"custom-seo-blog\">\n  <h2>Introduction</h2>\n  <p>Your content here...</p>\n</div>",
-    cssContent: "/* Paste your custom CSS here */\n.custom-seo-blog {\n  color: white;\n}\n.custom-seo-blog h2 {\n  color: #ff3366;\n}",
+    htmlContent: "<!-- Paste your complete HTML here -->\n<style>\n  .custom-seo-blog { color: white; }\n  .custom-seo-blog h2 { color: #ff3366; }\n</style>\n<div class=\"custom-seo-blog\">\n  <h2>Introduction</h2>\n  <p>Your content here...</p>\n</div>",
 };
 
 export default function AdminHtmlBlogPage() {
@@ -113,9 +112,9 @@ export default function AdminHtmlBlogPage() {
                     <div>
                         <h1 className="text-4xl font-bold text-white flex items-center gap-3">
                             <Code2 className="w-8 h-8 text-primary" />
-                            HTML/CSS Blog Admin
+                            HTML Blog Admin
                         </h1>
-                        <p className="text-white/50 mt-2">Manage fully custom-coded SEO blogs</p>
+                        <p className="text-white/50 mt-2">Manage fully custom HTML SEO blogs</p>
                     </div>
                     {!isEditing && (
                         <Button onClick={() => setIsEditing(true)} className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground">
@@ -156,12 +155,12 @@ export default function AdminHtmlBlogPage() {
                         {showPreview ? (
                             <div className="space-y-4">
                                 <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl text-yellow-500 text-sm mb-6">
-                                    <strong>Preview Mode:</strong> This simulates how your HTML and CSS will render on the live site inside the content wrapper.
+                                    <strong>Preview Mode:</strong> This simulates how your HTML will render on the live site (CSS isolated via Shadow DOM).
                                 </div>
-                                <div className="bg-black border border-white/20 rounded-2xl p-8 min-h-[500px] overflow-auto">
-                                    <style dangerouslySetInnerHTML={{ __html: currentPost.cssContent || '' }} />
-                                    <div dangerouslySetInnerHTML={{ __html: currentPost.htmlContent || '' }} />
-                                </div>
+                                <ShadowContainer
+                                    html={currentPost.htmlContent || ''}
+                                    className="bg-black border border-white/20 rounded-2xl p-8 min-h-[500px] overflow-auto"
+                                />
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-8">
@@ -218,37 +217,25 @@ export default function AdminHtmlBlogPage() {
                                     </div>
                                 </div>
 
-                                {/* Custom Code Engine */}
+                                {/* HTML Content */}
                                 <div className="space-y-6">
-                                    <h3 className="text-xl font-bold text-white border-b border-white/10 pb-2">Custom Code Engine</h3>
+                                    <h3 className="text-xl font-bold text-white border-b border-white/10 pb-2">HTML Content</h3>
 
                                     <div>
                                         <label className="text-sm font-bold text-blue-400 mb-2 flex items-center gap-2">
-                                            <Code2 className="w-4 h-4" /> HTML Content structure
+                                            <Code2 className="w-4 h-4" /> Full HTML (with inline or internal CSS)
                                         </label>
                                         <Textarea
                                             required
                                             value={currentPost.htmlContent || ""}
                                             onChange={(e) => setCurrentPost({ ...currentPost, htmlContent: e.target.value })}
                                             className="bg-[#0d1117] border-white/20 text-[#e6edf3] font-mono text-sm leading-relaxed"
-                                            rows={12}
-                                            placeholder="<div class='custom-seo'> ... </div>"
+                                            rows={20}
+                                            placeholder={"<style>\n  .my-blog { color: white; }\n</style>\n<div class='my-blog'>\n  <h2>Title</h2>\n  <p>Content...</p>\n</div>"}
                                         />
-                                        <p className="text-xs text-white/40 mt-2">Do not include {"<body>"} or {"<html>"} tags. Just paste the inner content structure.</p>
-                                    </div>
-
-                                    <div>
-                                        <label className="text-sm font-bold text-pink-400 mb-2 flex items-center gap-2">
-                                            <Code2 className="w-4 h-4" /> CSS Stylesheet
-                                        </label>
-                                        <Textarea
-                                            value={currentPost.cssContent || ""}
-                                            onChange={(e) => setCurrentPost({ ...currentPost, cssContent: e.target.value })}
-                                            className="bg-[#0d1117] border-white/20 text-[#e6edf3] font-mono text-sm leading-relaxed"
-                                            rows={12}
-                                            placeholder=".custom-seo { display: flex; }"
-                                        />
-                                        <p className="text-xs text-white/40 mt-2">Styles are automatically injected at the top of the post. Use unique class names to avoid conflicting with the main website theme.</p>
+                                        <p className="text-xs text-white/40 mt-2">
+                                            Paste your complete HTML here. You can use inline styles (<code className="text-white/60">style=&quot;...&quot;</code>) or internal CSS (<code className="text-white/60">&lt;style&gt;...&lt;/style&gt;</code>). Do not include {"<body>"} or {"<html>"} wrapper tags. All styles are isolated via Shadow DOM — no conflicts with the site theme.
+                                        </p>
                                     </div>
                                 </div>
 

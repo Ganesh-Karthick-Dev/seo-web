@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Calendar, Clock, ChevronLeft, Twitter, Linkedin, AlertCircle, CheckCircle2, ArrowRight, Bot, Zap, Settings, Server, Tag, Map, MousePointer, Eye, Layers, Scissors, Code, Check, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import ShadowContainer from "@/components/ui/shadow-container";
 
 // Enable ISR
 export const revalidate = 60;
@@ -89,15 +90,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     </div>
                 </div>
 
-                {/* INJECTED CSS */}
-                {post.cssContent && (
-                    <style dangerouslySetInnerHTML={{ __html: post.cssContent }} />
-                )}
-
-                {/* INJECTED HTML BODY */}
-                <div
-                    className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 html-blog-content"
-                    dangerouslySetInnerHTML={{ __html: post.htmlContent }}
+                {/* INJECTED HTML + CSS (Shadow DOM isolated) */}
+                <ShadowContainer
+                    html={post.htmlContent}
+                    className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12"
                 />
             </div>
         );
