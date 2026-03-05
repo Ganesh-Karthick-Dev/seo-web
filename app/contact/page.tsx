@@ -96,6 +96,14 @@ export default function Contact() {
             });
 
             if (response.ok) {
+                // Tracking event for form submission
+                const dataLayer = (window as any).dataLayer || [];
+                (window as any).dataLayer = dataLayer;
+                dataLayer.push({
+                    event: 'form_submitted',
+                    form_name: 'contact_form'
+                });
+
                 setFormSubmitted(true);
                 setFormData({
                     name: "",
