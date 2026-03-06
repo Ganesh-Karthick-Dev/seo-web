@@ -27,8 +27,9 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
         }))
     );
 
-    const currentQ = flatQuestions[currentQIndex];
-    const isAnswered = answers[currentQ.id] !== undefined;
+    // Safely fallback to the last question if index somehow out of bounds
+    const currentQ = flatQuestions[Math.min(currentQIndex, flatQuestions.length - 1)];
+    const isAnswered = currentQ ? answers[currentQ.id] !== undefined : false;
 
     const handleSelect = (questionId: string, score: number) => {
         setAnswers((prev) => ({ ...prev, [questionId]: score }));
@@ -250,8 +251,8 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                                         key={opt.score}
                                                         onClick={() => handleSelect(currentQ.id, opt.score)}
                                                         className={`relative flex sm:flex-col items-center sm:justify-center p-3 sm:p-4 rounded-xl border transition-all duration-300 text-left sm:text-center gap-3 sm:gap-2 ${isChecked
-                                                                ? "bg-cyan-500/15 border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.2)] scale-[1.02] sm:scale-[1.03]"
-                                                                : "bg-black/40 border-white/5 hover:border-cyan-500/40 hover:bg-white/5 cursor-pointer hover:translate-y-0 sm:hover:-translate-y-1"
+                                                            ? "bg-cyan-500/15 border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.2)] scale-[1.02] sm:scale-[1.03]"
+                                                            : "bg-black/40 border-white/5 hover:border-cyan-500/40 hover:bg-white/5 cursor-pointer hover:translate-y-0 sm:hover:-translate-y-1"
                                                             }`}
                                                     >
                                                         {isChecked && (

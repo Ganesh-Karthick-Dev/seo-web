@@ -1,10 +1,53 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { SplineScene } from "@/components/ui/splite";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Cpu, Database, Activity, Scale, Sparkles, Clock, ArrowRight, ShieldCheck } from "lucide-react";
 
 export default function Hero({ onStart }: { onStart: () => void }) {
+    const splineWrapperRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handlePointerMove = (e: PointerEvent) => {
+            if (!splineWrapperRef.current) return;
+            // Get the first canvas inside the wrapper (which is what Spline renders)
+            const canvas = splineWrapperRef.current.querySelector('canvas');
+            if (!canvas) return;
+
+            // Check if mouse is directly over the wrapper container to avoid double-dispatching
+            const rect = splineWrapperRef.current.getBoundingClientRect();
+            const isOver = e.clientX >= rect.left && e.clientX <= rect.right &&
+                e.clientY >= rect.top && e.clientY <= rect.bottom;
+
+            if (!isOver) {
+                // Manually fire the pointer event on the canvas so the 3D Spline model reacts globally!
+                const event = new PointerEvent(e.type, {
+                    clientX: e.clientX,
+                    clientY: e.clientY,
+                    button: e.button,
+                    buttons: e.buttons,
+                    pointerId: e.pointerId,
+                    pointerType: e.pointerType,
+                    isPrimary: e.isPrimary,
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                canvas.dispatchEvent(event);
+            }
+        };
+
+        window.addEventListener('pointermove', handlePointerMove);
+        window.addEventListener('pointerdown', handlePointerMove);
+        window.addEventListener('pointerup', handlePointerMove);
+        return () => {
+            window.removeEventListener('pointermove', handlePointerMove);
+            window.removeEventListener('pointerdown', handlePointerMove);
+            window.removeEventListener('pointerup', handlePointerMove);
+        };
+    }, []);
+
     return (
         <div className="relative h-[100dvh] w-full bg-black/[0.96] antialiased overflow-hidden">
             <Spotlight
@@ -97,7 +140,7 @@ export default function Hero({ onStart }: { onStart: () => void }) {
                 </div>
 
                 {/* Right content */}
-                <div className="flex-1 relative w-full h-[40vh] lg:h-full z-0 overflow-hidden flex items-center justify-center">
+                <div ref={splineWrapperRef} className="flex-1 relative w-full h-[40vh] lg:h-full z-0 overflow-hidden flex items-center justify-center">
                     <SplineScene
                         scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                         className="w-full h-full object-contain"
