@@ -3,13 +3,19 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { assessmentData } from "./data";
-import { ArrowLeft, CheckCircle2, X, ChevronRight } from "lucide-react";
+import { ArrowLeft, CheckCircle2, X, ChevronRight, Bot } from "lucide-react";
 import HighlightedText from "@/components/ui/highlighted-text";
 
 export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
     const [currentQIndex, setCurrentQIndex] = useState(0);
     const [answers, setAnswers] = useState<Record<string, number>>({});
     const [isCompleted, setIsCompleted] = useState(false);
+    const [typingDuration, setTypingDuration] = useState<number>(2.5); // Initial fallback
+
+    // Randomize AI typing speed per question to feel organic (between 2.0s and 4.0s)
+    useEffect(() => {
+        setTypingDuration(2.0 + Math.random() * 2.0);
+    }, [currentQIndex]);
 
     // Lock body scroll when modal is open
     useEffect(() => {
@@ -148,7 +154,7 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                             ][currentQ?.sIdx || 0]
                                 }`}
                         >
-                            Z
+                            <Bot className="w-4 h-4" />
                         </div>
                         <span className="font-semibold text-current">AI Readiness Assessment</span>
                     </div>
@@ -306,61 +312,95 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                         transition={{ duration: 0.4, ease: "easeOut" }}
                                         className="w-full"
                                     >
-                                        <div className="bg-white/[0.02] p-6 md:p-8 lg:p-10 rounded-3xl border border-white/10 shadow-2xl w-full relative overflow-hidden backdrop-blur-md">
-                                            {/* Subtle inner top glow */}
-                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-white/20 blur-[1px]" />
+                                        <div className="w-full relative flex flex-col gap-6 md:gap-8 pt-4 pb-2">
+                                            {/* AI Chat Bubble (Left) */}
+                                            <div className="flex items-start gap-3 md:gap-4 w-full pr-8 md:pr-16">
+                                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/20 shadow-sm mt-1 p-1">
+                                                    <svg
+                                                        viewBox="195 355 265 305"
+                                                        fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        className="w-full h-full object-contain"
+                                                        preserveAspectRatio="xMidYMid meet"
+                                                    >
+                                                        <path d="M430.5 380H224.5L222 429H360.5C395.5 395.5 430.5 380 430.5 380Z" fill="white" stroke="#1D3655" />
+                                                        <path d="M453 370.82C388.136 412.306 317.226 471.882 210.5 620.5L208 648.5L436 645L437.5 599H324C308.5 599 286.905 604.5 278.5 609C270.095 613.5 271.5 612.5 271.5 612.5C374 498 447 379.5 447 379.5L453 370.82Z" fill="#0F9CEE" />
+                                                    </svg>
+                                                </div>
+                                                <div className="bg-white/[0.05] border border-white/10 rounded-2xl rounded-tl-sm p-5 md:p-6 lg:p-8 text-neutral-100 shadow-sm backdrop-blur-sm inline-block max-w-full">
+                                                    <h3 className="text-sm md:text-base lg:text-lg font-medium leading-relaxed tracking-wide">
+                                                        {currentQ.text}
+                                                    </h3>
+                                                </div>
+                                            </div>
 
-                                            <h3 className="text-base md:text-lg lg:text-xl font-medium mb-8 flex gap-4 text-neutral-100 leading-relaxed tracking-wide">
-                                                <span>
-                                                    {currentQ.text}
-                                                </span>
-                                            </h3>
+                                            {/* User Side (Right) - Typing and Options */}
+                                            <div className="flex flex-col items-end w-full pl-0 md:pl-16 relative min-h-[120px]">
+                                                {/* Typing indicator */}
+                                                <motion.div
+                                                    initial={{ opacity: 0, scale: 0.9 }}
+                                                    animate={{
+                                                        opacity: [0, 1, 1, 0],
+                                                        scale: [0.9, 1, 1, 0.9],
+                                                        transitionEnd: { display: "none" }
+                                                    }}
+                                                    transition={{ duration: typingDuration, times: [0, 0.2, 0.8, 1] }}
+                                                    className="flex items-center gap-1.5 bg-white/[0.05] border border-white/10 px-5 py-4 rounded-2xl rounded-tr-sm shadow-sm backdrop-blur-sm absolute right-0 top-0"
+                                                >
+                                                    <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                                                    <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                                                    <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                                </motion.div>
 
-                                            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 md:gap-4 lg:gap-5">
-                                                {currentQ.options.map((opt, idx) => {
-                                                    const isChecked = answers[currentQ.id] === opt.score;
-                                                    return (
-                                                        <motion.button
-                                                            key={opt.score}
-                                                            initial={{ opacity: 0, y: 20 }}
-                                                            animate={{ opacity: 1, y: 0 }}
-                                                            transition={{ duration: 0.4, delay: idx * 0.05 + 0.1, ease: "easeOut" }}
-                                                            whileHover={{ scale: isChecked ? 1.02 : 1.04, y: isChecked ? 0 : -2 }}
-                                                            whileTap={{ scale: 0.96 }}
-                                                            onClick={() => handleSelect(currentQ.id, opt.score)}
-                                                            className={`group relative flex sm:flex-col items-center sm:justify-center p-4 sm:p-5 outline-none rounded-2xl border transition-all duration-300 text-left sm:text-center gap-3 sm:gap-4 overflow-hidden shadow-lg ${isChecked
-                                                                ? "bg-white/10 border-white shadow-[0_0_20px_rgba(255,255,255,0.25)] z-10"
-                                                                : "bg-black/60 border-white/10 hover:border-white/60 hover:bg-neutral-900/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] cursor-pointer"
-                                                                }`}
-                                                        >
-                                                            {/* Subtle hover background gradient */}
-                                                            {!isChecked && (
-                                                                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-500 pointer-events-none" />
-                                                            )}
+                                                {/* Options to pick (User quick replies) */}
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    transition={{ delay: Math.max(0, typingDuration - 0.2), duration: 0.4 }}
+                                                    className="w-full flex justify-end"
+                                                >
+                                                    <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 md:gap-4 lg:gap-5 w-full">
+                                                        {currentQ.options.map((opt, idx) => {
+                                                            const isChecked = answers[currentQ.id] === opt.score;
+                                                            return (
+                                                                <motion.button
+                                                                    key={opt.score}
+                                                                    initial={{ opacity: 0, y: 20 }}
+                                                                    animate={{ opacity: 1, y: 0 }}
+                                                                    transition={{ duration: 0.4, delay: (typingDuration - 0.1) + idx * 0.1, ease: "easeOut" }}
+                                                                    whileHover={{ scale: isChecked ? 1.02 : 1.04, y: isChecked ? 0 : -2 }}
+                                                                    whileTap={{ scale: 0.96 }}
+                                                                    onClick={() => handleSelect(currentQ.id, opt.score)}
+                                                                    className={`group relative flex sm:flex-col items-center sm:justify-center p-4 sm:p-5 outline-none rounded-2xl border transition-all duration-300 text-left sm:text-center gap-3 sm:gap-4 overflow-hidden shadow-lg ${isChecked
+                                                                        ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.25)] z-10"
+                                                                        : "bg-black/60 border-white/10 hover:border-white/60 hover:bg-neutral-900/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] cursor-pointer text-white"
+                                                                        }`}
+                                                                >
+                                                                    <AnimatePresence>
+                                                                        {isChecked && (
+                                                                            <motion.div
+                                                                                initial={{ scale: 0, rotate: -180 }}
+                                                                                animate={{ scale: 1, rotate: 0 }}
+                                                                                exit={{ scale: 0, rotate: 180 }}
+                                                                                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                                                                                className="absolute right-3 sm:top-3 sm:right-3 bg-black rounded-full text-white shadow-[0_0_10px_rgba(0,0,0,0.5)] z-20"
+                                                                            >
+                                                                                <CheckCircle2 className="w-5 h-5" />
+                                                                            </motion.div>
+                                                                        )}
+                                                                    </AnimatePresence>
 
-                                                            <AnimatePresence>
-                                                                {isChecked && (
-                                                                    <motion.div
-                                                                        initial={{ scale: 0, rotate: -180 }}
-                                                                        animate={{ scale: 1, rotate: 0 }}
-                                                                        exit={{ scale: 0, rotate: 180 }}
-                                                                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                                                                        className="absolute right-3 sm:top-3 sm:right-3 bg-white rounded-full text-black shadow-[0_0_10px_rgba(255,255,255,0.5)] z-20"
-                                                                    >
-                                                                        <CheckCircle2 className="w-5 h-5" />
-                                                                    </motion.div>
-                                                                )}
-                                                            </AnimatePresence>
-
-                                                            <div className={`text-2xl sm:text-3xl lg:text-4xl font-black transition-colors duration-300 relative z-10 ${isChecked ? "text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]" : "text-neutral-600 group-hover:text-white"}`}>
-                                                                {opt.score}
-                                                            </div>
-                                                            <div className={`text-xs md:text-sm tracking-wide leading-relaxed flex-1 transition-colors duration-300 relative z-10 ${isChecked ? "text-white font-bold" : "text-neutral-400 group-hover:text-neutral-100"}`}>
-                                                                {opt.label}
-                                                            </div>
-                                                        </motion.button>
-                                                    );
-                                                })}
+                                                                    <div className={`text-2xl sm:text-3xl lg:text-4xl font-black transition-colors duration-300 relative z-10 ${isChecked ? "text-black drop-shadow-[0_0_12px_rgba(0,0,0,0.1)]" : "text-neutral-500 group-hover:text-white"}`}>
+                                                                        {opt.score}
+                                                                    </div>
+                                                                    <div className={`text-xs md:text-sm tracking-wide leading-relaxed flex-1 transition-colors duration-300 relative z-10 ${isChecked ? "text-black font-bold" : "text-neutral-400 group-hover:text-neutral-100"}`}>
+                                                                        {opt.label}
+                                                                    </div>
+                                                                </motion.button>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </motion.div>
                                             </div>
                                         </div>
                                     </motion.div>
