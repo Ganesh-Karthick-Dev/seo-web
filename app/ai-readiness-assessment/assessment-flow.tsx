@@ -113,20 +113,48 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                 className="relative w-full max-w-6xl max-h-[90vh] flex flex-col bg-neutral-950 border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
             >
                 {/* Glow Effects */}
-                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white/10 blur-[80px] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 rounded-full bg-white/5 blur-[80px] pointer-events-none" />
+                <div
+                    className={`absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full blur-[80px] pointer-events-none transition-colors duration-1000 ${isCompleted ? "bg-white/10" : [
+                        "bg-blue-500/10", "bg-emerald-500/10", "bg-indigo-500/10", "bg-rose-500/10", "bg-amber-500/10"
+                    ][currentQ?.sIdx || 0]
+                        }`}
+                />
+                <div
+                    className={`absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 rounded-full blur-[80px] pointer-events-none transition-colors duration-1000 ${isCompleted ? "bg-white/5" : [
+                        "bg-blue-500/5", "bg-emerald-500/5", "bg-indigo-500/5", "bg-rose-500/5", "bg-amber-500/5"
+                    ][currentQ?.sIdx || 0]
+                        }`}
+                />
 
                 {/* Header Ribbon */}
-                <div className="shrink-0 px-6 py-4 flex items-center justify-between border-b border-white/10 bg-white/[0.02]">
+                <div
+                    className={`shrink-0 px-6 py-4 flex items-center justify-between border-b transition-colors duration-1000 ease-in-out ${isCompleted ? "bg-white text-black border-neutral-300" : [
+                        "bg-sky-100 text-sky-950 border-sky-300",     // Engineering Excellence
+                        "bg-emerald-100 text-emerald-950 border-emerald-300",  // Data Trust
+                        "bg-indigo-100 text-indigo-950 border-indigo-300",   // Operational Resilience
+                        "bg-rose-100 text-rose-950 border-rose-300",     // Compliance & Risk
+                        "bg-amber-100 text-amber-950 border-amber-300"     // AI Enablement
+                    ][currentQ?.sIdx || 0]
+                        }`}
+                >
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm">
+                        <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors duration-1000 shadow-sm ${isCompleted ? "bg-black text-white" : [
+                                "bg-sky-800 text-sky-50",
+                                "bg-emerald-800 text-emerald-50",
+                                "bg-indigo-800 text-indigo-50",
+                                "bg-rose-800 text-rose-50",
+                                "bg-amber-800 text-amber-50"
+                            ][currentQ?.sIdx || 0]
+                                }`}
+                        >
                             Z
                         </div>
-                        <span className="font-semibold text-white">AI Readiness Assessment</span>
+                        <span className="font-semibold text-current">AI Readiness Assessment</span>
                     </div>
                     <button
                         onClick={onClose}
-                        className="p-2 rounded-full hover:bg-white/10 text-neutral-400 hover:text-white transition-colors cursor-pointer"
+                        className="p-2 rounded-full hover:bg-black/5 text-current hover:opacity-75 transition-colors cursor-pointer"
                     >
                         <X className="w-5 h-5" />
                     </button>
@@ -278,9 +306,9 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                         transition={{ duration: 0.4, ease: "easeOut" }}
                                         className="w-full"
                                     >
-                                        <div className="bg-gradient-to-b from-white/[0.04] to-transparent p-6 md:p-8 lg:p-10 rounded-3xl border border-white/10 shadow-2xl w-full relative overflow-hidden backdrop-blur-md">
+                                        <div className="bg-white/[0.02] p-6 md:p-8 lg:p-10 rounded-3xl border border-white/10 shadow-2xl w-full relative overflow-hidden backdrop-blur-md">
                                             {/* Subtle inner top glow */}
-                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent blur-[1px]" />
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-white/20 blur-[1px]" />
 
                                             <h3 className="text-base md:text-lg lg:text-xl font-medium mb-8 flex gap-4 text-neutral-100 leading-relaxed tracking-wide">
                                                 <span>
