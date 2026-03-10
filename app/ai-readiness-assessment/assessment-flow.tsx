@@ -113,13 +113,13 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                 className="relative w-full max-w-6xl max-h-[90vh] flex flex-col bg-neutral-950 border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
             >
                 {/* Glow Effects */}
-                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-cyan-500/10 blur-[80px] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 rounded-full bg-purple-500/10 blur-[80px] pointer-events-none" />
+                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white/10 blur-[80px] pointer-events-none" />
+                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 rounded-full bg-white/5 blur-[80px] pointer-events-none" />
 
                 {/* Header Ribbon */}
                 <div className="shrink-0 px-6 py-4 flex items-center justify-between border-b border-white/10 bg-white/[0.02]">
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-sm">
+                        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm">
                             Z
                         </div>
                         <span className="font-semibold text-white">AI Readiness Assessment</span>
@@ -149,17 +149,17 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                     <>
                                         <div className="grid md:grid-cols-2 gap-4 mb-8">
                                             <div className="border border-white/10 bg-black/40 rounded-2xl p-4 md:p-6 flex flex-col items-center justify-center text-center">
-                                                <div className="text-4xl md:text-6xl font-black bg-gradient-to-br from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-1">
+                                                <div className="text-4xl md:text-6xl font-black text-white mb-1">
                                                     {results.overallPercentage}%
                                                 </div>
-                                                <div className="text-cyan-400 font-bold tracking-widest text-xs md:text-sm mb-2">
+                                                <div className="text-white font-bold tracking-widest text-xs md:text-sm mb-2">
                                                     {results.totalScore} / 75 POINTS
                                                 </div>
                                                 <div className="text-sm md:text-base text-neutral-300 font-medium">Overall Readiness Score</div>
                                             </div>
 
                                             <div className="border border-white/10 bg-black/40 rounded-2xl p-4 md:p-6 flex flex-col items-center justify-center text-center">
-                                                <div className="text-cyan-400 font-bold tracking-widest uppercase mb-1 text-xs md:text-sm">
+                                                <div className="text-white font-bold tracking-widest uppercase mb-1 text-xs md:text-sm">
                                                     {results.level}
                                                 </div>
                                                 <div className="text-2xl md:text-3xl font-bold text-white mb-2">
@@ -181,14 +181,14 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                                 <div key={idx} className="border border-white/5 bg-white/5 rounded-xl p-3 md:p-4">
                                                     <div className="flex justify-between items-center mb-2">
                                                         <h4 className="font-medium text-sm md:text-base text-white">{section.title.split(": ")[1]}</h4>
-                                                        <span className="font-bold text-cyan-400 text-sm">{section.percentage}%</span>
+                                                        <span className="font-bold text-white text-sm">{section.percentage}%</span>
                                                     </div>
                                                     <div className="w-full bg-black/50 h-2 rounded-full overflow-hidden">
                                                         <motion.div
                                                             initial={{ width: 0 }}
                                                             animate={{ width: `${section.percentage}%` }}
                                                             transition={{ duration: 1, delay: 0.2 + idx * 0.1 }}
-                                                            className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+                                                            className="h-full bg-white rounded-full"
                                                         />
                                                     </div>
                                                 </div>
@@ -203,10 +203,10 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                             {/* Vertical Stepper Progress */}
                             <div className="md:w-64 shrink-0 flex flex-col md:border-r border-white/10 md:pr-8 md:py-4 mb-6 md:mb-0">
                                 <div className="flex flex-row md:flex-col justify-between items-center md:items-start mb-6 md:mb-10 text-xs md:text-sm font-bold tracking-widest uppercase gap-2 md:gap-4 w-full">
-                                    <span className="text-cyan-400 flex items-center gap-2 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                                    <span className="text-white flex items-center gap-2 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
                                         <span className="relative flex h-2 w-2 shrink-0">
-                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                                         </span>
                                         Question {currentQIndex + 1} of {flatQuestions.length}
                                     </span>
@@ -231,18 +231,18 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
 
                                         return (
                                             <div key={idx} className="flex flex-col gap-2 flex-1 md:flex-none group">
-                                                <span className={`hidden md:block text-[10px] lg:text-xs font-bold uppercase tracking-widest transition-colors ${idx === currentQ.sIdx ? "text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]" : idx < currentQ.sIdx ? "text-white" : "text-neutral-600"}`}>
+                                                <span className={`hidden md:block text-[10px] lg:text-xs font-bold uppercase tracking-widest transition-colors ${idx === currentQ.sIdx ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" : idx < currentQ.sIdx ? "text-white" : "text-neutral-600"}`}>
                                                     {section.title.split(":")[1].trim()}
                                                 </span>
                                                 <div className="h-1.5 md:h-2 w-full rounded-full relative overflow-hidden bg-white/5">
                                                     <motion.div
-                                                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 to-blue-500"
+                                                        className="absolute inset-y-0 left-0 bg-white"
                                                         initial={{ width: "0%" }}
                                                         animate={{ width: `${fillPercentage}%` }}
                                                         transition={{ duration: 0.5, ease: "easeInOut" }}
                                                     />
                                                     {idx <= currentQ.sIdx && fillPercentage > 0 && (
-                                                        <div className="absolute inset-0 shadow-[0_0_10px_rgba(6,182,212,0.8)]" />
+                                                        <div className="absolute inset-0 shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
                                                     )}
                                                 </div>
                                             </div>
@@ -280,12 +280,9 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                     >
                                         <div className="bg-gradient-to-b from-white/[0.04] to-transparent p-6 md:p-8 lg:p-10 rounded-3xl border border-white/10 shadow-2xl w-full relative overflow-hidden backdrop-blur-md">
                                             {/* Subtle inner top glow */}
-                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent blur-[1px]" />
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent blur-[1px]" />
 
                                             <h3 className="text-base md:text-lg lg:text-xl font-medium mb-8 flex gap-4 text-neutral-100 leading-relaxed tracking-wide">
-                                                <span className="text-cyan-400 font-black shrink-0 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)]">
-                                                    Q{currentQ.id.replace('q', '')}.
-                                                </span>
                                                 <span>
                                                     {currentQ.text}
                                                 </span>
@@ -304,13 +301,13 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                                             whileTap={{ scale: 0.96 }}
                                                             onClick={() => handleSelect(currentQ.id, opt.score)}
                                                             className={`group relative flex sm:flex-col items-center sm:justify-center p-4 sm:p-5 outline-none rounded-2xl border transition-all duration-300 text-left sm:text-center gap-3 sm:gap-4 overflow-hidden shadow-lg ${isChecked
-                                                                ? "bg-gradient-to-br from-cyan-900/60 to-blue-900/40 border-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.25)] z-10"
-                                                                : "bg-black/60 border-white/10 hover:border-cyan-500/60 hover:bg-neutral-900/80 hover:shadow-[0_0_15px_rgba(34,211,238,0.1)] cursor-pointer"
+                                                                ? "bg-white/10 border-white shadow-[0_0_20px_rgba(255,255,255,0.25)] z-10"
+                                                                : "bg-black/60 border-white/10 hover:border-white/60 hover:bg-neutral-900/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] cursor-pointer"
                                                                 }`}
                                                         >
                                                             {/* Subtle hover background gradient */}
                                                             {!isChecked && (
-                                                                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/5 group-hover:to-blue-500/5 transition-colors duration-500 pointer-events-none" />
+                                                                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-500 pointer-events-none" />
                                                             )}
 
                                                             <AnimatePresence>
@@ -320,14 +317,14 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                                                         animate={{ scale: 1, rotate: 0 }}
                                                                         exit={{ scale: 0, rotate: 180 }}
                                                                         transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                                                                        className="absolute right-3 sm:top-3 sm:right-3 bg-cyan-500 rounded-full text-black shadow-[0_0_10px_rgba(34,211,238,0.5)] z-20"
+                                                                        className="absolute right-3 sm:top-3 sm:right-3 bg-white rounded-full text-black shadow-[0_0_10px_rgba(255,255,255,0.5)] z-20"
                                                                     >
                                                                         <CheckCircle2 className="w-5 h-5" />
                                                                     </motion.div>
                                                                 )}
                                                             </AnimatePresence>
 
-                                                            <div className={`text-2xl sm:text-3xl lg:text-4xl font-black transition-colors duration-300 relative z-10 ${isChecked ? "text-cyan-400 drop-shadow-[0_0_12px_rgba(34,211,238,0.5)]" : "text-neutral-600 group-hover:text-cyan-400"}`}>
+                                                            <div className={`text-2xl sm:text-3xl lg:text-4xl font-black transition-colors duration-300 relative z-10 ${isChecked ? "text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]" : "text-neutral-600 group-hover:text-white"}`}>
                                                                 {opt.score}
                                                             </div>
                                                             <div className={`text-xs md:text-sm tracking-wide leading-relaxed flex-1 transition-colors duration-300 relative z-10 ${isChecked ? "text-white font-bold" : "text-neutral-400 group-hover:text-neutral-100"}`}>
@@ -362,7 +359,7 @@ export default function AssessmentFlow({ onClose }: { onClose: () => void }) {
                                 onClick={handleNext}
                                 disabled={!isAnswered}
                                 className={`flex items-center gap-2 px-8 py-3 rounded-xl font-semibold transition-all ${isAnswered
-                                    ? "bg-gradient-to-r from-cyan-600 to-blue-600 text-white cursor-pointer hover:shadow-lg hover:shadow-cyan-500/20 hover:scale-[1.02]"
+                                    ? "bg-white text-black cursor-pointer hover:shadow-lg hover:shadow-white/20 hover:scale-[1.02] hover:bg-neutral-200"
                                     : "bg-white/5 text-neutral-500 cursor-not-allowed border border-white/5"
                                     }`}
                             >
