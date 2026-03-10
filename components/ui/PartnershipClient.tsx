@@ -230,6 +230,30 @@ function EstimatorToolSection() {
     const [emailHighlight, setEmailHighlight] = useState(false);
     const emailInputRef = useRef<HTMLInputElement>(null);
 
+    // Gate State
+    const [showGateModal, setShowGateModal] = useState(false);
+    const [gateStage, setGateStage] = useState(1);
+    const [hasPassedGate, setHasPassedGate] = useState(false);
+    const [gateTargetPhase, setGateTargetPhase] = useState<number>(3);
+    const [gateForm, setGateForm] = useState({
+        fullName: "",
+        workEmail: "",
+        companyName: "",
+        designation: "",
+        timeline: "ASAP",
+    });
+
+    const handleGateSubmit = () => {
+        setGateStage(3);
+        setTimeout(() => {
+            setHasPassedGate(true);
+            setShowGateModal(false);
+            setCurrentPhase(gateTargetPhase);
+            // Reset gate stage in case we need it later, though not strictly necessary
+            setTimeout(() => setGateStage(1), 500);
+        }, 1500);
+    };
+
     // Calculate totals
     const totals = useMemo(() => {
         let ourCost = 0;
@@ -348,7 +372,13 @@ function EstimatorToolSection() {
 
     const handleNext = () => {
         if (currentPhase < estimatorPhases.length - 1) {
-            setCurrentPhase(currentPhase + 1);
+            const nextPhase = currentPhase + 1;
+            if (nextPhase >= 3 && !hasPassedGate) {
+                setGateTargetPhase(nextPhase);
+                setShowGateModal(true);
+            } else {
+                setCurrentPhase(nextPhase);
+            }
         } else {
             // On last phase, focus email input with highlight
             if (emailInputRef.current) {
@@ -499,7 +529,14 @@ function EstimatorToolSection() {
                                 return (
                                     <div key={phase.id} className="flex items-center group">
                                         <button
-                                            onClick={() => setCurrentPhase(index)}
+                                            onClick={() => {
+                                                if (index >= 3 && !hasPassedGate) {
+                                                    setGateTargetPhase(index);
+                                                    setShowGateModal(true);
+                                                } else {
+                                                    setCurrentPhase(index);
+                                                }
+                                            }}
                                             className={`relative w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center transition-all flex-shrink-0 ${isPhaseComplete(phase.id)
                                                 ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25"
                                                 : currentPhase === index
@@ -894,6 +931,151 @@ function EstimatorToolSection() {
                     </div>
                 </div>
             </div>
+
+            {/* Gate Modal overlaying the section */}
+            <AnimatePresence>
+                {showGateModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            className="w-full max-w-xl bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden"
+                        >
+                            {/* Decorative blur */}
+                            <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />
+
+                            <AnimatePresence mode="wait">
+                                {gateStage === 1 && (
+                                    <motion.div
+                                        key="stage1"
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -20 }}
+                                        className="text-center"
+                                    >
+                                        <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                            <FileCheck className="w-8 h-8 text-blue-400" />
+                                        </div>
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                                            Your project is taking shape
+                                        </h3>
+                                        <p className="text-neutral-400 text-lg mb-10 leading-relaxed">
+                                            Ten minutes in and we have a clearer picture than most intake calls give us. Save your details — we'll send the full breakdown once all 10 phases are complete.
+                                        </p>
+                                        <button
+                                            onClick={() => setGateStage(2)}
+                                            className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-colors flex items-center justify-center gap-2"
+                                        >
+                                            Continue <ArrowRight className="w-5 h-5" />
+                                        </button>
+                                    </motion.div>
+                                )}
+
+                                {gateStage === 2 && (
+                                    <motion.div
+                                        key="stage2"
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -20 }}
+                                    >
+                                        <h3 className="text-2xl font-bold text-white mb-6">Save your progress</h3>
+                                        <div className="space-y-4 mb-8">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="space-y-1.5">
+                                                    <label className="text-xs uppercase tracking-wider text-neutral-500 font-semibold">Full Name</label>
+                                                    <input
+                                                        type="text"
+                                                        value={gateForm.fullName}
+                                                        onChange={(e) => setGateForm({ ...gateForm, fullName: e.target.value })}
+                                                        className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                                        placeholder="John Doe"
+                                                    />
+                                                </div>
+                                                <div className="space-y-1.5">
+                                                    <label className="text-xs uppercase tracking-wider text-neutral-500 font-semibold">Work Email</label>
+                                                    <input
+                                                        type="email"
+                                                        value={gateForm.workEmail}
+                                                        onChange={(e) => setGateForm({ ...gateForm, workEmail: e.target.value })}
+                                                        className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                                        placeholder="john@company.com"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="space-y-1.5">
+                                                    <label className="text-xs uppercase tracking-wider text-neutral-500 font-semibold">Company Name</label>
+                                                    <input
+                                                        type="text"
+                                                        value={gateForm.companyName}
+                                                        onChange={(e) => setGateForm({ ...gateForm, companyName: e.target.value })}
+                                                        className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                                        placeholder="Acme Corp"
+                                                    />
+                                                </div>
+                                                <div className="space-y-1.5">
+                                                    <label className="text-xs uppercase tracking-wider text-neutral-500 font-semibold">Designation</label>
+                                                    <input
+                                                        type="text"
+                                                        value={gateForm.designation}
+                                                        onChange={(e) => setGateForm({ ...gateForm, designation: e.target.value })}
+                                                        className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                                        placeholder="CTO / Founder"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="space-y-1.5 pt-2">
+                                                <label className="text-xs uppercase tracking-wider text-neutral-500 font-semibold">When do you need this built?</label>
+                                                <div className="grid grid-cols-2 gap-2 mt-1">
+                                                    {["ASAP", "1–3 months", "3–6 months", "Just exploring"].map((opt) => (
+                                                        <button
+                                                            key={opt}
+                                                            onClick={() => setGateForm({ ...gateForm, timeline: opt })}
+                                                            className={`py-2.5 px-3 rounded-lg text-sm transition-all border ${gateForm.timeline === opt
+                                                                    ? "border-blue-500 bg-blue-500/10 text-blue-400"
+                                                                    : "border-neutral-700 bg-neutral-800 text-neutral-400 hover:bg-neutral-700"
+                                                                }`}
+                                                        >
+                                                            {opt}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button
+                                            disabled={!gateForm.fullName || !gateForm.workEmail}
+                                            onClick={handleGateSubmit}
+                                            className="w-full py-4 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-xl font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                                        >
+                                            Save and continue building my estimate
+                                        </button>
+                                    </motion.div>
+                                )}
+
+                                {gateStage === 3 && (
+                                    <motion.div
+                                        key="stage3"
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="text-center py-10"
+                                    >
+                                        <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                                            <Check className="w-10 h-10 text-green-400" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-white mb-2">Details saved</h3>
+                                        <p className="text-neutral-400 text-lg flex items-center justify-center gap-2">
+                                            <span className="w-5 h-5 border-2 border-neutral-600 border-t-white rounded-full animate-spin" />
+                                            Resuming your estimate...
+                                        </p>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
