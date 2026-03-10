@@ -61,16 +61,16 @@ export default function Hero({ onStart }: { onStart: () => void }) {
                 {/* Left content */}
                 <div className="flex-1 px-4 sm:px-8 md:px-12 lg:px-20 relative z-10 flex flex-col justify-center h-full max-h-full">
 
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-4 lg:mb-6 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm w-fit">
-                        <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+                    <div className="inline-flex items-center ">
+                        {/* <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
                         <span className="text-xs sm:text-sm text-neutral-300 font-medium">
                             Lead Magnet — AI Readiness Assessment
-                        </span>
+                        </span> */}
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-4">
                         Data & AI <br />
-                        <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        <span className="text-cyan-400">
                             Readiness Assessment
                         </span>
                     </h1>
