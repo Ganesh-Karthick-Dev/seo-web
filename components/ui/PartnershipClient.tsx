@@ -371,7 +371,7 @@ function EstimatorToolSection() {
     };
 
     const handleNext = () => {
-        if (currentPhase < estimatorPhases.length - 1) {
+        if (currentPhase < estimatorPhases.length) {
             const nextPhase = currentPhase + 1;
             if (nextPhase >= 3 && !hasPassedGate) {
                 setGateTargetPhase(nextPhase);
@@ -379,8 +379,8 @@ function EstimatorToolSection() {
             } else {
                 setCurrentPhase(nextPhase);
             }
-        } else {
-            // On last phase, focus email input with highlight
+        } else if (currentPhase === estimatorPhases.length) {
+            // On summary phase, focus email
             if (emailInputRef.current) {
                 emailInputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
                 emailInputRef.current.focus();
@@ -445,7 +445,15 @@ function EstimatorToolSection() {
         }
     };
 
-    const currentPhaseData = estimatorPhases[currentPhase];
+    const currentPhaseData = estimatorPhases[currentPhase] || {
+        id: "summary",
+        phase: 11,
+        title: "Project Summary",
+        description: "Review your selected architecture and features before continuing",
+        icon: FileCheck,
+        multiSelect: false,
+        options: []
+    };
     const PhaseIcon = currentPhaseData.icon;
 
     return (
@@ -590,7 +598,7 @@ function EstimatorToolSection() {
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-1">
                                         <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs text-blue-400 font-medium">
-                                            Phase {currentPhaseData.phase}/10
+                                            {currentPhase === estimatorPhases.length ? "Final Review" : `Phase ${currentPhaseData.phase}/10`}
                                         </span>
                                         {currentPhaseData.multiSelect && (
                                             <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs text-purple-400 font-medium">
@@ -603,80 +611,113 @@ function EstimatorToolSection() {
                                 </div>
                             </div>
 
-                            {/* Options Grid */}
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                {currentPhaseData.options.map((option) => {
-                                    const isSelected = isOptionSelected(currentPhaseData.id, option.id);
-                                    const savingsPercent = option.competitorCost > 0
-                                        ? Math.round(((option.competitorCost - option.ourCost) / option.competitorCost) * 100)
-                                        : 0;
+                            {/* Options Grid or Summary */}
+                            {currentPhase < estimatorPhases.length ? (
+                                <div className="grid sm:grid-cols-2 gap-4">
+                                    {currentPhaseData.options.map((option) => {
+                                        const isSelected = isOptionSelected(currentPhaseData.id, option.id);
+                                        const savingsPercent = option.competitorCost > 0
+                                            ? Math.round(((option.competitorCost - option.ourCost) / option.competitorCost) * 100)
+                                            : 0;
 
-                                    return (
-                                        <motion.button
-                                            key={option.id}
-                                            whileHover={{ scale: 1.02, y: -2 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            onClick={() => handleOptionToggle(currentPhaseData.id, option.id, option)}
-                                            className={`relative p-5 rounded-2xl border-2 text-left transition-all group ${isSelected
-                                                ? "border-blue-500 bg-gradient-to-br from-blue-500/15 to-blue-600/10 shadow-lg shadow-blue-500/10"
-                                                : "border-neutral-700/50 bg-neutral-800/30 hover:border-neutral-600 hover:bg-neutral-800/50"
-                                                }`}
-                                        >
-                                            {/* Savings badge */}
-                                            {savingsPercent > 0 && (
-                                                <span className={`absolute -top-2 -right-2 px-2 py-0.5 rounded-full text-xs font-bold ${isSelected
-                                                    ? "bg-green-500 text-white"
-                                                    : "bg-green-500/20 text-green-400 border border-green-500/30"
-                                                    }`}>
-                                                    Save {savingsPercent}%
-                                                </span>
-                                            )}
-
-                                            <div className="flex items-start justify-between gap-3">
-                                                <div className="flex-1">
-                                                    <div className={`font-semibold text-base md:text-lg transition-colors ${isSelected ? "text-white" : "text-neutral-200 group-hover:text-white"
-                                                        }`}>{option.label}</div>
-                                                </div>
-                                                {currentPhaseData.multiSelect ? (
-                                                    <div
-                                                        className={`w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center transition-all ${isSelected
-                                                            ? "bg-blue-500"
-                                                            : "border-2 border-neutral-600 group-hover:border-neutral-500"
-                                                            }`}
-                                                    >
-                                                        {isSelected && <Check className="w-4 h-4 text-white" />}
-                                                    </div>
-                                                ) : (
-                                                    <div
-                                                        className={`w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center transition-all ${isSelected
-                                                            ? "bg-blue-500 ring-2 ring-blue-400/50"
-                                                            : "border-2 border-neutral-600 group-hover:border-neutral-500"
-                                                            }`}
-                                                    >
-                                                        {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
-                                                    </div>
+                                        return (
+                                            <motion.button
+                                                key={option.id}
+                                                whileHover={{ scale: 1.02, y: -2 }}
+                                                whileTap={{ scale: 0.98 }}
+                                                onClick={() => handleOptionToggle(currentPhaseData.id, option.id, option)}
+                                                className={`relative p-5 rounded-2xl border-2 text-left transition-all group ${isSelected
+                                                    ? "border-blue-500 bg-gradient-to-br from-blue-500/15 to-blue-600/10 shadow-lg shadow-blue-500/10"
+                                                    : "border-neutral-700/50 bg-neutral-800/30 hover:border-neutral-600 hover:bg-neutral-800/50"
+                                                    }`}
+                                            >
+                                                {/* Savings badge */}
+                                                {savingsPercent > 0 && (
+                                                    <span className={`absolute -top-2 -right-2 px-2 py-0.5 rounded-full text-xs font-bold ${isSelected
+                                                        ? "bg-green-500 text-white"
+                                                        : "bg-green-500/20 text-green-400 border border-green-500/30"
+                                                        }`}>
+                                                        Save {savingsPercent}%
+                                                    </span>
                                                 )}
-                                            </div>
 
-                                            <div className="flex items-center gap-3 mt-3">
-                                                <span className={`px-2.5 py-1 rounded-lg text-sm font-medium ${isSelected
-                                                    ? "bg-blue-500/30 text-blue-300"
-                                                    : "bg-blue-500/10 text-blue-400"
-                                                    }`}>
-                                                    ${option.ourCost.toLocaleString()}
-                                                </span>
-                                                <span className="text-neutral-500 line-through text-sm">
-                                                    ${option.competitorCost.toLocaleString()}
-                                                </span>
-                                                <span className="text-neutral-500 text-sm ml-auto flex items-center gap-1">
-                                                    <Clock className="w-3 h-3" />
-                                                    {option.days}d
-                                                </span>
+                                                <div className="flex items-start justify-between gap-3">
+                                                    <div className="flex-1">
+                                                        <div className={`font-semibold text-base md:text-lg transition-colors ${isSelected ? "text-white" : "text-neutral-200 group-hover:text-white"
+                                                            }`}>{option.label}</div>
+                                                    </div>
+                                                    {currentPhaseData.multiSelect ? (
+                                                        <div
+                                                            className={`w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center transition-all ${isSelected
+                                                                ? "bg-blue-500"
+                                                                : "border-2 border-neutral-600 group-hover:border-neutral-500"
+                                                                }`}
+                                                        >
+                                                            {isSelected && <Check className="w-4 h-4 text-white" />}
+                                                        </div>
+                                                    ) : (
+                                                        <div
+                                                            className={`w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center transition-all ${isSelected
+                                                                ? "bg-blue-500 ring-2 ring-blue-400/50"
+                                                                : "border-2 border-neutral-600 group-hover:border-neutral-500"
+                                                                }`}
+                                                        >
+                                                            {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                <div className="flex items-center gap-3 mt-3">
+                                                    <span className={`px-2.5 py-1 rounded-lg text-sm font-medium ${isSelected
+                                                        ? "bg-blue-500/30 text-blue-300"
+                                                        : "bg-blue-500/10 text-blue-400"
+                                                        }`}>
+                                                        ${option.ourCost.toLocaleString()}
+                                                    </span>
+                                                    <span className="text-neutral-500 line-through text-sm">
+                                                        ${option.competitorCost.toLocaleString()}
+                                                    </span>
+                                                    <span className="text-neutral-500 text-sm ml-auto flex items-center gap-1">
+                                                        <Clock className="w-3 h-3" />
+                                                        {option.days}d
+                                                    </span>
+                                                </div>
+                                            </motion.button>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                <div className="space-y-4 w-full">
+                                    {estimatorPhases.map((phase) => {
+                                        const phaseSelections = selections[phase.id];
+                                        if (!phaseSelections || phaseSelections.selectedOptions.length === 0) return null;
+
+                                        return (
+                                            <div key={phase.id} className="p-4 rounded-xl bg-neutral-800/40 border border-neutral-700/50 overflow-hidden">
+                                                <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+                                                    <phase.icon className="w-4 h-4 text-blue-400" />
+                                                    {phase.title}
+                                                </h4>
+                                                <ul className="space-y-2">
+                                                    {phaseSelections.selectedOptions.map(optId => {
+                                                        const opt = phase.options.find(o => o.id === optId);
+                                                        if (!opt) return null;
+                                                        return (
+                                                            <li key={optId} className="flex justify-between text-sm items-center border-b border-neutral-700/30 pb-2 last:border-0 last:pb-0">
+                                                                <span className="text-neutral-300">{opt.label}</span>
+                                                                <div className="flex gap-4">
+                                                                    <span className="text-neutral-500 flex items-center gap-1"><Clock className="w-3 h-3" />{opt.days}d</span>
+                                                                    <span className="text-blue-400 font-medium min-w-[60px] text-right">${opt.ourCost.toLocaleString()}</span>
+                                                                </div>
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
                                             </div>
-                                        </motion.button>
-                                    );
-                                })}
-                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
 
                             {/* Navigation */}
                             <div className="flex items-center justify-between mt-8">
@@ -689,14 +730,18 @@ function EstimatorToolSection() {
                                 </button>
                                 <button
                                     onClick={handleNext}
-                                    className={`px-6 py-2 text-white rounded-lg transition-all flex items-center gap-2 ${currentPhase === estimatorPhases.length - 1
+                                    className={`px-6 py-2 text-white rounded-lg transition-all flex items-center gap-2 ${currentPhase >= estimatorPhases.length - 1
                                         ? "bg-green-600 hover:bg-green-500"
                                         : "bg-blue-600 hover:bg-blue-500"
                                         }`}
                                 >
-                                    {currentPhase === estimatorPhases.length - 1 ? (
+                                    {currentPhase === estimatorPhases.length ? (
                                         <>
-                                            Get Roadmap <Send className="w-4 h-4" />
+                                            Complete Estimate <Check className="w-4 h-4" />
+                                        </>
+                                    ) : currentPhase === estimatorPhases.length - 1 ? (
+                                        <>
+                                            Review Summary <ArrowRight className="w-4 h-4" />
                                         </>
                                     ) : (
                                         <>
@@ -1033,8 +1078,8 @@ function EstimatorToolSection() {
                                                             key={opt}
                                                             onClick={() => setGateForm({ ...gateForm, timeline: opt })}
                                                             className={`py-2.5 px-3 rounded-lg text-sm transition-all border ${gateForm.timeline === opt
-                                                                    ? "border-blue-500 bg-blue-500/10 text-blue-400"
-                                                                    : "border-neutral-700 bg-neutral-800 text-neutral-400 hover:bg-neutral-700"
+                                                                ? "border-blue-500 bg-blue-500/10 text-blue-400"
+                                                                : "border-neutral-700 bg-neutral-800 text-neutral-400 hover:bg-neutral-700"
                                                                 }`}
                                                         >
                                                             {opt}
