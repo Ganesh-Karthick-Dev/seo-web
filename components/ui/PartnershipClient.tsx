@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect, useEffectEvent } from "react";
+import { useState, useMemo, useEffect, useEffectEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import {
     Check,
     ArrowRight,
     Send,
-    Sparkles,
     FileCheck,
     Clock,
     TrendingUp,
@@ -436,14 +435,11 @@ function downloadEstimatorSummaryPdf(data: EstimatorPdfData) {
 function EstimatorToolSection() {
     const [currentPhase, setCurrentPhase] = useState(0);
     const [selections, setSelections] = useState<Record<string, EstimatorSelection>>({});
-    const [email, setEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submissionError, setSubmissionError] = useState("");
     const [lastSubmittedEmail, setLastSubmittedEmail] = useState("");
-    const [emailHighlight, setEmailHighlight] = useState(false);
     const [showCompletionModal, setShowCompletionModal] = useState(false);
-    const emailInputRef = useRef<HTMLInputElement>(null);
 
     // Gate State
     const [showGateModal, setShowGateModal] = useState(false);
@@ -458,11 +454,10 @@ function EstimatorToolSection() {
         timeline: "ASAP",
     });
     const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    const resolvedBlueprintEmail = isValidEmail(email) ? email : gateForm.workEmail.trim();
+    const resolvedBlueprintEmail = gateForm.workEmail.trim();
 
     const handleGateSubmit = () => {
         setGateStage(3);
-        setEmail((currentEmail) => (isValidEmail(currentEmail) ? currentEmail : gateForm.workEmail));
         setTimeout(() => {
             setHasPassedGate(true);
             setShowGateModal(false);
@@ -506,8 +501,6 @@ function EstimatorToolSection() {
     }, [selections]);
 
     const completedPhases = Object.keys(selections).length;
-    const showEmailGate = completedPhases >= 5;
-    const allPhasesComplete = completedPhases === estimatorPhases.length;
     const selectedPhaseSummaries = useMemo<EstimatorPdfPhaseSummary[]>(
         () =>
             estimatorPhases.reduce<EstimatorPdfPhaseSummary[]>((phaseSummaries, phase) => {
@@ -531,18 +524,6 @@ function EstimatorToolSection() {
             }, []),
         [selections]
     );
-
-    // Auto-scroll to email input when all phases are complete
-    useEffect(() => {
-        if (allPhasesComplete && emailInputRef.current) {
-            setTimeout(() => {
-                emailInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-                emailInputRef.current?.focus();
-                setEmailHighlight(true);
-                setTimeout(() => setEmailHighlight(false), 2000);
-            }, 300);
-        }
-    }, [allPhasesComplete]);
 
     const handleOptionToggle = (phaseId: string, optionId: string, option: { ourCost: number; competitorCost: number; days: number }) => {
         const phase = estimatorPhases.find((p) => p.id === phaseId);
@@ -654,7 +635,6 @@ function EstimatorToolSection() {
                 }),
             });
             if (response.ok) {
-                setEmail(targetEmail);
                 setLastSubmittedEmail(targetEmail);
                 setIsSubmitted(true);
                 if (celebrate) {
@@ -694,12 +674,6 @@ function EstimatorToolSection() {
 
         return false;
     };
-
-    const handleSubmit = async () => {
-        const targetEmail = isValidEmail(email) ? email : gateForm.workEmail;
-        await submitEstimatorBlueprint(targetEmail, true);
-    };
-
     const autoSendBlueprint = useEffectEvent(async () => {
         if (isSubmitted || isSubmitting) return;
         if (!isValidEmail(resolvedBlueprintEmail)) {
@@ -1161,100 +1135,6 @@ function EstimatorToolSection() {
                             </div>
                         </div>
 
-                        {/* Email Gate - Premium CTA */}
-                        {showEmailGate && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                                className="relative bg-gradient-to-br from-neutral-900/90 to-neutral-950/90 backdrop-blur-xl rounded-3xl border border-neutral-800/80 p-6 overflow-hidden"
-                            >
-                                {/* Premium border glow */}
-                                <div className="absolute inset-0 rounded-3xl border border-blue-500/20 pointer-events-none" />
-                                <div className="absolute -top-12 -right-12 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
-                                {!isSubmitted ? (
-                                    <>
-                                        <div className="flex items-center gap-3 mb-3">
-                                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-                                                <Sparkles className="w-5 h-5 text-white" />
-                                            </div>
-                                            <div>
-                                                <h3 className="text-lg font-bold text-white">Get Your Roadmap</h3>
-                                                <p className="text-xs text-neutral-400">
-                                                    {allPhasesComplete ? "Estimate ready!" : `${10 - completedPhases} phases left`}
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <p className="text-sm text-neutral-400 mb-5">
-                                            {allPhasesComplete
-                                                ? "Your estimate is complete! Enter your email to receive a detailed Technical Roadmap with timeline & milestones."
-                                                : "Complete your estimate to unlock your personalized Technical Roadmap."}
-                                        </p>
-
-                                        <div className="space-y-4">
-                                            <div className="relative">
-                                                <input
-                                                    ref={emailInputRef}
-                                                    type="email"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                    placeholder="work-email@company.com"
-                                                    className={`w-full px-4 py-3.5 bg-neutral-800/80 border rounded-xl text-white placeholder-neutral-500 focus:outline-none transition-all ${emailHighlight
-                                                        ? "border-blue-500 ring-4 ring-blue-500/30 animate-pulse"
-                                                        : "border-neutral-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-                                                        }`}
-                                                />
-                                                {isValidEmail(email) && (
-                                                    <motion.div
-                                                        initial={{ scale: 0 }}
-                                                        animate={{ scale: 1 }}
-                                                        className="absolute right-3 top-1/2 -translate-y-1/2"
-                                                    >
-                                                        <Check className="w-5 h-5 text-green-400" />
-                                                    </motion.div>
-                                                )}
-                                            </div>
-
-                                            <motion.button
-                                                whileHover={{ scale: 1.02 }}
-                                                whileTap={{ scale: 0.98 }}
-                                                onClick={handleSubmit}
-                                                disabled={!isValidEmail(email) || isSubmitting}
-                                                className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
-                                            >
-                                                {isSubmitting ? (
-                                                    <div className="flex items-center gap-2">
-                                                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                                        Sending...
-                                                    </div>
-                                                ) : (
-                                                    <>
-                                                        <Send className="w-4 h-4" />
-                                                        Send Me The Roadmap
-                                                    </>
-                                                )}
-                                            </motion.button>
-
-                                            <p className="text-xs text-neutral-500 text-center">
-                                                We&apos;ll send you a detailed PDF with your project scope
-                                            </p>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className="text-center py-4">
-                                        <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <Check className="w-8 h-8 text-blue-400" />
-                                        </div>
-                                        <h3 className="text-lg font-semibold text-white mb-2">Check your inbox!</h3>
-                                        <p className="text-sm text-neutral-400">
-                                            Your Technical Roadmap is on its way.
-                                        </p>
-                                    </div>
-                                )}
-                            </motion.div>
-                        )}
                     </div>
                 </div>
             </div>
