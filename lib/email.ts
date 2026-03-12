@@ -483,17 +483,16 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         }
 
         .page {
-            width: 210mm;
-            min-height: 297mm;
-            padding: 20mm;
-            margin: 10mm auto;
-            background: white;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            margin: 0 auto;
+            background: #ffffff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
             box-sizing: border-box;
             page-break-after: always;
-            display: flex;
-            flex-direction: column;
+            overflow: hidden;
         }
 
         .page:last-child {
@@ -545,9 +544,6 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         }
 
         .brand-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             border-bottom: 3px solid #0055FF;
             padding-bottom: 12pt;
             margin-bottom: 25pt;
@@ -558,6 +554,7 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             font-weight: 900;
             color: #0055FF;
             letter-spacing: -1px;
+            margin: 0;
         }
 
         .doc-meta {
@@ -565,20 +562,19 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             font-size: 10pt;
             color: #8792a2;
             line-height: 1.4;
+            margin: 0;
         }
 
         .footer {
-            margin-top: auto;
+            margin-top: 30pt;
             border-top: 1px solid #e2e8f0;
             padding-top: 10pt;
             font-size: 9pt;
             color: #8792a2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .hero-block {
+            background: #0a2540;
             background: linear-gradient(135deg, #0a2540 0%, #1a1f36 100%);
             color: white;
             border-radius: 12pt;
@@ -612,8 +608,6 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         }
 
         .roi-compare {
-            display: flex;
-            justify-content: space-between;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 8pt;
@@ -622,7 +616,7 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         }
 
         .roi-col {
-            width: 45%;
+            padding: 10pt;
         }
 
         .roi-label {
@@ -645,13 +639,6 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             color: #10b981;
         }
 
-        .scope-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20pt;
-            margin-top: 20pt;
-        }
-
         .scope-item {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -659,6 +646,7 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             padding: 16pt;
             border-radius: 6pt;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            margin-bottom: 10px;
         }
 
         .scope-item h4 {
@@ -682,18 +670,11 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         }
 
         .pie-chart-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
             padding: 20pt;
             background: #0f172a;
             border-radius: 12pt;
             color: white;
             margin: 30pt 0;
-        }
-
-        .pie-legend {
-            width: 60%;
         }
 
         .pie-stat {
@@ -717,9 +698,7 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         }
 
         .gantt-row {
-            display: flex;
             margin-bottom: 16pt;
-            align-items: stretch;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 8pt;
@@ -729,13 +708,9 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         .gantt-days {
             background: #0055FF;
             color: white;
-            width: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             padding: 15pt;
             font-weight: bold;
+            text-align: center;
         }
 
         .gantt-days span {
@@ -746,7 +721,6 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
 
         .gantt-content {
             padding: 15pt 20pt;
-            flex: 1;
         }
 
         .gantt-content h4 {
@@ -763,6 +737,9 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         .cta-page {
             text-align: center;
             padding-top: 40pt;
+            padding-bottom: 40pt;
+            background: #0a2540;
+            color: white;
         }
 
         .cta-btn {
@@ -793,11 +770,19 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
 <body>
     <div class="page">
         <div class="brand-header">
-            <div class="brand-logo">ZYLEX</div>
-            <div class="doc-meta">
-                <strong>Project Estimation Blueprint</strong><br>
-                Date: ${escapeHtml(date)}
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="left" valign="middle">
+                        <div class="brand-logo">ZYLEX</div>
+                    </td>
+                    <td align="right" valign="middle">
+                        <div class="doc-meta">
+                            <strong>Project Estimation Blueprint</strong><br>
+                            Date: ${escapeHtml(date)}
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <p style="font-size: 14pt;">Prepared For: <strong>${preparedForLine}</strong><br>
@@ -811,40 +796,65 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         </div>
 
         <div class="roi-compare">
-            <div class="roi-col">
-                <div class="roi-label">Traditional Agency Estimate</div>
-                <div class="roi-bad">${traditionalEstimate}</div>
-                <div style="font-size: 11pt; color: #64748b; margin-top: 4pt;">Timeline: ${escapeHtml(data.totals.competitorDays)}+ Days</div>
-            </div>
-            <div class="roi-col" style="border-left: 2px solid #e2e8f0; padding-left: 20pt;">
-                <div class="roi-label" style="color: #0055FF;">Your Zylex Savings</div>
-                <div class="roi-good">Save ${totalSavings} (${savingsPercent}%)</div>
-                <div style="font-size: 11pt; font-weight: 600; color: #0a2540; margin-top: 4pt;">Delivered significantly faster than the traditional route</div>
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td width="45%" align="left" valign="top">
+                        <div class="roi-col">
+                            <div class="roi-label">Traditional Agency Estimate</div>
+                            <div class="roi-bad">${traditionalEstimate}</div>
+                            <div style="font-size: 11pt; color: #64748b; margin-top: 4pt;">Timeline: ${escapeHtml(data.totals.competitorDays)}+ Days</div>
+                        </div>
+                    </td>
+                    <td width="10%"></td>
+                    <td width="45%" align="left" valign="top" style="border-left: 2px solid #e2e8f0; padding-left: 20pt;">
+                        <div class="roi-col">
+                            <div class="roi-label" style="color: #0055FF;">Your Zylex Savings</div>
+                            <div class="roi-good">Save ${totalSavings} <br> (${savingsPercent}%)</div>
+                            <div style="font-size: 11pt; font-weight: 600; color: #0a2540; margin-top: 4pt;">Delivered significantly faster than the traditional route</div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div class="footer">
-            <div>Zylex Engineering • Contact: connect@zylex.io</div>
-            <div>Page 1 of 6</div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="left">Zylex Engineering • Contact: connect@zylex.io</td>
+                    <td align="right">Page 1 of 6</td>
+                </tr>
+            </table>
         </div>
     </div>
 
     <div class="page">
         <div class="brand-header">
-            <div class="brand-logo" style="font-size: 16pt;">ZYLEX</div>
-            <div class="doc-meta" style="font-size: 9pt;">Scope Blueprint</div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="left" valign="middle">
+                        <div class="brand-logo" style="font-size: 16pt;">ZYLEX</div>
+                    </td>
+                    <td align="right" valign="middle">
+                        <div class="doc-meta" style="font-size: 9pt;">Scope Blueprint</div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <h2>Technical Scope & Architecture</h2>
         <p>This page acts as the detailed receipt of the architectural and engineering phases selected for your specific build.</p>
 
-        <div class="scope-grid">
+        <div>
             ${scopeGridHtml}
         </div>
 
         <div class="footer">
-            <div>Zylex Engineering • Confidential</div>
-            <div>Page 2 of 6</div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="left">Zylex Engineering • Confidential</td>
+                    <td align="right">Page 2 of 6</td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -857,17 +867,23 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         <p>A common question from technical and financial stakeholders is: <em>"How is it possible to build enterprise software this fast, at this price?"</em> The answer lies in our proprietary engineering model.</p>
 
         <div class="pie-chart-container">
-            <div style="width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(#0055FF 0% 60%, #34d399 60% 100%);"></div>
-            <div class="pie-legend">
-                <div class="pie-stat">
-                    <h4><span style="display:inline-block; width:12px; height:12px; background:#0055FF; margin-right:8px; border-radius:2px;"></span>60% Zylex Core Modules</h4>
-                    <p>We utilize our proprietary library of battle-tested code for repetitive functions like authentication, databases, and delivery pipelines so that you are not paying to rebuild solved problems.</p>
-                </div>
-                <div class="pie-stat">
-                    <h4><span style="display:inline-block; width:12px; height:12px; background:#34d399; margin-right:8px; border-radius:2px;"></span>40% Custom Engineering</h4>
-                    <p>By removing boilerplate, our engineering time goes directly into the custom workflows, interfaces, and business logic that make your product valuable to your market.</p>
-                </div>
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td width="40%" align="center" valign="middle">
+                        <div style="width: 120px; height: 120px; border-radius: 50%; background: #0055FF; margin: 0 auto;"></div>
+                    </td>
+                    <td width="60%" align="left" valign="middle">
+                        <div class="pie-stat">
+                            <h4><span style="display:inline-block; width:12px; height:12px; background:#0055FF; margin-right:8px; border-radius:2px;"></span>60% Zylex Core Modules</h4>
+                            <p>We utilize our proprietary library of battle-tested code for repetitive functions like authentication, databases, and pipelines.</p>
+                        </div>
+                        <div class="pie-stat">
+                            <h4><span style="display:inline-block; width:12px; height:12px; background:#34d399; margin-right:8px; border-radius:2px;"></span>40% Custom Engineering</h4>
+                            <p>By removing boilerplate, our engineering time goes directly into custom workflows and business logic.</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div class="method-box">
@@ -876,8 +892,12 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         </div>
 
         <div class="footer">
-            <div>Zylex Engineering • Confidential</div>
-            <div>Page 3 of 6</div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="left">Zylex Engineering • Confidential</td>
+                    <td align="right">Page 3 of 6</td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -891,38 +911,66 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
 
         <div class="gantt-container">
             <div class="gantt-row">
-                <div class="gantt-days"><span>Phase</span><br>1</div>
-                <div class="gantt-content">
-                    <h4>Architecture & Foundation</h4>
-                    <p>Finalizing documentation, provisioning infrastructure, shaping the data layer, and wiring up the foundational authentication patterns.</p>
-                </div>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td width="100" class="gantt-days" style="background:#0055FF;">
+                            <span>Phase</span><br>1
+                        </td>
+                        <td class="gantt-content">
+                            <h4>Architecture & Foundation</h4>
+                            <p>Finalizing documentation, provisioning infrastructure, shaping the data layer, and wiring up the foundational patterns.</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="gantt-row">
-                <div class="gantt-days" style="background: #2563eb;"><span>Phase</span><br>2</div>
-                <div class="gantt-content">
-                    <h4>Core Engineering</h4>
-                    <p>Building the interface system, implementing the core application structure, and connecting the key product modules.</p>
-                </div>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td width="100" class="gantt-days" style="background: #2563eb;">
+                            <span>Phase</span><br>2
+                        </td>
+                        <td class="gantt-content">
+                            <h4>Core Engineering</h4>
+                            <p>Building the interface system, implementing the core application structure, and connecting the key product modules.</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="gantt-row">
-                <div class="gantt-days" style="background: #3b82f6;"><span>Phase</span><br>3</div>
-                <div class="gantt-content">
-                    <h4>Business Logic & Integrations</h4>
-                    <p>Shipping custom workflows, dynamic data connections, and the third-party integrations selected during the estimator flow.</p>
-                </div>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td width="100" class="gantt-days" style="background: #3b82f6;">
+                            <span>Phase</span><br>3
+                        </td>
+                        <td class="gantt-content">
+                            <h4>Business Logic & Integrations</h4>
+                            <p>Shipping custom workflows, dynamic data connections, and the third-party integrations selected during the estimator flow.</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="gantt-row">
-                <div class="gantt-days" style="background: #10b981;"><span>Phase</span><br>4</div>
-                <div class="gantt-content">
-                    <h4>QA, Polish, & Handover</h4>
-                    <p>Executing QA, testing the critical paths, polishing the release, and deploying the production-ready build with handover support.</p>
-                </div>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td width="100" class="gantt-days" style="background: #10b981;">
+                            <span>Phase</span><br>4
+                        </td>
+                        <td class="gantt-content">
+                            <h4>QA, Polish, & Handover</h4>
+                            <p>Executing QA, testing the critical paths, polishing the release, and deploying the production-ready build with handover support.</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
         <div class="footer">
-            <div>Zylex Engineering • Confidential</div>
-            <div>Page 4 of 6</div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="left">Zylex Engineering • Confidential</td>
+                    <td align="right">Page 4 of 6</td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -944,23 +992,25 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         </div>
 
         <div class="footer">
-            <div>Zylex Engineering • Confidential</div>
-            <div>Page 5 of 6</div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="left">Zylex Engineering • Confidential</td>
+                    <td align="right">Page 5 of 6</td>
+                </tr>
+            </table>
         </div>
     </div>
 
-    <div class="page" style="justify-content: center; align-items: center; background: #0a2540; color: white;">
-        <div class="cta-page">
-            <h2 style="color: white; border-bottom: none; font-size: 32pt; margin-bottom: 20pt;">Let's Validate Your Scope.</h2>
-            <p style="color: #cbd5e1; font-size: 14pt; max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                This estimate provides a highly accurate baseline for your MVP.
-                <br><br>
-                The next step is a focused Technical Discovery Call with our engineering team to map your business logic, answer stakeholder questions, and validate the execution plan.
-            </p>
-            <a href="https://calendly.com/zylex" class="cta-btn">Book Technical Discovery Call</a>
-        </div>
+    <div class="page cta-page">
+        <h2 style="color: white; border-bottom: none; font-size: 32pt; margin-bottom: 20pt; margin-top: 0;">Let's Validate Your Scope.</h2>
+        <p style="color: #cbd5e1; font-size: 14pt; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+            This estimate provides a highly accurate baseline for your MVP.
+            <br><br>
+            The next step is a focused Technical Discovery Call with our engineering team to map your business logic, answer stakeholder questions, and validate the execution plan.
+        </p>
+        <a href="https://calendly.com/zylex" class="cta-btn">Book Technical Discovery Call</a>
 
-        <div class="footer" style="border-top: 1px solid rgba(255,255,255,0.1); width: 100%; border-bottom: 0;">
+        <div class="footer" style="border-top: 1px solid rgba(255,255,255,0.1); width: 100%; border-bottom: 0; padding-top: 40pt;">
             <div style="color: #94a3b8; text-align: center; width: 100%; font-size: 11pt;">
                 Zylex Engineering • connect@zylex.io • zylex.io
             </div>
