@@ -1,30 +1,46 @@
-import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
         const { name, email, company, designation, message } = body;
 
+        const emailHost = process.env.EMAIL_HOST || "smtp.hostinger.com";
+        const emailPort = Number(process.env.EMAIL_PORT || 465);
+        const emailSecure = (process.env.EMAIL_SECURE || "true").toLowerCase() === "true";
+        const emailUser = process.env.EMAIL_USER;
+        const emailPass = process.env.EMAIL_PASS;
+        const emailTo = process.env.EMAIL_TO || emailUser;
+
+        if (!emailUser || !emailPass || !emailTo) {
+            return NextResponse.json(
+                { success: false, message: "Contact email is not configured" },
+                { status: 500 }
+            );
+        }
+
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: emailHost,
+            port: emailPort,
+            secure: emailSecure,
             auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
+                user: emailUser,
+                pass: emailPass,
             },
         });
 
-        // 1. Internal Team Notification Email Template
         const internalMailOptions = {
-            from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER, // Sending to yourself
-            subject: `New Lead: ${name} - ${company || 'No Company'}`,
+            from: `Zylex Website <${emailUser}>`,
+            to: emailTo,
+            replyTo: email,
+            subject: `New Lead: ${name} - ${company || "No Company"}`,
             html: `
         <!DOCTYPE html>
         <html>
           <head>
             <style>
-              body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
               .container { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9fafb; }
               .header { background: linear-gradient(to right, #ea580c, #f59e0b); padding: 30px; border-radius: 10px 10px 0 0; text-align: center; }
               .header h1 { color: white; margin: 0; font-size: 24px; }
@@ -39,7 +55,7 @@ export async function POST(req: Request) {
           <body>
             <div class="container">
               <div class="header">
-                <h1>New Lead Received 🚀</h1>
+                <h1>New Lead Received</h1>
               </div>
               <div class="content">
                 <div class="field">
@@ -52,11 +68,11 @@ export async function POST(req: Request) {
                 </div>
                 <div class="field">
                   <div class="label">Designation</div>
-                  <div class="value">${designation || 'Not provided'}</div>
+                  <div class="value">${designation || "Not provided"}</div>
                 </div>
                 <div class="field">
                   <div class="label">Company</div>
-                  <div class="value">${company || 'Not provided'}</div>
+                  <div class="value">${company || "Not provided"}</div>
                 </div>
                 <div class="field">
                   <div class="label">Message</div>
@@ -64,7 +80,7 @@ export async function POST(req: Request) {
                 </div>
               </div>
               <div class="footer">
-                <p>Sent from your website contact form.</p>
+                <p>Sent from the Zylex website contact form.</p>
               </div>
             </div>
           </body>
@@ -72,17 +88,17 @@ export async function POST(req: Request) {
       `,
         };
 
-        // 2. User Acknowledgement Email Template
         const userMailOptions = {
-            from: process.env.EMAIL_USER,
+            from: `Zylex <${emailUser}>`,
             to: email,
-            subject: 'We received your message! - SEOPro',
+            replyTo: emailTo,
+            subject: "We received your message! - Zylex",
             html: `
         <!DOCTYPE html>
         <html>
           <head>
             <style>
-              body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
               .container { max-width: 600px; margin: 0 auto; padding: 0; }
               .header { background-color: #000000; padding: 40px 20px; text-align: center; background-image: radial-gradient(circle at top right, #431407 0%, #000000 100%); }
               .logo { font-size: 24px; font-weight: bold; color: white; text-decoration: none; }
@@ -96,20 +112,20 @@ export async function POST(req: Request) {
           <body>
             <div class="container">
               <div class="header">
-                <div class="logo">SEOPro</div>
+                <div class="logo">Zylex</div>
               </div>
               <div class="content">
                 <h2 class="greeting">Hi ${name},</h2>
-                <p class="text">Thanks for reaching out! We've received your message and our team is already reviewing it.</p>
-                <p class="text">We specialize in helping businesses like yours scale through engineering-driven digital solutions. One of our experts will get back to you within 24 hours to discuss how we can help you achieve your goals.</p>
-                <p class="text">In the meantime, feel free to check out our latest case studies.</p>
+                <p class="text">Thanks for reaching out. We have received your message and our team is already reviewing it.</p>
+                <p class="text">One of our experts will get back to you within 24 hours to discuss your goals and the best next steps.</p>
+                <p class="text">In the meantime, feel free to explore our website and learn more about how we work.</p>
                 <center>
-                  <a href="https://yourwebsite.com/resources" class="button">View Resources</a>
+                  <a href="https://zylex.io/" class="button">Visit Zylex</a>
                 </center>
               </div>
               <div class="footer">
-                <p>&copy; ${new Date().getFullYear()} SEOPro. All rights reserved.</p>
-                <p>123 Business Ave, NY 10001</p>
+                <p>&copy; ${new Date().getFullYear()} Zylex. All rights reserved.</p>
+                <p>connect@zylex.io</p>
               </div>
             </div>
           </body>
@@ -117,17 +133,16 @@ export async function POST(req: Request) {
       `,
         };
 
-        // Send both emails
         await Promise.all([
             transporter.sendMail(internalMailOptions),
             transporter.sendMail(userMailOptions),
         ]);
 
-        return NextResponse.json({ success: true, message: 'Emails sent successfully' });
+        return NextResponse.json({ success: true, message: "Emails sent successfully" });
     } catch (error) {
-        console.error('Email error:', error);
+        console.error("Email error:", error);
         return NextResponse.json(
-            { success: false, message: 'Failed to send email' },
+            { success: false, message: "Failed to send email" },
             { status: 500 }
         );
     }

@@ -1,24 +1,14 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, useEffectEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import {
     Check,
-    Zap,
     ArrowRight,
     Send,
     Sparkles,
-    Globe,
-    Smartphone,
-    Bot,
-    Brain,
-    CreditCard,
-    Store,
-    Ban,
-    Palette,
     FileCheck,
-    AlertTriangle,
     Clock,
     TrendingUp,
     Trophy
@@ -34,7 +24,6 @@ import { cn } from "@/lib/utils";
 
 import {
     FileText,
-    Layers,
     Server,
     Database,
     Lock,
@@ -43,12 +32,7 @@ import {
     TestTube,
     Wallet,
     Rocket as RocketDeploy,
-    Building2,
-    Smartphone as Phone,
     Monitor,
-    TabletSmartphone,
-    Layout,
-    HardDrive
 } from "lucide-react";
 
 // 10-Phase Configuration
@@ -208,13 +192,257 @@ interface EstimatorSelection {
     days: number;
 }
 
+interface EstimatorPdfPhaseSummary {
+    title: string;
+    selectedLabels: string[];
+    ourCost: number;
+    days: number;
+}
+
+interface EstimatorPdfData {
+    phases: EstimatorPdfPhaseSummary[];
+    totals: {
+        ourCost: number;
+        competitorCost: number;
+        ourDays: string;
+        competitorDays: string;
+        savings: number;
+        savingsPercent: string | number;
+        isSprintReady: boolean;
+    };
+}
+
+function escapePdfText(value: string) {
+    return value
+        .replace(/\\/g, "\\\\")
+        .replace(/\(/g, "\\(")
+        .replace(/\)/g, "\\)")
+        .replace(/\r?\n/g, " ")
+        .replace(/[^\x20-\x7E]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+function wrapPdfText(value: string, maxChars: number) {
+    const normalized = escapePdfText(value);
+    if (!normalized) {
+        return [];
+    }
+
+    const words = normalized.split(" ");
+    const lines: string[] = [];
+    let currentLine = "";
+
+    words.forEach((word) => {
+        const nextLine = currentLine ? `${currentLine} ${word}` : word;
+
+        if (nextLine.length <= maxChars) {
+            currentLine = nextLine;
+            return;
+        }
+
+        if (currentLine) {
+            lines.push(currentLine);
+        }
+
+        if (word.length <= maxChars) {
+            currentLine = word;
+            return;
+        }
+
+        let remainingWord = word;
+        while (remainingWord.length > maxChars) {
+            lines.push(remainingWord.slice(0, maxChars));
+            remainingWord = remainingWord.slice(maxChars);
+        }
+        currentLine = remainingWord;
+    });
+
+    if (currentLine) {
+        lines.push(currentLine);
+    }
+
+    return lines;
+}
+
+function formatPdfDate(value: Date) {
+    return value.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
+}
+
+function buildEstimatorSummaryPdf(data: EstimatorPdfData) {
+    const commands: string[] = [];
+    const generatedOn = formatPdfDate(new Date());
+    const writeText = (
+        text: string,
+        x: number,
+        y: number,
+        fontSize: number,
+        font: "F1" | "F2" = "F1",
+        color: [number, number, number] = [0.1, 0.12, 0.16]
+    ) => {
+        commands.push(
+            `BT /${font} ${fontSize} Tf ${color[0]} ${color[1]} ${color[2]} rg 1 0 0 1 ${x} ${y} Tm (${escapePdfText(text)}) Tj ET`
+        );
+    };
+    const fillRect = (x: number, y: number, width: number, height: number, color: [number, number, number]) => {
+        commands.push(`${color[0]} ${color[1]} ${color[2]} rg ${x} ${y} ${width} ${height} re f`);
+    };
+    const strokeRect = (x: number, y: number, width: number, height: number, color: [number, number, number]) => {
+        commands.push(`${color[0]} ${color[1]} ${color[2]} RG ${x} ${y} ${width} ${height} re S`);
+    };
+    const drawRule = (y: number) => {
+        commands.push(`0.87 0.9 0.95 RG 48 ${y} m 547 ${y} l S`);
+    };
+
+    fillRect(0, 0, 595, 842, [1, 1, 1]);
+    fillRect(48, 734, 499, 78, [0.08, 0.17, 0.42]);
+    writeText("Zylex Project Estimate Summary", 66, 780, 24, "F2", [1, 1, 1]);
+    writeText("Prepared from your partnership estimator selections", 66, 758, 11, "F1", [0.86, 0.91, 1]);
+    writeText(`Generated on ${generatedOn}`, 66, 742, 10, "F1", [0.77, 0.84, 0.97]);
+
+    const cards = [
+        {
+            x: 48,
+            y: 640,
+            title: "Zylex Investment",
+            value: `$${data.totals.ourCost.toLocaleString()}`,
+            detail: `${data.totals.ourDays} day delivery`,
+            accent: [0.12, 0.34, 0.76] as [number, number, number],
+        },
+        {
+            x: 308,
+            y: 640,
+            title: "Traditional Agency",
+            value: `$${data.totals.competitorCost.toLocaleString()}`,
+            detail: `${data.totals.competitorDays}+ days`,
+            accent: [0.32, 0.36, 0.43] as [number, number, number],
+        },
+        {
+            x: 48,
+            y: 554,
+            title: "Estimated Savings",
+            value: `$${data.totals.savings.toLocaleString()}`,
+            detail: `${data.totals.savingsPercent}% lower spend`,
+            accent: [0.08, 0.56, 0.34] as [number, number, number],
+        },
+        {
+            x: 308,
+            y: 554,
+            title: "Project Status",
+            value: data.totals.isSprintReady ? "Sprint Ready" : "Custom Scope",
+            detail: data.totals.isSprintReady ? "Fits the 15-day sprint" : "Needs custom delivery planning",
+            accent: [0.56, 0.36, 0.12] as [number, number, number],
+        },
+    ];
+
+    cards.forEach((card) => {
+        fillRect(card.x, card.y, 239, 68, [0.97, 0.98, 1]);
+        strokeRect(card.x, card.y, 239, 68, [0.87, 0.9, 0.95]);
+        writeText(card.title, card.x + 16, card.y + 48, 10, "F1", [0.36, 0.41, 0.49]);
+        writeText(card.value, card.x + 16, card.y + 28, 18, "F2", card.accent);
+        writeText(card.detail, card.x + 16, card.y + 12, 9, "F1", [0.43, 0.48, 0.56]);
+    });
+
+    writeText("Selected Scope", 48, 520, 15, "F2", [0.08, 0.17, 0.42]);
+    writeText("Each line below reflects the selections currently included in your estimate.", 48, 504, 10, "F1", [0.36, 0.41, 0.49]);
+
+    let currentY = 478;
+
+    if (data.phases.length === 0) {
+        writeText("No phases were selected when this summary was generated.", 48, currentY, 11, "F1", [0.36, 0.41, 0.49]);
+        currentY -= 28;
+    } else {
+        data.phases.forEach((phase, index) => {
+            if (currentY < 92) {
+                return;
+            }
+
+            writeText(phase.title, 48, currentY, 11, "F2", [0.1, 0.12, 0.16]);
+            writeText(`${phase.days} days  |  $${phase.ourCost.toLocaleString()}`, 395, currentY, 10, "F1", [0.36, 0.41, 0.49]);
+            currentY -= 15;
+
+            const optionLines = wrapPdfText(phase.selectedLabels.join(", "), 84);
+            optionLines.forEach((line) => {
+                if (currentY < 92) {
+                    return;
+                }
+
+                writeText(line, 60, currentY, 10, "F1", [0.27, 0.31, 0.37]);
+                currentY -= 12;
+            });
+
+            currentY -= 8;
+            if (index < data.phases.length - 1 && currentY >= 92) {
+                drawRule(currentY + 4);
+                currentY -= 8;
+            }
+        });
+    }
+
+    drawRule(72);
+    writeText("Questions or next steps? Visit zylex.io/contact", 48, 52, 10, "F1", [0.36, 0.41, 0.49]);
+    writeText("This PDF was generated directly from your estimator summary.", 48, 36, 9, "F1", [0.5, 0.54, 0.61]);
+
+    const contentStream = commands.join("\n");
+    const objects = [
+        "<< /Type /Catalog /Pages 2 0 R >>",
+        "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>",
+        `<< /Length ${contentStream.length} >>\nstream\n${contentStream}\nendstream`,
+        "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+        "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>",
+    ];
+
+    let pdfDocument = "%PDF-1.4\n";
+    const offsets = [0];
+
+    objects.forEach((object, index) => {
+        offsets.push(pdfDocument.length);
+        pdfDocument += `${index + 1} 0 obj\n${object}\nendobj\n`;
+    });
+
+    const xrefOffset = pdfDocument.length;
+    pdfDocument += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+
+    offsets.slice(1).forEach((offset) => {
+        pdfDocument += `${offset.toString().padStart(10, "0")} 00000 n \n`;
+    });
+
+    pdfDocument += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
+
+    return pdfDocument;
+}
+
+function downloadEstimatorSummaryPdf(data: EstimatorPdfData) {
+    const pdfDocument = buildEstimatorSummaryPdf(data);
+    const pdfBlob = new Blob([pdfDocument], { type: "application/pdf" });
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    const link = document.createElement("a");
+    const stamp = new Date().toISOString().slice(0, 10);
+
+    link.href = pdfUrl;
+    link.download = `zylex-project-summary-${stamp}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(pdfUrl), 1000);
+}
+
 function EstimatorToolSection() {
     const [currentPhase, setCurrentPhase] = useState(0);
     const [selections, setSelections] = useState<Record<string, EstimatorSelection>>({});
     const [email, setEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submissionError, setSubmissionError] = useState("");
+    const [lastSubmittedEmail, setLastSubmittedEmail] = useState("");
     const [emailHighlight, setEmailHighlight] = useState(false);
+    const [showCompletionModal, setShowCompletionModal] = useState(false);
     const emailInputRef = useRef<HTMLInputElement>(null);
 
     // Gate State
@@ -229,9 +457,12 @@ function EstimatorToolSection() {
         designation: "",
         timeline: "ASAP",
     });
+    const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    const resolvedBlueprintEmail = isValidEmail(email) ? email : gateForm.workEmail.trim();
 
     const handleGateSubmit = () => {
         setGateStage(3);
+        setEmail((currentEmail) => (isValidEmail(currentEmail) ? currentEmail : gateForm.workEmail));
         setTimeout(() => {
             setHasPassedGate(true);
             setShowGateModal(false);
@@ -277,6 +508,29 @@ function EstimatorToolSection() {
     const completedPhases = Object.keys(selections).length;
     const showEmailGate = completedPhases >= 5;
     const allPhasesComplete = completedPhases === estimatorPhases.length;
+    const selectedPhaseSummaries = useMemo<EstimatorPdfPhaseSummary[]>(
+        () =>
+            estimatorPhases.reduce<EstimatorPdfPhaseSummary[]>((phaseSummaries, phase) => {
+                const phaseSelection = selections[phase.id];
+                if (!phaseSelection || phaseSelection.selectedOptions.length === 0) {
+                    return phaseSummaries;
+                }
+
+                const selectedLabels = phaseSelection.selectedOptions
+                    .map((optionId) => phase.options.find((option) => option.id === optionId)?.label)
+                    .filter((label): label is string => Boolean(label));
+
+                phaseSummaries.push({
+                    title: phase.title,
+                    selectedLabels,
+                    ourCost: phaseSelection.ourCost,
+                    days: phaseSelection.days,
+                });
+
+                return phaseSummaries;
+            }, []),
+        [selections]
+    );
 
     // Auto-scroll to email input when all phases are complete
     useEffect(() => {
@@ -284,6 +538,8 @@ function EstimatorToolSection() {
             setTimeout(() => {
                 emailInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
                 emailInputRef.current?.focus();
+                setEmailHighlight(true);
+                setTimeout(() => setEmailHighlight(false), 2000);
             }, 300);
         }
     }, [allPhasesComplete]);
@@ -325,7 +581,8 @@ function EstimatorToolSection() {
                 });
 
                 if (newOptions.length === 0) {
-                    const { [phaseId]: _, ...rest } = prev;
+                    const rest = { ...prev };
+                    delete rest[phaseId];
                     return rest;
                 }
 
@@ -367,13 +624,7 @@ function EstimatorToolSection() {
                 setCurrentPhase(nextPhase);
             }
         } else if (currentPhase === estimatorPhases.length) {
-            // On summary phase, focus email
-            if (emailInputRef.current) {
-                emailInputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-                emailInputRef.current.focus();
-                setEmailHighlight(true);
-                setTimeout(() => setEmailHighlight(false), 2000);
-            }
+            setShowCompletionModal(true);
         }
     };
 
@@ -383,53 +634,97 @@ function EstimatorToolSection() {
         }
     };
 
-    const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    const handleSubmit = async () => {
-        if (!isValidEmail(email)) return;
+    const submitEstimatorBlueprint = async (targetEmail: string, celebrate = false) => {
+        if (!isValidEmail(targetEmail)) return false;
         setIsSubmitting(true);
+        setSubmissionError("");
         try {
             const response = await fetch("/api/estimator/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    email,
+                    email: targetEmail,
+                    clientName: gateForm.fullName,
+                    companyName: gateForm.companyName,
+                    designation: gateForm.designation,
+                    timeline: gateForm.timeline,
                     selections,
                     totals,
                     completedPhases,
                 }),
             });
             if (response.ok) {
+                setEmail(targetEmail);
+                setLastSubmittedEmail(targetEmail);
                 setIsSubmitted(true);
-                // Trigger confetti celebration!
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                });
-                // Fire more confetti for extra celebration
-                setTimeout(() => {
+                if (celebrate) {
                     confetti({
-                        particleCount: 50,
-                        angle: 60,
-                        spread: 55,
-                        origin: { x: 0 },
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 },
                     });
-                }, 200);
-                setTimeout(() => {
-                    confetti({
-                        particleCount: 50,
-                        angle: 120,
-                        spread: 55,
-                        origin: { x: 1 },
-                    });
-                }, 400);
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 50,
+                            angle: 60,
+                            spread: 55,
+                            origin: { x: 0 },
+                        });
+                    }, 200);
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 50,
+                            angle: 120,
+                            spread: 55,
+                            origin: { x: 1 },
+                        });
+                    }, 400);
+                }
+                return true;
             }
+
+            const responseData = await response.json().catch(() => null);
+            setSubmissionError(responseData?.error || responseData?.message || "Failed to send your blueprint.");
         } catch (error) {
             console.error("Submission error:", error);
+            setSubmissionError("Failed to send your blueprint.");
         } finally {
             setIsSubmitting(false);
         }
+
+        return false;
+    };
+
+    const handleSubmit = async () => {
+        const targetEmail = isValidEmail(email) ? email : gateForm.workEmail;
+        await submitEstimatorBlueprint(targetEmail, true);
+    };
+
+    const autoSendBlueprint = useEffectEvent(async () => {
+        if (isSubmitted || isSubmitting) return;
+        if (!isValidEmail(resolvedBlueprintEmail)) {
+            setSubmissionError("Add a valid work email to receive your blueprint.");
+            return;
+        }
+
+        await submitEstimatorBlueprint(resolvedBlueprintEmail, false);
+    });
+
+    useEffect(() => {
+        if (!showCompletionModal) return;
+        void autoSendBlueprint();
+    }, [showCompletionModal]);
+
+    const handleDownloadPdf = () => {
+        downloadEstimatorSummaryPdf({
+            phases: selectedPhaseSummaries,
+            totals,
+        });
+    };
+
+    const handleGetInTouch = () => {
+        setShowCompletionModal(false);
+        window.location.assign("/contact");
     };
 
     const currentPhaseData = estimatorPhases[currentPhase] || {
@@ -713,7 +1008,7 @@ function EstimatorToolSection() {
                                     disabled={currentPhase === 0}
                                     className="px-4 py-2 text-neutral-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                 >
-                                    ← Previous
+                                    Previous
                                 </button>
                                 <button
                                     onClick={handleNext}
@@ -822,7 +1117,7 @@ function EstimatorToolSection() {
                                                 animate={{ opacity: 1, x: 0 }}
                                                 className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/20 border border-yellow-500/30"
                                             >
-                                                <span className="text-yellow-400 text-xs font-medium">🏆 Massive Savings!</span>
+                                                <span className="text-yellow-400 text-xs font-medium">Massive Savings!</span>
                                             </motion.div>
                                         )}
                                     </motion.div>
@@ -858,7 +1153,7 @@ function EstimatorToolSection() {
                                         <div key={milestone} className="flex flex-col items-center">
                                             <div className={`w-1.5 h-1.5 rounded-full ${completedPhases >= milestone ? "bg-blue-400" : "bg-neutral-700"}`} />
                                             <span className={`text-xs mt-1 ${completedPhases >= milestone ? "text-blue-400" : "text-neutral-600"}`}>
-                                                {milestone === 10 ? "✓" : milestone}
+                                                {milestone === 10 ? "Done" : milestone}
                                             </span>
                                         </div>
                                     ))}
@@ -943,7 +1238,7 @@ function EstimatorToolSection() {
                                             </motion.button>
 
                                             <p className="text-xs text-neutral-500 text-center">
-                                                📧 We&apos;ll send you a detailed PDF with your project scope
+                                                We&apos;ll send you a detailed PDF with your project scope
                                             </p>
                                         </div>
                                     </>
@@ -993,7 +1288,7 @@ function EstimatorToolSection() {
                                             Your project is taking shape
                                         </h3>
                                         <p className="text-neutral-400 text-lg mb-10 leading-relaxed">
-                                            Ten minutes in and we have a clearer picture than most intake calls give us. Save your details — we'll send the full breakdown once all 10 phases are complete.
+                                            Ten minutes in and we have a clearer picture than most intake calls give us. Save your details - we&apos;ll send the full breakdown once all 10 phases are complete.
                                         </p>
                                         <button
                                             onClick={() => setGateStage(2)}
@@ -1060,7 +1355,7 @@ function EstimatorToolSection() {
                                             <div className="space-y-1.5 pt-2">
                                                 <label className="text-xs uppercase tracking-wider text-neutral-500 font-semibold">When do you need this built?</label>
                                                 <div className="grid grid-cols-2 gap-2 mt-1">
-                                                    {["ASAP", "1–3 months", "3–6 months", "Just exploring"].map((opt) => (
+                                                    {["ASAP", "1-3 months", "3-6 months", "Just exploring"].map((opt) => (
                                                         <button
                                                             key={opt}
                                                             onClick={() => setGateForm({ ...gateForm, timeline: opt })}
@@ -1077,7 +1372,7 @@ function EstimatorToolSection() {
                                         </div>
 
                                         <button
-                                            disabled={!gateForm.fullName || !gateForm.workEmail}
+                                            disabled={!gateForm.fullName || !isValidEmail(gateForm.workEmail)}
                                             onClick={handleGateSubmit}
                                             className="w-full py-4 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-xl font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
                                         >
@@ -1104,6 +1399,75 @@ function EstimatorToolSection() {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {showCompletionModal && (
+                    <div
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+                        onClick={() => setShowCompletionModal(false)}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            transition={{ duration: 0.2 }}
+                            onClick={(event) => event.stopPropagation()}
+                            className="w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden"
+                        >
+                            <div className="absolute -top-16 -right-16 w-32 h-32 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+
+                            <div className="relative">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-5 shadow-lg shadow-blue-500/20">
+                                    <FileCheck className="w-7 h-7 text-white" />
+                                </div>
+
+                                <h3 className="text-2xl font-bold text-white mb-3">Choose your next step</h3>
+                                <p className="text-neutral-400 mb-6 leading-relaxed">
+                                    Download a polished PDF version of this estimate or jump straight to our contact page.
+                                </p>
+
+                                <div className="mb-5 rounded-2xl border border-neutral-800 bg-neutral-950/70 px-4 py-3">
+                                    <p className="text-sm text-neutral-300">
+                                        {isSubmitting
+                                            ? `Sending your blueprint to ${resolvedBlueprintEmail}...`
+                                            : isSubmitted
+                                                ? `Blueprint sent to ${lastSubmittedEmail || resolvedBlueprintEmail}.`
+                                                : submissionError || `We will email your blueprint to ${resolvedBlueprintEmail}.`}
+                                    </p>
+                                </div>
+
+                                <div className="space-y-3">
+                                    <button
+                                        onClick={handleDownloadPdf}
+                                        className="w-full rounded-2xl border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/15 transition-colors px-5 py-4 text-left flex items-center justify-between gap-4"
+                                    >
+                                        <div>
+                                            <div className="text-white font-semibold">Download PDF</div>
+                                            <div className="text-sm text-neutral-400 mt-1">
+                                                Save a clean summary of your selected scope, cost, and timeline.
+                                            </div>
+                                        </div>
+                                        <FileCheck className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                                    </button>
+
+                                    <button
+                                        onClick={handleGetInTouch}
+                                        className="w-full rounded-2xl border border-neutral-700 bg-neutral-800/70 hover:bg-neutral-800 transition-colors px-5 py-4 text-left flex items-center justify-between gap-4"
+                                    >
+                                        <div>
+                                            <div className="text-white font-semibold">Get in Touch</div>
+                                            <div className="text-sm text-neutral-400 mt-1">
+                                                Continue the conversation on our contact page.
+                                            </div>
+                                        </div>
+                                        <Send className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                                    </button>
+                                </div>
+                            </div>
                         </motion.div>
                     </div>
                 )}

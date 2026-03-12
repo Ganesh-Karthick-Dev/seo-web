@@ -8,6 +8,10 @@ export async function POST(request: Request) {
 
         const {
             email,
+            clientName,
+            companyName,
+            designation,
+            timeline,
             selections,
             totals,
             completedPhases,
@@ -20,9 +24,6 @@ export async function POST(request: Request) {
                 { status: 400 }
             );
         }
-
-        // Format selections for database storage
-        const selectionsJson = JSON.stringify(selections);
 
         // Store lead in database
         const lead = await prisma.estimatorLead.create({
@@ -43,6 +44,10 @@ export async function POST(request: Request) {
         try {
             await sendEstimatorEmails({
                 userEmail: email,
+                clientName,
+                companyName,
+                designation,
+                timeline,
                 selections,
                 totals: {
                     ourCost: totals?.ourCost || 0,
@@ -51,6 +56,7 @@ export async function POST(request: Request) {
                     competitorDays: totals?.competitorDays || "0",
                     savings: totals?.savings || 0,
                     savingsPercent: totals?.savingsPercent || "0",
+                    isSprintReady: totals?.isSprintReady ?? false,
                 },
                 completedPhases: completedPhases || 0,
             });
