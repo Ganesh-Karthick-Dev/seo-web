@@ -392,8 +392,17 @@ function getScopeGridHtml(data: EstimatorEmailData) {
 
         return `
             <div class="scope-item">
-                <h4>${index + 1}. ${escapeHtml(phase.title)}</h4>
-                <p><strong>${escapeHtml(selectedLabels)}</strong><br>${escapeHtml(description)}</p>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td align="left">
+                            <h4 style="margin: 0 0 6pt 0; color: #0a2540;">${index + 1}. ${escapeHtml(phase.title)}</h4>
+                            <p style="margin: 0; font-size: 10pt; color: #64748b;">
+                                <strong style="color: #1a1f36;">${escapeHtml(selectedLabels)}</strong><br>
+                                ${escapeHtml(description)}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
             </div>
         `;
     }).join("");
@@ -407,19 +416,19 @@ function getInfrastructureNarrative(data: EstimatorEmailData) {
 
     if (architectureSelection?.selectedOptions.includes("serverless")) {
         return `
-            <div class="method-box" style="margin-top: 30pt;">
-                <h3 style="margin-top: 0;">Infrastructure Cost Savings</h3>
-                <p>Traditional agencies often build products on fixed infrastructure that can cost hundreds every month to host and maintain.</p>
-                <p>Because your scope utilizes a modern <strong>${escapeHtml(chosenArchitecture?.label || "Serverless Architecture")}</strong>, your launch infrastructure stays lean, scales on demand, and avoids unnecessary operational overhead during the MVP phase.</p>
+            <div class="method-box">
+                <h3 style="margin: 0 0 8pt 0; color: #0055FF; font-family: sans-serif; font-size: 16px; font-weight: 700;">Infrastructure Cost Savings</h3>
+                <p style="margin: 0 0 10pt 0; color: #425466; font-family: sans-serif; font-size: 14px; line-height: 1.6;">Traditional agencies often build products on fixed infrastructure that can cost hundreds every month to host and maintain.</p>
+                <p style="margin: 0; color: #425466; font-family: sans-serif; font-size: 14px; line-height: 1.6;">Because your scope utilizes a modern <strong>${escapeHtml(chosenArchitecture?.label || "Serverless Architecture")}</strong>, your launch infrastructure stays lean, scales on demand, and avoids unnecessary operational overhead during the MVP phase.</p>
             </div>
         `;
     }
 
     return `
-        <div class="method-box" style="margin-top: 30pt;">
-            <h3 style="margin-top: 0;">Infrastructure Strategy</h3>
-            <p>Your selected <strong>${escapeHtml(chosenArchitecture?.label || "delivery architecture")}</strong> is designed to match the current product scope without over-engineering the MVP.</p>
-            <p>This keeps launch costs practical today while leaving room to evolve the platform architecture as usage, integrations, and traffic grow.</p>
+        <div class="method-box">
+            <h3 style="margin: 0 0 8pt 0; color: #0055FF; font-family: sans-serif; font-size: 16px; font-weight: 700;">Infrastructure Strategy</h3>
+            <p style="margin: 0 0 10pt 0; color: #425466; font-family: sans-serif; font-size: 14px; line-height: 1.6;">Your selected <strong>${escapeHtml(chosenArchitecture?.label || "delivery architecture")}</strong> is designed to match the current product scope without over-engineering the MVP.</p>
+            <p style="margin: 0; color: #425466; font-family: sans-serif; font-size: 14px; line-height: 1.6;">This keeps launch costs practical today while leaving room to evolve the platform architecture as usage, integrations, and traffic grow.</p>
         </div>
     `;
 }
@@ -438,12 +447,12 @@ function buildSelectionsTableHtml(selections: EstimatorEmailData["selections"]) 
             .join(", ");
 
         return `
-            <tr style="border-bottom: 1px solid #374151;">
-                <td style="padding: 12px; font-weight: 600; color: #1d4ed8;">${escapeHtml(phase.title)}</td>
-                <td style="padding: 12px; color: #1f2937;">${escapeHtml(selectedLabels)}</td>
-                <td style="padding: 12px; color: #0f766e;">${formatCurrency(selection.ourCost)}</td>
-                <td style="padding: 12px; color: #6b7280; text-decoration: line-through;">${formatCurrency(selection.competitorCost)}</td>
-                <td style="padding: 12px; color: #4b5563;">${escapeHtml(String(selection.days))} days</td>
+            <tr>
+                <td style="padding: 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #0055FF; font-family: sans-serif; font-size: 14px;">${escapeHtml(phase.title)}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e2e8f0; color: #425466; font-family: sans-serif; font-size: 14px;">${escapeHtml(selectedLabels)}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e2e8f0; color: #10b981; font-weight: 700; font-family: sans-serif; font-size: 14px;">${formatCurrency(selection.ourCost)}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e2e8f0; color: #94a3b8; text-decoration: line-through; font-family: sans-serif; font-size: 14px;">${formatCurrency(selection.competitorCost)}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-family: sans-serif; font-size: 14px;">${escapeHtml(String(selection.days))} days</td>
             </tr>
         `;
     }).join("");
@@ -484,69 +493,58 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
 
         .page {
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
             padding: 20px;
             margin: 0 auto;
             background: #ffffff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
             box-sizing: border-box;
-            page-break-after: always;
             overflow: hidden;
-        }
-
-        .page:last-child {
-            page-break-after: auto;
+            border: 1px solid #e2e8f0;
         }
 
         h1 {
-            font-size: 28pt;
+            font-size: 24pt;
             font-weight: 800;
             color: #0a2540;
-            margin-bottom: 2pt;
+            margin: 0 0 10pt 0;
             letter-spacing: -0.5px;
         }
 
         h2 {
-            font-size: 22pt;
+            font-size: 20pt;
             font-weight: 700;
             color: #0a2540;
-            margin-top: 10pt;
+            margin: 20pt 0 10pt 0;
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 8pt;
         }
 
         h3 {
-            font-size: 16pt;
+            font-size: 15pt;
             font-weight: 600;
             color: #0055FF;
-            margin-top: 16pt;
-            margin-bottom: 8pt;
+            margin: 15pt 0 8pt 0;
+        }
+
+        h4 {
+            margin: 0 0 6pt 0;
+            font-size: 12pt;
+            color: #0a2540;
+            font-weight: 700;
         }
 
         p {
             font-size: 11pt;
             color: #425466;
             line-height: 1.6;
-            margin-bottom: 12pt;
-        }
-
-        ul {
-            margin-top: 0;
-            padding-left: 20px;
-        }
-
-        li {
-            font-size: 11pt;
-            color: #425466;
-            line-height: 1.6;
-            margin-bottom: 8pt;
+            margin: 0 0 12pt 0;
         }
 
         .brand-header {
             border-bottom: 3px solid #0055FF;
             padding-bottom: 12pt;
-            margin-bottom: 25pt;
+            margin-bottom: 20pt;
         }
 
         .brand-logo {
@@ -574,116 +572,98 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         }
 
         .hero-block {
-            background: #0a2540;
-            background: linear-gradient(135deg, #0a2540 0%, #1a1f36 100%);
-            color: white;
+            background-color: #0a2540;
+            color: #ffffff;
             border-radius: 12pt;
-            padding: 30pt;
-            margin-top: 30pt;
-            box-shadow: 0 10px 25px rgba(10, 37, 64, 0.15);
+            padding: 30pt 20pt;
+            margin: 20pt 0;
             text-align: center;
         }
 
         .hero-title {
             color: #8792a2;
-            font-size: 14pt;
+            font-size: 13pt;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 10pt;
+            margin-bottom: 8pt;
         }
 
         .hero-price {
-            font-size: 56pt;
+            font-size: 48pt;
             font-weight: 800;
-            color: white;
-            line-height: 1;
+            color: #ffffff;
+            line-height: 1.1;
             margin: 10pt 0;
         }
 
         .hero-time {
-            font-size: 18pt;
+            font-size: 16pt;
             font-weight: 500;
             color: #34d399;
-            margin-top: 10pt;
+            margin-top: 5pt;
         }
 
         .roi-compare {
-            background: #f8fafc;
+            background-color: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 8pt;
-            padding: 20pt;
-            margin-top: 30pt;
-        }
-
-        .roi-col {
-            padding: 10pt;
+            padding: 15pt;
+            margin: 20pt 0;
         }
 
         .roi-label {
-            font-size: 11pt;
+            font-size: 10pt;
             color: #64748b;
-            margin-bottom: 6pt;
+            margin-bottom: 4pt;
             text-transform: uppercase;
             font-weight: 600;
         }
 
         .roi-bad {
-            font-size: 18pt;
+            font-size: 16pt;
             color: #f87171;
             text-decoration: line-through;
+            font-weight: 700;
         }
 
         .roi-good {
-            font-size: 20pt;
-            font-weight: 700;
+            font-size: 18pt;
+            font-weight: 800;
             color: #10b981;
         }
 
         .scope-item {
-            background: #ffffff;
+            background-color: #ffffff;
             border: 1px solid #e2e8f0;
             border-left: 4px solid #0055FF;
-            padding: 16pt;
+            padding: 12pt 15pt;
             border-radius: 6pt;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-            margin-bottom: 10px;
-        }
-
-        .scope-item h4 {
-            margin: 0 0 6pt 0;
-            font-size: 12pt;
-            color: #0a2540;
-        }
-
-        .scope-item p {
-            margin: 0;
-            font-size: 10pt;
-            color: #64748b;
+            margin-bottom: 12pt;
         }
 
         .method-box {
-            background: #f8fafc;
-            padding: 20pt;
+            background-color: #f8fafc;
+            padding: 15pt;
             border-radius: 8pt;
-            margin-bottom: 20pt;
+            margin: 15pt 0;
             border: 1px solid #e2e8f0;
         }
 
         .pie-chart-container {
             padding: 20pt;
-            background: #0f172a;
+            background-color: #0f172a;
             border-radius: 12pt;
-            color: white;
-            margin: 30pt 0;
+            color: #ffffff;
+            margin: 20pt 0;
         }
 
         .pie-stat {
-            margin-bottom: 16pt;
+            margin-bottom: 12pt;
         }
 
         .pie-stat h4 {
-            margin: 0 0 4pt 0;
-            font-size: 14pt;
+            margin: 0 0 2pt 0;
+            font-size: 13pt;
             color: #34d399;
         }
 
@@ -693,82 +673,74 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             color: #cbd5e1;
         }
 
-        .gantt-container {
-            margin-top: 30pt;
-        }
-
         .gantt-row {
-            margin-bottom: 16pt;
-            background: #f8fafc;
+            margin-bottom: 15pt;
+            background-color: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 8pt;
             overflow: hidden;
         }
 
         .gantt-days {
-            background: #0055FF;
-            color: white;
-            padding: 15pt;
+            background-color: #0055FF;
+            color: #ffffff;
+            padding: 12pt;
             font-weight: bold;
             text-align: center;
-        }
-
-        .gantt-days span {
-            font-size: 10pt;
-            font-weight: normal;
-            opacity: 0.9;
-        }
-
-        .gantt-content {
-            padding: 15pt 20pt;
-        }
-
-        .gantt-content h4 {
-            margin: 0 0 6pt 0;
-            color: #0a2540;
             font-size: 14pt;
         }
 
-        .gantt-content p {
-            margin: 0;
-            font-size: 10.5pt;
+        .gantt-content {
+            padding: 12pt 15pt;
         }
 
         .cta-page {
             text-align: center;
-            padding-top: 40pt;
-            padding-bottom: 40pt;
-            background: #0a2540;
-            color: white;
+            padding: 40pt 20pt;
+            background-color: #0a2540;
+            color: #ffffff;
+            border-radius: 12pt;
+            margin-top: 20pt;
         }
 
         .cta-btn {
             display: inline-block;
-            background: #0055FF;
-            color: white;
-            padding: 16pt 32pt;
-            font-size: 16pt;
-            font-weight: 600;
+            background-color: #0055FF;
+            color: #ffffff;
+            padding: 14pt 28pt;
+            font-size: 14pt;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 8pt;
-            margin-top: 30pt;
+            border-radius: 6pt;
+            margin-top: 20pt;
         }
 
-        @media print {
-            body {
-                background: white;
+        @media only screen and (max-width: 600px) {
+            .page { padding: 15px !important; }
+            .hero-price { font-size: 32pt !important; }
+            .roi-bad, .roi-good { font-size: 14pt !important; }
+            .stack-on-mobile {
+                display: block !important;
+                width: 100% !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                border-left: none !important;
+                border-top: 1px solid #e2e8f0 !important;
+                margin-top: 15pt !important;
+                padding-top: 15pt !important;
             }
-
-            .page {
-                margin: 0;
-                box-shadow: none;
-                padding: 15mm;
-            }
+            .mobile-hide { display: none !important; }
         }
     </style>
 </head>
-<body>
-    <div class="page">
+<body style="margin: 0; padding: 0; background-color: #f7fafc;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f7fafc;">
+        <tr>
+            <td align="center" style="padding: 20px 10px;">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 700px; background-color: #ffffff; border: 1px solid #e2e8f0;">
+                    <tr>
+                        <td>
+    <div class="page" style="border: none; margin: 0; max-width: none;">
         <div class="brand-header">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -798,19 +770,19 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         <div class="roi-compare">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
-                    <td width="45%" align="left" valign="top">
+                    <td class="stack-on-mobile" width="45%" align="left" valign="top">
                         <div class="roi-col">
                             <div class="roi-label">Traditional Agency Estimate</div>
                             <div class="roi-bad">${traditionalEstimate}</div>
                             <div style="font-size: 11pt; color: #64748b; margin-top: 4pt;">Timeline: ${escapeHtml(data.totals.competitorDays)}+ Days</div>
                         </div>
                     </td>
-                    <td width="10%"></td>
-                    <td width="45%" align="left" valign="top" style="border-left: 2px solid #e2e8f0; padding-left: 20pt;">
+                    <td class="mobile-hide" width="10%"></td>
+                    <td class="stack-on-mobile" width="45%" align="left" valign="top" style="border-left: 2px solid #e2e8f0; padding-left: 20pt;">
                         <div class="roi-col">
                             <div class="roi-label" style="color: #0055FF;">Your Zylex Savings</div>
                             <div class="roi-good">Save ${totalSavings} <br> (${savingsPercent}%)</div>
-                            <div style="font-size: 11pt; font-weight: 600; color: #0a2540; margin-top: 4pt;">Delivered significantly faster than the traditional route</div>
+                            <div style="font-size: 11pt; font-weight: 600; color: #0a2540; margin-top: 4pt;">Delivered significantly faster</div>
                         </div>
                     </td>
                 </tr>
@@ -827,7 +799,8 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         </div>
     </div>
 
-    <div class="page">
+    <!-- Page Break Placeholder for Print / Dividers for Email -->
+    <div class="page" style="border: none; margin: 30pt 0 0 0; border-top: 2px dashed #e2e8f0; max-width: none;">
         <div class="brand-header">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -858,7 +831,7 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" style="border: none; margin: 30pt 0 0 0; border-top: 2px dashed #e2e8f0; max-width: none;">
         <div class="brand-header">
             <div class="brand-logo" style="font-size: 16pt;">ZYLEX</div>
         </div>
@@ -869,17 +842,17 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         <div class="pie-chart-container">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
-                    <td width="40%" align="center" valign="middle">
-                        <div style="width: 120px; height: 120px; border-radius: 50%; background: #0055FF; margin: 0 auto;"></div>
+                    <td class="stack-on-mobile" width="30%" align="center" valign="middle" style="padding-bottom: 20pt;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; background: #0055FF; margin: 0 auto;"></div>
                     </td>
-                    <td width="60%" align="left" valign="middle">
+                    <td class="stack-on-mobile" width="70%" align="left" valign="middle">
                         <div class="pie-stat">
-                            <h4><span style="display:inline-block; width:12px; height:12px; background:#0055FF; margin-right:8px; border-radius:2px;"></span>60% Zylex Core Modules</h4>
-                            <p>We utilize our proprietary library of battle-tested code for repetitive functions like authentication, databases, and pipelines.</p>
+                            <h4 style="color: #34d399; font-size: 13pt; margin-bottom: 4pt;"><span style="display:inline-block; width:10px; height:10px; background:#0055FF; margin-right:8px; border-radius:2px;"></span>60% Zylex Core Modules</h4>
+                            <p style="color: #cbd5e1; font-size: 10pt; margin: 0;">We utilize our proprietary library of battle-tested code for repetitive functions.</p>
                         </div>
-                        <div class="pie-stat">
-                            <h4><span style="display:inline-block; width:12px; height:12px; background:#34d399; margin-right:8px; border-radius:2px;"></span>40% Custom Engineering</h4>
-                            <p>By removing boilerplate, our engineering time goes directly into custom workflows and business logic.</p>
+                        <div class="pie-stat" style="margin-top: 15pt;">
+                            <h4 style="color: #34d399; font-size: 13pt; margin-bottom: 4pt;"><span style="display:inline-block; width:10px; height:10px; background:#34d399; margin-right:8px; border-radius:2px;"></span>40% Custom Engineering</h4>
+                            <p style="color: #cbd5e1; font-size: 10pt; margin: 0;">By removing boilerplate, our engineering time goes directly into custom workflows.</p>
                         </div>
                     </td>
                 </tr>
@@ -901,7 +874,7 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" style="border: none; margin: 30pt 0 0 0; border-top: 2px dashed #e2e8f0; max-width: none;">
         <div class="brand-header">
             <div class="brand-logo" style="font-size: 16pt;">ZYLEX</div>
         </div>
@@ -913,10 +886,10 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             <div class="gantt-row">
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td width="100" class="gantt-days" style="background:#0055FF;">
-                            <span>Phase</span><br>1
+                        <td class="stack-on-mobile gantt-days" width="100" style="background:#0055FF; padding: 12pt; text-align: center;">
+                            <span>Phase</span><br><span style="font-size: 18pt;">1</span>
                         </td>
-                        <td class="gantt-content">
+                        <td class="stack-on-mobile gantt-content" style="padding: 12pt 15pt;">
                             <h4>Architecture & Foundation</h4>
                             <p>Finalizing documentation, provisioning infrastructure, shaping the data layer, and wiring up the foundational patterns.</p>
                         </td>
@@ -926,10 +899,10 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             <div class="gantt-row">
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td width="100" class="gantt-days" style="background: #2563eb;">
-                            <span>Phase</span><br>2
+                        <td class="stack-on-mobile gantt-days" width="100" style="background: #2563eb; padding: 12pt; text-align: center;">
+                            <span>Phase</span><br><span style="font-size: 18pt;">2</span>
                         </td>
-                        <td class="gantt-content">
+                        <td class="stack-on-mobile gantt-content" style="padding: 12pt 15pt;">
                             <h4>Core Engineering</h4>
                             <p>Building the interface system, implementing the core application structure, and connecting the key product modules.</p>
                         </td>
@@ -939,10 +912,10 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             <div class="gantt-row">
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td width="100" class="gantt-days" style="background: #3b82f6;">
-                            <span>Phase</span><br>3
+                        <td class="stack-on-mobile gantt-days" width="100" style="background: #3b82f6; padding: 12pt; text-align: center;">
+                            <span>Phase</span><br><span style="font-size: 18pt;">3</span>
                         </td>
-                        <td class="gantt-content">
+                        <td class="stack-on-mobile gantt-content" style="padding: 12pt 15pt;">
                             <h4>Business Logic & Integrations</h4>
                             <p>Shipping custom workflows, dynamic data connections, and the third-party integrations selected during the estimator flow.</p>
                         </td>
@@ -952,10 +925,10 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             <div class="gantt-row">
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td width="100" class="gantt-days" style="background: #10b981;">
-                            <span>Phase</span><br>4
+                        <td class="stack-on-mobile gantt-days" width="100" style="background: #10b981; padding: 12pt; text-align: center;">
+                            <span>Phase</span><br><span style="font-size: 18pt;">4</span>
                         </td>
-                        <td class="gantt-content">
+                        <td class="stack-on-mobile gantt-content" style="padding: 12pt 15pt;">
                             <h4>QA, Polish, & Handover</h4>
                             <p>Executing QA, testing the critical paths, polishing the release, and deploying the production-ready build with handover support.</p>
                         </td>
@@ -974,7 +947,7 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" style="border: none; margin: 30pt 0 0 0; border-top: 2px dashed #e2e8f0; max-width: none;">
         <div class="brand-header">
             <div class="brand-logo" style="font-size: 16pt;">ZYLEX</div>
         </div>
@@ -1001,12 +974,14 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
         </div>
     </div>
 
-    <div class="page cta-page">
+    </div>
+
+    <div class="page cta-page" style="border: none; margin: 30pt 0 0 0; max-width: none;">
         <h2 style="color: white; border-bottom: none; font-size: 32pt; margin-bottom: 20pt; margin-top: 0;">Let's Validate Your Scope.</h2>
         <p style="color: #cbd5e1; font-size: 14pt; max-width: 600px; margin: 0 auto; line-height: 1.6;">
             This estimate provides a highly accurate baseline for your MVP.
             <br><br>
-            The next step is a focused Technical Discovery Call with our engineering team to map your business logic, answer stakeholder questions, and validate the execution plan.
+            The next step is a focused Technical Discovery Call with our engineering team to map your business logic and validate the execution plan.
         </p>
         <a href="https://calendly.com/zylex" class="cta-btn">Book Technical Discovery Call</a>
 
@@ -1016,6 +991,12 @@ function buildUserBlueprintEmail(data: EstimatorEmailData) {
             </div>
         </div>
     </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
     `;
@@ -1048,31 +1029,31 @@ function buildInternalLeadEmail(data: EstimatorEmailData) {
             <td style="padding: 28px 32px;">
                 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 24px;">
                     <tr>
-                        <td width="50%" style="padding: 0 0 16px;">
+                        <td class="stack-on-mobile" width="50%" style="padding: 0 0 16px;">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Client</div>
                             <div style="font-size: 16px; font-weight: 600; color: #0f172a;">${clientName}</div>
                         </td>
-                        <td width="50%" style="padding: 0 0 16px;">
+                        <td class="stack-on-mobile" width="50%" style="padding: 0 0 16px;">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Company</div>
                             <div style="font-size: 16px; font-weight: 600; color: #0f172a;">${companyName}</div>
                         </td>
                     </tr>
                     <tr>
-                        <td width="50%" style="padding: 0 0 16px;">
+                        <td class="stack-on-mobile" width="50%" style="padding: 0 0 16px;">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Email</div>
                             <div style="font-size: 16px; font-weight: 600; color: #0f172a;">${escapeHtml(data.userEmail)}</div>
                         </td>
-                        <td width="50%" style="padding: 0 0 16px;">
+                        <td class="stack-on-mobile" width="50%" style="padding: 0 0 16px;">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Designation</div>
                             <div style="font-size: 16px; font-weight: 600; color: #0f172a;">${designation}</div>
                         </td>
                     </tr>
                     <tr>
-                        <td width="50%">
+                        <td class="stack-on-mobile" width="50%">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Requested Timeline</div>
                             <div style="font-size: 16px; font-weight: 600; color: #0f172a;">${timeline}</div>
                         </td>
-                        <td width="50%">
+                        <td class="stack-on-mobile" width="50%">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Project Profile</div>
                             <div style="font-size: 16px; font-weight: 600; color: #0f172a;">${projectProfile}</div>
                         </td>
@@ -1081,25 +1062,25 @@ function buildInternalLeadEmail(data: EstimatorEmailData) {
 
                 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 24px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px;">
                     <tr>
-                        <td width="25%" style="padding: 20px; border-right: 1px solid #bfdbfe; text-align: center;">
+                        <td class="stack-on-mobile" width="25%" style="padding: 20px; border-right: 1px solid #bfdbfe; text-align: center;">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Our Quote</div>
                             <div style="font-size: 26px; font-weight: 700; color: #0055FF;">${formatCurrency(data.totals.ourCost)}</div>
                             <div style="font-size: 12px; color: #475569;">${escapeHtml(data.totals.ourDays)} days</div>
                         </td>
-                        <td width="25%" style="padding: 20px; border-right: 1px solid #bfdbfe; text-align: center;">
+                        <td class="stack-on-mobile" width="25%" style="padding: 20px; border-right: 1px solid #bfdbfe; text-align: center;">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Competitor</div>
                             <div style="font-size: 22px; font-weight: 700; color: #94a3b8; text-decoration: line-through;">${formatCurrency(data.totals.competitorCost)}</div>
                             <div style="font-size: 12px; color: #475569;">${escapeHtml(data.totals.competitorDays)}+ days</div>
                         </td>
-                        <td width="25%" style="padding: 20px; border-right: 1px solid #bfdbfe; text-align: center;">
+                        <td class="stack-on-mobile" width="25%" style="padding: 20px; border-right: 1px solid #bfdbfe; text-align: center;">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Savings</div>
                             <div style="font-size: 26px; font-weight: 700; color: #059669;">${formatCurrency(data.totals.savings)}</div>
                             <div style="font-size: 12px; color: #475569;">${escapeHtml(data.totals.savingsPercent)}% saved</div>
                         </td>
-                        <td width="25%" style="padding: 20px; text-align: center;">
+                        <td class="stack-on-mobile" width="25%" style="padding: 20px; text-align: center;">
                             <div style="font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">Progress</div>
                             <div style="font-size: 26px; font-weight: 700; color: #0f172a;">${escapeHtml(String(data.completedPhases))}/10</div>
-                            <div style="font-size: 12px; color: #475569;">Estimator phases completed</div>
+                            <div style="font-size: 12px; color: #475569;">Estimator phases</div>
                         </td>
                     </tr>
                 </table>
