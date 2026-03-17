@@ -47,7 +47,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <head>
+      <body
+        className={`${outfit.variable} ${bebasNeue.variable} ${cormorant.variable} font-sans antialiased`}
+      >
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
@@ -60,10 +62,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-K66G34JR');`,
           }}
         />
-      </head>
-      <body
-        className={`${outfit.variable} ${bebasNeue.variable} ${cormorant.variable} font-sans antialiased`}
-      >
+
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
