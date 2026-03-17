@@ -18,5 +18,5 @@ RUN npm run build
 
 EXPOSE 3000
 
-# Apply tracked Prisma migrations, then start app
-CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]
+# Apply tracked Prisma migrations with legacy-db fallback, then start app
+CMD ["sh", "./scripts/start-prod.sh"]
