@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog-data";
-import { buildBlogMetadata } from "@/lib/blog-seo";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Calendar, Clock, ChevronLeft, AlertCircle, CheckCircle2, ArrowRight, Bot, Zap, Settings, Server, Tag, Map, MousePointer, Eye, Layers, Scissors, Code, Check, X, type LucideIcon } from "lucide-react";
@@ -27,20 +25,6 @@ interface BlogPostPageProps {
     params: Promise<{
         slug: string;
     }>;
-}
-
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-    const { slug } = await params;
-    const post = await getBlogPost(slug);
-
-    if (!post) {
-        return {
-            title: "Blog Not Found",
-            description: "The requested blog post could not be found.",
-        };
-    }
-
-    return buildBlogMetadata(post);
 }
 
 const IconMap: Record<string, LucideIcon> = {

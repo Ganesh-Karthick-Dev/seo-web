@@ -21,10 +21,16 @@ export function getCanonicalUrl(canonicalUrl: string | null | undefined, slug: s
     return new URL(value.startsWith("/") ? value : `/${value}`, SITE_URL).toString();
 }
 
+export function getBlogSeoDetails(post: BlogPost) {
+    return {
+        title: post.metaTitle?.trim() || post.title,
+        description: post.metaDescription?.trim() || post.excerpt,
+        canonical: getCanonicalUrl(post.canonicalUrl, post.slug),
+    };
+}
+
 export function buildBlogMetadata(post: BlogPost): Metadata {
-    const title = post.metaTitle?.trim() || post.title;
-    const description = post.metaDescription?.trim() || post.excerpt;
-    const canonical = getCanonicalUrl(post.canonicalUrl, post.slug);
+    const { title, description, canonical } = getBlogSeoDetails(post);
 
     return {
         title,
