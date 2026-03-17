@@ -16,6 +16,9 @@ interface HtmlBlogPost {
     readTime: string;
     category: string;
     image: string;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalUrl: string;
     authorName: string;
     authorRole: string;
     authorAvatar: string;
@@ -33,6 +36,9 @@ const emptyPost: Omit<HtmlBlogPost, "id" | "createdAt" | "updatedAt"> = {
     readTime: "5 min read",
     category: "Technical",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+    metaTitle: "",
+    metaDescription: "",
+    canonicalUrl: "",
     authorName: "SEO Team",
     authorRole: "Technical Writer",
     authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150",
@@ -205,13 +211,41 @@ export default function AdminHtmlBlogPage() {
                                             />
                                         </div>
                                         <div className="md:col-span-2">
-                                            <label className="text-sm text-white/70 mb-2 block">Excerpt / Meta Description</label>
+                                            <label className="text-sm text-white/70 mb-2 block">Excerpt</label>
                                             <Textarea
                                                 required
                                                 value={currentPost.excerpt || ""}
                                                 onChange={(e) => setCurrentPost({ ...currentPost, excerpt: e.target.value })}
                                                 className="bg-black/50 border-white/10 text-white"
                                                 rows={2}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm text-white/70 mb-2 block">Meta Title</label>
+                                            <Input
+                                                value={currentPost.metaTitle || ""}
+                                                onChange={(e) => setCurrentPost({ ...currentPost, metaTitle: e.target.value })}
+                                                className="bg-black/50 border-white/10 text-white font-mono"
+                                                placeholder="SEO title for browser and search"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm text-white/70 mb-2 block">Canonical URL</label>
+                                            <Input
+                                                value={currentPost.canonicalUrl || ""}
+                                                onChange={(e) => setCurrentPost({ ...currentPost, canonicalUrl: e.target.value })}
+                                                className="bg-black/50 border-white/10 text-white font-mono"
+                                                placeholder={`https://zylex.io/resources/blog/${currentPost.slug || "your-slug"}`}
+                                            />
+                                        </div>
+                                        <div className="md:col-span-2">
+                                            <label className="text-sm text-white/70 mb-2 block">Meta Description</label>
+                                            <Textarea
+                                                value={currentPost.metaDescription || ""}
+                                                onChange={(e) => setCurrentPost({ ...currentPost, metaDescription: e.target.value })}
+                                                className="bg-black/50 border-white/10 text-white"
+                                                rows={2}
+                                                placeholder="SEO description for search results"
                                             />
                                         </div>
                                         <div>

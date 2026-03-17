@@ -15,6 +15,9 @@ interface BlogPost {
     readTime: string;
     category: string;
     image: string;
+    metaTitle: string;
+    metaDescription: string;
+    canonicalUrl: string;
     authorName: string;
     authorRole: string;
     authorAvatar: string;
@@ -30,7 +33,14 @@ interface BlogPost {
     afterPoints: string[];
     businessValueTitle: string;
     businessValuePoints: { highlight: string; description: string }[];
+    createdAt?: string;
+    updatedAt?: string;
 }
+
+type StringArrayField = "painPointPoints" | "beforePoints" | "afterPoints";
+type ObjectArrayField = "solutionFeatures" | "businessValuePoints";
+type SolutionFeature = BlogPost["solutionFeatures"][number];
+type BusinessValuePoint = BlogPost["businessValuePoints"][number];
 
 const emptyPost: Omit<BlogPost, "id" | "createdAt" | "updatedAt"> = {
     title: "",
@@ -40,6 +50,9 @@ const emptyPost: Omit<BlogPost, "id" | "createdAt" | "updatedAt"> = {
     readTime: "5 min read",
     category: "Development",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800",
+    metaTitle: "",
+    metaDescription: "",
+    canonicalUrl: "",
     authorName: "Admin",
     authorRole: "Content Creator",
     authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150",
@@ -66,6 +79,9 @@ const samplePost: Omit<BlogPost, "id" | "createdAt" | "updatedAt"> = {
     readTime: "8 min read",
     category: "AI & Automation",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    metaTitle: "How AI-Powered Automation Transforms Business Operations",
+    metaDescription: "Learn how AI automation reduces repetitive work, improves accuracy, and creates measurable ROI for fast-growing businesses.",
+    canonicalUrl: "https://zylex.io/resources/blog/ai-powered-automation-transforms-business",
     authorName: "Zylex Team",
     authorRole: "Technology Experts",
     authorAvatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150",
@@ -175,24 +191,68 @@ export default function AdminBlogPage() {
         setIsEditing(true);
     };
 
-    const addArrayItem = (field: keyof BlogPost) => {
+    const addStringArrayItem = (field: StringArrayField) => {
         setCurrentPost((prev) => ({
             ...prev,
-            [field]: [...((prev[field] as any[]) || []), ""],
+            [field]: [...(prev[field] || []), ""],
         }));
     };
 
-    const removeArrayItem = (field: keyof BlogPost, index: number) => {
+    const removeStringArrayItem = (field: StringArrayField, index: number) => {
         setCurrentPost((prev) => ({
             ...prev,
-            [field]: ((prev[field] as any[]) || []).filter((_, i) => i !== index),
+            [field]: (prev[field] || []).filter((_, i) => i !== index),
         }));
     };
 
-    const updateArrayItem = (field: keyof BlogPost, index: number, value: any) => {
+    const updateStringArrayItem = (field: StringArrayField, index: number, value: string) => {
         setCurrentPost((prev) => ({
             ...prev,
-            [field]: ((prev[field] as any[]) || []).map((item, i) => (i === index ? value : item)),
+            [field]: (prev[field] || []).map((item, i) => (i === index ? value : item)),
+        }));
+    };
+
+    const addObjectArrayItem = (field: "solutionFeatures" | "businessValuePoints") => {
+        if (field === "solutionFeatures") {
+            setCurrentPost((prev) => ({
+                ...prev,
+                solutionFeatures: [...(prev.solutionFeatures || []), { title: "", description: "", icon: "Zap" }],
+            }));
+            return;
+        }
+
+        setCurrentPost((prev) => ({
+            ...prev,
+            businessValuePoints: [...(prev.businessValuePoints || []), { highlight: "", description: "" }],
+        }));
+    };
+
+    const removeObjectArrayItem = (field: ObjectArrayField, index: number) => {
+        if (field === "solutionFeatures") {
+            setCurrentPost((prev) => ({
+                ...prev,
+                solutionFeatures: (prev.solutionFeatures || []).filter((_, i) => i !== index),
+            }));
+            return;
+        }
+
+        setCurrentPost((prev) => ({
+            ...prev,
+            businessValuePoints: (prev.businessValuePoints || []).filter((_, i) => i !== index),
+        }));
+    };
+
+    const updateSolutionFeature = (index: number, value: SolutionFeature) => {
+        setCurrentPost((prev) => ({
+            ...prev,
+            solutionFeatures: (prev.solutionFeatures || []).map((item, i) => (i === index ? value : item)),
+        }));
+    };
+
+    const updateBusinessValuePoint = (index: number, value: BusinessValuePoint) => {
+        setCurrentPost((prev) => ({
+            ...prev,
+            businessValuePoints: (prev.businessValuePoints || []).map((item, i) => (i === index ? value : item)),
         }));
     };
 
@@ -311,6 +371,34 @@ export default function AdminBlogPage() {
                                         />
                                     </div>
                                     <div>
+                                        <label className="text-sm text-white/70 mb-2 block">Meta Title</label>
+                                        <Input
+                                            value={currentPost.metaTitle || ""}
+                                            onChange={(e) => setCurrentPost({ ...currentPost, metaTitle: e.target.value })}
+                                            className="bg-white/5 border-white/10 text-white"
+                                            placeholder="SEO title for browser and Google"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-sm text-white/70 mb-2 block">Canonical URL</label>
+                                        <Input
+                                            value={currentPost.canonicalUrl || ""}
+                                            onChange={(e) => setCurrentPost({ ...currentPost, canonicalUrl: e.target.value })}
+                                            className="bg-white/5 border-white/10 text-white"
+                                            placeholder={`https://zylex.io/resources/blog/${currentPost.slug || "your-slug"}`}
+                                        />
+                                    </div>
+                                    <div className="md:col-span-2">
+                                        <label className="text-sm text-white/70 mb-2 block">Meta Description</label>
+                                        <Textarea
+                                            value={currentPost.metaDescription || ""}
+                                            onChange={(e) => setCurrentPost({ ...currentPost, metaDescription: e.target.value })}
+                                            className="bg-white/5 border-white/10 text-white"
+                                            rows={3}
+                                            placeholder="SEO description for search results"
+                                        />
+                                    </div>
+                                    <div>
                                         <label className="text-sm text-white/70 mb-2 block">Category</label>
                                         <Input
                                             required
@@ -360,7 +448,7 @@ export default function AdminBlogPage() {
                                             <div key={idx} className="flex gap-2 mb-2">
                                                 <Input
                                                     value={point}
-                                                    onChange={(e) => updateArrayItem("painPointPoints", idx, e.target.value)}
+                                                    onChange={(e) => updateStringArrayItem("painPointPoints", idx, e.target.value)}
                                                     className="bg-white/5 border-white/10 text-white"
                                                     placeholder={`Pain point ${idx + 1}`}
                                                 />
@@ -368,7 +456,7 @@ export default function AdminBlogPage() {
                                                     type="button"
                                                     variant="ghost"
                                                     size="icon"
-                                                    onClick={() => removeArrayItem("painPointPoints", idx)}
+                                                    onClick={() => removeStringArrayItem("painPointPoints", idx)}
                                                 >
                                                     <Trash2 className="w-4 h-4" />
                                                 </Button>
@@ -378,7 +466,7 @@ export default function AdminBlogPage() {
                                             type="button"
                                             variant="outline"
                                             size="sm"
-                                            onClick={() => addArrayItem("painPointPoints")}
+                                            onClick={() => addStringArrayItem("painPointPoints")}
                                             className="mt-2"
                                         >
                                             <Plus className="w-4 h-4 mr-2" />
@@ -419,7 +507,7 @@ export default function AdminBlogPage() {
                                                     <Input
                                                         value={feature.title}
                                                         onChange={(e) =>
-                                                            updateArrayItem("solutionFeatures", idx, { ...feature, title: e.target.value })
+                                                            updateSolutionFeature(idx, { ...feature, title: e.target.value })
                                                         }
                                                         className="bg-white/5 border-white/10 text-white"
                                                         placeholder="Feature title"
@@ -427,7 +515,7 @@ export default function AdminBlogPage() {
                                                     <Input
                                                         value={feature.icon}
                                                         onChange={(e) =>
-                                                            updateArrayItem("solutionFeatures", idx, { ...feature, icon: e.target.value })
+                                                            updateSolutionFeature(idx, { ...feature, icon: e.target.value })
                                                         }
                                                         className="bg-white/5 border-white/10 text-white"
                                                         placeholder="Icon name"
@@ -436,7 +524,7 @@ export default function AdminBlogPage() {
                                                         type="button"
                                                         variant="ghost"
                                                         size="icon"
-                                                        onClick={() => removeArrayItem("solutionFeatures", idx)}
+                                                        onClick={() => removeObjectArrayItem("solutionFeatures", idx)}
                                                     >
                                                         <Trash2 className="w-4 h-4" />
                                                     </Button>
@@ -444,7 +532,7 @@ export default function AdminBlogPage() {
                                                 <Textarea
                                                     value={feature.description}
                                                     onChange={(e) =>
-                                                        updateArrayItem("solutionFeatures", idx, { ...feature, description: e.target.value })
+                                                        updateSolutionFeature(idx, { ...feature, description: e.target.value })
                                                     }
                                                     className="bg-white/5 border-white/10 text-white"
                                                     placeholder="Feature description"
@@ -456,7 +544,7 @@ export default function AdminBlogPage() {
                                             type="button"
                                             variant="outline"
                                             size="sm"
-                                            onClick={() => addArrayItem("solutionFeatures")}
+                                            onClick={() => addObjectArrayItem("solutionFeatures")}
                                         >
                                             <Plus className="w-4 h-4 mr-2" />
                                             Add Feature
@@ -473,7 +561,7 @@ export default function AdminBlogPage() {
                                         <div key={idx} className="flex gap-2 mb-2">
                                             <Input
                                                 value={point}
-                                                onChange={(e) => updateArrayItem("beforePoints", idx, e.target.value)}
+                                                onChange={(e) => updateStringArrayItem("beforePoints", idx, e.target.value)}
                                                 className="bg-white/5 border-white/10 text-white"
                                                 placeholder={`Before point ${idx + 1}`}
                                             />
@@ -481,7 +569,7 @@ export default function AdminBlogPage() {
                                                 type="button"
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => removeArrayItem("beforePoints", idx)}
+                                                onClick={() => removeStringArrayItem("beforePoints", idx)}
                                             >
                                                 <Trash2 className="w-4 h-4" />
                                             </Button>
@@ -491,7 +579,7 @@ export default function AdminBlogPage() {
                                         type="button"
                                         variant="outline"
                                         size="sm"
-                                        onClick={() => addArrayItem("beforePoints")}
+                                        onClick={() => addStringArrayItem("beforePoints")}
                                     >
                                         <Plus className="w-4 h-4 mr-2" />
                                         Add Point
@@ -504,7 +592,7 @@ export default function AdminBlogPage() {
                                         <div key={idx} className="flex gap-2 mb-2">
                                             <Input
                                                 value={point}
-                                                onChange={(e) => updateArrayItem("afterPoints", idx, e.target.value)}
+                                                onChange={(e) => updateStringArrayItem("afterPoints", idx, e.target.value)}
                                                 className="bg-white/5 border-white/10 text-white"
                                                 placeholder={`After point ${idx + 1}`}
                                             />
@@ -512,7 +600,7 @@ export default function AdminBlogPage() {
                                                 type="button"
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => removeArrayItem("afterPoints", idx)}
+                                                onClick={() => removeStringArrayItem("afterPoints", idx)}
                                             >
                                                 <Trash2 className="w-4 h-4" />
                                             </Button>
@@ -522,7 +610,7 @@ export default function AdminBlogPage() {
                                         type="button"
                                         variant="outline"
                                         size="sm"
-                                        onClick={() => addArrayItem("afterPoints")}
+                                        onClick={() => addStringArrayItem("afterPoints")}
                                     >
                                         <Plus className="w-4 h-4 mr-2" />
                                         Add Point
@@ -539,7 +627,7 @@ export default function AdminBlogPage() {
                                             <Input
                                                 value={point.highlight}
                                                 onChange={(e) =>
-                                                    updateArrayItem("businessValuePoints", idx, { ...point, highlight: e.target.value })
+                                                    updateBusinessValuePoint(idx, { ...point, highlight: e.target.value })
                                                 }
                                                 className="bg-white/5 border-white/10 text-white"
                                                 placeholder="Highlight"
@@ -548,7 +636,7 @@ export default function AdminBlogPage() {
                                                 <Input
                                                     value={point.description}
                                                     onChange={(e) =>
-                                                        updateArrayItem("businessValuePoints", idx, { ...point, description: e.target.value })
+                                                        updateBusinessValuePoint(idx, { ...point, description: e.target.value })
                                                     }
                                                     className="bg-white/5 border-white/10 text-white"
                                                     placeholder="Description"
@@ -557,7 +645,7 @@ export default function AdminBlogPage() {
                                                     type="button"
                                                     variant="ghost"
                                                     size="icon"
-                                                    onClick={() => removeArrayItem("businessValuePoints", idx)}
+                                                    onClick={() => removeObjectArrayItem("businessValuePoints", idx)}
                                                 >
                                                     <Trash2 className="w-4 h-4" />
                                                 </Button>
@@ -569,7 +657,7 @@ export default function AdminBlogPage() {
                                     type="button"
                                     variant="outline"
                                     size="sm"
-                                    onClick={() => addArrayItem("businessValuePoints")}
+                                    onClick={() => addObjectArrayItem("businessValuePoints")}
                                 >
                                     <Plus className="w-4 h-4 mr-2" />
                                     Add Value Point

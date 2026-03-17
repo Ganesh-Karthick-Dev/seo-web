@@ -19,6 +19,9 @@ model BlogPost {
   readTime  String
   category  String
   image     String
+  metaTitle String?  @db.Text
+  metaDescription String? @db.Text
+  canonicalUrl String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -74,6 +77,9 @@ model HtmlBlogPost {
   readTime  String
   category  String
   image     String
+  metaTitle String?  @db.Text
+  metaDescription String? @db.Text
+  canonicalUrl String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

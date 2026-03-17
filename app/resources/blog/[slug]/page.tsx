@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog-data";
+import { buildBlogMetadata } from "@/lib/blog-seo";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Calendar, Clock, ChevronLeft, Twitter, Linkedin, AlertCircle, CheckCircle2, ArrowRight, Bot, Zap, Settings, Server, Tag, Map, MousePointer, Eye, Layers, Scissors, Code, Check, X } from "lucide-react";
+import { Calendar, Clock, ChevronLeft, AlertCircle, CheckCircle2, ArrowRight, Bot, Zap, Settings, Server, Tag, Map, MousePointer, Eye, Layers, Scissors, Code, Check, X, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import ShadowContainer from "@/components/ui/shadow-container";
@@ -15,7 +17,7 @@ export async function generateStaticParams() {
         return posts.map((post) => ({
             slug: post.slug,
         }));
-    } catch (error) {
+    } catch {
         console.warn("generateStaticParams: Database not accessible, skipping static generation");
         return [];
     }
@@ -27,8 +29,22 @@ interface BlogPostPageProps {
     }>;
 }
 
-const IconMap: Record<string, any> = {
-    Bot, Zap, Settings, Server, Tag, Map, MousePointer, Eye, Layers, Image: Image, Scissors, Code
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const post = await getBlogPost(slug);
+
+    if (!post) {
+        return {
+            title: "Blog Not Found",
+            description: "The requested blog post could not be found.",
+        };
+    }
+
+    return buildBlogMetadata(post);
+}
+
+const IconMap: Record<string, LucideIcon> = {
+    Bot, Zap, Settings, Server, Tag, Map, MousePointer, Eye, Layers, Scissors, Code
 };
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

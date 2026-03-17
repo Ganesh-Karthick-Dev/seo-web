@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { buildStructuredBlogCreateData, getMissingStructuredBlogFields } from '@/lib/blog-payload';
 
 export async function GET() {
     try {
@@ -17,16 +18,20 @@ export async function POST(request: Request) {
     try {
         console.log('POST /api/blog - Starting...');
         const body = await request.json();
+        const data = buildStructuredBlogCreateData(body);
         console.log('POST /api/blog - Body received:', Object.keys(body));
+        const missingFields = getMissingStructuredBlogFields(data);
 
-        // Validate required fields
-        if (!body.title || !body.slug) {
-            return NextResponse.json({ error: 'Title and slug are required' }, { status: 400 });
+        if (missingFields.length > 0) {
+            return NextResponse.json({
+                error: 'Missing required fields',
+                fields: missingFields,
+            }, { status: 400 });
         }
 
         console.log('POST /api/blog - Creating post in database...');
         const post = await prisma.blogPost.create({
-            data: body,
+            data,
         });
         console.log('POST /api/blog - Post created successfully:', post.id);
         return NextResponse.json(post);
@@ -40,4 +45,3 @@ export async function POST(request: Request) {
         }, { status: 500 });
     }
 }
-

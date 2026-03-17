@@ -6,7 +6,7 @@ RUN apk add --no-cache openssl
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
 COPY . .
 
@@ -18,5 +18,5 @@ RUN npm run build
 
 EXPOSE 3000
 
-# Push schema, then start app
-CMD npx prisma db push --skip-generate && npm start
+# Apply tracked Prisma migrations, then start app
+CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]

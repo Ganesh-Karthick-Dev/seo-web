@@ -1,5 +1,16 @@
 import { prisma } from './prisma';
 
+type SolutionFeature = {
+    title: string;
+    description: string;
+    icon: string;
+};
+
+type BusinessValuePoint = {
+    highlight: string;
+    description: string;
+};
+
 export type PostBase = {
     id: string;
     title: string;
@@ -9,6 +20,9 @@ export type PostBase = {
     readTime: string;
     category: string;
     image: string;
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    canonicalUrl?: string | null;
     author: {
         name: string;
         role: string;
@@ -77,6 +91,9 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         readTime: post.readTime,
         category: post.category,
         image: post.image,
+        metaTitle: post.metaTitle,
+        metaDescription: post.metaDescription,
+        canonicalUrl: post.canonicalUrl,
         author: {
             name: post.authorName,
             role: post.authorRole,
@@ -90,7 +107,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         solution: {
             title: post.solutionTitle,
             description: post.solutionDescription,
-            features: post.solutionFeatures as any,
+            features: post.solutionFeatures as SolutionFeature[],
         },
         beforeAfter: {
             before: {
@@ -104,7 +121,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         },
         businessValue: {
             title: post.businessValueTitle,
-            points: post.businessValuePoints as any,
+            points: post.businessValuePoints as BusinessValuePoint[],
         },
         createdAt: post.createdAt,
     }));
@@ -125,6 +142,9 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
             readTime: post.readTime,
             category: post.category,
             image: post.image,
+            metaTitle: post.metaTitle,
+            metaDescription: post.metaDescription,
+            canonicalUrl: post.canonicalUrl,
             author: {
                 name: post.authorName,
                 role: post.authorRole,
@@ -180,6 +200,9 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
             readTime: post.readTime,
             category: post.category,
             image: post.image,
+            metaTitle: post.metaTitle,
+            metaDescription: post.metaDescription,
+            canonicalUrl: post.canonicalUrl,
             author: {
                 name: post.authorName,
                 role: post.authorRole,
@@ -193,7 +216,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
             solution: {
                 title: post.solutionTitle,
                 description: post.solutionDescription,
-                features: post.solutionFeatures as any,
+                features: post.solutionFeatures as SolutionFeature[],
             },
             beforeAfter: {
                 before: {
@@ -207,7 +230,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
             },
             businessValue: {
                 title: post.businessValueTitle,
-                points: post.businessValuePoints as any,
+                points: post.businessValuePoints as BusinessValuePoint[],
             },
             createdAt: post.createdAt,
         };
@@ -233,6 +256,9 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
             readTime: htmlPost.readTime,
             category: htmlPost.category,
             image: htmlPost.image,
+            metaTitle: htmlPost.metaTitle,
+            metaDescription: htmlPost.metaDescription,
+            canonicalUrl: htmlPost.canonicalUrl,
             author: {
                 name: htmlPost.authorName,
                 role: htmlPost.authorRole,
