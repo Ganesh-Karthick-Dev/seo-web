@@ -50,7 +50,7 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
             changeFrequency: "daily" as const,
             priority: 0.85,
         }));
-    } catch (error) {
+    } catch {
         console.warn("Sitemap: Could not fetch blog posts, skipping dynamic routes");
     }
 
