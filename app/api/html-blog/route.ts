@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { buildHtmlBlogCreateData, getMissingHtmlBlogFields } from '@/lib/html-blog-payload';
 
 export async function GET() {
     try {
@@ -17,13 +18,18 @@ export async function POST(request: Request) {
     try {
         console.log('POST /api/html-blog - Starting...');
         const body = await request.json();
+        const data = buildHtmlBlogCreateData(body);
+        const missingFields = getMissingHtmlBlogFields(data);
 
-        if (!body.title || !body.slug) {
-            return NextResponse.json({ error: 'Title and slug are required' }, { status: 400 });
+        if (missingFields.length > 0) {
+            return NextResponse.json({
+                error: 'Missing required fields',
+                fields: missingFields,
+            }, { status: 400 });
         }
 
         const post = await prisma.htmlBlogPost.create({
-            data: body,
+            data,
         });
         return NextResponse.json(post);
     } catch (error) {

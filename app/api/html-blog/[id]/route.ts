@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { buildHtmlBlogUpdateData } from '@/lib/html-blog-payload';
 
 export async function GET(
     request: Request,
@@ -14,7 +15,7 @@ export async function GET(
             return NextResponse.json({ error: 'Post not found' }, { status: 404 });
         }
         return NextResponse.json(post);
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Failed to fetch post' }, { status: 500 });
     }
 }
@@ -26,9 +27,15 @@ export async function PUT(
     try {
         const { id } = await params;
         const body = await request.json();
+        const data = buildHtmlBlogUpdateData(body);
+
+        if (Object.keys(data).length === 0) {
+            return NextResponse.json({ error: 'No valid fields provided for update' }, { status: 400 });
+        }
+
         const post = await prisma.htmlBlogPost.update({
             where: { id },
-            data: body,
+            data,
         });
         return NextResponse.json(post);
     } catch (error) {
@@ -47,7 +54,7 @@ export async function DELETE(
             where: { id },
         });
         return NextResponse.json({ success: true });
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });
     }
 }

@@ -20,6 +20,9 @@ interface HtmlBlogPost {
     authorRole: string;
     authorAvatar: string;
     htmlContent: string;
+    cssContent: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 const emptyPost: Omit<HtmlBlogPost, "id" | "createdAt" | "updatedAt"> = {
@@ -34,7 +37,21 @@ const emptyPost: Omit<HtmlBlogPost, "id" | "createdAt" | "updatedAt"> = {
     authorRole: "Technical Writer",
     authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150",
     htmlContent: "<!-- Paste your complete HTML here -->\n<style>\n  .custom-seo-blog { color: white; }\n  .custom-seo-blog h2 { color: #ff3366; }\n</style>\n<div class=\"custom-seo-blog\">\n  <h2>Introduction</h2>\n  <p>Your content here...</p>\n</div>",
+    cssContent: "",
 };
+
+function mergeEditorContent(post: HtmlBlogPost): HtmlBlogPost {
+    const hasEmbeddedStyles = /<style[\s>]/i.test(post.htmlContent);
+    const htmlContent = post.cssContent && !hasEmbeddedStyles
+        ? `<style>\n${post.cssContent}\n</style>\n\n${post.htmlContent}`
+        : post.htmlContent;
+
+    return {
+        ...post,
+        htmlContent,
+        cssContent: "",
+    };
+}
 
 export default function AdminHtmlBlogPage() {
     const [posts, setPosts] = useState<HtmlBlogPost[]>([]);
@@ -100,7 +117,7 @@ export default function AdminHtmlBlogPage() {
     };
 
     const handleEdit = (post: HtmlBlogPost) => {
-        setCurrentPost(post);
+        setCurrentPost(mergeEditorContent(post));
         setIsEditing(true);
         setShowPreview(false);
     };
@@ -159,6 +176,7 @@ export default function AdminHtmlBlogPage() {
                                 </div>
                                 <ShadowContainer
                                     html={currentPost.htmlContent || ''}
+                                    css={currentPost.cssContent || ''}
                                     className="bg-black border border-white/20 rounded-2xl p-8 min-h-[500px] overflow-auto"
                                 />
                             </div>
