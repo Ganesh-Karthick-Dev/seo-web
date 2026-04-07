@@ -19,7 +19,7 @@ import {
 import Beams from "@/components/Beams";
 
 export default function Contact() {
-    const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL?.trim();
+    const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL?.trim() || "https://calendly.com/zylexconnect/30min";
     const hasCalendlyUrl = Boolean(calendlyUrl);
     const [activeTab, setActiveTab] = useState<"form" | "calendar">(hasCalendlyUrl ? "calendar" : "form");
     const [formSubmitted, setFormSubmitted] = useState(false);
