@@ -14,7 +14,6 @@ import {
     SiMongodb,
     SiPostgresql,
     SiGraphql,
-    SiAmazonwebservices,
     SiDocker,
     SiGooglecloud,
     SiKubernetes,
@@ -29,6 +28,7 @@ import {
     SiGrafana,
     SiDatadog,
 } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 import { Cloud, Database, Shield, CreditCard } from "lucide-react";
 
 const Circle = forwardRef<
@@ -73,7 +73,7 @@ const Icons: Record<string, IconFn> = {
     mongodb: icon(SiMongodb, "#47A248"),
     postgresql: icon(SiPostgresql, "#4169E1"),
     graphql: icon(SiGraphql, "#E10098"),
-    aws: icon(SiAmazonwebservices, "#FF9900"),
+    aws: icon(FaAws, "#FF9900"),
     azure: icon(Cloud, "#0078D4"),
     docker: icon(SiDocker, "#2496ED"),
     gcp: icon(SiGooglecloud, "#4285F4"),
