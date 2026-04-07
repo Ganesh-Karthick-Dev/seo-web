@@ -125,7 +125,7 @@ export async function POST(req: Request) {
               </div>
               <div class="footer">
                 <p>&copy; ${new Date().getFullYear()} Zylex. All rights reserved.</p>
-                <p>connect@zylex.io</p>
+                <p>${emailTo}</p>
               </div>
             </div>
           </body>

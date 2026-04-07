@@ -19,7 +19,9 @@ import {
 import Beams from "@/components/Beams";
 
 export default function Contact() {
-    const [activeTab, setActiveTab] = useState<"form" | "calendar">("calendar");
+    const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL?.trim();
+    const hasCalendlyUrl = Boolean(calendlyUrl);
+    const [activeTab, setActiveTab] = useState<"form" | "calendar">(hasCalendlyUrl ? "calendar" : "form");
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -286,11 +288,16 @@ export default function Contact() {
                                     {/* Tab Switcher */}
                                     <div className="flex border-b border-white/10">
                                         <button
-                                            onClick={() => setActiveTab("calendar")}
+                                            onClick={() => {
+                                                if (hasCalendlyUrl) {
+                                                    setActiveTab("calendar");
+                                                }
+                                            }}
+                                            aria-disabled={!hasCalendlyUrl}
                                             className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 text-sm font-medium transition-all ${activeTab === "calendar"
                                                 ? "text-cyan-400 bg-cyan-500/10 border-b-2 border-cyan-400"
                                                 : "text-neutral-400 hover:text-white hover:bg-white/5"
-                                                }`}
+                                                } ${!hasCalendlyUrl ? "opacity-50 cursor-not-allowed" : ""}`}
                                         >
                                             <Calendar className="w-4 h-4" />
                                             Schedule a Meeting
@@ -321,23 +328,42 @@ export default function Contact() {
                                                     </p>
                                                 </div>
 
-                                                {/* Calendly Widget */}
-                                                <div className="rounded-xl overflow-hidden bg-white">
-                                                    <InlineWidget
-                                                        url="https://calendly.com/ganeshkarthik18697/30min"
-                                                        styles={{
-                                                            height: "900px",
-                                                            width: "100%",
-                                                        }}
-                                                        pageSettings={{
-                                                            backgroundColor: "ffffff",
-                                                            hideEventTypeDetails: false,
-                                                            hideLandingPageDetails: false,
-                                                            primaryColor: "06b6d4", // Cyan-500 hex
-                                                            textColor: "374151",
-                                                        }}
-                                                    />
-                                                </div>
+                                                {hasCalendlyUrl ? (
+                                                    <div className="rounded-xl overflow-hidden bg-white">
+                                                        <InlineWidget
+                                                            url={calendlyUrl!}
+                                                            styles={{
+                                                                height: "900px",
+                                                                width: "100%",
+                                                            }}
+                                                            pageSettings={{
+                                                                backgroundColor: "ffffff",
+                                                                hideEventTypeDetails: false,
+                                                                hideLandingPageDetails: false,
+                                                                primaryColor: "06b6d4", // Cyan-500 hex
+                                                                textColor: "374151",
+                                                            }}
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="rounded-2xl border border-dashed border-white/10 bg-white/[0.03] p-8 text-center">
+                                                        <Sparkles className="mx-auto mb-4 h-10 w-10 text-cyan-400" />
+                                                        <h4 className="text-xl font-semibold text-white">
+                                                            Scheduling link coming soon
+                                                        </h4>
+                                                        <p className="mx-auto mt-3 max-w-xl text-neutral-400">
+                                                            We removed the old personal booking link. Use the message form for now,
+                                                            and we&apos;ll add the new company Calendly as soon as you share it.
+                                                        </p>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setActiveTab("form")}
+                                                            className="mt-6 inline-flex items-center justify-center rounded-xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-black transition-colors hover:bg-cyan-400"
+                                                        >
+                                                            Open Message Form
+                                                        </button>
+                                                    </div>
+                                                )}
 
 
                                             </div>
