@@ -88,6 +88,12 @@ const engineeringFocus = [
     "We keep your system observable so issues are identified and resolved early.",
 ];
 
+const engineeringRisks = [
+    "Rebuilding after launch",
+    "Scaling issues under real traffic",
+    "Costly fixes due to poor architecture",
+];
+
 const experiencePoints = [
     {
         title: "You Get a Scoping Document Before Work Begins",
@@ -526,24 +532,30 @@ export default async function OutsourceSoftwareDevelopmentIndiaPage() {
                     title="Outsourcing Software Development in India That Understands Your Business Before Writing a Line of Code"
                     titleHighlight="Built by Engineers Who Plan, Execute, and Deliver with Clarity"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {operatingPrinciples.map((item) => {
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        {operatingPrinciples.map((item, index) => {
                             const Icon = item.icon;
 
                             return (
                                 <article
                                     key={item.title}
-                                    className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-7 md:p-8 backdrop-blur-sm"
+                                    className="group rounded-[1.75rem] border border-white/10 bg-white/[0.02] p-7 transition-colors duration-300 hover:border-white/18 md:p-8"
                                 >
-                                    <div className="flex items-center gap-3">
-                                        <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-300">
-                                            <Icon className="w-5 h-5" />
+                                    <div className="flex items-start justify-between gap-4">
+                                        <div className="inline-flex items-center gap-3">
+                                            <span className="text-xs font-medium tracking-[0.28em] text-white/35">
+                                                {String(index + 1).padStart(2, "0")}
+                                            </span>
+                                            <span className="h-px w-10 bg-white/12" />
+                                        </div>
+                                        <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white/80">
+                                            <Icon className="h-5 w-5" />
                                         </span>
-                                        <h3 className="text-xl font-semibold text-white leading-snug">
-                                            {item.title}
-                                        </h3>
                                     </div>
-                                    <p className="mt-5 text-base leading-relaxed text-neutral-400">
+                                    <h3 className="mt-8 max-w-[22rem] text-2xl font-semibold leading-[1.2] text-white">
+                                        {item.title}
+                                    </h3>
+                                    <p className="mt-5 max-w-[34rem] text-base leading-relaxed text-neutral-400">
                                         {item.description}
                                     </p>
                                 </article>
@@ -552,47 +564,85 @@ export default async function OutsourceSoftwareDevelopmentIndiaPage() {
                     </div>
                 </SectionShell>
 
-                <SectionShell
-                    title="Built on Strong Engineering Thinking, Not Just Development Execution"
-                    description="We do not just write code. We design systems that hold up under real usage, scale without breaking, and stay maintainable as your business grows."
-                >
-                    <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-                        <div className="rounded-[2rem] border border-cyan-500/15 bg-cyan-500/[0.04] p-8 md:p-10">
-                            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-300">
-                                What we focus on when building your software
-                            </p>
-                            <div className="mt-8 space-y-4">
-                                {engineeringFocus.map((item) => (
-                                    <div key={item} className="flex gap-3">
-                                        <Check className="mt-1 h-4 w-4 flex-none text-cyan-300" />
-                                        <p className="text-base leading-relaxed text-neutral-300">{item}</p>
-                                    </div>
-                                ))}
+                <section className="relative overflow-hidden py-24 md:py-32">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.035),transparent_34%)] pointer-events-none" />
+                    <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="max-w-5xl mb-16 md:mb-20">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-[1.08]">
+                                Built on Strong Engineering Thinking
+                                <br />
+                                <span className="text-neutral-500">Not Just Development Execution</span>
+                            </h2>
+                            <div className="mt-6 max-w-3xl space-y-3">
+                                <p className="text-lg md:text-xl leading-relaxed text-neutral-200">
+                                    We don&apos;t just write code.
+                                </p>
+                                <p className="text-lg md:text-xl leading-relaxed text-neutral-400">
+                                    We design systems that hold up under real usage, scale without breaking, and stay maintainable as your business grows.
+                                </p>
                             </div>
                         </div>
 
-                        <div className="grid gap-6">
-                            <article className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 md:p-10">
-                                <h3 className="text-2xl font-semibold text-white">Why This Matters for Your Business</h3>
-                                <p className="mt-4 text-base leading-relaxed text-neutral-400">
-                                    Most outsourcing fails not because of effort, but because of poor technical decisions early on.
-                                    We focus on getting those decisions right so you do not face rebuilding after launch,
-                                    scaling issues under real traffic, or costly fixes caused by weak architecture.
+                        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)]">
+                            <article className="rounded-[2rem] border border-cyan-500/18 bg-[linear-gradient(180deg,rgba(3,15,20,0.92),rgba(6,11,14,0.88))] p-8 md:p-10 lg:p-12">
+                                <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300">
+                                    What We Focus on When Building Your Software
                                 </p>
+                                <div className="mt-8 space-y-6">
+                                    {engineeringFocus.map((item) => (
+                                        <div
+                                            key={item}
+                                            className="flex gap-4 border-t border-white/8 pt-6 first:border-t-0 first:pt-0"
+                                        >
+                                            <Check className="mt-1 h-4 w-4 flex-none text-cyan-300" />
+                                            <p className="text-lg leading-relaxed text-neutral-100">{item}</p>
+                                        </div>
+                                    ))}
+                                </div>
                             </article>
-                            <article className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 md:p-10">
-                                <h3 className="text-2xl font-semibold text-white">Built to Support Real-World Usage</h3>
-                                <p className="mt-4 text-base leading-relaxed text-neutral-400">
-                                    Your software is not just meant to be delivered. It is meant to be used daily,
-                                    handle pressure, and grow with your business without constant rework.
-                                </p>
-                            </article>
+
+                            <div className="grid gap-6">
+                                <article className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 md:p-10">
+                                    <h3 className="text-3xl font-semibold leading-tight text-white">
+                                        Why This Matters for Your Business
+                                    </h3>
+                                    <p className="mt-5 text-lg leading-relaxed text-neutral-300">
+                                        Most outsourcing fails not because of effort, but because of poor technical decisions early on.
+                                    </p>
+                                    <p className="mt-4 text-base leading-relaxed text-neutral-400">
+                                        We focus on getting those decisions right so you don&apos;t face:
+                                    </p>
+                                    <div className="mt-6 space-y-4">
+                                        {engineeringRisks.map((item) => (
+                                            <div key={item} className="flex items-start gap-3">
+                                                <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-white/70" />
+                                                <p className="text-base leading-relaxed text-neutral-200">{item}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </article>
+
+                                <article className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 md:p-10">
+                                    <h3 className="text-3xl font-semibold leading-tight text-white">
+                                        Built to Support Real World Usage
+                                    </h3>
+                                    <div className="mt-5 space-y-3">
+                                        <p className="text-lg leading-relaxed text-neutral-300">
+                                            Your software is not just meant to be delivered.
+                                        </p>
+                                        <p className="text-base leading-relaxed text-neutral-400">
+                                            It is meant to be used daily, handle pressure, and grow with your business without constant rework.
+                                        </p>
+                                    </div>
+                                </article>
+                            </div>
                         </div>
                     </div>
-                </SectionShell>
+                </section>
 
                 <SectionShell
-                    title="What Outsourcing Software Development to Zylex Actually Feels Like"
+                    title="What Outsourcing Software Development to Zylex"
+                    titleHighlight="Actually Feels Like"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12">
                         {experiencePoints.map((item) => (
