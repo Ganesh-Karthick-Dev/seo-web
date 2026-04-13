@@ -38,6 +38,8 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
         { url: `${baseUrl}/services/digital-transformation`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
         { url: `${baseUrl}/services/ecommerce`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
         { url: `${baseUrl}/services/it-strategy-consulting`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+        { url: `${baseUrl}/services/offshore-software-development-india`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+        { url: `${baseUrl}/services/outsource-software-development-india`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
         { url: `${baseUrl}/services/web-mobile-development`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     ];
 

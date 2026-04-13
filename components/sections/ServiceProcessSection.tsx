@@ -17,6 +17,8 @@ interface ServiceProcessSectionProps {
     processData?: ProcessItem[];
     /** Optional CTA below section - e.g. { text: "View case studies", href: "/resources" } */
     ctaLink?: { text: string; href: string };
+    backgroundClassName?: string;
+    showBackgroundEffects?: boolean;
 }
 
 const defaultProcessData: ProcessItem[] = [
@@ -117,11 +119,14 @@ export function ServiceProcessSection({
     titleHighlight = "Our Core Software Capabilities",
     processData = defaultProcessData,
     ctaLink,
+    backgroundClassName = "bg-black",
+    showBackgroundEffects = true,
 }: ServiceProcessSectionProps) {
     return (
-        <section className="relative bg-black overflow-hidden">
-            {/* Background effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_left,rgba(6,182,212,0.08),transparent_50%)] pointer-events-none" />
+        <section className={`relative overflow-hidden ${backgroundClassName}`}>
+            {showBackgroundEffects ? (
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_left,rgba(6,182,212,0.08),transparent_50%)] pointer-events-none" />
+            ) : null}
 
             {/* Header */}
             <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8 pt-24 md:pt-32">

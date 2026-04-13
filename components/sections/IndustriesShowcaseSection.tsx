@@ -10,7 +10,15 @@ import { industries } from "@/lib/industries-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function IndustriesShowcaseSection() {
+interface IndustriesShowcaseSectionProps {
+    backgroundClassName?: string;
+    showBackgroundEffects?: boolean;
+}
+
+export function IndustriesShowcaseSection({
+    backgroundClassName = "bg-black",
+    showBackgroundEffects = true,
+}: IndustriesShowcaseSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const gridRef = useRef<HTMLDivElement>(null);
@@ -59,22 +67,26 @@ export function IndustriesShowcaseSection() {
     }, []);
 
     return (
-        <section ref={containerRef} className="relative w-full py-24 md:py-32 bg-black overflow-hidden">
-            {/* Subtle Background Grid */}
-            <div className="absolute inset-0 opacity-[0.03]">
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+        <section
+            ref={containerRef}
+            className={cn("relative w-full py-24 md:py-32 overflow-hidden", backgroundClassName)}
+        >
+            {showBackgroundEffects ? (
+                <>
+                    <div className="absolute inset-0 opacity-[0.03]">
+                        <div
+                            className="absolute inset-0"
+                            style={{
+                                backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
                                           linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                        backgroundSize: "60px 60px",
-                    }}
-                />
-            </div>
-
-            {/* Ambient Glow Effects */}
-            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none" />
+                                backgroundSize: "60px 60px",
+                            }}
+                        />
+                    </div>
+                    <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
+                    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none" />
+                </>
+            ) : null}
 
             <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header Section */}

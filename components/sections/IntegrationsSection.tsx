@@ -123,6 +123,7 @@ interface IntegrationsSectionProps {
     leftTechItems?: TechItem[];
     rightTechItems?: TechItem[];
     description?: string;
+    backgroundClassName?: string;
 }
 
 export function IntegrationsSection({
@@ -131,6 +132,7 @@ export function IntegrationsSection({
     leftTechItems = defaultLeftTechItems,
     rightTechItems = defaultRightTechItems,
     description = "Technology decisions are driven by your requirements — not our preferences. We select the right stack based on scalability needs, team capabilities, integration requirements, and long-term maintenance strategy.",
+    backgroundClassName = "bg-black",
 }: IntegrationsSectionProps) {
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -156,7 +158,7 @@ export function IntegrationsSection({
     const curvatures = [-50, -25, 0, 25, 50];
 
     return (
-        <section className="w-full py-20 lg:py-32 bg-black">
+        <section className={cn("w-full py-20 lg:py-32", backgroundClassName)}>
             <div className="max-w-[90rem] mx-auto px-4 md:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="mb-16 max-w-4xl">
