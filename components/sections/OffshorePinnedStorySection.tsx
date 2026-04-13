@@ -21,11 +21,11 @@ export function OffshorePinnedStorySection({
 }) {
     const sectionRef = useRef<HTMLDivElement>(null);
     const pinnedRef = useRef<HTMLDivElement>(null);
-    const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
+    const slideRefs = useRef<Array<HTMLElement | null>>([]);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            const slides = slideRefs.current.filter(Boolean) as HTMLDivElement[];
+            const slides = slideRefs.current.filter(Boolean) as HTMLElement[];
             if (!sectionRef.current || !pinnedRef.current || slides.length === 0) return;
 
             const setupSlides = (distance: number) => {

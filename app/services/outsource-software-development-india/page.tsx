@@ -15,7 +15,6 @@ import {
     RefreshCw,
     Rocket,
     Search,
-    ShieldCheck,
     ShoppingCart,
     Smartphone,
     Users,
@@ -26,7 +25,11 @@ import { IntegrationsSection } from "@/components/sections/IntegrationsSection";
 import { IndustriesShowcaseSection } from "@/components/sections/IndustriesShowcaseSection";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { Testimonial } from "@/components/ui/design-testimonial";
+import FAQs from "@/components/ui/faqs-component";
+import { OutsourceDifferenceGrid } from "@/components/ui/outsource-difference-grid";
+import { OutsourceStandardsParallax } from "@/components/ui/outsource-standards-parallax";
 import { SoftwareOutsourcingHero } from "@/components/ui/software-outsourcing-hero";
+import { VerticalTabs } from "@/components/ui/vertical-tabs";
 import { getAllBlogPosts } from "@/lib/blog-data";
 
 const canonicalPath = "/services/outsource-software-development-india";
@@ -96,31 +99,43 @@ const engineeringRisks = [
 
 const experiencePoints = [
     {
+        id: "01",
+        image: "/service-page/offshore/Discovery_Through_System_202604092221.png",
         title: "You Get a Scoping Document Before Work Begins",
         description:
             "No assumptions. No jumping straight into code. Before anything is built, you receive a clear written scope that outlines exactly what we are building and why.",
     },
     {
+        id: "02",
+        image: "/service-page/offshore/Live_Working_Software,_202604092226.png",
         title: "Every Sprint Ends With a Live Demo",
         description:
             "Not a screenshot. Not a slide. A working build you can interact with, share with your stakeholders, and give direct feedback on before the next sprint begins.",
     },
     {
+        id: "03",
+        image: "/service-page/offshore/Sprint_Visibility_Through_202604092223.png",
         title: "Your Feedback Shapes the Next Sprint Immediately",
         description:
             "Nothing sits in a backlog for weeks. What you say at the end of one sprint directly influences what gets built in the next. Fast decisions. Faster delivery.",
     },
     {
+        id: "04",
+        image: "/service-page/offshore/Dedicated_Offshore_Product_202604092222.png",
         title: "You Own Everything From Day One",
         description:
             "All code, all assets, all intellectual property are yours. No lock-in. No licensing fees. Full ownership transfers to you at every stage of the engagement.",
     },
     {
+        id: "05",
+        image: "/service-page/offshore/Dedicated_Offshore_Team_202604092233.png",
         title: "One Point of Contact Who Knows Your Product Inside Out",
         description:
             "You are not passed around. One dedicated person from our team knows your project end to end and is your single point of contact throughout the entire engagement.",
     },
     {
+        id: "06",
+        image: "/service-page/offshore/Security,_Documentation,_and_202604092231.png",
         title: "We Document As We Build",
         description:
             "Every decision, every architecture choice, every integration is documented as it happens. When your product ships, the documentation ships with it.",
@@ -644,41 +659,14 @@ export default async function OutsourceSoftwareDevelopmentIndiaPage() {
                     title="What Outsourcing Software Development to Zylex"
                     titleHighlight="Actually Feels Like"
                 >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12">
-                        {experiencePoints.map((item) => (
-                            <article
-                                key={item.title}
-                                className="border-t border-white/10 py-8 first:pt-0 lg:odd:pr-4 lg:even:pl-4"
-                            >
-                                <div>
-                                    <h3 className="text-xl font-semibold text-white leading-snug">{item.title}</h3>
-                                    <p className="mt-3 text-base leading-relaxed text-neutral-400">
-                                        {item.description}
-                                    </p>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
+                    <VerticalTabs items={experiencePoints} />
                 </SectionShell>
 
                 <SectionShell
-                    title="What Makes Our Software Development Approach Different from Typical Outsourcing"
+                    title="What Makes Our Software Development Approach Different"
+                    titleHighlight="From Typical Outsourcing"
                 >
-                    <div className="grid gap-5">
-                        {differencePoints.map((item) => (
-                            <article
-                                key={item.title}
-                                className="rounded-[1.75rem] border border-white/10 bg-white/[0.02] p-7 md:p-8"
-                            >
-                                <div>
-                                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                                    <p className="mt-3 text-base leading-relaxed text-neutral-400">
-                                        {item.description}
-                                    </p>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
+                    <OutsourceDifferenceGrid items={differencePoints} />
                 </SectionShell>
 
                 <section className="relative overflow-hidden py-24">
@@ -771,25 +759,11 @@ export default async function OutsourceSoftwareDevelopmentIndiaPage() {
                     showBackgroundEffects={false}
                 />
 
-                <SectionShell title="This Is the Standard We Hold Every Outsource Engagement To">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        {standards.map((item) => (
-                            <article
-                                key={item.title}
-                                className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-8"
-                            >
-                                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-300">
-                                    <ShieldCheck className="w-5 h-5" />
-                                </span>
-                                <h3 className="mt-5 text-2xl font-semibold text-white leading-tight">
-                                    {item.title}
-                                </h3>
-                                <p className="mt-4 text-base leading-relaxed text-neutral-400">
-                                    {item.description}
-                                </p>
-                            </article>
-                        ))}
-                    </div>
+                <SectionShell
+                    title="This Is the Standard We Hold"
+                    titleHighlight="Every Outsource Engagement To"
+                >
+                    <OutsourceStandardsParallax items={standards} />
                 </SectionShell>
 
                 <IndustriesShowcaseSection backgroundClassName="bg-transparent" showBackgroundEffects={false} />
@@ -835,32 +809,14 @@ export default async function OutsourceSoftwareDevelopmentIndiaPage() {
                     </div>
                 </section>
 
-                <SectionShell
+                <FAQs
                     title="Frequently Asked Questions About Outsourcing Software Development to India"
-                >
-                    <div className="grid gap-4">
-                        {faqs.map((faq) => (
-                            <details
-                                key={faq.question}
-                                className="group rounded-[1.5rem] border border-white/10 bg-white/[0.03] px-6 py-5"
-                            >
-                                <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
-                                    <div>
-                                        <h3 className="text-lg md:text-xl font-semibold text-white leading-snug">
-                                            {faq.question}
-                                        </h3>
-                                    </div>
-                                    <span className="mt-1 text-cyan-300 transition-transform duration-300 group-open:rotate-45">
-                                        <ArrowRight className="h-5 w-5 rotate-[-45deg]" />
-                                    </span>
-                                </summary>
-                                <p className="mt-5 max-w-4xl text-base leading-relaxed text-neutral-400">
-                                    {faq.answer}
-                                </p>
-                            </details>
-                        ))}
-                    </div>
-                </SectionShell>
+                    faqItems={faqs.map((faq, index) => ({
+                        id: `item-${index + 1}`,
+                        question: faq.question,
+                        answer: faq.answer,
+                    }))}
+                />
             </main>
         </>
     );

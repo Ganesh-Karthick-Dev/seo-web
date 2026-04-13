@@ -10,7 +10,7 @@ type FAQItem = {
 
 type FAQsProps = {
     title: string
-    description: string
+    description?: string
     faqItems: FAQItem[]
 }
 
@@ -20,7 +20,9 @@ export default function FAQs({ title, description, faqItems }: FAQsProps) {
             <div className="mx-auto max-w-5xl px-4 md:px-6">
                 <div>
                     <h2 className="text-foreground text-4xl font-semibold md:text-5xl">{title}</h2>
-                    <p className="text-muted-foreground mt-4 max-w-3xl text-balance text-lg">{description}</p>
+                    {description ? (
+                        <p className="text-muted-foreground mt-4 max-w-3xl text-balance text-lg">{description}</p>
+                    ) : null}
                 </div>
 
                 <div className="mt-12">
